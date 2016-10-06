@@ -29,6 +29,13 @@ class NetworkManager: NSObject {
         sendRequest(request: URLRequest(url: url), callback: callback)
     }
     
+    func getCommentsForPost(permalink: String, callback: @escaping NetworkCallback) {
+        //https://www.reddit.com/r/pics/comments/5658ox/how_to_cable/.json
+        let url: URL = URL(string: "https://www.reddit.com\(permalink).json")!
+        print(url)
+        sendRequest(request: URLRequest(url: url), callback: callback)
+    }
+    
     func getDetailInfo(detailPostItem: DetailPostItem, callback: NetworkCallback?) {
         let url: URL = URL(string: "http://localhost:3000/parse")!
         var request: URLRequest = URLRequest(url: url)

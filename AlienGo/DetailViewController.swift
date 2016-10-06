@@ -20,6 +20,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let commentTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubletap))
+        commentTapGesture.numberOfTapsRequired = 2
+        
+        view.addGestureRecognizer(commentTapGesture)
+    }
+    
+    func didDoubletap() {
+        viewModel.didDoubletap()
     }
     
     override func viewWillLayoutSubviews() {
@@ -51,5 +59,9 @@ extension DetailViewController: DetailViewModelDelegate {
             self.view.addSubview(childVC.view)
             childVC.didMove(toParentViewController: self)
         }
+    }
+    
+    func present(vc: UIViewController) {
+        present(vc, animated: true, completion: nil)
     }
 }

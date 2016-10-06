@@ -11,4 +11,6 @@ import UIKit
 protocol DetailPostItem {
     var content: RedditContent { get }
     var title: String { get }
+    var id: String { get }
+    var permalink: String { get }
 }

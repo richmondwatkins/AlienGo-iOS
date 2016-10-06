@@ -16,6 +16,7 @@ struct RedditPost {
     let id: String
     let name: String
     let title: String
+    let permalink: String
     var author: String?
     var score: Int?
     
@@ -25,6 +26,7 @@ struct RedditPost {
             let id = data["id"] as? String,
             let previewPhoto = PreviewPhoto(apiResponse: data),
             let name = data["name"] as? String,
+            let permalink: String = data["permalink"] as? String,
             let title = data["title"] as? String else {
             return nil
         }
@@ -35,6 +37,7 @@ struct RedditPost {
         self.content = RedditContent(apiResponse: data)
         self.subreddit = subreddit
         self.previewPhoto = previewPhoto
+        self.permalink = permalink
         
         self.author = data["author"] as? String
         self.score = data["score"] as? Int
@@ -59,7 +62,15 @@ struct RedditPost {
 }
 
 extension RedditPost: DisplayableFeedItem {
+    internal var postPermalink: String {
+        return permalink
+    }
+
     var postId: String {
+        return id
+    }
+
+    var postName: String {
         return name
     }
 

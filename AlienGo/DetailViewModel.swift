@@ -10,15 +10,16 @@ import UIKit
 
 protocol DetailViewModelDelegate {
     func display(childVC: UIViewController)
+    func present(vc: UIViewController)
 }
-struct DetailViewModel {
+class DetailViewModel: NSObject {
 
     let detailPostItem: DetailPostItem
     let displayDelegate: DetailViewModelDelegate
     var provider: RedditDetailPostProvider!
     private var readableDelegate: ReadableDelegate = ReadHandler()
     
-    mutating func set(readableDelegate: ReadableDelegate) {
+    func set(readableDelegate: ReadableDelegate) {
         self.readableDelegate = readableDelegate
     }
     
@@ -30,6 +31,15 @@ struct DetailViewModel {
     
     func viewDidDisappear() {
         readableDelegate.stopIfNeeded()
+    }
+    
+    func didDoubletap() {
+        readableDelegate.stopIfNeeded()
+        
+        let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController
+        commentVC.viewModel = CommentViewModel(detailPostItem: detailPostItem, displayDelegate: commentVC)
+        
+        displayDelegate.present(vc: commentVC)
     }
     
     func getInfo() {
@@ -64,7 +74,6 @@ struct DetailViewModel {
     }
     
     func showVideoVC() {
-        //DetailVideoViewController
          let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
         
         if let videoUrl = detailPostItem.content.url {
