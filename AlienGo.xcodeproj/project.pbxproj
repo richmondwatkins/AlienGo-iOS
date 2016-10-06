@@ -7,14 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		108D1906779C5BEEDFD97261 /* Pods_AlienGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942E0184373714DB25C5CFEB /* Pods_AlienGoTests.framework */; };
+		27C2EDF18D803453A0E31768 /* Pods_AlienGoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5095718DCB632A856304EE1 /* Pods_AlienGoUITests.framework */; };
+		2E6647AF155CAD882FB56237 /* Pods_AlienGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE49ADC3D7BA3F6FD4A247C /* Pods_AlienGo.framework */; };
+		5D29A2B91DA5B81900963D0D /* DisplayableDetailContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2B81DA5B81900963D0D /* DisplayableDetailContainer.swift */; };
+		5D29A2BB1DA5DB3B00963D0D /* ReaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BA1DA5DB3B00963D0D /* ReaderContainer.swift */; };
+		5D29A2BD1DA5F43800963D0D /* DetailTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BC1DA5F43800963D0D /* DetailTextViewController.swift */; };
+		5D29A2BF1DA6007100963D0D /* DetailImageGifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BE1DA6007100963D0D /* DetailImageGifViewController.swift */; };
+		5D29A2C11DA6011700963D0D /* DetailImageGifContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2C01DA6011700963D0D /* DetailImageGifContainer.swift */; };
+		5DA74A051DA44076001B3B79 /* Subreddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A041DA44076001B3B79 /* Subreddit.swift */; };
+		5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */; };
+		5DA74A0A1DA44693001B3B79 /* DisplayableFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */; };
+		5DA74A0D1DA44E5E001B3B79 /* MainCollectionViewSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A0C1DA44E5E001B3B79 /* MainCollectionViewSource.swift */; };
+		5DA74A101DA44F82001B3B79 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A0E1DA44F82001B3B79 /* MainCollectionViewCell.swift */; };
+		5DA74A111DA44F82001B3B79 /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DA74A0F1DA44F82001B3B79 /* MainCollectionViewCell.xib */; };
+		5DA74A131DA45334001B3B79 /* Readable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A121DA45334001B3B79 /* Readable.swift */; };
+		5DA74A151DA47A29001B3B79 /* RedditReadablePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A141DA47A29001B3B79 /* RedditReadablePost.swift */; };
+		5DA74A171DA482BC001B3B79 /* ReadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A161DA482BC001B3B79 /* ReadHandler.swift */; };
+		5DA74A1A1DA522F3001B3B79 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A191DA522F3001B3B79 /* DetailViewController.swift */; };
+		5DA74A1D1DA52555001B3B79 /* SwipeToShowInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A1C1DA52554001B3B79 /* SwipeToShowInteractionController.swift */; };
+		5DA74A1F1DA52734001B3B79 /* SwipeToShowAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A1E1DA52734001B3B79 /* SwipeToShowAnimationController.swift */; };
+		5DA74A211DA52CE8001B3B79 /* DetailPostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A201DA52CE8001B3B79 /* DetailPostItem.swift */; };
+		5DA74A231DA52D00001B3B79 /* DetailPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A221DA52D00001B3B79 /* DetailPost.swift */; };
+		5DA74A281DA58852001B3B79 /* RedditContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A271DA58852001B3B79 /* RedditContent.swift */; };
+		5DA74A2A1DA59120001B3B79 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A291DA59120001B3B79 /* DetailViewModel.swift */; };
+		5DA74A2C1DA59282001B3B79 /* RedditPostDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */; };
+		5DA74A2E1DA592AC001B3B79 /* RedditDetailPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2D1DA592AC001B3B79 /* RedditDetailPostProvider.swift */; };
+		5DA74A301DA592F1001B3B79 /* DisplayableDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */; };
 		5DD1BA641DA432D40044BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA631DA432D40044BD0C /* AppDelegate.swift */; };
-		5DD1BA661DA432D40044BD0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA651DA432D40044BD0C /* ViewController.swift */; };
+		5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA651DA432D40044BD0C /* MainViewController.swift */; };
 		5DD1BA691DA432D40044BD0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA671DA432D40044BD0C /* Main.storyboard */; };
 		5DD1BA6C1DA432D40044BD0C /* AlienGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA6A1DA432D40044BD0C /* AlienGo.xcdatamodeld */; };
 		5DD1BA6E1DA432D40044BD0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA6D1DA432D40044BD0C /* Assets.xcassets */; };
 		5DD1BA711DA432D40044BD0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA6F1DA432D40044BD0C /* LaunchScreen.storyboard */; };
 		5DD1BA7C1DA432D40044BD0C /* AlienGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA7B1DA432D40044BD0C /* AlienGoTests.swift */; };
 		5DD1BA871DA432D40044BD0C /* AlienGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA861DA432D40044BD0C /* AlienGoUITests.swift */; };
+		5DD1BA971DA434230044BD0C /* RedditPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA961DA434230044BD0C /* RedditPostRepository.swift */; };
+		5DD1BA991DA434310044BD0C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA981DA434310044BD0C /* NetworkManager.swift */; };
+		5DD1BA9C1DA4343F0044BD0C /* RedditPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */; };
+		5DD1BA9F1DA4370F0044BD0C /* RedditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */; };
+		5DD1BAA21DA438440044BD0C /* RedditPostListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +67,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D4C7D157D884D8716243FDD /* Pods-AlienGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGoTests/Pods-AlienGoTests.release.xcconfig"; sourceTree = "<group>"; };
+		5D29A2B81DA5B81900963D0D /* DisplayableDetailContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableDetailContainer.swift; sourceTree = "<group>"; };
+		5D29A2BA1DA5DB3B00963D0D /* ReaderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderContainer.swift; sourceTree = "<group>"; };
+		5D29A2BC1DA5F43800963D0D /* DetailTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTextViewController.swift; sourceTree = "<group>"; };
+		5D29A2BE1DA6007100963D0D /* DetailImageGifViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageGifViewController.swift; sourceTree = "<group>"; };
+		5D29A2C01DA6011700963D0D /* DetailImageGifContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageGifContainer.swift; sourceTree = "<group>"; };
+		5DA74A041DA44076001B3B79 /* Subreddit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subreddit.swift; sourceTree = "<group>"; };
+		5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
+		5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableFeedItem.swift; sourceTree = "<group>"; };
+		5DA74A0C1DA44E5E001B3B79 /* MainCollectionViewSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewSource.swift; sourceTree = "<group>"; };
+		5DA74A0E1DA44F82001B3B79 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		5DA74A0F1DA44F82001B3B79 /* MainCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCollectionViewCell.xib; sourceTree = "<group>"; };
+		5DA74A121DA45334001B3B79 /* Readable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Readable.swift; sourceTree = "<group>"; };
+		5DA74A141DA47A29001B3B79 /* RedditReadablePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditReadablePost.swift; sourceTree = "<group>"; };
+		5DA74A161DA482BC001B3B79 /* ReadHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadHandler.swift; sourceTree = "<group>"; };
+		5DA74A191DA522F3001B3B79 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		5DA74A1C1DA52554001B3B79 /* SwipeToShowInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToShowInteractionController.swift; sourceTree = "<group>"; };
+		5DA74A1E1DA52734001B3B79 /* SwipeToShowAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToShowAnimationController.swift; sourceTree = "<group>"; };
+		5DA74A201DA52CE8001B3B79 /* DetailPostItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPostItem.swift; sourceTree = "<group>"; };
+		5DA74A221DA52D00001B3B79 /* DetailPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPost.swift; sourceTree = "<group>"; };
+		5DA74A271DA58852001B3B79 /* RedditContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditContent.swift; sourceTree = "<group>"; };
+		5DA74A291DA59120001B3B79 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostDetailRepository.swift; sourceTree = "<group>"; };
+		5DA74A2D1DA592AC001B3B79 /* RedditDetailPostProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditDetailPostProvider.swift; sourceTree = "<group>"; };
+		5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableDetailItem.swift; sourceTree = "<group>"; };
 		5DD1BA601DA432D40044BD0C /* AlienGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlienGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD1BA631DA432D40044BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5DD1BA651DA432D40044BD0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5DD1BA651DA432D40044BD0C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5DD1BA681DA432D40044BD0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5DD1BA6B1DA432D40044BD0C /* AlienGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AlienGo.xcdatamodel; sourceTree = "<group>"; };
 		5DD1BA6D1DA432D40044BD0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +106,19 @@
 		5DD1BA821DA432D40044BD0C /* AlienGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlienGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD1BA861DA432D40044BD0C /* AlienGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlienGoUITests.swift; sourceTree = "<group>"; };
 		5DD1BA881DA432D40044BD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DD1BA961DA434230044BD0C /* RedditPostRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostRepository.swift; sourceTree = "<group>"; };
+		5DD1BA981DA434310044BD0C /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostProvider.swift; sourceTree = "<group>"; };
+		5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPost.swift; sourceTree = "<group>"; };
+		5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostListingViewModel.swift; sourceTree = "<group>"; };
+		74CEF7E6C5D81CF10C70F3FA /* Pods-AlienGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo.release.xcconfig"; sourceTree = "<group>"; };
+		8A43E8E894BDC2C3F1C80F48 /* Pods-AlienGoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGoUITests/Pods-AlienGoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		942E0184373714DB25C5CFEB /* Pods_AlienGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlienGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5095718DCB632A856304EE1 /* Pods_AlienGoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlienGoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE49ADC3D7BA3F6FD4A247C /* Pods_AlienGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlienGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8C3725C41958C9212755DC9 /* Pods-AlienGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo.debug.xcconfig"; sourceTree = "<group>"; };
+		ECDCF9CAF3E35AD492B343BC /* Pods-AlienGoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGoUITests/Pods-AlienGoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FA86DF413C8CCC51BE7D0603 /* Pods-AlienGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGoTests/Pods-AlienGoTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E6647AF155CAD882FB56237 /* Pods_AlienGo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				108D1906779C5BEEDFD97261 /* Pods_AlienGoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +142,79 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C2EDF18D803453A0E31768 /* Pods_AlienGoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C3DC408ACE467A11043E025 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEE49ADC3D7BA3F6FD4A247C /* Pods_AlienGo.framework */,
+				942E0184373714DB25C5CFEB /* Pods_AlienGoTests.framework */,
+				C5095718DCB632A856304EE1 /* Pods_AlienGoUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4DEB0ADF05A1493D3B930EDA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8C3725C41958C9212755DC9 /* Pods-AlienGo.debug.xcconfig */,
+				74CEF7E6C5D81CF10C70F3FA /* Pods-AlienGo.release.xcconfig */,
+				FA86DF413C8CCC51BE7D0603 /* Pods-AlienGoTests.debug.xcconfig */,
+				4D4C7D157D884D8716243FDD /* Pods-AlienGoTests.release.xcconfig */,
+				8A43E8E894BDC2C3F1C80F48 /* Pods-AlienGoUITests.debug.xcconfig */,
+				ECDCF9CAF3E35AD492B343BC /* Pods-AlienGoUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5DA74A081DA44682001B3B79 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */,
+				5DA74A121DA45334001B3B79 /* Readable.swift */,
+				5DA74A201DA52CE8001B3B79 /* DetailPostItem.swift */,
+				5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		5DA74A0B1DA44E10001B3B79 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				5DD1BA651DA432D40044BD0C /* MainViewController.swift */,
+				5DA74A0C1DA44E5E001B3B79 /* MainCollectionViewSource.swift */,
+				5DA74A0E1DA44F82001B3B79 /* MainCollectionViewCell.swift */,
+				5DA74A0F1DA44F82001B3B79 /* MainCollectionViewCell.xib */,
+			);
+			name = MainVC;
+			sourceTree = "<group>";
+		};
+		5DA74A181DA522CE001B3B79 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5DA74A0B1DA44E10001B3B79 /* MainVC */,
+				5DA74A1B1DA522F8001B3B79 /* DetailVC */,
+				5DA74A1C1DA52554001B3B79 /* SwipeToShowInteractionController.swift */,
+				5DA74A1E1DA52734001B3B79 /* SwipeToShowAnimationController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5DA74A1B1DA522F8001B3B79 /* DetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				5DA74A191DA522F3001B3B79 /* DetailViewController.swift */,
+				5D29A2BC1DA5F43800963D0D /* DetailTextViewController.swift */,
+				5D29A2BE1DA6007100963D0D /* DetailImageGifViewController.swift */,
+			);
+			name = DetailVC;
+			sourceTree = "<group>";
+		};
 		5DD1BA571DA432D40044BD0C = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +222,8 @@
 				5DD1BA7A1DA432D40044BD0C /* AlienGoTests */,
 				5DD1BA851DA432D40044BD0C /* AlienGoUITests */,
 				5DD1BA611DA432D40044BD0C /* Products */,
+				4DEB0ADF05A1493D3B930EDA /* Pods */,
+				1C3DC408ACE467A11043E025 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +240,20 @@
 		5DD1BA621DA432D40044BD0C /* AlienGo */ = {
 			isa = PBXGroup;
 			children = (
+				5DA74A181DA522CE001B3B79 /* ViewControllers */,
+				5DA74A161DA482BC001B3B79 /* ReadHandler.swift */,
+				5DA74A081DA44682001B3B79 /* Protocols */,
+				5DD1BAA01DA438350044BD0C /* ViewModels */,
+				5DD1BA9D1DA437040044BD0C /* Models */,
+				5DD1BA9A1DA434360044BD0C /* Providers */,
+				5DD1BA951DA4340B0044BD0C /* Repositories */,
+				5DD1BA941DA432DB0044BD0C /* CoreData */,
 				5DD1BA631DA432D40044BD0C /* AppDelegate.swift */,
-				5DD1BA651DA432D40044BD0C /* ViewController.swift */,
 				5DD1BA671DA432D40044BD0C /* Main.storyboard */,
 				5DD1BA6D1DA432D40044BD0C /* Assets.xcassets */,
 				5DD1BA6F1DA432D40044BD0C /* LaunchScreen.storyboard */,
 				5DD1BA721DA432D40044BD0C /* Info.plist */,
-				5DD1BA6A1DA432D40044BD0C /* AlienGo.xcdatamodeld */,
+				5DD1BA981DA434310044BD0C /* NetworkManager.swift */,
 			);
 			path = AlienGo;
 			sourceTree = "<group>";
@@ -128,6 +276,57 @@
 			path = AlienGoUITests;
 			sourceTree = "<group>";
 		};
+		5DD1BA941DA432DB0044BD0C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5DD1BA6A1DA432D40044BD0C /* AlienGo.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		5DD1BA951DA4340B0044BD0C /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				5DD1BA961DA434230044BD0C /* RedditPostRepository.swift */,
+				5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */,
+			);
+			name = Repositories;
+			sourceTree = "<group>";
+		};
+		5DD1BA9A1DA434360044BD0C /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */,
+				5DA74A2D1DA592AC001B3B79 /* RedditDetailPostProvider.swift */,
+			);
+			name = Providers;
+			sourceTree = "<group>";
+		};
+		5DD1BA9D1DA437040044BD0C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */,
+				5DA74A041DA44076001B3B79 /* Subreddit.swift */,
+				5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */,
+				5DA74A141DA47A29001B3B79 /* RedditReadablePost.swift */,
+				5DA74A221DA52D00001B3B79 /* DetailPost.swift */,
+				5DA74A271DA58852001B3B79 /* RedditContent.swift */,
+				5D29A2B81DA5B81900963D0D /* DisplayableDetailContainer.swift */,
+				5D29A2BA1DA5DB3B00963D0D /* ReaderContainer.swift */,
+				5D29A2C01DA6011700963D0D /* DetailImageGifContainer.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5DD1BAA01DA438350044BD0C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */,
+				5DA74A291DA59120001B3B79 /* DetailViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +334,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DD1BA8B1DA432D40044BD0C /* Build configuration list for PBXNativeTarget "AlienGo" */;
 			buildPhases = (
+				6C325593F9EF3C41BEAA0BBF /* [CP] Check Pods Manifest.lock */,
 				5DD1BA5C1DA432D40044BD0C /* Sources */,
 				5DD1BA5D1DA432D40044BD0C /* Frameworks */,
 				5DD1BA5E1DA432D40044BD0C /* Resources */,
+				3B99647F761EEE415574AD4A /* [CP] Embed Pods Frameworks */,
+				32635B8C0A31B766B349C6AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +354,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DD1BA8E1DA432D40044BD0C /* Build configuration list for PBXNativeTarget "AlienGoTests" */;
 			buildPhases = (
+				6215E9AE36C109769D12A13B /* [CP] Check Pods Manifest.lock */,
 				5DD1BA731DA432D40044BD0C /* Sources */,
 				5DD1BA741DA432D40044BD0C /* Frameworks */,
 				5DD1BA751DA432D40044BD0C /* Resources */,
+				817A1F35A4D4EBCA407D1208 /* [CP] Embed Pods Frameworks */,
+				5B0599F37912DA40B7ED0E04 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +375,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DD1BA911DA432D40044BD0C /* Build configuration list for PBXNativeTarget "AlienGoUITests" */;
 			buildPhases = (
+				C3B918943970B868FEC3E58F /* [CP] Check Pods Manifest.lock */,
 				5DD1BA7E1DA432D40044BD0C /* Sources */,
 				5DD1BA7F1DA432D40044BD0C /* Frameworks */,
 				5DD1BA801DA432D40044BD0C /* Resources */,
+				FCF8951CBB9E271FEFCD6F21 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +448,7 @@
 				5DD1BA711DA432D40044BD0C /* LaunchScreen.storyboard in Resources */,
 				5DD1BA6E1DA432D40044BD0C /* Assets.xcassets in Resources */,
 				5DD1BA691DA432D40044BD0C /* Main.storyboard in Resources */,
+				5DA74A111DA44F82001B3B79 /* MainCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,14 +468,165 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		32635B8C0A31B766B349C6AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B99647F761EEE415574AD4A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B0599F37912DA40B7ED0E04 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlienGoTests/Pods-AlienGoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6215E9AE36C109769D12A13B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6C325593F9EF3C41BEAA0BBF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		817A1F35A4D4EBCA407D1208 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlienGoTests/Pods-AlienGoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3B918943970B868FEC3E58F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FCF8951CBB9E271FEFCD6F21 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlienGoUITests/Pods-AlienGoUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5DD1BA5C1DA432D40044BD0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DD1BA661DA432D40044BD0C /* ViewController.swift in Sources */,
+				5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */,
+				5DA74A1A1DA522F3001B3B79 /* DetailViewController.swift in Sources */,
+				5D29A2BF1DA6007100963D0D /* DetailImageGifViewController.swift in Sources */,
 				5DD1BA641DA432D40044BD0C /* AppDelegate.swift in Sources */,
+				5DA74A1D1DA52555001B3B79 /* SwipeToShowInteractionController.swift in Sources */,
+				5DD1BA9F1DA4370F0044BD0C /* RedditPost.swift in Sources */,
+				5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */,
+				5D29A2BD1DA5F43800963D0D /* DetailTextViewController.swift in Sources */,
+				5DA74A231DA52D00001B3B79 /* DetailPost.swift in Sources */,
+				5DA74A2A1DA59120001B3B79 /* DetailViewModel.swift in Sources */,
+				5DA74A301DA592F1001B3B79 /* DisplayableDetailItem.swift in Sources */,
+				5DD1BA991DA434310044BD0C /* NetworkManager.swift in Sources */,
+				5D29A2C11DA6011700963D0D /* DetailImageGifContainer.swift in Sources */,
+				5DA74A211DA52CE8001B3B79 /* DetailPostItem.swift in Sources */,
+				5DA74A101DA44F82001B3B79 /* MainCollectionViewCell.swift in Sources */,
+				5DA74A171DA482BC001B3B79 /* ReadHandler.swift in Sources */,
+				5DA74A281DA58852001B3B79 /* RedditContent.swift in Sources */,
 				5DD1BA6C1DA432D40044BD0C /* AlienGo.xcdatamodeld in Sources */,
+				5DD1BA9C1DA4343F0044BD0C /* RedditPostProvider.swift in Sources */,
+				5DD1BAA21DA438440044BD0C /* RedditPostListingViewModel.swift in Sources */,
+				5DA74A2C1DA59282001B3B79 /* RedditPostDetailRepository.swift in Sources */,
+				5D29A2BB1DA5DB3B00963D0D /* ReaderContainer.swift in Sources */,
+				5DA74A051DA44076001B3B79 /* Subreddit.swift in Sources */,
+				5DA74A0A1DA44693001B3B79 /* DisplayableFeedItem.swift in Sources */,
+				5DA74A0D1DA44E5E001B3B79 /* MainCollectionViewSource.swift in Sources */,
+				5DA74A1F1DA52734001B3B79 /* SwipeToShowAnimationController.swift in Sources */,
+				5D29A2B91DA5B81900963D0D /* DisplayableDetailContainer.swift in Sources */,
+				5DD1BA971DA434230044BD0C /* RedditPostRepository.swift in Sources */,
+				5DA74A151DA47A29001B3B79 /* RedditReadablePost.swift in Sources */,
+				5DA74A2E1DA592AC001B3B79 /* RedditDetailPostProvider.swift in Sources */,
+				5DA74A131DA45334001B3B79 /* Readable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +776,7 @@
 		};
 		5DD1BA8C1DA432D40044BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8C3725C41958C9212755DC9 /* Pods-AlienGo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TB5YKEAJ2S;
@@ -430,6 +790,7 @@
 		};
 		5DD1BA8D1DA432D40044BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74CEF7E6C5D81CF10C70F3FA /* Pods-AlienGo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TB5YKEAJ2S;
@@ -443,6 +804,7 @@
 		};
 		5DD1BA8F1DA432D40044BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA86DF413C8CCC51BE7D0603 /* Pods-AlienGoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -458,6 +820,7 @@
 		};
 		5DD1BA901DA432D40044BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D4C7D157D884D8716243FDD /* Pods-AlienGoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -473,6 +836,7 @@
 		};
 		5DD1BA921DA432D40044BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A43E8E894BDC2C3F1C80F48 /* Pods-AlienGoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = TB5YKEAJ2S;
@@ -487,6 +851,7 @@
 		};
 		5DD1BA931DA432D40044BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECDCF9CAF3E35AD492B343BC /* Pods-AlienGoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = TB5YKEAJ2S;
@@ -518,6 +883,7 @@
 				5DD1BA8D1DA432D40044BD0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5DD1BA8E1DA432D40044BD0C /* Build configuration list for PBXNativeTarget "AlienGoTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +892,7 @@
 				5DD1BA901DA432D40044BD0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5DD1BA911DA432D40044BD0C /* Build configuration list for PBXNativeTarget "AlienGoUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +901,7 @@
 				5DD1BA931DA432D40044BD0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
