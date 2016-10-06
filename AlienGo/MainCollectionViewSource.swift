@@ -8,8 +8,21 @@
 
 import UIKit
 
+enum ScrollDirection {
+    case up, down
+    
+    init(previousPageGreaterThanNew: Bool) {
+        if previousPageGreaterThanNew {
+            self = .up
+        } else {
+            self = .down
+        }
+    }
+}
+
 protocol MainCollectionSourceSelectionDelegate {
     func didSelect(post: DisplayableFeedItem)
+    func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection)
 }
 
 class MainCollectionViewSource: NSObject {
@@ -21,16 +34,7 @@ class MainCollectionViewSource: NSObject {
         }
     }
     var currentPage: Int = 0
-    private var isFirstLoad: Bool = true
-    fileprivate var data: [DisplayableFeedItem] = [] {
-        didSet {
-            if isFirstLoad && data.count > 0 {
-                readableDelegate.readItem(prefixText: "First Post", readableItem: RedditReadablePost(displayablePost: data[0]))
-                isFirstLoad = false
-            }
-        }
-    }
-    fileprivate var readableDelegate: ReadableDelegate!
+    fileprivate var data: [DisplayableFeedItem] = []
     fileprivate var selectionDelegate: MainCollectionSourceSelectionDelegate!
     
     fileprivate func set(data: [DisplayableFeedItem]) {
@@ -41,20 +45,19 @@ class MainCollectionViewSource: NSObject {
     func set(selectionDelegate: MainCollectionSourceSelectionDelegate) {
         self.selectionDelegate = selectionDelegate
     }
-    
-    func set(readableDelegate: ReadableDelegate) {
-        self.readableDelegate = readableDelegate
-    }
-    
+
     func getCurrentPost() -> DisplayableFeedItem {
         return data[currentPage]
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if collectionView != nil && collectionView.frame.height > 0 {
+            let previousPage = currentPage
             currentPage = Int(self.collectionView.contentOffset.y / self.collectionView.frame.height)
             
-            readableDelegate.readItem(prefixText: "Next Post", readableItem:  RedditReadablePost(displayablePost: getCurrentPost()))
+            if previousPage != currentPage {
+                selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: getCurrentPost()), scrollDirection: ScrollDirection(previousPageGreaterThanNew: previousPage > currentPage))
+            }
         }
     }
 }

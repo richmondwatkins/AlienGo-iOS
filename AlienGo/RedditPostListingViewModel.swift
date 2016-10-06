@@ -17,10 +17,10 @@ protocol RedditPostListingNavigationDelegate {
 }
 class RedditPostListingViewModel: NSObject {
 
-    lazy var readHandler: ReadHandler = ReadHandler()
+    lazy var readHandler: ReadableDelegate = ReadHandler()
+    private var isFirstLoad: Bool = true
     @IBOutlet weak var collectionSource: MainCollectionViewSource! {
         didSet {
-            collectionSource.set(readableDelegate: readHandler)
             collectionSource.set(selectionDelegate: self)
             displayDelegate = collectionSource
         }
@@ -46,12 +46,29 @@ class RedditPostListingViewModel: NSObject {
     
     func getPosts() {
         DispatchQueue.global(qos: .userInitiated).async {
+            let posts = self.postProvider.get()
             self.displayDelegate.displayRedditPosts(posts: self.postProvider.get())
+            
+            if self.isFirstLoad && posts.count > 0 {
+                self.readHandler.readItem(prefixText: "First Post", readableItem: RedditReadablePost(displayablePost: posts[0]))
+                self.isFirstLoad = false
+            }
         }
     }
 }
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
+    func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection) {
+        var prefixText = "Next Post"
+        
+        if scrollDirection == .up {
+            prefixText = "Previous Post"
+            
+        }
+        
+        readHandler.readItem(prefixText: prefixText, readableItem: post)
+    }
+
     func didSelect(post: DisplayableFeedItem) {
         readHandler.stopIfNeeded()
     }

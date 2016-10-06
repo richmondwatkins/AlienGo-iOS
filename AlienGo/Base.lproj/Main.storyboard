@@ -124,33 +124,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iU8-aJ-k1W" customClass="FLAnimatedImageView">
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="999" constant="375" id="9K1-cP-MiF"/>
-                                    <constraint firstAttribute="height" priority="999" constant="667" id="sdS-6D-n4X"/>
-                                </constraints>
-                            </imageView>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPa-5F-sei">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkq-cf-Vlx">
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gL-Ny-9tQ">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bU1-qD-W9P" customClass="FLAnimatedImageView"/>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bU1-qD-W9P" firstAttribute="top" secondItem="8gL-Ny-9tQ" secondAttribute="top" id="99h-gS-PXF"/>
+                                    <constraint firstItem="bU1-qD-W9P" firstAttribute="leading" secondItem="8gL-Ny-9tQ" secondAttribute="leading" id="Ksy-h0-Kxj"/>
+                                    <constraint firstItem="bU1-qD-W9P" firstAttribute="centerX" secondItem="8gL-Ny-9tQ" secondAttribute="centerX" id="UK5-hl-2xN"/>
+                                    <constraint firstItem="bU1-qD-W9P" firstAttribute="centerY" secondItem="8gL-Ny-9tQ" secondAttribute="centerY" id="aub-t6-xP9"/>
+                                    <constraint firstAttribute="bottom" secondItem="bU1-qD-W9P" secondAttribute="bottom" id="nmb-O2-Nc5"/>
+                                    <constraint firstAttribute="trailing" secondItem="bU1-qD-W9P" secondAttribute="trailing" id="uJe-R5-vV8"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="SPa-5F-sei" secondAttribute="trailing" id="36x-eV-631"/>
-                            <constraint firstItem="iU8-aJ-k1W" firstAttribute="centerY" secondItem="gff-LA-UfZ" secondAttribute="centerY" id="5Jd-rq-vZs"/>
-                            <constraint firstItem="yFw-51-JKa" firstAttribute="top" secondItem="SPa-5F-sei" secondAttribute="bottom" id="DLB-ke-dix"/>
-                            <constraint firstItem="iU8-aJ-k1W" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" id="P9g-gD-bvt"/>
-                            <constraint firstItem="SPa-5F-sei" firstAttribute="top" secondItem="coY-5w-Ihu" secondAttribute="bottom" id="Xb8-sy-9dg"/>
-                            <constraint firstItem="iU8-aJ-k1W" firstAttribute="centerX" secondItem="gff-LA-UfZ" secondAttribute="centerX" id="XsE-Im-GUZ"/>
-                            <constraint firstItem="SPa-5F-sei" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" id="fTM-ko-tmy"/>
-                            <constraint firstItem="iU8-aJ-k1W" firstAttribute="top" secondItem="gff-LA-UfZ" secondAttribute="top" id="rBc-Nw-rUr"/>
+                            <constraint firstItem="Jkq-cf-Vlx" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" constant="8" id="588-bG-Drx"/>
+                            <constraint firstItem="8gL-Ny-9tQ" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" id="Hfh-Q2-kqf"/>
+                            <constraint firstAttribute="trailing" secondItem="Jkq-cf-Vlx" secondAttribute="trailing" constant="8" id="TUb-z8-g3a"/>
+                            <constraint firstItem="Jkq-cf-Vlx" firstAttribute="top" secondItem="coY-5w-Ihu" secondAttribute="bottom" constant="8" id="Ugi-jw-5PW"/>
+                            <constraint firstItem="yFw-51-JKa" firstAttribute="top" secondItem="8gL-Ny-9tQ" secondAttribute="bottom" id="ZFQ-uL-zGt"/>
+                            <constraint firstItem="yFw-51-JKa" firstAttribute="top" secondItem="Jkq-cf-Vlx" secondAttribute="bottom" constant="8" id="ea2-8o-jQ4"/>
+                            <constraint firstItem="8gL-Ny-9tQ" firstAttribute="top" secondItem="coY-5w-Ihu" secondAttribute="bottom" id="q86-2e-zPy"/>
+                            <constraint firstAttribute="trailing" secondItem="8gL-Ny-9tQ" secondAttribute="trailing" id="qfR-PT-R1H"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="iU8-aJ-k1W" id="tJP-Az-v0M"/>
-                        <outlet property="imageViewHeightConstraint" destination="sdS-6D-n4X" id="JK5-9x-UMW"/>
-                        <outlet property="imageViewWidthConstraint" destination="9K1-cP-MiF" id="LDf-Ng-czj"/>
-                        <outlet property="webView" destination="SPa-5F-sei" id="ElC-kV-tgx"/>
+                        <outlet property="imageScrollView" destination="8gL-Ny-9tQ" id="3Er-K1-TPR"/>
+                        <outlet property="imageView" destination="bU1-qD-W9P" id="sc0-Au-jaf"/>
+                        <outlet property="webView" destination="Jkq-cf-Vlx" id="j4E-qn-CJe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrN-v1-tZu" userLabel="First Responder" sceneMemberID="firstResponder"/>

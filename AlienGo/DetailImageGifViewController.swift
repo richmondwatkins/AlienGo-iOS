@@ -11,10 +11,17 @@ import PINRemoteImage
 
 class DetailImageGifViewController: UIViewController {
 
+    @IBOutlet weak var imageScrollView: UIScrollView! {
+        didSet {
+            imageScrollView.minimumZoomScale = 0.5;
+            imageScrollView.maximumZoomScale = 6.0;
+            imageScrollView.delegate = self
+        }
+    }
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
-           // imageView.contentMode = .scaleAspectFill
+            imageView.contentMode = .scaleAspectFit
         }
     }
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
@@ -26,24 +33,23 @@ class DetailImageGifViewController: UIViewController {
         
         if imageGifPost.showInWebView {
             view.bringSubview(toFront: webView)
+            imageScrollView.isHidden = true
             webView.loadRequest(URLRequest(url: URL(string: imageGifPost.imageGifUrl)!))
         } else {
             view.sendSubview(toBack: webView)
+            webView.isHidden = true
             imageView.pin_setImage(from: URL(string: imageGifPost.imageGifUrl)) { (result) in
                 if let image = result.image {
                     self.imageView.image = image
-                    
-                    self.imageViewWidthConstraint.constant = image.size.width
-                    self.imageViewHeightConstraint.constant = image.size.height
                 }
             }
         }
     }
+}
+
+extension DetailImageGifViewController: UIScrollViewDelegate {
     
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        
-//        self.imageViewWidthConstraint.constant = 10000
-//        self.imageViewHeightConstraint.constant = 8000
-//    }
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
 }

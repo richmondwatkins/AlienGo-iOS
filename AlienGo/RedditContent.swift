@@ -56,15 +56,6 @@ struct RedditContent {
                 self.url!.append(".jpg")
             }
         }
-        
-        if let url = url, contentType == .richVideo, (url.contains("youtube") || url.contains("yt")), (url.contains("/v/") || url.contains("/watch?v=")) {
-            
-            if url.contains("/v/") {
-                self.url = url.replacingOccurrences(of: "/v/", with: "/embed/")
-            } else if url.contains("/watch?v=") {
-                self.url = url.replacingOccurrences(of: "/watch?v=", with: "/embed/")
-            }
-        }
     }
     
     func shouldBeShownInWebView() -> Bool {
