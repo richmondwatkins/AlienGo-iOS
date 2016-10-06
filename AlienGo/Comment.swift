@@ -8,14 +8,19 @@
 
 import UIKit
 
-struct Comment {
+func ==<T: Comment>(lhs: T, rhs: T) -> Bool {
+    return lhs.id == rhs.id
+}
+
+class Comment: Equatable {
     let id: String
     let score: Int
     let body: String
     let nestedLevel: Int
     var replies: [Comment] = []
+    weak var parent: Comment?
     
-    init?(apiResponse: [String: AnyObject], nestedLevel: Int = 0) {
+    init?(apiResponse: [String: AnyObject], nestedLevel: Int = 0, parent: Comment? = nil) {
         guard let data = apiResponse["data"] as? [String: AnyObject],
             let id = data["id"] as? String,
             let score = data["score"] as? Int,
@@ -27,10 +32,11 @@ struct Comment {
         self.score = score
         self.body = body
         self.nestedLevel = nestedLevel
+        self.parent = parent
         
         if let replies = (data["replies"]?["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]] {
             for reply in replies {
-                if let comment = Comment(apiResponse: reply, nestedLevel: nestedLevel + 1) {
+                if let comment = Comment(apiResponse: reply, nestedLevel: nestedLevel + 1, parent: self) {
                     self.replies.append(comment)
                 }
             }

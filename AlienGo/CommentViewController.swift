@@ -58,6 +58,9 @@ extension CommentViewController: UIGestureRecognizerDelegate {
 }
 
 extension CommentViewController: CommentDisplayDelegate {
+    internal func scrollTo(indexPath: IndexPath) {
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
     
     func display(comments: [Comment]) {
         DispatchQueue.main.async {
