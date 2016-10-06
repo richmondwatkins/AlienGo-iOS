@@ -27,4 +27,19 @@ class RedditPostProvider {
         
         return posts
     }
+    
+    func loadMore(postId: String, totalCount: Int) -> [RedditPost] {
+        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+        var posts: [RedditPost] = [RedditPost]()
+        
+        repository.loadMore(postId: postId, totalCount: totalCount) { (redditPosts) in
+            posts = redditPosts
+            
+            semaphore.signal()
+        }
+        
+        semaphore.wait()
+        
+        return posts
+    }
 }

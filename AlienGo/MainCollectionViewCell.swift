@@ -16,3 +16,13 @@ class MainCollectionViewCell: UICollectionViewCell {
         titleLabel.text = post.postTitle
     }
 }
+
+extension MainCollectionViewCell: ReadingCallbackDelegate {
+    func willSpeak(_ speechString: String, characterRange: NSRange) {
+        let attrString = NSMutableAttributedString(string: titleLabel.text!)
+        
+        attrString.addAttributes([NSForegroundColorAttributeName: UIColor.darkGray, NSFontAttributeName: titleLabel.font!], range: characterRange)
+        
+        titleLabel.attributedText = attrString
+    }
+}

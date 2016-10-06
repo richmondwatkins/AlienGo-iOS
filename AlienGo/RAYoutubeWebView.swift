@@ -83,7 +83,9 @@ class RAYoutubeWebView: UIView {
         
         if urlIsYoutube() {
             embededHTML = youtubeHTMLEmbed(embedUrlString: embedUrlString)
-        } else if embedUrlString.contains("streamable") {
+        } else if urlIsVidMe() {
+            embededHTML = vidmeHTMLEmbed(embedUrlString: embedUrlString)
+        } else if urlIsStreamable() {
             embededHTML  = streamabledHTMLEmbed(streamableURL: embedUrlString)
         }
         
@@ -107,8 +109,30 @@ class RAYoutubeWebView: UIView {
         return urlString.contains("youtube") || urlString.contains("youtu.be")
     }
     
+    fileprivate func urlIsVidMe() -> Bool {
+        return urlString.contains("vid.me")
+    }
+    
+    fileprivate func urlIsStreamable() -> Bool {
+        return urlString.contains("streamable")
+    }
+    
     private func streamabledHTMLEmbed(streamableURL: String) -> String {
         return "<div style=\"width: 100%; height: 0px; position: relative; padding-bottom: 53.587%;\"><iframe src=\"\(streamableURL)\" frameborder=\"0\" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling=\"no\" style=\"width: 100%; height: 100%; position: absolute;\"></iframe></div>"
+    }
+    
+    private func vidmeHTMLEmbed(embedUrlString: String) -> String {
+        let components = NSURLComponents(string: embedUrlString)!
+        let originalPath = components.path!
+        
+         var newPath = ""
+        if embedUrlString.contains("vid.me") && originalPath.characters.count == 5 {
+            newPath = originalPath.replacingOccurrences(of: "/", with: "/e/")
+        }
+        
+        let newUrl = "\(components.scheme!)://vid.me\(newPath)"
+        
+        return "<iframe src=\"\(newUrl)\" width=\"720\" height=\"554\" frameborder=\"0\" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling=\"no\"></iframe>"
     }
     
     private func youtubeHTMLEmbed(embedUrlString: String) -> String {

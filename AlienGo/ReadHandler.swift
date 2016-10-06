@@ -30,6 +30,7 @@ class ReadHandler: NSObject {
     var speakBody: (() -> Void)?
     var state: ReadState = .stopped
     var previousRead: Readable?
+    var prefixText: String?
     var readingCallbackDelegate: ReadingCallbackDelegate?
     
     override init() {
@@ -54,6 +55,7 @@ class ReadHandler: NSObject {
     }
     
     func speak(prefix: String, body: String) {
+        self.prefixText = prefix
         
         let prefixUtterance = createUtterance(text: prefix)
         
@@ -99,6 +101,10 @@ extension ReadHandler: AVSpeechSynthesizerDelegate {
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        guard let prefixText = prefixText, utterance.speechString != prefixText else {
+            return
+        }
+        
         readingCallbackDelegate?.willSpeak(utterance.speechString, characterRange: characterRange)
     }
 }

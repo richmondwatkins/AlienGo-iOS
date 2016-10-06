@@ -9,6 +9,7 @@
 import UIKit
 
 protocol DisplayableFeedItem: Readable {
+    var postId: String { get }
     var postTitle: String { get }
     var postPhotoURL: String? { get }
     var content: RedditContent { get }

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -177,17 +178,17 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLO-bZ-BMi" customClass="RAYoutubeWebView" customModule="AlienGo" customModuleProvider="target">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TLO-bZ-BMi" secondAttribute="height" multiplier="16:10" id="wdW-fu-Hi4"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="leading" secondItem="If4-S0-Whb" secondAttribute="leading" id="2U1-R1-3AW"/>
-                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="leading" secondItem="If4-S0-Whb" secondAttribute="leading" id="CAL-IK-T94"/>
-                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="top" secondItem="If4-S0-Whb" secondAttribute="top" id="Mou-9w-bzK"/>
-                            <constraint firstItem="8rl-pY-mr9" firstAttribute="top" secondItem="TLO-bZ-BMi" secondAttribute="bottom" id="Wdu-y7-ugj"/>
-                            <constraint firstAttribute="trailing" secondItem="TLO-bZ-BMi" secondAttribute="trailing" id="gxB-vK-avF"/>
-                            <constraint firstAttribute="trailing" secondItem="TLO-bZ-BMi" secondAttribute="trailing" id="hdm-tf-fBD"/>
-                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="top" secondItem="If4-S0-Whb" secondAttribute="top" id="t2E-vu-KYX"/>
+                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="centerX" secondItem="If4-S0-Whb" secondAttribute="centerX" id="KuW-NX-4wF"/>
+                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="centerY" secondItem="If4-S0-Whb" secondAttribute="centerY" id="aHV-sG-AbH"/>
+                            <constraint firstAttribute="trailing" secondItem="TLO-bZ-BMi" secondAttribute="trailing" id="q4s-V2-D6M"/>
+                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="leading" secondItem="If4-S0-Whb" secondAttribute="leading" id="sLZ-V9-TrA"/>
                         </constraints>
                     </view>
                     <connections>

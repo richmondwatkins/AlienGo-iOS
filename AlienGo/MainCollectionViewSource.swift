@@ -9,10 +9,12 @@
 import UIKit
 
 enum ScrollDirection {
-    case up, down
+    case up, down, first
     
-    init(previousPageGreaterThanNew: Bool) {
-        if previousPageGreaterThanNew {
+    init(previousPage: Int, newPage: Int) {
+        if previousPage == 0 && newPage == 0 {
+            self = .first
+        } else if previousPage > newPage {
             self = .up
         } else {
             self = .down
@@ -22,7 +24,9 @@ enum ScrollDirection {
 
 protocol MainCollectionSourceSelectionDelegate {
     func didSelect(post: DisplayableFeedItem)
+    func didDisplay(post: DisplayableFeedItem, cell: MainCollectionViewCell)
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection)
+    func loadMore()
 }
 
 class MainCollectionViewSource: NSObject {
@@ -34,12 +38,26 @@ class MainCollectionViewSource: NSObject {
         }
     }
     var currentPage: Int = 0
+    var pagesLoaded: [Int] = []
     fileprivate var data: [DisplayableFeedItem] = []
     fileprivate var selectionDelegate: MainCollectionSourceSelectionDelegate!
+    fileprivate var firstLoad: Bool = true
     
     fileprivate func set(data: [DisplayableFeedItem]) {
         self.data = data
         collectionView?.reloadData()
+    }
+    
+    func getData() -> [DisplayableFeedItem] {
+        return data
+    }
+    
+    func insert(data: [DisplayableFeedItem]) {
+        self.data.append(contentsOf: data)
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     func set(selectionDelegate: MainCollectionSourceSelectionDelegate) {
@@ -56,9 +74,17 @@ class MainCollectionViewSource: NSObject {
             currentPage = Int(self.collectionView.contentOffset.y / self.collectionView.frame.height)
             
             if previousPage != currentPage {
-                selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: getCurrentPost()), scrollDirection: ScrollDirection(previousPageGreaterThanNew: previousPage > currentPage))
+              callDelegates(previousPage: previousPage)
             }
         }
+    }
+    
+    func callDelegates(previousPage: Int) {
+        selectionDelegate.didDisplay(
+            post: getCurrentPost(),
+            cell: self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as! MainCollectionViewCell
+        )
+        selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: getCurrentPost()), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage))
     }
 }
 
@@ -66,8 +92,6 @@ extension MainCollectionViewSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainCollectionViewCell.self), for: indexPath) as! MainCollectionViewCell
-        
-        cell.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
         
         cell.configure(post: data[indexPath.row])
         
@@ -93,6 +117,24 @@ extension MainCollectionViewSource: UICollectionViewDelegate {
    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionDelegate.didSelect(post: data[indexPath.row])
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if firstLoad {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                self.callDelegates(previousPage: 0)
+                self.firstLoad = false
+            })
+        }
+        
+        let page = data.count / 25
+        
+        if indexPath.row == data.count - 5 && !pagesLoaded.contains(page) {
+            selectionDelegate.loadMore()
+            pagesLoaded.append(page)
+        }
     }
 }
 

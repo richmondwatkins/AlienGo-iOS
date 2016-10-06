@@ -46,24 +46,22 @@ class RedditPostListingViewModel: NSObject {
     
     func getPosts() {
         DispatchQueue.global(qos: .userInitiated).async {
-            let posts = self.postProvider.get()
             self.displayDelegate.displayRedditPosts(posts: self.postProvider.get())
-            
-            if self.isFirstLoad && posts.count > 0 {
-                self.readHandler.readItem(prefixText: "First Post", readableItem: RedditReadablePost(displayablePost: posts[0]))
-                self.isFirstLoad = false
-            }
         }
     }
 }
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection) {
-        var prefixText = "Next Post"
+        var prefixText = ""
         
-        if scrollDirection == .up {
+        switch scrollDirection {
+        case .first:
+            prefixText = "First Post"
+        case .down:
+            prefixText = "Next Post"
+        case .up:
             prefixText = "Previous Post"
-            
         }
         
         readHandler.readItem(prefixText: prefixText, readableItem: post)
@@ -71,5 +69,20 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
 
     func didSelect(post: DisplayableFeedItem) {
         readHandler.stopIfNeeded()
+    }
+    
+    func didDisplay(post: DisplayableFeedItem, cell: MainCollectionViewCell) {
+        readHandler.readingCallbackDelegate = cell
+    }
+    
+    func loadMore() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let existingData = self.collectionSource.getData()
+            if let lastPost = existingData.last {
+                let nextPage = self.postProvider.loadMore(postId: lastPost.postId, totalCount: existingData.count)
+                
+                self.collectionSource.insert(data: nextPage)
+            }
+        }
     }
 }

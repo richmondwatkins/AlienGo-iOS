@@ -21,6 +21,14 @@ class NetworkManager: NSObject {
         sendRequest(request: URLRequest(url: url), callback: callback)
     }
     
+    func getRedditPostsAtPage(lastPostId: String, totalPostCount: Int, callback: @escaping NetworkCallback) {
+        //https://www.reddit.com/r/all/.json?count=25&after=t3_5656e1.json
+        print("https://www.reddit.com/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")
+        let url: URL = URL(string: "https://www.reddit.com/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")!
+        
+        sendRequest(request: URLRequest(url: url), callback: callback)
+    }
+    
     func getDetailInfo(detailPostItem: DetailPostItem, callback: NetworkCallback?) {
         let url: URL = URL(string: "http://localhost:3000/parse")!
         var request: URLRequest = URLRequest(url: url)
