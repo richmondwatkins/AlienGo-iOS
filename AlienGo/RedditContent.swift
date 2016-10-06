@@ -32,8 +32,13 @@ struct RedditContent {
             self.contentType = .imageGallery
         } else if let url = url, url.contains(".gif") {
             self.contentType = .gif
-        } else if let domain = apiResponse["domain"] as? String, domain.contains("reddituploads") || domain.contains("imgur") {
-            self.contentType = .image
+        } else if let domain = apiResponse["domain"] as? String, domain.contains("reddituploads") || domain.contains("imgur") || domain.contains("streamable") {
+            
+            if  domain.contains("streamable") {
+                self.contentType = .richVideo
+            } else {
+                self.contentType = .image
+            }
             
             if domain.contains("reddituploads") {
                 if let url = ((((apiResponse["preview"] as? [String: AnyObject])?["images"] as? [[String: AnyObject]])?.first)?["source"] as? [String: AnyObject])?["url"] as? String {
