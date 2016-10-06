@@ -10,6 +10,7 @@ import UIKit
 
 enum ContentType: String {
     case image = "image"
+    case imageGallery = "imageGallery"
     case link = "link"
     case selfPost = "self"
     case gif = "gif"
@@ -27,21 +28,42 @@ struct RedditContent {
         url = apiResponse["url"] as? String
         
         //order of conditional matters
-        if let domain = apiResponse["domain"] as? String, domain.contains("reddituploads") || domain.contains("imgur") {
-            self.contentType = .image
+        if let url = url, url.contains("gallery") || url.contains("/a/") {
+            self.contentType = .imageGallery
         } else if let url = url, url.contains(".gif") {
             self.contentType = .gif
+        } else if let domain = apiResponse["domain"] as? String, domain.contains("reddituploads") || domain.contains("imgur") {
+            self.contentType = .image
+            
+            if domain.contains("reddituploads") {
+                if let url = ((((apiResponse["preview"] as? [String: AnyObject])?["images"] as? [[String: AnyObject]])?.first)?["source"] as? [String: AnyObject])?["url"] as? String {
+                    self.url = url
+                }
+            }
         } else if let postHint = apiResponse["post_hint"] as? String, let contentType = ContentType(rawValue: postHint) {
             self.contentType = contentType
         } else {
             self.contentType = .titleOnly
         }
-        
+
         if let url = url {
-            if contentType == .image && url.contains("imgur") && !url.contains("gif") && !url.contains("jpg") && !url.contains("png") && !url.contains("gallery") {
+            if contentType == .image && url.contains("imgur") && !url.contains("gif") && !url.contains("jpg") && !url.contains("png") && self.contentType != .imageGallery {
                 self.url!.append(".jpg")
             }
         }
+        
+        if let url = url, contentType == .richVideo, (url.contains("youtube") || url.contains("yt")), (url.contains("/v/") || url.contains("/watch?v=")) {
+            
+            if url.contains("/v/") {
+                self.url = url.replacingOccurrences(of: "/v/", with: "/embed/")
+            } else if url.contains("/watch?v=") {
+                self.url = url.replacingOccurrences(of: "/watch?v=", with: "/embed/")
+            }
+        }
+    }
+    
+    func shouldBeShownInWebView() -> Bool {
+        return self.contentType == .gif || self.contentType == .imageGallery
     }
     
     func requestBodyValue() -> String? {

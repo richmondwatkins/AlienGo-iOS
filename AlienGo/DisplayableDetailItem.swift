@@ -15,6 +15,12 @@ protocol DetailTextItem: DetailItem {
 
 protocol DetailImageGifItem: DetailItem {
     var imageGifUrl: String { get }
-    var isGif: Bool { get }
-    init?(title: String?, imageGifUrl: String?)
+    var showInWebView: Bool { get set }
+    init?(title: String?, imageGifUrl: String?, showInWebView: Bool)
 }
+
+protocol DetailVideoItem: DetailItem {
+    var videoUrl: String { get set }
+}
+
+

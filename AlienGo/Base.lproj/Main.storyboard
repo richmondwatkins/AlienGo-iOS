@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -156,6 +157,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrN-v1-tZu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2988" y="135.38230884557723"/>
+        </scene>
+        <!--Detail Video View Controller-->
+        <scene sceneID="smN-pN-N0q">
+            <objects>
+                <viewController storyboardIdentifier="DetailVideoViewController" id="QmV-t0-NBa" customClass="DetailVideoViewController" customModule="AlienGo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s6b-fC-Tlb"/>
+                        <viewControllerLayoutGuide type="bottom" id="8rl-pY-mr9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="If4-S0-Whb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLO-bZ-BMi" customClass="RAYoutubeWebView" customModule="AlienGo" customModuleProvider="target">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TLO-bZ-BMi" secondAttribute="height" multiplier="16:10" id="xaX-Kv-esa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="leading" secondItem="If4-S0-Whb" secondAttribute="leading" id="CAL-IK-T94"/>
+                            <constraint firstAttribute="trailing" secondItem="TLO-bZ-BMi" secondAttribute="trailing" id="hdm-tf-fBD"/>
+                            <constraint firstItem="TLO-bZ-BMi" firstAttribute="top" secondItem="If4-S0-Whb" secondAttribute="top" id="t2E-vu-KYX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="youtubeWebView" destination="TLO-bZ-BMi" id="86Z-Uo-qvk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tfZ-7H-gCM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3677.5999999999999" y="137.18140929535232"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dn3-uH-xSd">

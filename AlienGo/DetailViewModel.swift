@@ -35,13 +35,14 @@ struct DetailViewModel {
     func getInfo() {
         DispatchQueue.global(qos: .userInitiated).async {
             switch self.detailPostItem.content.contentType {
-            case .image, .gif:
+            case .image, .gif, .imageGallery:
                 self.getImageGifInfo()
                 break
             case .link, .selfPost:
                 self.getTextInfo()
                 break
             case .richVideo:
+                self.showVideoVC()
                 break
             case .titleOnly:
                 break
@@ -62,10 +63,21 @@ struct DetailViewModel {
         }
     }
     
+    func showVideoVC() {
+        //DetailVideoViewController
+         let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
+        
+        if let videoUrl = detailPostItem.content.url {
+             detailVideoVC.videoDetailItem = DetailVideoItemContainer(title: detailPostItem.title, videoUrl: videoUrl)
+            
+            self.displayDelegate.display(childVC: detailVideoVC)
+        }
+    }
+    
     func getImageGifInfo() {
         let detailImageGifVc = vc(storyboardId: String(describing: DetailImageGifViewController.self)) as! DetailImageGifViewController
         
-        if let detailImageGifItem = DetailImageGifContainer(title: detailPostItem.title, imageGifUrl: detailPostItem.content.url) {
+        if let detailImageGifItem = DetailImageGifContainer(title: detailPostItem.title, imageGifUrl: detailPostItem.content.url, showInWebView: detailPostItem.content.shouldBeShownInWebView()) {
             detailImageGifVc.imageGifPost = detailImageGifItem
             
             self.displayDelegate.display(childVC: detailImageGifVc)

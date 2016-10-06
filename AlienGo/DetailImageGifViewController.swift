@@ -12,7 +12,11 @@ import PINRemoteImage
 class DetailImageGifViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView!
-    @IBOutlet weak var imageView: FLAnimatedImageView!
+    @IBOutlet weak var imageView: FLAnimatedImageView! {
+        didSet {
+           // imageView.contentMode = .scaleAspectFill
+        }
+    }
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     var imageGifPost: DetailImageGifItem!
@@ -20,7 +24,7 @@ class DetailImageGifViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if imageGifPost.isGif {
+        if imageGifPost.showInWebView {
             view.bringSubview(toFront: webView)
             webView.loadRequest(URLRequest(url: URL(string: imageGifPost.imageGifUrl)!))
         } else {
@@ -35,4 +39,11 @@ class DetailImageGifViewController: UIViewController {
             }
         }
     }
+    
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        
+//        self.imageViewWidthConstraint.constant = 10000
+//        self.imageViewHeightConstraint.constant = 8000
+//    }
 }
