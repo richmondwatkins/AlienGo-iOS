@@ -47,6 +47,8 @@ struct RedditContent {
             }
         } else if let postHint = apiResponse["post_hint"] as? String, let contentType = ContentType(rawValue: postHint) {
             self.contentType = contentType
+        } else if let isSelf = apiResponse["is_self"] as? Bool, isSelf == true {
+            self.contentType = .selfPost
         } else {
             self.contentType = .titleOnly
         }

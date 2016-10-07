@@ -44,23 +44,58 @@ class CommentViewModel {
         }
     }
     
-    func didTap(gesture: UITapGestureRecognizer) {
-        readableDelegate.stopIfNeeded()
-        if let readingComment = readingComment {
-            if let topIndex = orderedComments.index(of: readingComment.topLevelParent()), topIndex + 1 < orderedComments.count {
-                let nextTopIndex = topIndex + 1
-                let comment = orderedComments[nextTopIndex]
-                
-                if let liniearIndex = linearComments.index(of: comment) {
-                    read(comment: comment)
-                    displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
+    // go back to top comments
+    func longPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .ended {
+            if let readingComment = readingComment {
+                readableDelegate.stopIfNeeded()
+                if let topIndex = orderedComments.index(of: readingComment.topLevelParent()), topIndex + 1 < orderedComments.count {
+                    let nextTopIndex = topIndex + 1
+                    let comment = orderedComments[nextTopIndex]
+                    
+                    if let liniearIndex = linearComments.index(of: comment) {
+                        read(comment: comment)
+                        displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
+                    }
                 }
             }
         }
     }
     
+    func didTap(gesture: UITapGestureRecognizer) {
+        if let readingComment = readingComment {
+            readableDelegate.stopIfNeeded()
+
+            
+        }
+    }
+    
     func didSwipe(gesture: UISwipeGestureRecognizer) {
-        readableDelegate.stopIfNeeded()
+        if let readingComment = readingComment {
+            if gesture.direction == .down {
+                readableDelegate.stopIfNeeded()
+                
+                if let comment = orderedComments.nextSibling(current: readingComment) {
+                    goToComment(comment: comment)
+                }
+            } else if let firstReply = readingComment.replies.first, gesture.direction == .right {
+                readableDelegate.stopIfNeeded()
+                goToComment(comment: firstReply)
+            } else if gesture.direction == .up {
+                readableDelegate.stopIfNeeded()
+                
+                if let previousComment = orderedComments.previous(current: readingComment) {
+                    goToComment(comment: previousComment)
+                }
+            }
+        }
+    }
+    
+    func goToComment(comment: Comment) {
+        if let liniearIndex = linearComments.index(of: comment) {
+            read(comment: comment)
+            displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
+        }
     }
     
     private func read(comment: Comment) {
@@ -72,10 +107,61 @@ class CommentViewModel {
 extension Comment {
     
     func topLevelParent() -> Comment {
-        guard let parent = self.parent else {
-            return self
+        var comment: Comment = self
+        var parent: Comment? = self.parent
+        
+        while parent != nil {
+            if let newParent = parent {
+                comment = newParent
+            }
+            
+            parent = comment.parent
         }
         
-       return parent.topLevelParent()
+       return comment
+    }
+}
+
+extension Array where Element:CommentItem {
+    
+    func nextSibling<T: CommentItem>(current: T) -> T? {
+        
+        if current.parent == nil {
+            if let currentIndex = self.index(of: current), currentIndex + 1 <= self.count {
+                return self[currentIndex + 1] as? T
+            }
+        }
+        
+        return nil
+    }
+    
+    func previous<T: CommentItem>(current: T) -> T? {
+        guard let parent = current.parent else {
+            if let currentIndex = self.index(of: current), currentIndex - 1 >= 0 {
+                return self[currentIndex - 1] as? T
+            }
+            
+            return nil
+        }
+   
+        if let currentIndex = parent.replies.index(of: current) {
+            if currentIndex == 0 && current.parent != nil {
+                return current.parent as? T
+            } else if currentIndex - 1 >= 0 {
+                return self[currentIndex - 1] as? T
+            }
+        }
+        
+        return nil
+    }
+    
+    func index<T: CommentItem>(of el: T) -> Int? {
+        for (index, element) in self.enumerated() {
+            if element.id == el.id {
+                return index
+            }
+        }
+        
+        return nil
     }
 }

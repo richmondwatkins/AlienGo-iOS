@@ -8,17 +8,22 @@
 
 import UIKit
 
-func ==<T: Comment>(lhs: T, rhs: T) -> Bool {
+func ==<T: CommentItem>(lhs: T, rhs: T) -> Bool {
     return lhs.id == rhs.id
 }
 
-class Comment: Equatable {
-    let id: String
+protocol CommentItem: Equatable {
+    var id: String { get }
+    var parent: Comment? { get }
+}
+
+class Comment: CommentItem {
+    var id: String
     let score: Int
     let body: String
     let nestedLevel: Int
     var replies: [Comment] = []
-    weak var parent: Comment?
+    var parent: Comment?
     
     init?(apiResponse: [String: AnyObject], nestedLevel: Int = 0, parent: Comment? = nil) {
         guard let data = apiResponse["data"] as? [String: AnyObject],

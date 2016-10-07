@@ -35,14 +35,21 @@ class CommentViewController: UIViewController {
             tableView.addGestureRecognizer(swipGesture)
         }
         
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(tapGesture:)))
-        tapGesture.numberOfTapsRequired = 1
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(gesture:)))
+        longPressGesture.minimumPressDuration = 0.8
+        tableView.addGestureRecognizer(longPressGesture)
         
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(gesture:)))
+        tapGesture.numberOfTapsRequired = 1
         tableView.addGestureRecognizer(tapGesture)
     }
     
-    func didTap(tapGesture: UITapGestureRecognizer) {
-        viewModel.didTap(gesture: tapGesture)
+    func didTap(gesture: UITapGestureRecognizer) {
+        viewModel.didTap(gesture: gesture)
+    }
+    
+    func didLongPress(gesture: UILongPressGestureRecognizer) {
+        viewModel.longPress(gesture: gesture)
     }
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
