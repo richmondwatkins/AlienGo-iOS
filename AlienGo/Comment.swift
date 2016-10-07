@@ -22,18 +22,22 @@ class Comment: CommentItem {
     let score: Int
     let body: String
     let nestedLevel: Int
+    let user: User
     var replies: [Comment] = []
     var parent: Comment?
+    var readCompletionHandler: (() -> Void)?
     
     init?(apiResponse: [String: AnyObject], nestedLevel: Int = 0, parent: Comment? = nil) {
         guard let data = apiResponse["data"] as? [String: AnyObject],
             let id = data["id"] as? String,
             let score = data["score"] as? Int,
+            let username = data["author"] as? String,
             let body = data["body"] as? String else {
             return nil
         }
         
         self.id = id
+        self.user = User(username: username)
         self.score = score
         self.body = body
         self.nestedLevel = nestedLevel

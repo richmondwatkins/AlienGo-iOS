@@ -19,6 +19,7 @@ class CommentViewModel {
     let provider: CommentProvider
     let displayDelegate: CommentDisplayDelegate
     private var readableDelegate: ReadableDelegate = ReadHandler()
+    private lazy var metaDetailReader: ReadableDelegate = ReadHandler()
     private var orderedComments: [Comment] = []
     private var linearComments: [Comment] = []
     private var readingComment: Comment?
@@ -64,9 +65,13 @@ class CommentViewModel {
     
     func didTap(gesture: UITapGestureRecognizer) {
         if let readingComment = readingComment {
-            readableDelegate.stopIfNeeded()
-
+            var metaInfoReader = ReaderContainer(text: "Comment by \(readingComment.user.username)   score of \(readingComment.score)")
             
+            metaInfoReader.readCompletionHandler = {
+                self.readableDelegate.readItem(prefixText: "", readableItem: readingComment)
+            }
+            
+            readableDelegate.readItem(prefixText: "", readableItem: metaInfoReader)
         }
     }
     
@@ -77,15 +82,23 @@ class CommentViewModel {
                 
                 if let comment = orderedComments.nextSibling(current: readingComment) {
                     goToComment(comment: comment)
+                } else {
+                    self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more sibling comments"))
                 }
-            } else if let firstReply = readingComment.replies.first, gesture.direction == .right {
-                readableDelegate.stopIfNeeded()
-                goToComment(comment: firstReply)
+            } else if gesture.direction == .right {
+                if let firstReply = readingComment.replies.first {
+                    readableDelegate.stopIfNeeded()
+                    goToComment(comment: firstReply)
+                } else {
+                    self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"))
+                }
             } else if gesture.direction == .up {
                 readableDelegate.stopIfNeeded()
                 
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
+                } else {
+                    self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."))
                 }
             }
         }
@@ -100,7 +113,14 @@ class CommentViewModel {
     
     private func read(comment: Comment) {
         self.readingComment = comment
-        self.readableDelegate.readItem(prefixText: "", readableItem: comment)
+        
+        var userReadItem = ReaderContainer(readable: comment.user)
+        
+        userReadItem.readCompletionHandler = {
+            self.readableDelegate.readItem(prefixText: "", readableItem: comment)
+        }
+        
+        self.readableDelegate.readItem(prefixText: "Comment by  ", readableItem: userReadItem)
     }
 }
 
@@ -125,10 +145,16 @@ extension Comment {
 extension Array where Element:CommentItem {
     
     func nextSibling<T: CommentItem>(current: T) -> T? {
-        
-        if current.parent == nil {
+        guard let parent = current.parent else {
             if let currentIndex = self.index(of: current), currentIndex + 1 <= self.count {
                 return self[currentIndex + 1] as? T
+            }
+            
+            return nil
+        }
+        if let currentIndex = parent.replies.index(of: current) {
+            if currentIndex + 1 < parent.replies.count {
+                return parent.replies[currentIndex + 1] as? T
             }
         }
         
@@ -145,7 +171,7 @@ extension Array where Element:CommentItem {
         }
    
         if let currentIndex = parent.replies.index(of: current) {
-            if currentIndex == 0 && current.parent != nil {
+            if currentIndex == 0 {
                 return current.parent as? T
             } else if currentIndex - 1 >= 0 {
                 return self[currentIndex - 1] as? T

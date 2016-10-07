@@ -8,6 +8,15 @@
 
 import UIKit
 
-struct User {
+struct User: Readable {
     let username: String
+    var readCompletionHandler: (() -> Void)?
+    
+    var text: String {
+        return username
+    }
+    
+    init(username: String) {
+        self.username = username
+    }
 }

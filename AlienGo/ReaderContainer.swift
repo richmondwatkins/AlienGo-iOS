@@ -10,4 +10,13 @@ import UIKit
 
 struct ReaderContainer: Readable {
     var text: String
+    var readCompletionHandler: (() -> Void)?
+    
+    init(text: String) {
+        self.text = text
+    }
+    
+    init(readable: Readable) {
+        self.text = readable.text
+    }
 }

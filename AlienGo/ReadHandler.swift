@@ -14,6 +14,7 @@ enum ReadState {
 }
 
 protocol ReadableDelegate {
+    func readItemWithoutStop(prefixText: String, readableItem: Readable)
     func readItem(prefixText: String, readableItem: Readable)
     func stopIfNeeded()
     func setReadingCallback(delegate: ReadingCallbackDelegate)
@@ -28,8 +29,14 @@ class ReadHandler: NSObject {
 
     var synthesizer = AVSpeechSynthesizer()
     var speakBody: (() -> Void)?
-    var state: ReadState = .stopped
-    var previousRead: Readable?
+    var state: ReadState = .stopped {
+        didSet {
+            if state == .finished {
+                currentRead?.readCompletionHandler?()
+            }
+        }
+    }
+    var currentRead: Readable?
     var prefixText: String?
     var readingCallbackDelegate: ReadingCallbackDelegate?
     
@@ -75,6 +82,11 @@ class ReadHandler: NSObject {
 }
 
 extension ReadHandler: ReadableDelegate {
+    
+    func readItemWithoutStop(prefixText: String, readableItem: Readable) {
+        self.currentRead = readableItem
+        speak(prefix: prefixText, body: readableItem.text)
+    }
 
     func setReadingCallback(delegate: ReadingCallbackDelegate) {
         readingCallbackDelegate = delegate
@@ -82,10 +94,11 @@ extension ReadHandler: ReadableDelegate {
     
     func readItem(prefixText: String, readableItem: Readable) {
         stopIfNeeded()
-        speak(prefix: prefixText, body: readableItem.text)
+        readItemWithoutStop(prefixText: prefixText, readableItem: readableItem)
     }
     
     func stopIfNeeded() {
+        currentRead?.readCompletionHandler = nil
         synthesizer.stopSpeaking(at: .immediate)
     }
 }
@@ -93,6 +106,10 @@ extension ReadHandler: ReadableDelegate {
 extension ReadHandler: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        guard let prefixText = prefixText, utterance.speechString != prefixText else {
+            return
+        }
+        
         if let speakBody = speakBody, state == .readingPrefix {
             speakBody()
         }

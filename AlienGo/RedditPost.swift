@@ -19,6 +19,7 @@ struct RedditPost {
     let permalink: String
     var author: String?
     var score: Int?
+    var readCompletionHandler: (() -> Void)?
     
     init?(apiResponse: [String: AnyObject]) {
         guard let data = apiResponse["data"] as? [String: AnyObject],

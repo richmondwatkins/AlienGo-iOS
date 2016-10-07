@@ -11,6 +11,7 @@ import UIKit
 struct RedditReadablePost: Readable {
 
     var text: String
+    var readCompletionHandler: (() -> Void)?
     
     init(displayablePost: DisplayableFeedItem) {
         self.text = displayablePost.postTitle
