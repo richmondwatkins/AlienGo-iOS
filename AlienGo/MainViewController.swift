@@ -23,16 +23,30 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setUpNavAnimations()
+        
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        tapGesture.numberOfTapsRequired = 2
+        
+        view.addGestureRecognizer(tapGesture)
     }
     
-    private func setUpNavAnimations() {
-        swipeAnimationController = SwipeToShowAnimationController(percentDrivenController: self.swipeInteractionController)
-        
+    func didTap() {
+//        setupDetailVC()
+//        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func setupDetailVC() {
         self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         
         swipeInteractionController.detailViewController = detailViewController
         swipeInteractionController.mainViewController = self
         swipeInteractionController.attachToViewController(viewController: self)
+    }
+    
+    private func setUpNavAnimations() {
+        swipeAnimationController = SwipeToShowAnimationController(percentDrivenController: self.swipeInteractionController)
+        
+        setupDetailVC()
         
         navigationController?.delegate = self
     }

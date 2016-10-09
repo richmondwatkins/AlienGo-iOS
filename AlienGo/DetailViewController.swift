@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
              viewModel.getInfo()
         }
     }
+    var disappearFromCommentPopover: Bool = false
     var childVC: UIViewController?
     
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class DetailViewController: UIViewController {
     }
     
     func didDoubletap() {
+        disappearFromCommentPopover = true
         viewModel.didDoubletap()
     }
     
@@ -35,10 +37,18 @@ class DetailViewController: UIViewController {
         childVC?.view.frame = view.bounds
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if disappearFromCommentPopover {
+            disappearFromCommentPopover = false
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if let childVC = childVC {
+        if let childVC = childVC, !disappearFromCommentPopover {
             childVC.willMove(toParentViewController: nil)
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()

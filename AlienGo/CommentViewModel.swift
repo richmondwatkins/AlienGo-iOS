@@ -111,6 +111,10 @@ class CommentViewModel {
         }
     }
     
+    func dismiss() {
+        readableDelegate.stopIfNeeded()
+    }
+    
     private func read(comment: Comment) {
         self.readingComment = comment
         

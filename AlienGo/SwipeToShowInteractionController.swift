@@ -57,14 +57,14 @@ class SwipeToShowInteractionController: UIPercentDrivenInteractiveTransition {
                 transitionInProgress = true
             }
         case .changed:
-            if showState == .main && gestureRecognizer.isLeft() ||
-                showState == .detail && !gestureRecognizer.isLeft() {
+//            if showState == .main && gestureRecognizer.isLeft() ||
+//                showState == .detail && !gestureRecognizer.isLeft() {
                 shouldCompleteTransition = percentComplete > 0.5
-                
+//                
                 if percentComplete <= 1.0 && transitionInProgress {
                     update(percentComplete)
                 }
-            }
+//            }
         case .cancelled, .ended:
             if transitionInProgress {
                 if !shouldCompleteTransition || gestureRecognizer.state == .cancelled {

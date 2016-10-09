@@ -63,6 +63,14 @@ struct RedditPost {
 }
 
 extension RedditPost: DisplayableFeedItem {
+    var postedByUsername: String? {
+        return author
+    }
+
+    var postSubredditName: String? {
+        return subreddit.name
+    }
+
     internal var postPermalink: String {
         return permalink
     }

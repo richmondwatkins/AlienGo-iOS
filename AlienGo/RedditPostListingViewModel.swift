@@ -64,6 +64,10 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
             prefixText = "Previous Post"
         }
         
+        if let subbreddit = post.subredditName {
+            prefixText += " in \(subbreddit)"
+        }
+        
         readHandler.readItem(prefixText: prefixText, readableItem: post)
     }
 
