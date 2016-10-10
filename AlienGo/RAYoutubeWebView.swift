@@ -83,6 +83,8 @@ class RAYoutubeWebView: UIView {
         
         if urlIsYoutube() {
             embededHTML = youtubeHTMLEmbed(embedUrlString: embedUrlString)
+        } else if urlIsVine() {
+            embededHTML = vineEmbed(embedUrlString: embedUrlString)
         } else if urlIsVidMe() {
             embededHTML = vidmeHTMLEmbed(embedUrlString: embedUrlString)
         } else if urlIsStreamable() {
@@ -93,6 +95,10 @@ class RAYoutubeWebView: UIView {
         //<div style="width: 100%; height: 0px; position: relative; padding-bottom: 53.587%;"><iframe src="https://streamable.com/e/kqop" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no" style="width: 100%; height: 100%; position: absolute;"></iframe></div>
 
         //<iframe width="560" height="315" src="https://www.youtube.com/embed/q63h59hFcX0" frameborder="0" allowfullscreen></iframe>
+        
+        //Vine 
+        //https://vine.co/v/5gAphDzxlYt
+        // <iframe src="https://vine.co/v/5gAphDzxlYt/embed/simple" width="600" height="600" frameborder="0"></iframe><script src="https://platform.vine.co/static/scripts/embed.js"></script>
         
         if embededHTML == nil {
             print(embedUrlString)
@@ -107,6 +113,10 @@ class RAYoutubeWebView: UIView {
     
     fileprivate func urlIsYoutube() -> Bool {
         return urlString.contains("youtube") || urlString.contains("youtu.be")
+    }
+    
+    fileprivate func urlIsVine() -> Bool {
+        return urlString.contains("vine")
     }
     
     fileprivate func urlIsVidMe() -> Bool {
@@ -133,6 +143,22 @@ class RAYoutubeWebView: UIView {
         let newUrl = "\(components.scheme!)://vid.me\(newPath)"
         
         return "<iframe src=\"\(newUrl)\" width=\"720\" height=\"554\" frameborder=\"0\" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling=\"no\"></iframe>"
+    }
+    
+    private func vineEmbed(embedUrlString: String) -> String {
+        let components = NSURLComponents(string: embedUrlString)!
+        let originalPath = components.path!
+        var embedUrlString = embedUrlString
+        
+        if embedUrlString.contains("vine.co") && originalPath.contains("/v/") {
+            embedUrlString += "/embed/simple"
+        }
+        
+        //<iframe src="https://vine.co/v/5gAphDzxlYt/embed/simple" width="600" height="600" frameborder="0"></iframe><script src="https://platform.vine.co/static/scripts/embed.js"></script>
+        
+        let embedHtml = "<iframe src=\"\(embedUrlString)\" width=\"\(self.frame.width)\" height=\"\(self.frame.height)\" frameborder=\"0\"></iframe><script src=\"https://platform.vine.co/static/scripts/embed.js\"></script>"
+        
+        return embedHtml
     }
     
     private func youtubeHTMLEmbed(embedUrlString: String) -> String {
