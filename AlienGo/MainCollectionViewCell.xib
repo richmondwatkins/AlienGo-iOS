@@ -35,10 +35,10 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="nIV-RI-zqB" secondAttribute="bottom" constant="8" id="H0g-e8-rsd"/>
                 <constraint firstItem="nIV-RI-zqB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="TrS-6h-32I"/>
-                <constraint firstItem="hL2-IP-A7h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="aCT-pP-aFh"/>
+                <constraint firstItem="hL2-IP-A7h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="aCT-pP-aFh"/>
                 <constraint firstAttribute="trailing" secondItem="PMu-gc-dUd" secondAttribute="trailing" constant="8" id="cs5-7B-88L"/>
                 <constraint firstAttribute="bottom" secondItem="PMu-gc-dUd" secondAttribute="bottom" constant="8" id="fvG-KS-mCV"/>
-                <constraint firstAttribute="trailing" secondItem="hL2-IP-A7h" secondAttribute="trailing" constant="8" id="gDR-IT-VS5"/>
+                <constraint firstAttribute="trailing" secondItem="hL2-IP-A7h" secondAttribute="trailing" constant="16" id="gDR-IT-VS5"/>
                 <constraint firstAttribute="bottom" secondItem="hL2-IP-A7h" secondAttribute="bottom" constant="8" id="kuU-UN-7Og"/>
                 <constraint firstItem="hL2-IP-A7h" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="rAu-yU-rV0"/>
             </constraints>

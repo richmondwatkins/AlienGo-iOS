@@ -108,6 +108,7 @@ extension MainCollectionViewSource: RedditPostListingViewModelDelegate {
     internal func displayRedditPosts(posts: [DisplayableFeedItem]) {
         DispatchQueue.main.async {
             self.set(data: posts)
+            self.collectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
 }

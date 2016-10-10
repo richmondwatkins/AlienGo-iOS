@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PO6-c3-rVY">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PO6-c3-rVY">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lsI-Co-3e0">
                                     <size key="itemSize" width="50" height="50"/>
@@ -92,7 +92,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SYm-0t-arw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SYm-0t-arw">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7P1-Em-v4q" id="lfc-UH-mOP"/>
@@ -102,10 +102,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SYm-0t-arw" firstAttribute="leading" secondItem="p7p-mZ-sc7" secondAttribute="leadingMargin" id="5zK-rI-2Sg"/>
-                            <constraint firstItem="mPf-kS-LPg" firstAttribute="top" secondItem="SYm-0t-arw" secondAttribute="bottom" constant="8" id="ZLu-RH-dt8"/>
-                            <constraint firstItem="SYm-0t-arw" firstAttribute="top" secondItem="H9M-VV-WFz" secondAttribute="bottom" id="aVy-U6-cgH"/>
-                            <constraint firstItem="SYm-0t-arw" firstAttribute="trailing" secondItem="p7p-mZ-sc7" secondAttribute="trailingMargin" id="rd7-a0-5tw"/>
+                            <constraint firstItem="mPf-kS-LPg" firstAttribute="top" secondItem="SYm-0t-arw" secondAttribute="bottom" id="2ct-sP-Ujb"/>
+                            <constraint firstItem="SYm-0t-arw" firstAttribute="leading" secondItem="p7p-mZ-sc7" secondAttribute="leading" id="G4h-f5-4Q5"/>
+                            <constraint firstItem="SYm-0t-arw" firstAttribute="top" secondItem="H9M-VV-WFz" secondAttribute="bottom" id="Uih-Fs-awe"/>
+                            <constraint firstAttribute="trailing" secondItem="SYm-0t-arw" secondAttribute="trailing" id="cy0-PF-oWK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -138,10 +138,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PX2-8U-mSK" firstAttribute="leading" secondItem="Kgn-QS-6uS" secondAttribute="leading" id="4UC-WV-jzR"/>
-                            <constraint firstItem="MaU-qp-XJJ" firstAttribute="top" secondItem="PX2-8U-mSK" secondAttribute="bottom" id="7cV-xE-eNk"/>
-                            <constraint firstItem="PX2-8U-mSK" firstAttribute="top" secondItem="Kgn-QS-6uS" secondAttribute="top" id="MKr-Uw-UsQ"/>
-                            <constraint firstAttribute="trailing" secondItem="PX2-8U-mSK" secondAttribute="trailing" id="TKi-hQ-ANM"/>
+                            <constraint firstItem="PX2-8U-mSK" firstAttribute="leading" secondItem="Kgn-QS-6uS" secondAttribute="leadingMargin" id="90n-yJ-cCb"/>
+                            <constraint firstItem="PX2-8U-mSK" firstAttribute="trailing" secondItem="Kgn-QS-6uS" secondAttribute="trailingMargin" id="bPw-Gp-O9b"/>
+                            <constraint firstItem="MaU-qp-XJJ" firstAttribute="top" secondItem="PX2-8U-mSK" secondAttribute="bottom" id="e6R-gM-yZE"/>
+                            <constraint firstItem="PX2-8U-mSK" firstAttribute="top" secondItem="J5W-nX-aP7" secondAttribute="bottom" constant="8" id="uQ2-cy-HOe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -150,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZW-gV-fJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2338" y="136"/>
+            <point key="canvasLocation" x="2336.8000000000002" y="135.38230884557723"/>
         </scene>
         <!--Detail Image Gif View Controller-->
         <scene sceneID="J9M-jI-w7q">
@@ -183,14 +183,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Jkq-cf-Vlx" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" constant="8" id="588-bG-Drx"/>
                             <constraint firstItem="8gL-Ny-9tQ" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" id="Hfh-Q2-kqf"/>
-                            <constraint firstAttribute="trailing" secondItem="Jkq-cf-Vlx" secondAttribute="trailing" constant="8" id="TUb-z8-g3a"/>
-                            <constraint firstItem="Jkq-cf-Vlx" firstAttribute="top" secondItem="coY-5w-Ihu" secondAttribute="bottom" constant="8" id="Ugi-jw-5PW"/>
                             <constraint firstItem="yFw-51-JKa" firstAttribute="top" secondItem="8gL-Ny-9tQ" secondAttribute="bottom" id="ZFQ-uL-zGt"/>
-                            <constraint firstItem="yFw-51-JKa" firstAttribute="top" secondItem="Jkq-cf-Vlx" secondAttribute="bottom" constant="8" id="ea2-8o-jQ4"/>
+                            <constraint firstItem="yFw-51-JKa" firstAttribute="top" secondItem="Jkq-cf-Vlx" secondAttribute="bottom" id="ZVV-fd-Tni"/>
+                            <constraint firstItem="Jkq-cf-Vlx" firstAttribute="leading" secondItem="gff-LA-UfZ" secondAttribute="leading" id="m1E-au-kfo"/>
+                            <constraint firstItem="Jkq-cf-Vlx" firstAttribute="top" secondItem="coY-5w-Ihu" secondAttribute="bottom" id="odH-Pk-MY4"/>
                             <constraint firstItem="8gL-Ny-9tQ" firstAttribute="top" secondItem="coY-5w-Ihu" secondAttribute="bottom" id="q86-2e-zPy"/>
                             <constraint firstAttribute="trailing" secondItem="8gL-Ny-9tQ" secondAttribute="trailing" id="qfR-PT-R1H"/>
+                            <constraint firstAttribute="trailing" secondItem="Jkq-cf-Vlx" secondAttribute="trailing" id="zca-gS-Ggo"/>
                         </constraints>
                     </view>
                     <connections>

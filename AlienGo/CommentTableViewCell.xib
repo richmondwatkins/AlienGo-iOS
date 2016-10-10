@@ -20,12 +20,21 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yI5-hX-mvy">
+                        <color key="backgroundColor" red="0.78431372549019607" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="vQs-l2-gle"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="yI5-hX-mvy" firstAttribute="leading" secondItem="T4x-4i-cv9" secondAttribute="leading" id="3zh-ax-qWh"/>
+                    <constraint firstAttribute="trailing" secondItem="yI5-hX-mvy" secondAttribute="trailing" id="AkD-xi-6CC"/>
                     <constraint firstItem="T4x-4i-cv9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="FQK-99-VkY"/>
+                    <constraint firstAttribute="bottom" secondItem="yI5-hX-mvy" secondAttribute="bottom" id="MY1-nH-5vL"/>
                     <constraint firstAttribute="bottom" secondItem="T4x-4i-cv9" secondAttribute="bottom" constant="8" id="qBK-jO-Aoc"/>
                     <constraint firstItem="T4x-4i-cv9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="rtm-En-v7L"/>
-                    <constraint firstAttribute="trailing" secondItem="T4x-4i-cv9" secondAttribute="trailing" id="yjF-nI-Nj1"/>
+                    <constraint firstAttribute="trailing" secondItem="T4x-4i-cv9" secondAttribute="trailing" constant="8" id="yjF-nI-Nj1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

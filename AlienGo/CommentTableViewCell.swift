@@ -24,3 +24,9 @@ class CommentTableViewCell: UITableViewCell {
         lableLeadingConstraint.constant = CGFloat((comment.nestedLevel + 1) * 8)
     }
 }
+
+extension CommentTableViewCell: ReadingCallbackDelegate {
+    func willSpeak(_ speechString: String, characterRange: NSRange) {
+         commentLabel.attributedText = willSpeakAttrString(fullString: commentLabel.text!, range: characterRange, font: commentLabel.font)
+    }
+}

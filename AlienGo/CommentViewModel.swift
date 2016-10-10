@@ -11,6 +11,7 @@ import UIKit
 protocol CommentDisplayDelegate {
     func display(comments: [Comment])
     func scrollTo(indexPath: IndexPath)
+    func cellForIndex(indexPath: IndexPath) -> CommentTableViewCell?
 }
 
 class CommentViewModel {
@@ -33,15 +34,15 @@ class CommentViewModel {
     func getComments() {
         DispatchQueue.global(qos: .userInitiated).async {
             let response = self.provider.get()
-            
-            if let first = response.linearComments.first {
-              self.read(comment: first)
-            }
-            
+        
             self.orderedComments = response.orderedComments
             self.linearComments = response.linearComments
             
             self.displayDelegate.display(comments: response.linearComments)
+            
+            if let first = response.linearComments.first {
+                self.read(comment: first, index: 0)
+            }
         }
     }
     
@@ -49,15 +50,11 @@ class CommentViewModel {
     func longPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .ended {
             if let readingComment = readingComment {
-                readableDelegate.stopIfNeeded()
                 if let topIndex = orderedComments.index(of: readingComment.topLevelParent()), topIndex + 1 < orderedComments.count {
                     let nextTopIndex = topIndex + 1
                     let comment = orderedComments[nextTopIndex]
                     
-                    if let liniearIndex = linearComments.index(of: comment) {
-                        read(comment: comment)
-                        displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
-                    }
+                    goToComment(comment: comment)
                 }
             }
         }
@@ -65,21 +62,13 @@ class CommentViewModel {
     
     func didTap(gesture: UITapGestureRecognizer) {
         if let readingComment = readingComment {
-            var metaInfoReader = ReaderContainer(text: "Comment by \(readingComment.user.username)   score of \(readingComment.score)")
-            
-            metaInfoReader.readCompletionHandler = {
-                self.readableDelegate.readItem(prefixText: "", readableItem: readingComment)
-            }
-            
-            readableDelegate.readItem(prefixText: "", readableItem: metaInfoReader)
+             self.readableDelegate.readItem(prefixText: "Comment by \(readingComment.user.username)   score of \(readingComment.score)", readableItem: readingComment)
         }
     }
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
         if let readingComment = readingComment {
             if gesture.direction == .down {
-                readableDelegate.stopIfNeeded()
-                
                 if let comment = orderedComments.nextSibling(current: readingComment) {
                     goToComment(comment: comment)
                 } else {
@@ -87,14 +76,11 @@ class CommentViewModel {
                 }
             } else if gesture.direction == .right {
                 if let firstReply = readingComment.replies.first {
-                    readableDelegate.stopIfNeeded()
                     goToComment(comment: firstReply)
                 } else {
                     self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"))
                 }
             } else if gesture.direction == .up {
-                readableDelegate.stopIfNeeded()
-                
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
                 } else {
@@ -106,8 +92,10 @@ class CommentViewModel {
     
     func goToComment(comment: Comment) {
         if let liniearIndex = linearComments.index(of: comment) {
-            read(comment: comment)
+           
             displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
+            
+            read(comment: comment, index: liniearIndex)
         }
     }
     
@@ -115,16 +103,19 @@ class CommentViewModel {
         readableDelegate.stopIfNeeded()
     }
     
-    private func read(comment: Comment) {
+    private func read(comment: Comment, index: Int) {
         self.readingComment = comment
         
-        var userReadItem = ReaderContainer(readable: comment.user)
+        let userReadItem = ReaderContainer(readable: comment.user)
         
-        userReadItem.readCompletionHandler = {
-            self.readableDelegate.readItem(prefixText: "", readableItem: comment)
-        }
+        self.readableDelegate.readItem(prefixText: "Comment by  \(userReadItem.text)", readableItem: comment)
         
-        self.readableDelegate.readItem(prefixText: "Comment by  ", readableItem: userReadItem)
+        // hack for now
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            if let cell = self.displayDelegate.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
+                self.readableDelegate.setReadingCallback(delegate: cell)
+            }
+        })
     }
 }
 
@@ -186,10 +177,13 @@ extension Array where Element:CommentItem {
     }
     
     func index<T: CommentItem>(of el: T) -> Int? {
-        for (index, element) in self.enumerated() {
+        var i = 0
+        for element in self {
             if element.id == el.id {
-                return index
+                return i
             }
+            
+            i += 1
         }
         
         return nil

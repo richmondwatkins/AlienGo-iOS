@@ -31,7 +31,7 @@ class ReadHandler: NSObject {
     var speakBody: (() -> Void)?
     var state: ReadState = .stopped {
         didSet {
-            if state == .finished {
+            if state == .finished || state == .stopped {
                 currentRead?.readCompletionHandler?()
             }
         }
@@ -115,6 +115,10 @@ extension ReadHandler: AVSpeechSynthesizerDelegate {
         }
         
         state = .finished
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        state = .stopped
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
