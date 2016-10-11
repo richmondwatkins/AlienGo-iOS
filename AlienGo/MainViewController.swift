@@ -18,29 +18,32 @@ class MainViewController: UIViewController {
     fileprivate lazy var swipeInteractionController = SwipeToShowInteractionController()
     fileprivate var swipeAnimationController: SwipeToShowAnimationController!
     fileprivate var detailViewController: DetailViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavAnimations()
+//        setUpNavAnimations()
         
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
-        tapGesture.numberOfTapsRequired = 2
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(reReadCurrent(press:)))
+        view.addGestureRecognizer(longPress)
         
-        view.addGestureRecognizer(tapGesture)
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTap))
+        singleTap.numberOfTapsRequired = 1
+        view.addGestureRecognizer(singleTap)
     }
     
-    func didTap() {
-//        setupDetailVC()
-//        self.navigationController?.pushViewController(detailViewController, animated: true)
+    func reReadCurrent(press: UILongPressGestureRecognizer) {
+        viewModel.reReadCurrent(press: press)
+    }
+    
+    func didSingleTap() {
+        setupDetailVC()
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func setupDetailVC() {
         self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
-        
-        swipeInteractionController.detailViewController = detailViewController
-        swipeInteractionController.mainViewController = self
-        swipeInteractionController.attachToViewController(viewController: self)
+        detailViewController.viewModel = viewModel.getDetailViewModel(detailViewController: detailViewController)        
     }
     
     private func setUpNavAnimations() {
@@ -54,19 +57,19 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if operation == .push {
-            detailViewController.viewModel = viewModel.getDetailViewModel(detailViewController: detailViewController)
-        }
-        
-        return swipeAnimationController
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        
-        return swipeInteractionController
-    }
+//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        
+//        if operation == .push {
+//            detailViewController.viewModel = viewModel.getDetailViewModel(detailViewController: detailViewController)
+//        }
+//        
+//        return swipeAnimationController
+//    }
+//    
+//    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//        
+//        return swipeInteractionController
+//    }
 }
 
 extension MainViewController: RedditPostListingNavigationDelegate {

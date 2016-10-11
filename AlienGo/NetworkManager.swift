@@ -23,7 +23,6 @@ class NetworkManager: NSObject {
     
     func getRedditPostsAtPage(lastPostId: String, totalPostCount: Int, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/all/.json?count=25&after=t3_5656e1.json
-        print("https://www.reddit.com/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")
         let url: URL = URL(string: "https://www.reddit.com/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")!
         
         sendRequest(request: URLRequest(url: url), callback: callback)
@@ -36,16 +35,26 @@ class NetworkManager: NSObject {
         sendRequest(request: URLRequest(url: url), callback: callback)
     }
     
+    func postDetailInfo(detailPostItem: DetailPostItem, bodyContent: String,  callback: NetworkCallback?) {
+        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/update")!
+
+        Alamofire.request(url, method: .post, parameters: ["content": bodyContent, "postId": detailPostItem.id], encoding: JSONEncoding.default).responseJSON { (response) in
+            if response.result.isSuccess, let value = response.result.value as AnyObject? {
+                callback?(value as AnyObject?, nil)
+            } else {
+                callback?(nil, response.result.error)
+            }
+        }
+    }
+    
     func getDetailInfo(detailPostItem: DetailPostItem, callback: NetworkCallback?) {
-        let url: URL = URL(string: "http://localhost:3000/parse")!
-        var request: URLRequest = URLRequest(url: url)
-        request.httpMethod = "POST"
+        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/parse")!
         
         guard let bodyContent = detailPostItem.content.requestBodyValue() else {
             return
         }
         
-        Alamofire.request(url, method: .post, parameters: ["html": bodyContent], encoding: JSONEncoding.default).responseJSON { (response) in
+        Alamofire.request(url, method: .post, parameters: ["html": bodyContent, "postId": detailPostItem.id], encoding: JSONEncoding.default).responseJSON { (response) in
             if response.result.isSuccess, let value = response.result.value as AnyObject? {
                 callback?(value as AnyObject?, nil)
             } else {

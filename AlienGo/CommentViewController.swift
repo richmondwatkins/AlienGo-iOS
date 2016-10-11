@@ -36,7 +36,6 @@ class CommentViewController: UIViewController {
         }
         
         let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(gesture:)))
-        longPressGesture.minimumPressDuration = 0.5
         tableView.addGestureRecognizer(longPressGesture)
         
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(gesture:)))

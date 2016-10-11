@@ -17,7 +17,9 @@ class DetailViewModel: NSObject {
     let detailPostItem: DetailPostItem
     let displayDelegate: DetailViewModelDelegate
     var provider: RedditDetailPostProvider!
+    var disappearFromCommentPopover: Bool = false
     private var readableDelegate: ReadableDelegate = ReadHandler()
+    private var shouldAcceptLongPress: Bool = true
     
     func set(readableDelegate: ReadableDelegate) {
         self.readableDelegate = readableDelegate
@@ -33,7 +35,20 @@ class DetailViewModel: NSObject {
         readableDelegate.stopIfNeeded()
     }
     
-    func didDoubletap() {
+    func showComments(press: UILongPressGestureRecognizer) {
+        if press.state == .began && shouldAcceptLongPress {
+            
+            showCommentVC()
+            
+            shouldAcceptLongPress = false
+        } else if press.state == .ended {
+            shouldAcceptLongPress = true
+        }
+    }
+    
+    func showCommentVC() {
+        disappearFromCommentPopover = true
+        
         readableDelegate.stopIfNeeded()
         
         let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController
@@ -54,7 +69,13 @@ class DetailViewModel: NSObject {
             case .richVideo:
                 self.showVideoVC()
                 break
-            case .titleOnly:
+            case .titleOnly, .selfPostTitleOnly:
+                let vc = self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
+                self.displayDelegate.display(childVC: vc)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { 
+                    self.showCommentVC()
+                })
                 break
             }
         }
@@ -62,15 +83,22 @@ class DetailViewModel: NSObject {
     
     func getTextInfo() {
         if let textPost = self.provider.get() {
-            let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
-            detailTextVC.textPost = textPost
             
-            readableDelegate.setReadingCallback(delegate: detailTextVC)
+            let vc = buildTextVC(title: textPost.title, text: textPost.content)
             
-            self.displayDelegate.display(childVC: detailTextVC)
+            readableDelegate.setReadingCallback(delegate: vc)
             
             self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: textPost.content))
         }
+    }
+    
+    func buildTextVC(title: String, text: String) -> DetailTextViewController {
+        let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
+        detailTextVC.textPost = DetailTextContainer(title: title, content: text)
+        
+        self.displayDelegate.display(childVC: detailTextVC)
+        
+        return detailTextVC
     }
     
     func showVideoVC() {

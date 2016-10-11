@@ -19,6 +19,7 @@ class RedditPostListingViewModel: NSObject {
 
     lazy var readHandler: ReadableDelegate = ReadHandler()
     private var isFirstLoad: Bool = true
+    private var shouldAcceptLongPress: Bool = true
     @IBOutlet weak var collectionSource: MainCollectionViewSource! {
         didSet {
             collectionSource.set(selectionDelegate: self)
@@ -37,6 +38,16 @@ class RedditPostListingViewModel: NSObject {
     // For storyboard object
     override init() {
         super.init()
+        
+    }
+    
+    func reReadCurrent(press: UILongPressGestureRecognizer) {
+        if press.state == .began && shouldAcceptLongPress {
+            readHandler.reReadCurrent()
+            shouldAcceptLongPress = false
+        } else if press.state == .ended {
+            shouldAcceptLongPress = true
+        }
     }
 
     func getDetailViewModel(detailViewController: DetailViewController) -> DetailViewModel {
@@ -79,11 +90,16 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
         readHandler.readingCallbackDelegate = cell
     }
     
+    
+    func refresh() {
+        getPosts()
+    }
+    
     func loadMore() {
         DispatchQueue.global(qos: .userInitiated).async {
             let existingData = self.collectionSource.getData()
             if let lastPost = existingData.last {
-                let nextPage = self.postProvider.loadMore(postId: lastPost.postId, totalCount: existingData.count)
+                let nextPage = self.postProvider.loadMore(postId: lastPost.postName , totalCount: existingData.count)
                 
                 self.collectionSource.insert(data: nextPage)
             }

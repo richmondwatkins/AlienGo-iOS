@@ -27,14 +27,23 @@ protocol MainCollectionSourceSelectionDelegate {
     func didDisplay(post: DisplayableFeedItem, cell: MainCollectionViewCell)
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection)
     func loadMore()
+    func refresh()
 }
 
 class MainCollectionViewSource: NSObject {
 
+    fileprivate lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.tintColor = UIColor(ColorConstants.appBlue)
+        control.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return control
+    }()
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             let cellClassName = String(describing: MainCollectionViewCell.self)
             collectionView.register(UINib(nibName: cellClassName, bundle: Bundle.main), forCellWithReuseIdentifier: cellClassName)
+            collectionView.addSubview(refreshControl)
+            collectionView.alwaysBounceVertical = true
         }
     }
     var currentPage: Int = 0
@@ -46,6 +55,11 @@ class MainCollectionViewSource: NSObject {
     fileprivate func set(data: [DisplayableFeedItem]) {
         self.data = data
         collectionView?.reloadData()
+    }
+    
+    func refresh() {
+        self.collectionView.setContentOffset(self.collectionView.contentOffset, animated: true)
+        selectionDelegate.refresh()
     }
     
     func getData() -> [DisplayableFeedItem] {
@@ -107,6 +121,10 @@ extension MainCollectionViewSource: UICollectionViewDataSource {
 extension MainCollectionViewSource: RedditPostListingViewModelDelegate {
     internal func displayRedditPosts(posts: [DisplayableFeedItem]) {
         DispatchQueue.main.async {
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            
             self.set(data: posts)
             self.collectionView.setContentOffset(CGPoint.zero, animated: true)
         }

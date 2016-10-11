@@ -24,6 +24,7 @@ class CommentViewModel {
     private var orderedComments: [Comment] = []
     private var linearComments: [Comment] = []
     private var readingComment: Comment?
+    private var shouldAcceptLongPress: Bool = true
     
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate) {
         self.detailPostItem = detailPostItem
@@ -48,7 +49,8 @@ class CommentViewModel {
     
     // go back to top comments
     func longPress(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .ended {
+        if gesture.state == .began && shouldAcceptLongPress {
+            
             if let readingComment = readingComment {
                 if let topIndex = orderedComments.index(of: readingComment.topLevelParent()), topIndex + 1 < orderedComments.count {
                     let nextTopIndex = topIndex + 1
@@ -57,6 +59,10 @@ class CommentViewModel {
                     goToComment(comment: comment)
                 }
             }
+            
+            shouldAcceptLongPress = false
+        } else if gesture.state == .ended {
+            shouldAcceptLongPress = true
         }
     }
     

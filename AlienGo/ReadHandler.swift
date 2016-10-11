@@ -17,6 +17,7 @@ protocol ReadableDelegate {
     func readItemWithoutStop(prefixText: String, readableItem: Readable)
     func readItem(prefixText: String, readableItem: Readable)
     func stopIfNeeded()
+    func reReadCurrent()
     func setReadingCallback(delegate: ReadingCallbackDelegate)
     var readingCallbackDelegate: ReadingCallbackDelegate? { get set }
 }
@@ -90,6 +91,12 @@ extension ReadHandler: ReadableDelegate {
 
     func setReadingCallback(delegate: ReadingCallbackDelegate) {
         readingCallbackDelegate = delegate
+    }
+    
+    func reReadCurrent() {
+        if let currentRead = currentRead {
+            readItem(prefixText: "", readableItem: currentRead)
+        }
     }
     
     func readItem(prefixText: String, readableItem: Readable) {

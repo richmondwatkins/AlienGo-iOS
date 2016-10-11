@@ -15,21 +15,26 @@ class DetailViewController: UIViewController {
              viewModel.getInfo()
         }
     }
-    var disappearFromCommentPopover: Bool = false
     var childVC: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let commentTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubletap))
-        commentTapGesture.numberOfTapsRequired = 2
+        let commentLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(showComments(press:)))
+        view.addGestureRecognizer(commentLongPress)
         
-        view.addGestureRecognizer(commentTapGesture)
+        let exitTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pop))
+        exitTap.numberOfTapsRequired = 2
+        exitTap.delegate = self
+        view.addGestureRecognizer(exitTap)
     }
     
-    func didDoubletap() {
-        disappearFromCommentPopover = true
-        viewModel.didDoubletap()
+    func showComments(press: UILongPressGestureRecognizer) {
+        viewModel.showComments(press: press)
+    }
+    
+    func pop() {
+        let _ = self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillLayoutSubviews() {
@@ -40,21 +45,28 @@ class DetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if disappearFromCommentPopover {
-            disappearFromCommentPopover = false
+        if viewModel.disappearFromCommentPopover {
+            viewModel.disappearFromCommentPopover = false
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if let childVC = childVC, !disappearFromCommentPopover {
+        if let childVC = childVC, !viewModel.disappearFromCommentPopover {
             childVC.willMove(toParentViewController: nil)
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()
         }
         
         viewModel.viewDidDisappear()
+    }
+}
+
+extension DetailViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 

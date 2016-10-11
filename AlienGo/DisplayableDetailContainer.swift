@@ -13,12 +13,11 @@ struct DetailTextContainer: DetailTextItem {
     var content: String
     
     init?(title: String?, content: String?) {
-        guard let title = title,
-            let content = content else {
+        guard let content = content else {
             return nil
         }
         
-        self.title = title
+        self.title = title ?? ""
         self.content = content
     }
 }
