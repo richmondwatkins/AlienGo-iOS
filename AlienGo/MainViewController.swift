@@ -18,7 +18,8 @@ class MainViewController: UIViewController {
     fileprivate lazy var swipeInteractionController = SwipeToShowInteractionController()
     fileprivate var swipeAnimationController: SwipeToShowAnimationController!
     fileprivate var detailViewController: DetailViewController!
-
+    private var disapearFromDetailNav: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,12 +33,22 @@ class MainViewController: UIViewController {
         view.addGestureRecognizer(singleTap)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if disapearFromDetailNav && StateProvider.isAuto {
+            viewModel.readAndShowNextPost()
+            disapearFromDetailNav = false
+        }
+    }
+    
     func reReadCurrent(press: UILongPressGestureRecognizer) {
         viewModel.reReadCurrent(press: press)
     }
     
     func didSingleTap() {
         setupDetailVC()
+        disapearFromDetailNav = true
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
@@ -74,7 +85,7 @@ extension MainViewController: UINavigationControllerDelegate {
 
 extension MainViewController: RedditPostListingNavigationDelegate {
     
-    func display(vc: DetailViewController) {
-        //swipeInteractionController.toViewController = vc
+    func displayDetailVC() {
+        didSingleTap()
     }
 }

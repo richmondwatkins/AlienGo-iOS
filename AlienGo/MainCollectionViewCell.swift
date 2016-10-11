@@ -23,6 +23,11 @@ class MainCollectionViewCell: UICollectionViewCell {
         
         usernameLabel.text = post.postedByUsername
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+     
+    }
 }
 
 extension MainCollectionViewCell: ReadingCallbackDelegate {

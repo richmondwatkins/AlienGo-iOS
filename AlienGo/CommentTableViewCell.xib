@@ -26,20 +26,36 @@
                             <constraint firstAttribute="height" constant="1" id="vQs-l2-gle"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cb-kP-O9d">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOO-9A-BQI">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="yI5-hX-mvy" firstAttribute="leading" secondItem="T4x-4i-cv9" secondAttribute="leading" id="3zh-ax-qWh"/>
                     <constraint firstAttribute="trailing" secondItem="yI5-hX-mvy" secondAttribute="trailing" id="AkD-xi-6CC"/>
-                    <constraint firstItem="T4x-4i-cv9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="FQK-99-VkY"/>
+                    <constraint firstItem="yOO-9A-BQI" firstAttribute="top" secondItem="3cb-kP-O9d" secondAttribute="top" id="DBk-zJ-Jan"/>
+                    <constraint firstItem="T4x-4i-cv9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="FQK-99-VkY"/>
                     <constraint firstAttribute="bottom" secondItem="yI5-hX-mvy" secondAttribute="bottom" id="MY1-nH-5vL"/>
+                    <constraint firstItem="3cb-kP-O9d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TfJ-UX-842"/>
+                    <constraint firstItem="yOO-9A-BQI" firstAttribute="leading" secondItem="3cb-kP-O9d" secondAttribute="trailing" constant="8" id="Wmp-VQ-lVu"/>
                     <constraint firstAttribute="bottom" secondItem="T4x-4i-cv9" secondAttribute="bottom" constant="8" id="qBK-jO-Aoc"/>
                     <constraint firstItem="T4x-4i-cv9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="rtm-En-v7L"/>
+                    <constraint firstItem="3cb-kP-O9d" firstAttribute="leading" secondItem="T4x-4i-cv9" secondAttribute="leading" id="t7B-44-gKQ"/>
                     <constraint firstAttribute="trailing" secondItem="T4x-4i-cv9" secondAttribute="trailing" constant="8" id="yjF-nI-Nj1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentLabel" destination="T4x-4i-cv9" id="Ywa-zW-hGB"/>
                 <outlet property="lableLeadingConstraint" destination="rtm-En-v7L" id="NRb-u1-wdP"/>
+                <outlet property="scoreLabel" destination="yOO-9A-BQI" id="JyO-cN-ObU"/>
+                <outlet property="usernameLabel" destination="3cb-kP-O9d" id="hfs-1w-6pY"/>
             </connections>
         </tableViewCell>
     </objects>

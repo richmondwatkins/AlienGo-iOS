@@ -47,19 +47,28 @@ class DetailViewController: UIViewController {
         
         if viewModel.disappearFromCommentPopover {
             viewModel.disappearFromCommentPopover = false
+            
+            if StateProvider.isAuto {
+                pop()
+            }
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
+        removeChildVCIfNeeded()
+        
+        viewModel.viewDidDisappear()
+    }
+    
+    func removeChildVCIfNeeded() {
+        
         if let childVC = childVC, !viewModel.disappearFromCommentPopover {
             childVC.willMove(toParentViewController: nil)
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()
         }
-        
-        viewModel.viewDidDisappear()
     }
 }
 

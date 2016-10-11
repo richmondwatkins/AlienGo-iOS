@@ -82,13 +82,28 @@ class DetailViewModel: NSObject {
     }
     
     func getTextInfo() {
+        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Parsing text"))
+        
         if let textPost = self.provider.get() {
             
-            let vc = buildTextVC(title: textPost.title, text: textPost.content)
+            if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
+                readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Could not parse text. Long press for comments"))
+            } else {
+                let vc = buildTextVC(title: textPost.title, text: textPost.content)
+                
+                readableDelegate.setReadingCallback(delegate: vc)
+                
+                var readable = ReaderContainer(text: "bleh bleh bleh bloh")
+                
+                readable.readCompletionHandler = {
+                    if StateProvider.isAuto {
+                        self.showCommentVC()
+                    }
+                }
+                
+                self.readableDelegate.readItem(prefixText: "", readableItem: readable)
+            }
             
-            readableDelegate.setReadingCallback(delegate: vc)
-            
-            self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: textPost.content))
         }
     }
     
@@ -102,7 +117,9 @@ class DetailViewModel: NSObject {
     }
     
     func showVideoVC() {
-         let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
+        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Loading video"))
+        
+        let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
         
         if let videoUrl = detailPostItem.content.url {
              detailVideoVC.videoDetailItem = DetailVideoItemContainer(title: detailPostItem.title, videoUrl: videoUrl)
@@ -112,10 +129,18 @@ class DetailViewModel: NSObject {
     }
     
     func getImageGifInfo() {
+        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Loading"))
+        
         let detailImageGifVc = vc(storyboardId: String(describing: DetailImageGifViewController.self)) as! DetailImageGifViewController
         
         if let detailImageGifItem = DetailImageGifContainer(title: detailPostItem.title, imageGifUrl: detailPostItem.content.url, showInWebView: detailPostItem.content.shouldBeShownInWebView()) {
             detailImageGifVc.imageGifPost = detailImageGifItem
+            
+            if StateProvider.isAuto {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { 
+                    self.showCommentVC()
+                })
+            }
             
             self.displayDelegate.display(childVC: detailImageGifVc)
         }
@@ -123,5 +148,13 @@ class DetailViewModel: NSObject {
     
     private func vc(storyboardId: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: storyboardId)
+    }
+}
+
+extension String {
+    
+    func removeAllNewLinesAndSpaces() -> String {
+        let trimmed = self.replacingOccurrences(of: "^\\s*", with: "", options: .regularExpression)
+        return trimmed.replacingOccurrences(of: "^\\n*", with: "", options: .regularExpression)
     }
 }

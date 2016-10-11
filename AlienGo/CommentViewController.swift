@@ -16,10 +16,16 @@ class CommentViewController: UIViewController {
             let cellClassName = String(describing: CommentTableViewCell.self)
             tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 140
-            tableView.isScrollEnabled = false
+            self.tableView.isScrollEnabled = false
             tableView.register(UINib(nibName: cellClassName, bundle: Bundle.main), forCellReuseIdentifier: cellClassName)
         }
     }
+    fileprivate lazy var refreshControl: UIRefreshControl = {
+       let control = UIRefreshControl()
+        control.tintColor = UIColor(ColorConstants.appBlue)
+        control.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return control
+    }()
     var viewModel: CommentViewModel!
     
     override func viewDidLoad() {
@@ -41,16 +47,20 @@ class CommentViewController: UIViewController {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(gesture:)))
         tapGesture.numberOfTapsRequired = 2
         tableView.addGestureRecognizer(tapGesture)
+        
+        refreshControl.beginRefreshing()
+    }
+    
+    func refresh() {
+        viewModel.getComments()
     }
     
     func didTap(gesture: UITapGestureRecognizer) {
-//        viewModel.didTap(gesture: gesture)
-        viewModel.dismiss()
-        self.dismiss(animated: true, completion: nil)
+        viewModel.goToNextTopLevel()
     }
     
     func didLongPress(gesture: UILongPressGestureRecognizer) {
-        viewModel.longPress(gesture: gesture)
+        viewModel.dismiss()
     }
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
@@ -76,8 +86,18 @@ extension CommentViewController: CommentDisplayDelegate {
     
     func display(comments: [Comment]) {
         DispatchQueue.main.async {
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            UIView.animate(withDuration: 0.3, animations: { 
+                self.tableView.alpha = 1
+            })
             self.tableSource.comments = comments
             self.tableView.reloadData()
         }
+    }
+    
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

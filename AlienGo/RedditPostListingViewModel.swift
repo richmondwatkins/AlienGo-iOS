@@ -13,7 +13,7 @@ protocol RedditPostListingViewModelDelegate {
 }
 
 protocol RedditPostListingNavigationDelegate {
-    func display(vc: DetailViewController)
+    func displayDetailVC()
 }
 class RedditPostListingViewModel: NSObject {
 
@@ -41,6 +41,10 @@ class RedditPostListingViewModel: NSObject {
         
     }
     
+    func readAndShowNextPost() {
+        collectionSource.goToNextPage()
+    }
+    
     func reReadCurrent(press: UILongPressGestureRecognizer) {
         if press.state == .began && shouldAcceptLongPress {
             readHandler.reReadCurrent()
@@ -63,7 +67,8 @@ class RedditPostListingViewModel: NSObject {
 }
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
-    func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection) {
+    func readPostTitle( post: RedditReadablePost, scrollDirection: ScrollDirection) {
+        var post = post
         var prefixText = ""
         
         switch scrollDirection {
@@ -77,6 +82,12 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
         
         if let subbreddit = post.subredditName {
             prefixText += " in \(subbreddit)"
+        }
+        
+        post.readCompletionHandler = {
+            if StateProvider.isAuto {
+                self.navigationDelegate.displayDetailVC()
+            }
         }
         
         readHandler.readItem(prefixText: prefixText, readableItem: post)

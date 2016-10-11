@@ -14,6 +14,7 @@ enum ReadState {
 }
 
 protocol ReadableDelegate {
+    func readItem(readableItem: Readable)
     func readItemWithoutStop(prefixText: String, readableItem: Readable)
     func readItem(prefixText: String, readableItem: Readable)
     func stopIfNeeded()
@@ -32,7 +33,7 @@ class ReadHandler: NSObject {
     var speakBody: (() -> Void)?
     var state: ReadState = .stopped {
         didSet {
-            if state == .finished || state == .stopped {
+            if state == .finished {
                 currentRead?.readCompletionHandler?()
             }
         }
@@ -97,6 +98,11 @@ extension ReadHandler: ReadableDelegate {
         if let currentRead = currentRead {
             readItem(prefixText: "", readableItem: currentRead)
         }
+    }
+
+    func readItem(readableItem: Readable) {
+        stopIfNeeded()
+        speak(text: readableItem.text)
     }
     
     func readItem(prefixText: String, readableItem: Readable) {

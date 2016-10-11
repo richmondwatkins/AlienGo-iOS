@@ -38,7 +38,7 @@ class MainCollectionViewSource: NSObject {
         control.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return control
     }()
-    @IBOutlet weak var collectionView: UICollectionView! {
+    @IBOutlet weak var collectionView: MainCollectionView! {
         didSet {
             let cellClassName = String(describing: MainCollectionViewCell.self)
             collectionView.register(UINib(nibName: cellClassName, bundle: Bundle.main), forCellWithReuseIdentifier: cellClassName)
@@ -51,6 +51,7 @@ class MainCollectionViewSource: NSObject {
     fileprivate var data: [DisplayableFeedItem] = []
     fileprivate var selectionDelegate: MainCollectionSourceSelectionDelegate!
     fileprivate var firstLoad: Bool = true
+    private var userScrolling: Bool = false
     
     fileprivate func set(data: [DisplayableFeedItem]) {
         self.data = data
@@ -74,12 +75,29 @@ class MainCollectionViewSource: NSObject {
         }
     }
     
+    func goToNextPage() {
+        if !userScrolling {
+            DispatchQueue.main.async {
+                self.currentPage += 1
+                self.collectionView.scrollToItem(at: IndexPath(row: self.currentPage, section: 0), at: .centeredVertically, animated: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    self.callDelegates(previousPage: self.currentPage - 1)
+                })
+            }
+        }
+    }
+    
     func set(selectionDelegate: MainCollectionSourceSelectionDelegate) {
         self.selectionDelegate = selectionDelegate
     }
 
     func getCurrentPost() -> DisplayableFeedItem {
         return data[currentPage]
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        userScrolling = true
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -91,6 +109,8 @@ class MainCollectionViewSource: NSObject {
               callDelegates(previousPage: previousPage)
             }
         }
+        
+        userScrolling = false
     }
     
     func callDelegates(previousPage: Int) {

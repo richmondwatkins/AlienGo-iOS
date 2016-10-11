@@ -10,6 +10,7 @@ import UIKit
 
 protocol CommentDisplayDelegate {
     func display(comments: [Comment])
+    func dismiss()
     func scrollTo(indexPath: IndexPath)
     func cellForIndex(indexPath: IndexPath) -> CommentTableViewCell?
 }
@@ -25,6 +26,7 @@ class CommentViewModel {
     private var linearComments: [Comment] = []
     private var readingComment: Comment?
     private var shouldAcceptLongPress: Bool = true
+    var readComments: Int = 0
     
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate) {
         self.detailPostItem = detailPostItem
@@ -33,6 +35,7 @@ class CommentViewModel {
     }
     
     func getComments() {
+        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Loading comments"))
         DispatchQueue.global(qos: .userInitiated).async {
             let response = self.provider.get()
         
@@ -48,21 +51,14 @@ class CommentViewModel {
     }
     
     // go back to top comments
-    func longPress(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began && shouldAcceptLongPress {
-            
-            if let readingComment = readingComment {
-                if let topIndex = orderedComments.index(of: readingComment.topLevelParent()), topIndex + 1 < orderedComments.count {
-                    let nextTopIndex = topIndex + 1
-                    let comment = orderedComments[nextTopIndex]
-                    
-                    goToComment(comment: comment)
-                }
+    func goToNextTopLevel() {
+        if let readingComment = readingComment {
+            if let topIndex = orderedComments.index(of: readingComment.topLevelParent()), topIndex + 1 < orderedComments.count {
+                let nextTopIndex = topIndex + 1
+                let comment = orderedComments[nextTopIndex]
+                
+                goToComment(comment: comment)
             }
-            
-            shouldAcceptLongPress = false
-        } else if gesture.state == .ended {
-            shouldAcceptLongPress = true
         }
     }
     
@@ -75,33 +71,46 @@ class CommentViewModel {
     func didSwipe(gesture: UISwipeGestureRecognizer) {
         if let readingComment = readingComment {
             if gesture.direction == .down {
-                if let comment = orderedComments.nextSibling(current: readingComment) {
-                    goToComment(comment: comment)
-                } else {
-                    self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more sibling comments"))
-                }
+               goToNextSibling()
             } else if gesture.direction == .right {
-                if let firstReply = readingComment.replies.first {
-                    goToComment(comment: firstReply)
-                } else {
-                    self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"))
-                }
+               goToReply()
             } else if gesture.direction == .up {
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
                 } else {
+                    self.readableDelegate.readingCallbackDelegate = nil
                     self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."))
                 }
             }
         }
     }
     
-    func goToComment(comment: Comment) {
+    func goToReply() {
+        if let readingComment = readingComment {
+            if let firstReply = readingComment.replies.first {
+                goToComment(comment: firstReply, prefix: "Reply by")
+            } else {
+                self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"))
+            }
+        }
+    }
+    
+    func goToNextSibling() {
+        if let readingComment = readingComment {
+            if let comment = orderedComments.nextSibling(current: readingComment) {
+                goToComment(comment: comment)
+            } else {
+                self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more sibling comments"))
+            }
+        }
+    }
+    
+    func goToComment(comment: Comment, prefix: String = "Comment by") {
         if let liniearIndex = linearComments.index(of: comment) {
            
             displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
             
-            read(comment: comment, index: liniearIndex)
+            read(comment: comment, index: liniearIndex, prefix: prefix)
         }
     }
     
@@ -109,12 +118,28 @@ class CommentViewModel {
         readableDelegate.stopIfNeeded()
     }
     
-    private func read(comment: Comment, index: Int) {
-        self.readingComment = comment
+    private func read(comment: Comment, index: Int, prefix: String = "Comment by") {
+        readComments += 1
+        readingComment = comment
         
         let userReadItem = ReaderContainer(readable: comment.user)
         
-        self.readableDelegate.readItem(prefixText: "Comment by  \(userReadItem.text)", readableItem: comment)
+        self.readableDelegate.readItem(prefixText: "\(prefix)  \(userReadItem.text)", readableItem: comment)
+        
+        comment.readCompletionHandler = {
+            if StateProvider.isAuto {
+                if self.readComments == 6 {
+                    self.displayDelegate.dismiss()
+                    return
+                }
+                
+                if comment.nestedLevel == 0 {
+                    self.goToReply()
+                } else {
+                    self.goToNextTopLevel()
+                }
+            }
+        }
         
         // hack for now
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
