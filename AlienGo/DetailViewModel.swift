@@ -12,13 +12,14 @@ protocol DetailViewModelDelegate {
     func display(childVC: UIViewController)
     func present(vc: UIViewController)
 }
-class DetailViewModel: NSObject {
+class DetailViewModel {
 
     let detailPostItem: DetailPostItem
     let displayDelegate: DetailViewModelDelegate
     var provider: RedditDetailPostProvider!
     var disappearFromCommentPopover: Bool = false
-    private var readableDelegate: ReadableDelegate = ReadHandler()
+    var disappearFromSettings: Bool = false
+    private var readableDelegate: ReadableDelegate = ReadHandler.shared
     private var shouldAcceptLongPress: Bool = true
     
     func set(readableDelegate: ReadableDelegate) {
@@ -29,6 +30,9 @@ class DetailViewModel: NSObject {
         self.detailPostItem = detailPostItem
         provider = RedditDetailPostProvider(detailPost: detailPostItem)
         self.displayDelegate = displayDelegate
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(settingsWillShow), name: nSettingsWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingsWillHide), name: nSettingsWillHide, object: nil)
     }
     
     func viewDidDisappear() {
@@ -48,6 +52,14 @@ class DetailViewModel: NSObject {
     
     func navBack() {
         readableDelegate.hardStop()
+    }
+    
+    @objc func settingsWillShow() {
+        disappearFromSettings = true
+    }
+    
+    @objc func settingsWillHide() {
+        disappearFromSettings = true
     }
     
     func showCommentVC() {
@@ -74,6 +86,7 @@ class DetailViewModel: NSObject {
                 
                 nothingToRead({ 
                     self.getImageGifInfo()
+                    self.showCommentVC()
                 })
                 break
             case .link, .selfPost:

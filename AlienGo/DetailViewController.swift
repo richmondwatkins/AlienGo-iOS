@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let commentLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(showComments(press:)))
         view.addGestureRecognizer(commentLongPress)
         
@@ -46,7 +46,9 @@ class DetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if viewModel.disappearFromCommentPopover {
+        if viewModel.disappearFromSettings {
+            viewModel.disappearFromSettings = false
+        } else if viewModel.disappearFromCommentPopover {
             viewModel.disappearFromCommentPopover = false
             
             if StateProvider.isAuto {
@@ -65,7 +67,7 @@ class DetailViewController: UIViewController {
     
     func removeChildVCIfNeeded() {
         
-        if let childVC = childVC, !viewModel.disappearFromCommentPopover {
+        if let childVC = childVC, !viewModel.disappearFromCommentPopover, !viewModel.disappearFromSettings {
             childVC.willMove(toParentViewController: nil)
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()

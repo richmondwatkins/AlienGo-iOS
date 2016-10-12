@@ -20,7 +20,7 @@ class CommentViewModel {
     let detailPostItem: DetailPostItem
     let provider: CommentProvider
     let displayDelegate: CommentDisplayDelegate
-    private var readableDelegate: ReadableDelegate = ReadHandler()
+    private var readableDelegate: ReadableDelegate = ReadHandler.shared
     private lazy var metaDetailReader: ReadableDelegate = ReadHandler()
     private var orderedComments: [Comment] = []
     private var linearComments: [Comment] = []

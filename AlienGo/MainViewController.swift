@@ -23,7 +23,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setUpNavAnimations()
+        let settingsView = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil)!.first as! SettingsView
+        let settingsWidthHeight: CGFloat = 60
+        
+        settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
+        
+        settingsView.layer.zPosition = 1000
+        
+        UIApplication.shared.keyWindow?.addSubview(settingsView)
         
         let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(reReadCurrent(press:)))
         view.addGestureRecognizer(longPress)
@@ -31,6 +38,12 @@ class MainViewController: UIViewController {
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTap))
         singleTap.numberOfTapsRequired = 1
         view.addGestureRecognizer(singleTap)
+        
+        if !UserDefaults.standard.bool(forKey: "hasLaunched") {
+            let helpVC: InstructionsViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: InstructionsViewController.self)) as! InstructionsViewController
+            
+            present(helpVC, animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

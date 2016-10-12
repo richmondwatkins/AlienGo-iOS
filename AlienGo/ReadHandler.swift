@@ -28,6 +28,7 @@ protocol ReadingCallbackDelegate {
 
 class ReadHandler: NSObject {
 
+    static let shared: ReadHandler = ReadHandler()
     var synthesizer = AVSpeechSynthesizer()
     var state: ReadState = .stopped
     var currentRead: Readable?

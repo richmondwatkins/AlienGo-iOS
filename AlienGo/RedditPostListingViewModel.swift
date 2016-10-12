@@ -17,7 +17,7 @@ protocol RedditPostListingNavigationDelegate {
 }
 class RedditPostListingViewModel: NSObject {
 
-    lazy var readHandler: ReadableDelegate = ReadHandler()
+    lazy var readHandler: ReadableDelegate = ReadHandler.shared
     private var isFirstLoad: Bool = true
     private var shouldAcceptLongPress: Bool = true
     @IBOutlet weak var collectionSource: MainCollectionViewSource! {
@@ -83,7 +83,7 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
             prefixText += " in \(subbreddit)"
         }
         
-        readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) { 
+        readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
             self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
                 if StateProvider.isAuto {
                     self.navigationDelegate.displayDetailVC()

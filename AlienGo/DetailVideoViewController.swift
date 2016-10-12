@@ -18,4 +18,10 @@ class DetailVideoViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         youtubeWebView.urlString = videoDetailItem.videoUrl
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        youtubeWebView.stopVideo()
+    }
 }

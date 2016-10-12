@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SettingsView" customModule="AlienGo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyD-AB-v6P" userLabel="ContainerView">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWJ-D1-stB">
+                            <state key="normal" backgroundImage="settings"/>
+                            <connections>
+                                <action selector="didSelectSettings:" destination="iN0-l3-epB" eventType="touchUpInside" id="pd6-o1-zOy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="FWJ-D1-stB" secondAttribute="trailing" constant="8" id="JNh-9J-oiI"/>
+                        <constraint firstAttribute="bottom" secondItem="FWJ-D1-stB" secondAttribute="bottom" constant="8" id="OLU-Ow-HSc"/>
+                        <constraint firstItem="FWJ-D1-stB" firstAttribute="top" secondItem="tyD-AB-v6P" secondAttribute="top" constant="8" id="gDN-3S-Rrh"/>
+                        <constraint firstItem="FWJ-D1-stB" firstAttribute="leading" secondItem="tyD-AB-v6P" secondAttribute="leading" constant="8" id="gwf-ZG-sU2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tyD-AB-v6P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="CVN-sT-7Lg"/>
+                <constraint firstItem="tyD-AB-v6P" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="WDc-aY-dJ5"/>
+                <constraint firstAttribute="bottom" secondItem="tyD-AB-v6P" secondAttribute="bottom" constant="8" id="rzQ-Lv-J3Q"/>
+                <constraint firstAttribute="trailing" secondItem="tyD-AB-v6P" secondAttribute="trailing" constant="8" id="u0a-KI-dcJ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="containerView" destination="tyD-AB-v6P" id="RHJ-Nc-gff"/>
+            </connections>
+            <point key="canvasLocation" x="-59" y="-197"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="settings" width="75" height="75"/>
+    </resources>
+</document>
