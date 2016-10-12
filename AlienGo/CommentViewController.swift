@@ -50,7 +50,7 @@ class CommentViewController: UIViewController {
         
         refreshControl.beginRefreshing()
     }
-    
+
     func refresh() {
         viewModel.getComments()
     }

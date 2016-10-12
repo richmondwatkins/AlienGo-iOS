@@ -89,7 +89,7 @@ extension ReadHandler: ReadableDelegate {
         }
         
         if synthesizer.isSpeaking {
-            stop()
+            hardStop()
         } else {
             startNew?()
         }
@@ -114,7 +114,7 @@ extension ReadHandler: ReadableDelegate {
     
     func stop() {
         if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: .immediate)
+            hardStop()
         }
     }
     

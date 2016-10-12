@@ -20,7 +20,7 @@ class CommentViewModel {
     let detailPostItem: DetailPostItem
     let provider: CommentProvider
     let displayDelegate: CommentDisplayDelegate
-    private var readableDelegate: ReadableDelegate = ReadHandler.shared
+    private var readableDelegate: ReadableDelegate = ReadHandler()
     private lazy var metaDetailReader: ReadableDelegate = ReadHandler()
     private var orderedComments: [Comment] = []
     private var linearComments: [Comment] = []
@@ -132,7 +132,7 @@ class CommentViewModel {
         
         let userReadItem = ReaderContainer(readable: comment.user)
         
-  
+        readableDelegate.hardStop()
         // hack for now
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if let cell = self.displayDelegate.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {

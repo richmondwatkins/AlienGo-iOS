@@ -38,7 +38,7 @@ class Comment: CommentItem {
         self.id = id
         self.user = User(username: username)
         self.score = score
-        self.body = body
+        self.body = body.replacingOccurrences(of: "&gt;", with: "\"")
         self.nestedLevel = nestedLevel
         self.parent = parent
         

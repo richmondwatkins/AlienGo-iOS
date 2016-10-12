@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
         
         settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
         
-        settingsView.layer.zPosition = 1000
+        settingsView.layer.zPosition = CGFloat.greatestFiniteMagnitude
         
         UIApplication.shared.keyWindow?.addSubview(settingsView)
         
