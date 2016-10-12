@@ -59,6 +59,8 @@ class CommentTableViewCell: UITableViewCell {
 
 extension CommentTableViewCell: ReadingCallbackDelegate {
     func willSpeak(_ speechString: String, characterRange: NSRange) {
-         commentLabel.attributedText = willSpeakAttrString(fullString: commentLabel.text!, range: characterRange, font: commentLabel.font)
+        if let attString = willSpeakAttrString(fullString: commentLabel.text!, speechString: speechString, range: characterRange, font: commentLabel.font) {
+            commentLabel.attributedText = attString
+        }
     }
 }

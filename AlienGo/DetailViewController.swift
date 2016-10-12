@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
     }
     
     func pop() {
+        viewModel.navBack()
         let _ = self.navigationController?.popViewController(animated: true)
     }
     

@@ -13,15 +13,32 @@ class ColorConstants {
 }
 
 
-public func willSpeakAttrString(fullString: String, range: NSRange, font: UIFont) -> NSMutableAttributedString {
-    let attrString = NSMutableAttributedString(string: fullString)
+public func willSpeakAttrString(fullString: String, speechString: String, range: NSRange, font: UIFont) -> NSMutableAttributedString? {
+    if fullString.contains(speechString) {
+        let attrString = NSMutableAttributedString(string: fullString)
+        
+        attrString.addAttributes([NSFontAttributeName: font], range: NSMakeRange(0, fullString.characters.count))
+        
+        attrString.addAttributes([NSForegroundColorAttributeName: UIColor(ColorConstants.appBlue), NSFontAttributeName: font], range: range)
+        
+        return attrString
+    }
     
-    attrString.addAttributes([NSFontAttributeName: font], range: NSMakeRange(0, fullString.characters.count))
+    return nil
+}
+
+extension String {
+    func isURL() -> Bool {
+        let types: NSTextCheckingResult.CheckingType = .link
+        let detector = try! NSDataDetector(types: types.rawValue)
+        let matches = detector.matches(in: self, options: .reportCompletion, range: NSMakeRange(0, self.characters.count))
+        
+        return matches.count > 0
+    }
     
-    
-    attrString.addAttributes([NSForegroundColorAttributeName: UIColor(ColorConstants.appBlue), NSFontAttributeName: font], range: range)
-    
-    return attrString
+    func words() -> [String] {
+        return self.components(separatedBy: " ")
+    }
 }
 
 /**

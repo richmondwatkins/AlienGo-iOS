@@ -32,7 +32,7 @@ class DetailViewModel: NSObject {
     }
     
     func viewDidDisappear() {
-        readableDelegate.stopIfNeeded()
+        readableDelegate.stop()
     }
     
     func showComments(press: UILongPressGestureRecognizer) {
@@ -46,11 +46,13 @@ class DetailViewModel: NSObject {
         }
     }
     
+    func navBack() {
+        readableDelegate.hardStop()
+    }
+    
     func showCommentVC() {
         disappearFromCommentPopover = true
-        
-        readableDelegate.stopIfNeeded()
-        
+                
         let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController
         commentVC.viewModel = CommentViewModel(detailPostItem: detailPostItem, displayDelegate: commentVC)
         
@@ -58,10 +60,21 @@ class DetailViewModel: NSObject {
     }
     
     func getInfo() {
-        DispatchQueue.global(qos: .userInitiated).async {
+        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
+        
+        let nothingToRead: (@escaping () -> Void) -> Void = {  call in
+            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Nothing to read. Will display comments"), delegate: nil, completion: {
+                call()
+            })
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
             switch self.detailPostItem.content.contentType {
             case .image, .gif, .imageGallery:
-                self.getImageGifInfo()
+                
+                nothingToRead({ 
+                    self.getImageGifInfo()
+                })
                 break
             case .link, .selfPost:
                 self.getTextInfo()
@@ -78,32 +91,23 @@ class DetailViewModel: NSObject {
                 })
                 break
             }
-        }
+        })
     }
     
     func getTextInfo() {
-        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Parsing text"))
-        
         if let textPost = self.provider.get() {
             
             if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
-                readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Could not parse text. Long press for comments"))
+                self.readableDelegate.readItem(readableItem:  ReaderContainer(text: "Could not parse text. Long press for comments"), delegate: nil, completion: nil)
             } else {
-                let vc = buildTextVC(title: textPost.title, text: textPost.content)
+                let vc = self.buildTextVC(title: textPost.title, text: textPost.content)
                 
-                readableDelegate.setReadingCallback(delegate: vc)
-                
-                var readable = ReaderContainer(text: "bleh bleh bleh bloh")
-                
-                readable.readCompletionHandler = {
+                self.readableDelegate.readItem(readableItem: ReaderContainer(text: textPost.content), delegate: vc, completion: {
                     if StateProvider.isAuto {
                         self.showCommentVC()
                     }
-                }
-                
-                self.readableDelegate.readItem(prefixText: "", readableItem: readable)
+                })
             }
-            
         }
     }
     
@@ -117,7 +121,7 @@ class DetailViewModel: NSObject {
     }
     
     func showVideoVC() {
-        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Loading video"))
+        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading video"), delegate: nil, completion: nil)
         
         let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
         
@@ -129,7 +133,7 @@ class DetailViewModel: NSObject {
     }
     
     func getImageGifInfo() {
-        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Loading"))
+        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
         let detailImageGifVc = vc(storyboardId: String(describing: DetailImageGifViewController.self)) as! DetailImageGifViewController
         

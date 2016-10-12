@@ -26,6 +26,7 @@ class CommentViewModel {
     private var linearComments: [Comment] = []
     private var readingComment: Comment?
     private var shouldAcceptLongPress: Bool = true
+    private var isDisplaying: Bool = true
     var readComments: Int = 0
     
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate) {
@@ -35,7 +36,9 @@ class CommentViewModel {
     }
     
     func getComments() {
-        readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "Loading comments"))
+        
+        readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading comments"), delegate: nil, completion: nil)
+        
         DispatchQueue.global(qos: .userInitiated).async {
             let response = self.provider.get()
         
@@ -64,7 +67,7 @@ class CommentViewModel {
     
     func didTap(gesture: UITapGestureRecognizer) {
         if let readingComment = readingComment {
-             self.readableDelegate.readItem(prefixText: "Comment by \(readingComment.user.username)   score of \(readingComment.score)", readableItem: readingComment)
+            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Comment by \(readingComment.user.username)   score of \(readingComment.score) \(readingComment.text)"), delegate: nil, completion: nil)
         }
     }
     
@@ -78,8 +81,7 @@ class CommentViewModel {
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
                 } else {
-                    self.readableDelegate.readingCallbackDelegate = nil
-                    self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."))
+                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."), delegate: nil, completion: nil)
                 }
             }
         }
@@ -90,7 +92,11 @@ class CommentViewModel {
             if let firstReply = readingComment.replies.first {
                 goToComment(comment: firstReply, prefix: "Reply by")
             } else {
-                self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"))
+                if StateProvider.isAuto {
+                    goToNextTopLevel()
+                } else {
+                     self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"), delegate: nil, completion: nil)
+                }
             }
         }
     }
@@ -100,7 +106,7 @@ class CommentViewModel {
             if let comment = orderedComments.nextSibling(current: readingComment) {
                 goToComment(comment: comment)
             } else {
-                self.readableDelegate.readItem(prefixText: "", readableItem: ReaderContainer(text: "No more sibling comments"))
+                self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more sibling comments"), delegate: nil, completion: nil)
             }
         }
     }
@@ -115,7 +121,9 @@ class CommentViewModel {
     }
     
     func dismiss() {
-        readableDelegate.stopIfNeeded()
+        isDisplaying = false
+        readableDelegate.hardStop()
+        displayDelegate.dismiss()
     }
     
     private func read(comment: Comment, index: Int, prefix: String = "Comment by") {
@@ -124,27 +132,26 @@ class CommentViewModel {
         
         let userReadItem = ReaderContainer(readable: comment.user)
         
-        self.readableDelegate.readItem(prefixText: "\(prefix)  \(userReadItem.text)", readableItem: comment)
-        
-        comment.readCompletionHandler = {
-            if StateProvider.isAuto {
-                if self.readComments == 6 {
-                    self.displayDelegate.dismiss()
-                    return
-                }
-                
-                if comment.nestedLevel == 0 {
-                    self.goToReply()
-                } else {
-                    self.goToNextTopLevel()
-                }
-            }
-        }
-        
+  
         // hack for now
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if let cell = self.displayDelegate.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
-                self.readableDelegate.setReadingCallback(delegate: cell)
+                self.readableDelegate.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
+                    self.readableDelegate.readItem(readableItem: comment, delegate: cell, completion: { 
+                        if StateProvider.isAuto && self.isDisplaying {
+                            if self.readComments == 6 {
+                                self.displayDelegate.dismiss()
+                                return
+                            }
+                            
+                            if comment.nestedLevel == 0 {
+                                self.goToReply()
+                            } else {
+                                self.goToNextTopLevel()
+                            }
+                        }
+                    })
+                })
             }
         })
     }

@@ -61,7 +61,7 @@
 		5DD1BA9C1DA4343F0044BD0C /* RedditPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */; };
 		5DD1BA9F1DA4370F0044BD0C /* RedditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */; };
 		5DD1BAA21DA438440044BD0C /* RedditPostListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */; };
-		5DDCC7C01DAA8FA800FD63BF /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7BF1DAA8FA800FD63BF /* ColorConstants.swift */; };
+		5DDCC7C01DAA8FA800FD63BF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7BF1DAA8FA800FD63BF /* Constants.swift */; };
 		5DDCC7C21DAC8BEE00FD63BF /* StateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7C11DAC8BEE00FD63BF /* StateProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,7 +141,7 @@
 		5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostProvider.swift; sourceTree = "<group>"; };
 		5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPost.swift; sourceTree = "<group>"; };
 		5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostListingViewModel.swift; sourceTree = "<group>"; };
-		5DDCC7BF1DAA8FA800FD63BF /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		5DDCC7BF1DAA8FA800FD63BF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5DDCC7C11DAC8BEE00FD63BF /* StateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateProvider.swift; sourceTree = "<group>"; };
 		74CEF7E6C5D81CF10C70F3FA /* Pods-AlienGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo.release.xcconfig"; sourceTree = "<group>"; };
 		8A43E8E894BDC2C3F1C80F48 /* Pods-AlienGoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGoUITests/Pods-AlienGoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 				5DD1BA6F1DA432D40044BD0C /* LaunchScreen.storyboard */,
 				5DD1BA721DA432D40044BD0C /* Info.plist */,
 				5DD1BA981DA434310044BD0C /* NetworkManager.swift */,
-				5DDCC7BF1DAA8FA800FD63BF /* ColorConstants.swift */,
+				5DDCC7BF1DAA8FA800FD63BF /* Constants.swift */,
 				5DDCC7C11DAC8BEE00FD63BF /* StateProvider.swift */,
 				5DB609241DAC8FDB000F3258 /* MainCollectionView.swift */,
 			);
@@ -669,7 +669,7 @@
 				5DA74A2A1DA59120001B3B79 /* DetailViewModel.swift in Sources */,
 				5DA74A301DA592F1001B3B79 /* DisplayableDetailItem.swift in Sources */,
 				5DD1BA991DA434310044BD0C /* NetworkManager.swift in Sources */,
-				5DDCC7C01DAA8FA800FD63BF /* ColorConstants.swift in Sources */,
+				5DDCC7C01DAA8FA800FD63BF /* Constants.swift in Sources */,
 				5D29A2C11DA6011700963D0D /* DetailImageGifContainer.swift in Sources */,
 				5DA74A211DA52CE8001B3B79 /* DetailPostItem.swift in Sources */,
 				5DA74A101DA44F82001B3B79 /* MainCollectionViewCell.swift in Sources */,

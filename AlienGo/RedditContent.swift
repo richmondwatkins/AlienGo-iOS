@@ -23,11 +23,12 @@ struct RedditContent {
     var selfText: String?
     var url: String?
     var contentType: ContentType
+    var thumbnailUrl: String?
 
     init(apiResponse: [String: AnyObject]) {
         selfText = (apiResponse["selftext"] as? String)?.trim()
         url = apiResponse["url"] as? String
-        
+        thumbnailUrl = apiResponse["thumbnail"] as? String
         
         //order of conditional matters
         if let url = url, url.contains("gallery") || url.contains("/a/") {

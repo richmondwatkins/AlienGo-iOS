@@ -10,5 +10,4 @@ import UIKit
 
 protocol Readable {
     var text: String { get }
-    var readCompletionHandler: (() -> Void)? { get set }
 }

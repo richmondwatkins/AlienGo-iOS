@@ -25,13 +25,14 @@ class RedditPostDetailRepository {
     func get(callback: @escaping  (_ textItem: DetailTextItem?) -> Void) {
         NetworkManager.shared.getDetailInfo(detailPostItem: detailPost) { (response, error) in
             guard let response = response, let content = response["content"] as? String else {
+                callback(nil)
                 return
             }
             
             callback(
                 DetailTextContainer(
                     title: response["title"] as? String,
-                    content: content
+                    content: content.trim()
                 )
             )
         }

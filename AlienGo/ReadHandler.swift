@@ -10,17 +10,16 @@ import UIKit
 import AVFoundation
 
 enum ReadState {
-    case readingPrefix, readingBody, stopped, finished
+    case reading, stopped, finished
 }
 
+typealias ReaderCompletion = (() -> Void)?
+
 protocol ReadableDelegate {
-    func readItem(readableItem: Readable)
-    func readItemWithoutStop(prefixText: String, readableItem: Readable)
-    func readItem(prefixText: String, readableItem: Readable)
-    func stopIfNeeded()
+    func stop()
+    func hardStop()
     func reReadCurrent()
-    func setReadingCallback(delegate: ReadingCallbackDelegate)
-    var readingCallbackDelegate: ReadingCallbackDelegate? { get set }
+    func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion)
 }
 
 protocol ReadingCallbackDelegate {
@@ -30,17 +29,15 @@ protocol ReadingCallbackDelegate {
 class ReadHandler: NSObject {
 
     var synthesizer = AVSpeechSynthesizer()
-    var speakBody: (() -> Void)?
-    var state: ReadState = .stopped {
+    var state: ReadState = .stopped
+    var currentRead: Readable?
+    var readingCallbackDelegate: ReadingCallbackDelegate? {
         didSet {
-            if state == .finished {
-                currentRead?.readCompletionHandler?()
-            }
+            synthesizer.delegate = self
         }
     }
-    var currentRead: Readable?
-    var prefixText: String?
-    var readingCallbackDelegate: ReadingCallbackDelegate?
+    var completion: ReaderCompletion
+    var startNew: (() -> Void)?
     
     override init() {
         super.init()
@@ -48,31 +45,11 @@ class ReadHandler: NSObject {
     }
     
     func speak(text: String) {
-        let speak = {
-            let utterance = self.createUtterance(text: text)
-            
-            self.synthesizer.speak(utterance)
-            
-            self.state = .readingBody
-        }
+        let utterance = self.createUtterance(text: text)
         
-        if state == .readingPrefix {
-            speak()
-        } else {
-            speakBody = speak
-        }
-    }
-    
-    func speak(prefix: String, body: String) {
-        self.prefixText = prefix
+        self.synthesizer.speak(utterance)
         
-        let prefixUtterance = createUtterance(text: prefix)
-        
-        self.synthesizer.speak(prefixUtterance)
-        
-        state = .readingPrefix
-        
-        self.speak(text: body)
+        self.state = .reading
     }
     
     private func createUtterance(text: String) -> AVSpeechUtterance {
@@ -84,34 +61,65 @@ class ReadHandler: NSObject {
 }
 
 extension ReadHandler: ReadableDelegate {
-    
-    func readItemWithoutStop(prefixText: String, readableItem: Readable) {
-        self.currentRead = readableItem
-        speak(prefix: prefixText, body: readableItem.text)
-    }
 
-    func setReadingCallback(delegate: ReadingCallbackDelegate) {
-        readingCallbackDelegate = delegate
+    func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
+        
+        startNew = {
+            self.synthesizer.delegate = nil
+            
+            let words = readableItem.text.words()
+            var originalText = readableItem.text
+            var urls: [String] = []
+            
+            words.forEach { (word) in
+                if word.isURL() {
+                    urls.append(word)
+                }
+            }
+            
+            urls.forEach { (url) in
+                originalText = originalText.replacingOccurrences(of: url, with: " skipping un readable u r l ")
+            }
+            
+            self.readingCallbackDelegate = delegate
+            self.completion = completion
+            self.readItem(readableItem: ReaderContainer(text: originalText))
+            self.startNew = nil
+        }
+        
+        if synthesizer.isSpeaking {
+            stop()
+        } else {
+            startNew?()
+        }
     }
     
     func reReadCurrent() {
         if let currentRead = currentRead {
-            readItem(prefixText: "", readableItem: currentRead)
+            readItem(readableItem: currentRead)
         }
     }
 
     func readItem(readableItem: Readable) {
-        stopIfNeeded()
         speak(text: readableItem.text)
     }
     
-    func readItem(prefixText: String, readableItem: Readable) {
-        stopIfNeeded()
-        readItemWithoutStop(prefixText: prefixText, readableItem: readableItem)
+    
+    func pause() {
+        if synthesizer.isSpeaking {
+            synthesizer.pauseSpeaking(at: .immediate)
+        }
     }
     
-    func stopIfNeeded() {
-        currentRead?.readCompletionHandler = nil
+    func stop() {
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
+    }
+    
+    func hardStop() {
+        currentRead = nil
+        completion = nil
         synthesizer.stopSpeaking(at: .immediate)
     }
 }
@@ -119,25 +127,17 @@ extension ReadHandler: ReadableDelegate {
 extension ReadHandler: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        guard let prefixText = prefixText, utterance.speechString != prefixText else {
-            return
-        }
-        
-        if let speakBody = speakBody, state == .readingPrefix {
-            speakBody()
-        }
-        
+        completion?()
+        startNew?()
         state = .finished
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        completion?()
         state = .stopped
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        guard let prefixText = prefixText, utterance.speechString != prefixText else {
-            return
-        }
         
         readingCallbackDelegate?.willSpeak(utterance.speechString, characterRange: characterRange)
     }

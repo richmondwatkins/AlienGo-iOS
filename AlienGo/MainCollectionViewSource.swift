@@ -24,8 +24,8 @@ enum ScrollDirection {
 
 protocol MainCollectionSourceSelectionDelegate {
     func didSelect(post: DisplayableFeedItem)
-    func didDisplay(post: DisplayableFeedItem, cell: MainCollectionViewCell)
-    func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection)
+    func didStartToPan()
+    func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell)
     func loadMore()
     func refresh()
 }
@@ -98,6 +98,7 @@ class MainCollectionViewSource: NSObject {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         userScrolling = true
+        selectionDelegate.didStartToPan()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -114,11 +115,7 @@ class MainCollectionViewSource: NSObject {
     }
     
     func callDelegates(previousPage: Int) {
-        selectionDelegate.didDisplay(
-            post: getCurrentPost(),
-            cell: self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as! MainCollectionViewCell
-        )
-        selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: getCurrentPost()), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage))
+        selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: getCurrentPost()), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage), cell:  self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as! MainCollectionViewCell)
     }
 }
 

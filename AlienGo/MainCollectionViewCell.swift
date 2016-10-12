@@ -7,12 +7,14 @@
 //
 
 import UIKit
-
+import PINRemoteImage
 class MainCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subredditLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     func configure(post: DisplayableFeedItem) {
         titleLabel.text = post.postTitle
@@ -22,16 +24,29 @@ class MainCollectionViewCell: UICollectionViewCell {
         }
         
         usernameLabel.text = post.postedByUsername
+        
+        if let thumbnail = post.content.thumbnailUrl {
+            imageView.pin_setImage(from: URL(string: thumbnail), completion: { (result) in
+            })
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
      
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+    }
 }
 
 extension MainCollectionViewCell: ReadingCallbackDelegate {
     func willSpeak(_ speechString: String, characterRange: NSRange) {
-        titleLabel.attributedText = willSpeakAttrString(fullString: titleLabel.text!, range: characterRange, font: titleLabel.font)
+        if let attString = willSpeakAttrString(fullString: titleLabel.text!, speechString: speechString, range: characterRange, font: titleLabel.font) {
+            titleLabel.attributedText = attString
+        }
     }
 }

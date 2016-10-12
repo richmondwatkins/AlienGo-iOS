@@ -55,7 +55,7 @@ class RedditPostListingViewModel: NSObject {
     }
 
     func getDetailViewModel(detailViewController: DetailViewController) -> DetailViewModel {
-        readHandler.stopIfNeeded()
+        readHandler.stop()
         return DetailViewModel(detailPostItem: DetailPost(displayableFeedItem: collectionSource.getCurrentPost()), displayDelegate: detailViewController)
     }
     
@@ -67,8 +67,7 @@ class RedditPostListingViewModel: NSObject {
 }
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
-    func readPostTitle( post: RedditReadablePost, scrollDirection: ScrollDirection) {
-        var post = post
+    func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell) {
         var prefixText = ""
         
         switch scrollDirection {
@@ -84,23 +83,24 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
             prefixText += " in \(subbreddit)"
         }
         
-        post.readCompletionHandler = {
-            if StateProvider.isAuto {
-                self.navigationDelegate.displayDetailVC()
-            }
+        readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) { 
+            self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
+                if StateProvider.isAuto {
+                    self.navigationDelegate.displayDetailVC()
+                }
+            })
         }
-        
-        readHandler.readItem(prefixText: prefixText, readableItem: post)
+    }
+    
+    func didStartToPan() {
+        if StateProvider.isAuto {
+            readHandler.hardStop()
+        }
     }
 
     func didSelect(post: DisplayableFeedItem) {
-        readHandler.stopIfNeeded()
+        readHandler.stop()
     }
-    
-    func didDisplay(post: DisplayableFeedItem, cell: MainCollectionViewCell) {
-        readHandler.readingCallbackDelegate = cell
-    }
-    
     
     func refresh() {
         getPosts()

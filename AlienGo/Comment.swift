@@ -25,7 +25,6 @@ class Comment: CommentItem {
     let user: User
     var replies: [Comment] = []
     var parent: Comment?
-    var readCompletionHandler: (() -> Void)?
     
     init?(apiResponse: [String: AnyObject], nestedLevel: Int = 0, parent: Comment? = nil) {
         guard let data = apiResponse["data"] as? [String: AnyObject],

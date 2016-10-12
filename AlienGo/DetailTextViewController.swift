@@ -31,7 +31,8 @@ class DetailTextViewController: UIViewController {
 
 extension DetailTextViewController: ReadingCallbackDelegate {
     func willSpeak(_ speechString: String, characterRange: NSRange) {
-        
-        textView.attributedText = willSpeakAttrString(fullString: textPost.content, range: characterRange, font: UIFont(name: "AvenirNext-Regular", size: 18)!)
+        if let attString = willSpeakAttrString(fullString: textPost.content, speechString: speechString, range: characterRange, font: UIFont(name: "AvenirNext-Regular", size: 18)!){
+            textView.attributedText = attString
+        }
     }
 }
