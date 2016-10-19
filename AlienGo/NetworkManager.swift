@@ -31,8 +31,30 @@ class NetworkManager: NSObject {
     func getCommentsForPost(permalink: String, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/pics/comments/5658ox/how_to_cable/.json
         let url: URL = URL(string: "https://www.reddit.com\(permalink).json")!
-        print(url)
+
         sendRequest(request: URLRequest(url: url), callback: callback)
+    }
+    
+    func getRedditUsername(callback: NetworkCallback?) {
+        Alamofire.request( URL(string: "https://oauth.reddit.com/api/v1/me")!, method: .get, parameters: nil, headers: ["Authorization": "bearer \(AuthInfo.accessToken ?? "")"]).responseJSON { (response) in
+            if let result = response.result.value, response.result.isSuccess {
+                callback?(result as AnyObject?, nil)
+            } else {
+                callback?(nil, response.result.error)
+            }
+        }
+    }
+    
+    func getRedditAccessToken(code: String, callback: @escaping NetworkCallback) {
+        //https://www.reddit.com/api/v1/access_token
+
+        Alamofire.request("https://www.reddit.com/api/v1/access_token", method: .post, parameters: ["grant_type": "authorization_code", "code": code, "redirect_uri": redirectUri], encoding: URLEncoding.default).authenticate(user: clientId, password: "").responseJSON { (response) in
+            if response.result.isSuccess, let value = response.result.value as AnyObject? {
+                callback(value as AnyObject?, nil)
+            } else {
+                callback(nil, response.result.error)
+            }
+        }
     }
     
     func postDetailInfo(detailPostItem: DetailPostItem, bodyContent: String,  callback: NetworkCallback?) {
@@ -63,6 +85,16 @@ class NetworkManager: NSObject {
         }
     }
     
+    private func appendRedditAuth(request: URLRequest) -> URLRequest {
+        var requestVal = request
+
+        print("bearer \(AuthInfo.accessToken ?? "")")
+        requestVal.setValue("bearer \(AuthInfo.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+
+        return request
+    }
+    
+    
     private func sendRequest(request: URLRequest, callback: NetworkCallback?) {
 
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -71,6 +103,7 @@ class NetworkManager: NSObject {
             if let data = data {
                 print(data)
                 let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
                 if let response = response as? HTTPURLResponse , 200...299 ~= response.statusCode {
                     callback?(json as AnyObject?, error)
                 } else {

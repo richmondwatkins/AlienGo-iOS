@@ -75,7 +75,7 @@ class DetailViewModel {
         self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
         let nothingToRead: (@escaping () -> Void) -> Void = {  call in
-            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Nothing to read. Will display comments"), delegate: nil, completion: {
+            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Image was found without a description. Long press for comments"), delegate: nil, completion: {
                 call()
             })
         }
@@ -86,7 +86,6 @@ class DetailViewModel {
                 
                 nothingToRead({ 
                     self.getImageGifInfo()
-                    self.showCommentVC()
                 })
                 break
             case .link, .selfPost:

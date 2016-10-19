@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AlienGo.xcodeproj">
+      location = "group:/Users/richmondwatkins/Documents/Code/iOS/AlienGo/Alien Reader.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

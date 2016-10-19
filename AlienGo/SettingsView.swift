@@ -19,30 +19,14 @@ class SettingsView: UIView {
 
     @IBOutlet weak var containerView: UIView!
     var state: SettingsState = .closed
-    var settingsVC: SettingsViewController?
+    var settingsVC: UINavigationController?
   
     @IBAction func didSelectSettings(_ sender: UIButton) {
-        switch state {
-        case .closed:
-            NotificationCenter.default.post(name: nSettingsWillShow, object: nil)
-            
-            sender.setBackgroundImage(UIImage(named: "close"), for: .normal)
-            settingsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: SettingsViewController.self)) as? SettingsViewController
-            
-            UIApplication.shared.keyWindow?.rootViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: settingsVC!, animated: true, completion: nil)
-            
-            state = .open
-            break
-        case .open:
-            
-            NotificationCenter.default.post(name: nSettingsWillHide, object: nil)
-
-            settingsVC?.dismiss(animated: true, completion: nil)
-            sender.setBackgroundImage(UIImage(named: "settings"), for: .normal)
-            
-            state = .closed
-            break
-        }
+        NotificationCenter.default.post(name: nSettingsWillShow, object: nil)
+        
+        settingsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsNavigationController") as? UINavigationController
+        
+        UIApplication.shared.keyWindow?.rootViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: settingsVC!, animated: true, completion: nil)
     }
    
     override func layoutSubviews() {

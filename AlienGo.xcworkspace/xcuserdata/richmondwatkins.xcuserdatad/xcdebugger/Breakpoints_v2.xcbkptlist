@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlienGo/RAYoutubeWebView.swift"
-            timestampString = "497751822.403196"
+            timestampString = "498142841.872622"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "loadVideo(embedUrlString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -68,108 +68,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlienGo/ReadHandler.swift"
-            timestampString = "497940827.215804"
+            timestampString = "498014328.451463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "speechSynthesizer(_:willSpeakRangeOfSpeechString:utterance:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlienGo/DetailViewModel.swift"
-            timestampString = "497937042.804689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "getInfo()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlienGo/ReadHandler.swift"
-            timestampString = "497940704.401916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "readItem(readableItem:delegate:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AlienGo.ReadHandler.readItem (readableItem : AlienGo.Readable, delegate : Swift.Optional&lt;AlienGo.ReadingCallbackDelegate&gt;, completion : Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "AlienGo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/richmondwatkins/Documents/Code/iOS/AlienGo/AlienGo/ReadHandler.swift"
-                  timestampString = "497941003.145173"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "589">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AlienGo.ReadHandler.(readItem (readableItem : AlienGo.Readable, delegate : Swift.Optional&lt;AlienGo.ReadingCallbackDelegate&gt;, completion : Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1)"
-                  moduleName = "AlienGo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/richmondwatkins/Documents/Code/iOS/AlienGo/AlienGo/ReadHandler.swift"
-                  timestampString = "497941003.146657"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "34">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlienGo/ReadHandler.swift"
-            timestampString = "497940705.16508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "readItem(readableItem:delegate:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlienGo/ReadHandler.swift"
-            timestampString = "497940827.215804"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "readItem(readableItem:delegate:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

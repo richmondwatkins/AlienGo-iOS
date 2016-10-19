@@ -1,6 +1,10 @@
 PODS:
   - Alamofire (4.0.1)
+  - Crashlytics (3.8.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.9)
   - FLAnimatedImage (1.0.12)
+  - KeychainAccess (3.0.0)
   - PINCache (2.3)
   - PINRemoteImage (2.1.4):
     - PINRemoteImage/FLAnimatedImage (= 2.1.4)
@@ -12,14 +16,20 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.0.1)
+  - Crashlytics
+  - Fabric
+  - KeychainAccess
   - PINRemoteImage
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  KeychainAccess: 412bf2650d9aebfc8135a58103b90ec38caad7f8
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
 
-PODFILE CHECKSUM: e5dba6aa69dcba30f777ee7f4bfb680f661112a0
+PODFILE CHECKSUM: ab3347a4c0b0d5f6b42171b431dba6e679f1d7bd
 
 COCOAPODS: 1.0.1

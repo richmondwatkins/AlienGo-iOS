@@ -11,20 +11,16 @@ import UIKit
 class ColorConstants {
     static let appBlue = "#5593FC"
 }
-
+let notificationAuthCodeReceived = "notificationAuthCodeReceived"
 
 public func willSpeakAttrString(fullString: String, speechString: String, range: NSRange, font: UIFont) -> NSMutableAttributedString? {
-    if fullString.contains(speechString) {
-        let attrString = NSMutableAttributedString(string: fullString)
-        
-        attrString.addAttributes([NSFontAttributeName: font], range: NSMakeRange(0, fullString.characters.count))
-        
-        attrString.addAttributes([NSForegroundColorAttributeName: UIColor(ColorConstants.appBlue), NSFontAttributeName: font], range: range)
-        
-        return attrString
-    }
+    let attrString = NSMutableAttributedString(string: fullString)
     
-    return nil
+    attrString.addAttributes([NSFontAttributeName: font], range: NSMakeRange(0, fullString.characters.count))
+    
+    attrString.addAttributes([NSForegroundColorAttributeName: UIColor(ColorConstants.appBlue), NSFontAttributeName: font], range: range)
+    
+    return attrString
 }
 
 extension String {

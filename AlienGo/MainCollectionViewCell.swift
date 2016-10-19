@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PINRemoteImage
+
 class MainCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
@@ -24,11 +24,8 @@ class MainCollectionViewCell: UICollectionViewCell {
         }
         
         usernameLabel.text = post.postedByUsername
-        
-        if let thumbnail = post.content.thumbnailUrl {
-            imageView.pin_setImage(from: URL(string: thumbnail), completion: { (result) in
-            })
-        }
+
+        imageView.ra_setImageFromUrlString(urlString: post.content.thumbnailUrl)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

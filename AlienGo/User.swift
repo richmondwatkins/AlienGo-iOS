@@ -10,7 +10,7 @@ import UIKit
 
 struct User: Readable {
     let username: String
-    var readCompletionHandler: (() -> Void)?
+    var isOp: Bool = false
     
     var text: String {
         return username

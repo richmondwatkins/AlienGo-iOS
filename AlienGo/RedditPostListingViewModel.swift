@@ -45,6 +45,10 @@ class RedditPostListingViewModel: NSObject {
         collectionSource.goToNextPage()
     }
     
+    func readFirst() {
+       collectionSource.callDelegates(previousPage: 0)
+    }
+    
     func reReadCurrent(press: UILongPressGestureRecognizer) {
         if press.state == .began && shouldAcceptLongPress {
             readHandler.reReadCurrent()
@@ -68,27 +72,29 @@ class RedditPostListingViewModel: NSObject {
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell) {
-        var prefixText = ""
-        
-        switch scrollDirection {
-        case .first:
-            prefixText = "First Post"
-        case .down:
-            prefixText = "Next Post"
-        case .up:
-            prefixText = "Previous Post"
-        }
-        
-        if let subbreddit = post.subredditName {
-            prefixText += " in \(subbreddit)"
-        }
-        
-        readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
-            self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
-                if StateProvider.isAuto {
-                    self.navigationDelegate.displayDetailVC()
-                }
-            })
+        if UserDefaults.standard.bool(forKey: "hasLaunched") {
+            var prefixText = ""
+            
+            switch scrollDirection {
+            case .first:
+                prefixText = "First Post"
+            case .down:
+                prefixText = "Next Post"
+            case .up:
+                prefixText = "Previous Post"
+            }
+            
+            if let subbreddit = post.subredditName {
+                prefixText += " in \(subbreddit)"
+            }
+            
+            readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
+                self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
+                    if StateProvider.isAuto {
+                        self.navigationDelegate.displayDetailVC()
+                    }
+                })
+            }
         }
     }
     

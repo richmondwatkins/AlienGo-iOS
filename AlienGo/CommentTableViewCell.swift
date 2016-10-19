@@ -37,7 +37,7 @@ class CommentTableViewCell: UITableViewCell {
         
         for _ in 0..<comment.nestedLevel + 1 {
             let tmpLine = UIView()
-            tmpLine.backgroundColor = UIColor("#D3D3D3")
+            tmpLine.backgroundColor = UIColor("#FAFAFA")
             addSubview(tmpLine)
             
             sideLines.append(tmpLine)

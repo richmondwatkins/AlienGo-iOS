@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 enum ReadState {
-    case reading, stopped, finished
+    case reading, stopped, finished, notStarted
 }
 
 typealias ReaderCompletion = (() -> Void)?
@@ -30,7 +30,7 @@ class ReadHandler: NSObject {
 
     static let shared: ReadHandler = ReadHandler()
     var synthesizer = AVSpeechSynthesizer()
-    var state: ReadState = .stopped
+    var state: ReadState = .notStarted
     var currentRead: Readable?
     var readingCallbackDelegate: ReadingCallbackDelegate? {
         didSet {
@@ -66,6 +66,8 @@ extension ReadHandler: ReadableDelegate {
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
         
         startNew = {
+            self.state = .reading
+            
             self.synthesizer.delegate = nil
             
             let words = readableItem.text.words()
@@ -88,11 +90,14 @@ extension ReadHandler: ReadableDelegate {
             self.startNew = nil
         }
         
-        if synthesizer.isSpeaking {
-            hardStop()
+        if synthesizer.isSpeaking || state == .reading {
+           
         } else {
-            startNew?()
+            
         }
+        
+        hardStop()
+        startNew?()
     }
     
     func reReadCurrent() {
@@ -119,9 +124,9 @@ extension ReadHandler: ReadableDelegate {
     }
     
     func hardStop() {
+        synthesizer.stopSpeaking(at: .immediate)
         currentRead = nil
         completion = nil
-        synthesizer.stopSpeaking(at: .immediate)
     }
 }
 

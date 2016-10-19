@@ -19,18 +19,19 @@ class MainViewController: UIViewController {
     fileprivate var swipeAnimationController: SwipeToShowAnimationController!
     fileprivate var detailViewController: DetailViewController!
     private var disapearFromDetailNav: Bool = false
+    private var settingsView: SettingsView = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil)!.first as! SettingsView
+    private var disappearFromInstructionsVC: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let settingsView = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil)!.first as! SettingsView
         let settingsWidthHeight: CGFloat = 60
         
         settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
         
         settingsView.layer.zPosition = CGFloat.greatestFiniteMagnitude
         
-        UIApplication.shared.keyWindow?.addSubview(settingsView)
+        view.addSubview(settingsView)
         
         let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(reReadCurrent(press:)))
         view.addGestureRecognizer(longPress)
@@ -42,7 +43,11 @@ class MainViewController: UIViewController {
         if !UserDefaults.standard.bool(forKey: "hasLaunched") {
             let helpVC: InstructionsViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: InstructionsViewController.self)) as! InstructionsViewController
             
-            present(helpVC, animated: true, completion: nil)
+            
+            
+            present(helpVC, animated: true, completion: {
+                self.disappearFromInstructionsVC = true
+            })
         }
     }
     
@@ -52,6 +57,9 @@ class MainViewController: UIViewController {
         if disapearFromDetailNav && StateProvider.isAuto {
             viewModel.readAndShowNextPost()
             disapearFromDetailNav = false
+        } else if disappearFromInstructionsVC {
+            viewModel.readFirst()
+            disappearFromInstructionsVC = false
         }
     }
     

@@ -38,11 +38,8 @@ class DetailImageGifViewController: UIViewController {
         } else {
             view.sendSubview(toBack: webView)
             webView.isHidden = true
-            imageView.pin_setImage(from: URL(string: imageGifPost.imageGifUrl)) { (result) in
-                if let image = result.image {
-                    self.imageView.image = image
-                }
-            }
+            
+            imageView.ra_setImageFromUrlString(urlString: imageGifPost.imageGifUrl)
         }
     }
 }

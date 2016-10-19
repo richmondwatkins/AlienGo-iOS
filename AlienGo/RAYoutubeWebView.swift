@@ -83,6 +83,8 @@ class RAYoutubeWebView: UIView {
         
         if urlIsYoutube() {
             embededHTML = youtubeHTMLEmbed(embedUrlString: embedUrlString)
+        } else if urlIsGfyCat() {
+            embededHTML = gfycatEmbed(embedUrlString: embedUrlString)
         } else if urlIsVine() {
             embededHTML = vineEmbed(embedUrlString: embedUrlString)
         } else if urlIsVidMe() {
@@ -103,12 +105,16 @@ class RAYoutubeWebView: UIView {
         if embededHTML == nil {
             print(embedUrlString)
             //TODO: remove before release
-            abort()
+           // abort()
         }
         
         self.webView.loadHTMLString(embededHTML, baseURL: nil)
         
         self.webView.stringByEvaluatingJavaScript(from: "document.body.style.backgroundColor = 'black';")
+    }
+    
+    fileprivate func urlIsGfyCat() -> Bool {
+        return urlString.contains("gfycat")
     }
     
     fileprivate func urlIsYoutube() -> Bool {
@@ -144,6 +150,18 @@ class RAYoutubeWebView: UIView {
         
         return "<iframe src=\"\(newUrl)\" width=\"720\" height=\"554\" frameborder=\"0\" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling=\"no\"></iframe>"
     }
+    
+    private func gfycatEmbed(embedUrlString: String) -> String {
+        let components = NSURLComponents(string: embedUrlString)!
+        let originalPath = components.path!
+        let newPath = "/ifr\(originalPath)"
+        let newUrl = "\(components.scheme!)://gfycat.com\(newPath)"
+
+        let embedHtml = "<iframe src='\(newUrl)' frameborder='0' scrolling='no' width='\(self.frame.width)' height='\(self.frame.height)' allowfullscreen></iframe>"
+        
+        return embedHtml
+    }
+
     
     private func vineEmbed(embedUrlString: String) -> String {
         let components = NSURLComponents(string: embedUrlString)!
