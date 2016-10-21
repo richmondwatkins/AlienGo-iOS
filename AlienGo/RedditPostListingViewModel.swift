@@ -10,6 +10,7 @@ import UIKit
 
 protocol RedditPostListingViewModelDelegate {
     func displayRedditPosts(posts: [DisplayableFeedItem])
+    func animateRefreshControl()
 }
 
 protocol RedditPostListingNavigationDelegate {
@@ -26,10 +27,10 @@ class RedditPostListingViewModel: NSObject {
             displayDelegate = collectionSource
         }
     }
-    
+    var currentSubreddit = Subreddit(name: "front")
     var displayDelegate: RedditPostListingViewModelDelegate! {
         didSet {
-            getPosts()
+           getPostsFor(subreddit: Subreddit(name: "front"))
         }
     }
     lazy var postProvider: RedditPostProvider = RedditPostProvider()
@@ -57,17 +58,20 @@ class RedditPostListingViewModel: NSObject {
             shouldAcceptLongPress = true
         }
     }
+    
+    func getPostsFor(subreddit: Subreddit) {
+        displayDelegate.animateRefreshControl()
+        self.currentSubreddit = subreddit
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.displayDelegate.displayRedditPosts(posts: self.postProvider.getPostsFor(subreddit: subreddit))
+        }
+    }
 
     func getDetailViewModel(detailViewController: DetailViewController) -> DetailViewModel {
         readHandler.stop()
         return DetailViewModel(detailPostItem: DetailPost(displayableFeedItem: collectionSource.getCurrentPost()), displayDelegate: detailViewController)
     }
-    
-    func getPosts() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.displayDelegate.displayRedditPosts(posts: self.postProvider.get())
-        }
-    }
+
 }
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
@@ -109,7 +113,7 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     }
     
     func refresh() {
-        getPosts()
+        
     }
     
     func loadMore() {
@@ -123,3 +127,15 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
         }
     }
 }
+
+extension RedditPostListingViewModel: ActionDelegate {
+    
+    func showFrontPage() {
+        getPostsFor(subreddit: Subreddit(name: "front"))
+    }
+    
+    func showAll() {
+        getPostsFor(subreddit: Subreddit(name: "all"))
+    }
+}
+

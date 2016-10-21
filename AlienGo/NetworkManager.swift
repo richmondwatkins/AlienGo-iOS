@@ -10,63 +10,97 @@ import UIKit
 import Alamofire
 
 typealias NetworkCallback = (_ data: AnyObject?, _ error: Error?) -> Void
+typealias NetworkCall = (request: URLRequest, callback: NetworkCallback?)
 
 class NetworkManager: NSObject {
 
     static let shared: NetworkManager = NetworkManager()
     
-    func getRedditPosts(callback: NetworkCallback?) {
-        let url: URL = URL(string: "https://www.reddit.com/r/all/.json")!
+    var urlDomainPrefix: String {
+        if let _ = AuthInfo.accessToken {
+            return "https://oauth.reddit.com"
+        }
         
-        sendRequest(request: URLRequest(url: url), callback: callback)
+        return "https://www.reddit.com"
+    }
+    var queuedRequests: [NetworkCall] = []
+    
+    func getPostsForSubreddit(subreddit: Subreddit, callback: NetworkCallback?) {
+        
+        let url: URL = URL(string: "\(urlDomainPrefix)\(subreddit.urlPath)")!
+        var request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+       
+        request = setReadditHeaders(request: request)
+        
+        sendRequest(request: request as URLRequest, callback: callback)
+    }
+    
+    func getFrontPage(callback: NetworkCallback?) {
+        let url: URL = URL(string: "\(urlDomainPrefix)/.json")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        sendRequest(request: setReadditHeaders(request: request) as URLRequest, callback: callback)
     }
     
     func getRedditPostsAtPage(lastPostId: String, totalPostCount: Int, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/all/.json?count=25&after=t3_5656e1.json
-        let url: URL = URL(string: "https://www.reddit.com/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")!
+        let url: URL = URL(string: "\(urlDomainPrefix)/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")!
         
         sendRequest(request: URLRequest(url: url), callback: callback)
     }
     
     func getCommentsForPost(permalink: String, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/pics/comments/5658ox/how_to_cable/.json
-        let url: URL = URL(string: "https://www.reddit.com\(permalink).json")!
+        let url: URL = URL(string: "\(urlDomainPrefix)\(permalink).json")!
 
         sendRequest(request: URLRequest(url: url), callback: callback)
     }
     
     func getRedditUsername(callback: NetworkCallback?) {
-        Alamofire.request( URL(string: "https://oauth.reddit.com/api/v1/me")!, method: .get, parameters: nil, headers: ["Authorization": "bearer \(AuthInfo.accessToken ?? "")"]).responseJSON { (response) in
-            if let result = response.result.value, response.result.isSuccess {
-                callback?(result as AnyObject?, nil)
-            } else {
-                callback?(nil, response.result.error)
-            }
-        }
+        let url: URL = URL(string: "https://oauth.reddit.com/api/v1/me")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        sendRequest(request: setReadditHeaders(request: request) as URLRequest, callback: callback)
     }
     
-    func getRedditAccessToken(code: String, callback: @escaping NetworkCallback) {
+    func getRedditAccessToken(code: String, callback: NetworkCallback?) {
         //https://www.reddit.com/api/v1/access_token
 
-        Alamofire.request("https://www.reddit.com/api/v1/access_token", method: .post, parameters: ["grant_type": "authorization_code", "code": code, "redirect_uri": redirectUri], encoding: URLEncoding.default).authenticate(user: clientId, password: "").responseJSON { (response) in
-            if response.result.isSuccess, let value = response.result.value as AnyObject? {
-                callback(value as AnyObject?, nil)
-            } else {
-                callback(nil, response.result.error)
-            }
-        }
+        getAccessToken(paramaters: ["grant_type": "authorization_code", "code": code, "redirect_uri": redirectUri], callback: callback)
     }
     
-    func postDetailInfo(detailPostItem: DetailPostItem, bodyContent: String,  callback: NetworkCallback?) {
-        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/update")!
-
-        Alamofire.request(url, method: .post, parameters: ["content": bodyContent, "postId": detailPostItem.id], encoding: JSONEncoding.default).responseJSON { (response) in
+    func getRedditAccessToken(refreshToken: String, callback: NetworkCallback?) {
+        //https://www.reddit.com/api/v1/access_token
+        
+        getAccessToken(paramaters: ["grant_type": "authorization_code", "refresh_token": refreshToken, "redirect_uri": redirectUri], callback: callback)
+    }
+    
+    private func getAccessToken(paramaters: [String: String], callback: NetworkCallback?) {
+        Alamofire.request("https://www.reddit.com/api/v1/access_token", method: .post, parameters: paramaters, encoding: URLEncoding.default).authenticate(user: clientId, password: "").responseJSON { (response) in
             if response.result.isSuccess, let value = response.result.value as AnyObject? {
-                callback?(value as AnyObject?, nil)
+                print(value)
+                AuthInfo.accessToken = value["access_token"] as? String
+                AuthInfo.refreshToken = value["refresh_token"] as? String
+                
+                self.emptyQueuedCalls()
+                
+                callback?(value, nil)
             } else {
                 callback?(nil, response.result.error)
             }
         }
+    }
+    
+    func postDetailInfo(detailPostItem: DetailPostItem, bodyContent: String, callback: NetworkCallback?) {
+        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/update")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: ["content": bodyContent, "postId": detailPostItem.id], options: .prettyPrinted)
+        
+        sendRequest(request: request as URLRequest, callback: callback)
     }
     
     func getDetailInfo(detailPostItem: DetailPostItem, callback: NetworkCallback?) {
@@ -76,40 +110,46 @@ class NetworkManager: NSObject {
             return
         }
         
-        Alamofire.request(url, method: .post, parameters: ["html": bodyContent, "postId": detailPostItem.id], encoding: JSONEncoding.default).responseJSON { (response) in
-            if response.result.isSuccess, let value = response.result.value as AnyObject? {
-                callback?(value as AnyObject?, nil)
+        let request = NSMutableURLRequest(url: url)
+        request.httpBody = try? JSONSerialization.data(withJSONObject: ["html": bodyContent, "postId": detailPostItem.id], options: .prettyPrinted)
+        request.httpMethod = "GET"
+        
+        sendRequest(request: request as URLRequest, callback: callback)
+    }
+    
+    private func setReadditHeaders(request: NSMutableURLRequest) -> NSMutableURLRequest {
+        if let accessToken = AuthInfo.accessToken {
+            request.setValue("bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+         return request
+    }
+    
+    private func sendRequest(request: URLRequest, callback: NetworkCallback?) {
+        Alamofire.request(request).responseJSON { (response) in
+            if let result = response.result.value as AnyObject?, response.result.isSuccess {
+                if let errorCode = result["error"] as? Int, errorCode == 401 {
+                    self.queuedRequests.append((request: request, callback: callback))
+                    if let refreshToken = AuthInfo.refreshToken {
+                        self.getRedditAccessToken(refreshToken: refreshToken, callback: nil)
+                    }
+                } else {
+                    callback?(result, nil)
+                }
             } else {
                 callback?(nil, response.result.error)
             }
         }
     }
     
-    private func appendRedditAuth(request: URLRequest) -> URLRequest {
-        var requestVal = request
-
-        print("bearer \(AuthInfo.accessToken ?? "")")
-        requestVal.setValue("bearer \(AuthInfo.accessToken ?? "")", forHTTPHeaderField: "Authorization")
-
-        return request
+    private func emptyQueuedCalls() {
+        queuedRequests.forEach { (networkCall) in
+            sendRequest(request: networkCall.request, callback: networkCall.callback)
+        }
+        queuedRequests.removeAll()
     }
-    
-    
-    private func sendRequest(request: URLRequest, callback: NetworkCallback?) {
-
-        let session = URLSession(configuration: URLSessionConfiguration.default)
         
-        session.dataTask(with: request) {(data, response, error) -> Void in
-            if let data = data {
-                print(data)
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
-                if let response = response as? HTTPURLResponse , 200...299 ~= response.statusCode {
-                    callback?(json as AnyObject?, error)
-                } else {
-                    callback?(nil, error)
-                }
-            }
-        }.resume()
+    private func handleResponse(callback: NetworkCallback?) {
+    
     }
 }

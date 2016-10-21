@@ -37,6 +37,7 @@ class ReadHandler: NSObject {
             synthesizer.delegate = self
         }
     }
+    var shouldCallCompletion: Bool = false
     var completion: ReaderCompletion
     var startNew: (() -> Void)?
     
@@ -55,6 +56,7 @@ class ReadHandler: NSObject {
     
     private func createUtterance(text: String) -> AVSpeechUtterance {
         let utterance = AVSpeechUtterance(string: text)
+        utterance.rate = UserInfo.utteranceSpeed ?? AVSpeechUtteranceDefaultSpeechRate
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         
         return utterance
@@ -64,7 +66,7 @@ class ReadHandler: NSObject {
 extension ReadHandler: ReadableDelegate {
 
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
-        
+    
         startNew = {
             self.state = .reading
             
@@ -95,7 +97,7 @@ extension ReadHandler: ReadableDelegate {
         } else {
             
         }
-        
+                
         hardStop()
         startNew?()
     }
@@ -124,9 +126,11 @@ extension ReadHandler: ReadableDelegate {
     }
     
     func hardStop() {
-        synthesizer.stopSpeaking(at: .immediate)
+        shouldCallCompletion = false
+        readingCallbackDelegate = nil
         currentRead = nil
         completion = nil
+        synthesizer.stopSpeaking(at: .immediate)
     }
 }
 

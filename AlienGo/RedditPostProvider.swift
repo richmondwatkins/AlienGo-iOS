@@ -13,11 +13,12 @@ class RedditPostProvider {
     
     lazy var repository: RedditPostRepository = RedditPostRepository()
 
-    func get() -> [RedditPost] {
+    
+    func getPostsFor(subreddit: Subreddit) -> [RedditPost] {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         var posts: [RedditPost] = [RedditPost]()
         
-        repository.get { (redditPosts) in
+        repository.getPostsFor(subreddit: subreddit) { (redditPosts) in
             posts = redditPosts
             
             semaphore.signal()

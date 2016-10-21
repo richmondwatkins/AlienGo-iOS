@@ -17,7 +17,30 @@ class UserInfo {
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: "alienReaderUsername")
+            if newValue == nil {
+                UserDefaults.standard.removeObject(forKey: "alienReaderUsername")
+            } else {
+                UserDefaults.standard.set(newValue, forKey: "alienReaderUsername")
+            }
+            
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var utteranceSpeed: Float {
+        get {
+            let speed = UserDefaults.standard.float(forKey: "alienReaderUtteranceSpeed")
+            
+            return speed == 0 ? 0.5 : speed
+        }
+        
+        set {
+            if newValue == nil {
+                UserDefaults.standard.removeObject(forKey: "alienReaderUtteranceSpeed")
+            } else {
+                UserDefaults.standard.set(newValue, forKey: "alienReaderUtteranceSpeed")
+            }
+            
             UserDefaults.standard.synchronize()
         }
     }

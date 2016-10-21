@@ -20,11 +20,16 @@ class SettingsView: UIView {
     @IBOutlet weak var containerView: UIView!
     var state: SettingsState = .closed
     var settingsVC: UINavigationController?
-  
+    var actionDelegate: ActionDelegate!
+    
     @IBAction func didSelectSettings(_ sender: UIButton) {
         NotificationCenter.default.post(name: nSettingsWillShow, object: nil)
         
         settingsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsNavigationController") as? UINavigationController
+        
+        if settingsVC?.topViewController is SettingsViewController {
+            (settingsVC?.topViewController as! SettingsViewController)._actionDelegate = actionDelegate
+        }
         
         UIApplication.shared.keyWindow?.rootViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: settingsVC!, animated: true, completion: nil)
     }

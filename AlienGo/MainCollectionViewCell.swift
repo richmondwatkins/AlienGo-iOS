@@ -15,8 +15,11 @@ class MainCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var subredditLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    var post: DisplayableFeedItem!
     
     func configure(post: DisplayableFeedItem) {
+        self.post = post
+        
         titleLabel.text = post.postTitle
         
         if let subredditName = post.postSubredditName {
@@ -37,6 +40,8 @@ class MainCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         imageView.image = nil
+        
+        configure(post: post)
     }
 }
 

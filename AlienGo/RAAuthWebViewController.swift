@@ -20,7 +20,7 @@ class RAAuthWebViewController: UIViewController {
     }
     
     let state: String = UUID().uuidString
-    let scope: String = "identity,mysubreddits,vote"
+    let scope: String = "identity,history,mysubreddits,read,report,save,vote"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +40,6 @@ class RAAuthWebViewController: UIViewController {
     
     func didRecieveCode(notification: Notification) {
         NetworkManager.shared.getRedditAccessToken(code: notification.userInfo?["code"] as! String, callback: { (response, error) in
-            AuthInfo.accessToken = response?["access_token"] as? String
-            AuthInfo.refreshToken = response?["refresh_token"] as? String
-            
             NetworkManager.shared.getRedditUsername(callback: { [weak self] (response, error) in
                 if let username = response?["name"] as? String {
                     UserInfo.username = username

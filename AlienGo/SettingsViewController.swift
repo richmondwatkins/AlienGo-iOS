@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController {
             originalButtonColor = helpButton.titleLabel?.textColor
         }
     }
+    var _actionDelegate: ActionDelegate!
     private var originalButtonColor: UIColor!
     var reader: ReadableDelegate = ReadHandler.shared
     //Auto mode tries to navigate the app for you. Auto mode on the comments screen reads the top 3 comments and their direct replies
@@ -81,6 +82,13 @@ class SettingsViewController: UIViewController {
 }
 
 extension SettingsViewController: SettingsDisplayDelegate {
+    var actionDelegate: ActionDelegate {
+        return _actionDelegate
+    }
+
+    var vc: UIViewController {
+        return self
+    }
     
     func display(vc: UIViewController) {
         self.navigationController?.pushViewController(vc, animated: true)

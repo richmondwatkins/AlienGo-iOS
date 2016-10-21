@@ -18,7 +18,9 @@ public func willSpeakAttrString(fullString: String, speechString: String, range:
     
     attrString.addAttributes([NSFontAttributeName: font], range: NSMakeRange(0, fullString.characters.count))
     
-    attrString.addAttributes([NSForegroundColorAttributeName: UIColor(ColorConstants.appBlue), NSFontAttributeName: font], range: range)
+    if range.length < fullString.characters.count {
+        attrString.addAttributes([NSForegroundColorAttributeName: UIColor(ColorConstants.appBlue), NSFontAttributeName: font], range: range)
+    }
     
     return attrString
 }

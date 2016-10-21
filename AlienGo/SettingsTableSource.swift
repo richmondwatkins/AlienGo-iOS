@@ -10,27 +10,56 @@ import UIKit
 
 protocol SettingsDisplayDelegate {
     func display(vc: UIViewController)
+    var vc: UIViewController { get }
+    var actionDelegate: ActionDelegate { get }
 }
 
 class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var dataSource: [SettingItem] = SettingBuilder.build()
-    var displayDelegate: SettingsDisplayDelegate?
+    var displayDelegate: SettingsDisplayDelegate!
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-            let signInCell: String = String(describing: RASettingsSignInTableViewCell.self)
-            tableView.register(UINib(nibName: signInCell, bundle: Bundle.main), forCellReuseIdentifier: signInCell)
-            
-            let accountCell: String = String(describing: AccountInfoTableViewCell.self)
-            tableView.register(UINib(nibName: accountCell, bundle: Bundle.main), forCellReuseIdentifier: accountCell)
+            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.estimatedRowHeight = 100
+        
+            regsiterCells(cellStrings: [
+                String(describing: RASettingsSignInTableViewCell.self),
+                String(describing: AccountInfoTableViewCell.self),
+                String(describing: AllFrontSettingTableViewCell.self),
+                String(describing: SpeechVolumeCellTableViewCell.self)
+            ])
+        }
+    }
+    
+    func regsiterCells(cellStrings: [String]) {
+        cellStrings.forEach { (cellString) in
+            tableView.register(UINib(nibName: cellString, bundle: Bundle.main), forCellReuseIdentifier: cellString)
         }
     }
     
     func refresh() {
         dataSource = SettingBuilder.build()
         tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let dataItem = dataSource[indexPath.row]
+        
+        return dataItem.type == .postAuth
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (dataSource[indexPath.row].type == .postAuth) {
+            UserInfo.username = nil
+            AuthInfo.accessToken = nil
+            AuthInfo.refreshToken = nil
+            dataSource[indexPath.row] = SettingAuthItem()
+            tableView.reloadData()
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,6 +73,8 @@ class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        displayDelegate?.display(vc: dataSource[indexPath.row].didSelect())
+        if let vc = dataSource[indexPath.row].didSelect(currentVC: displayDelegate.vc, actionDelegate: displayDelegate.actionDelegate) {
+            displayDelegate.display(vc: vc)
+        }
     }
 }

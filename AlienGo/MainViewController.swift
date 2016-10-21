@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ActionDelegate {
+    func showFrontPage()
+    func showAll()
+}
+
 class MainViewController: UIViewController {
 
     @IBOutlet var viewModel: RedditPostListingViewModel! {
@@ -28,6 +33,7 @@ class MainViewController: UIViewController {
         let settingsWidthHeight: CGFloat = 60
         
         settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
+        settingsView.actionDelegate = viewModel
         
         settingsView.layer.zPosition = CGFloat.greatestFiniteMagnitude
         
@@ -81,27 +87,12 @@ class MainViewController: UIViewController {
     private func setUpNavAnimations() {
         swipeAnimationController = SwipeToShowAnimationController(percentDrivenController: self.swipeInteractionController)
         
-        setupDetailVC()
-        
-        navigationController?.delegate = self
+        setupDetailVC()        
     }
-}
-
-extension MainViewController: UINavigationControllerDelegate {
     
-//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        
-//        if operation == .push {
-//            detailViewController.viewModel = viewModel.getDetailViewModel(detailViewController: detailViewController)
-//        }
-//        
-//        return swipeAnimationController
-//    }
-//    
-//    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-//        
-//        return swipeInteractionController
-//    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 extension MainViewController: RedditPostListingNavigationDelegate {

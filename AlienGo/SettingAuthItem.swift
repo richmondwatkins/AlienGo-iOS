@@ -37,7 +37,7 @@ struct SettingAuthItem: SettingItem {
         }
     }
     
-    func didSelect() -> UIViewController {
+    func didSelect(currentVC: UIViewController, actionDelegate: ActionDelegate) -> UIViewController? {
 //        if type == .preAuth {
             return UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: RAAuthWebViewController.self))
 //        } else {

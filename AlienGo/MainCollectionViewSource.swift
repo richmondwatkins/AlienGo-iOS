@@ -136,8 +136,15 @@ extension MainCollectionViewSource: UICollectionViewDataSource {
 
 
 extension MainCollectionViewSource: RedditPostListingViewModelDelegate {
+    internal func animateRefreshControl() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+    }
+
     internal func displayRedditPosts(posts: [DisplayableFeedItem]) {
         DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.refreshControl.isRefreshing {
                 self.refreshControl.endRefreshing()
             }

@@ -9,21 +9,24 @@
 import UIKit
 
 enum SettingType {
-    case preAuth, postAuth, auto
+    case preAuth, postAuth, auto, front, all, speedControl
 }
 
 protocol SettingItem {
     var text: String { get }
     var type: SettingType { get }
     func configure(tableView: UITableView) -> UITableViewCell
-    func didSelect() -> UIViewController
+    func didSelect(currentVC: UIViewController, actionDelegate: ActionDelegate) -> UIViewController?
 }
 
 struct SettingBuilder {
    
     static func build() -> [SettingItem] {
         return [
-            SettingAuthItem()
+            SettingAllSubredditItem(),
+            SettingFrontPageItem(),
+            SettingAuthItem(),
+            SettingSpeechSpeed()
         ]
     }
 }
