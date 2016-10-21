@@ -75,7 +75,7 @@ class NetworkManager: NSObject {
     func getRedditAccessToken(refreshToken: String, callback: NetworkCallback?) {
         //https://www.reddit.com/api/v1/access_token
         
-        getAccessToken(paramaters: ["grant_type": "authorization_code", "refresh_token": refreshToken, "redirect_uri": redirectUri], callback: callback)
+        getAccessToken(paramaters: ["grant_type": "refresh_token", "refresh_token": refreshToken], callback: callback)
     }
     
     private func getAccessToken(paramaters: [String: String], callback: NetworkCallback?) {
