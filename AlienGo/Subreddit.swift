@@ -18,10 +18,18 @@ struct Subreddit: Equatable {
     
     var urlPath: String {
         if name == "front" {
-            return "/"
+            if let _ = AuthInfo.accessToken {
+                return "/"
+            }
+            
+            return "/.json"
         }
         
-        return "/r/\(name)"
+        if let _ = AuthInfo.accessToken {
+            return "/r/\(name)"
+        }
+        
+        return "/r/\(name).json"
     }
     
     init?(apiResponse: [String: AnyObject]) {

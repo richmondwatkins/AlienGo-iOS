@@ -45,16 +45,6 @@ class MainViewController: UIViewController {
         let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSingleTap))
         singleTap.numberOfTapsRequired = 1
         view.addGestureRecognizer(singleTap)
-        
-        if !UserDefaults.standard.bool(forKey: "hasLaunched") {
-            let helpVC: InstructionsViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: InstructionsViewController.self)) as! InstructionsViewController
-            
-            
-            
-            present(helpVC, animated: true, completion: {
-                self.disappearFromInstructionsVC = true
-            })
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

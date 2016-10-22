@@ -35,7 +35,7 @@ class UserInfo {
         }
         
         set {
-            if newValue == nil {
+            if newValue == 0 {
                 UserDefaults.standard.removeObject(forKey: "alienReaderUtteranceSpeed")
             } else {
                 UserDefaults.standard.set(newValue, forKey: "alienReaderUtteranceSpeed")

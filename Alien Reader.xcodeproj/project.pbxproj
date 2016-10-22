@@ -72,6 +72,11 @@
 		5DD1BAA21DA438440044BD0C /* RedditPostListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */; };
 		5DDAECAC1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECAA1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift */; };
 		5DDAECAD1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DDAECAB1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib */; };
+		5DDAECAF1DBBBEFF005201CF /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DDAECAE1DBBBEFF005201CF /* Onboarding.storyboard */; };
+		5DDAECB21DBBBF25005201CF /* WelcomeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB11DBBBF25005201CF /* WelcomeOnboardingViewController.swift */; };
+		5DDAECB41DBBBF73005201CF /* UserAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB31DBBBF73005201CF /* UserAppState.swift */; };
+		5DDAECB61DBBC599005201CF /* PostNavigationDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB51DBBC599005201CF /* PostNavigationDemoViewController.swift */; };
+		5DDAECB81DBBC5BE005201CF /* SoundSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB71DBBC5BE005201CF /* SoundSetupViewController.swift */; };
 		5DDCC7C01DAA8FA800FD63BF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7BF1DAA8FA800FD63BF /* Constants.swift */; };
 		5DDCC7C21DAC8BEE00FD63BF /* StateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7C11DAC8BEE00FD63BF /* StateProvider.swift */; };
 		5DE3F4C21DAF1DCC007F533A /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE3F4C11DAF1DCC007F533A /* UIImageViewExtension.swift */; };
@@ -174,6 +179,11 @@
 		5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostListingViewModel.swift; sourceTree = "<group>"; };
 		5DDAECAA1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechVolumeCellTableViewCell.swift; sourceTree = "<group>"; };
 		5DDAECAB1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeechVolumeCellTableViewCell.xib; sourceTree = "<group>"; };
+		5DDAECAE1DBBBEFF005201CF /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		5DDAECB11DBBBF25005201CF /* WelcomeOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeOnboardingViewController.swift; sourceTree = "<group>"; };
+		5DDAECB31DBBBF73005201CF /* UserAppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAppState.swift; sourceTree = "<group>"; };
+		5DDAECB51DBBC599005201CF /* PostNavigationDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNavigationDemoViewController.swift; sourceTree = "<group>"; };
+		5DDAECB71DBBC5BE005201CF /* SoundSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundSetupViewController.swift; sourceTree = "<group>"; };
 		5DDCC7BF1DAA8FA800FD63BF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5DDCC7C11DAC8BEE00FD63BF /* StateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateProvider.swift; sourceTree = "<group>"; };
 		5DE3F4C11DAF1DCC007F533A /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -317,6 +327,7 @@
 		5DA74A181DA522CE001B3B79 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5DDAECB01DBBBF0E005201CF /* Onboarding */,
 				5DF830D31DB3E98500CD270C /* Authorization */,
 				5D66492A1DADDA5C0054F4BA /* Settings */,
 				5D3A06631DA6CA83001C8B7C /* CommenVC */,
@@ -386,6 +397,8 @@
 				5D6649331DADF3870054F4BA /* InstructionsViewController.swift */,
 				5DE3F4C11DAF1DCC007F533A /* UIImageViewExtension.swift */,
 				5D86016D1DB5C03D00BC7DAE /* UserInfo.swift */,
+				5DDAECAE1DBBBEFF005201CF /* Onboarding.storyboard */,
+				5DDAECB31DBBBF73005201CF /* UserAppState.swift */,
 			);
 			path = AlienGo;
 			sourceTree = "<group>";
@@ -477,6 +490,16 @@
 				5DDAECAB1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib */,
 			);
 			name = SpeechVolume;
+			sourceTree = "<group>";
+		};
+		5DDAECB01DBBBF0E005201CF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5DDAECB11DBBBF25005201CF /* WelcomeOnboardingViewController.swift */,
+				5DDAECB51DBBC599005201CF /* PostNavigationDemoViewController.swift */,
+				5DDAECB71DBBC5BE005201CF /* SoundSetupViewController.swift */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		5DF830D31DB3E98500CD270C /* Authorization */ = {
@@ -622,6 +645,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DDAECAF1DBBBEFF005201CF /* Onboarding.storyboard in Resources */,
 				5DD1BA711DA432D40044BD0C /* LaunchScreen.storyboard in Resources */,
 				5D86016C1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib in Resources */,
 				5DD1BA6E1DA432D40044BD0C /* Assets.xcassets in Resources */,
@@ -798,7 +822,9 @@
 				5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */,
 				5DA74A1A1DA522F3001B3B79 /* DetailViewController.swift in Sources */,
 				5D3A06691DA6CAC1001C8B7C /* CommentRepository.swift in Sources */,
+				5DDAECB81DBBC5BE005201CF /* SoundSetupViewController.swift in Sources */,
 				5DF830D81DB3FA4D00CD270C /* SettingsTableSource.swift in Sources */,
+				5DDAECB21DBBBF25005201CF /* WelcomeOnboardingViewController.swift in Sources */,
 				5DDCC7C21DAC8BEE00FD63BF /* StateProvider.swift in Sources */,
 				5D29A2BF1DA6007100963D0D /* DetailImageGifViewController.swift in Sources */,
 				5DD1BA641DA432D40044BD0C /* AppDelegate.swift in Sources */,
@@ -814,6 +840,7 @@
 				5D86016E1DB5C03D00BC7DAE /* UserInfo.swift in Sources */,
 				5DDCC7C01DAA8FA800FD63BF /* Constants.swift in Sources */,
 				5D29A2C11DA6011700963D0D /* DetailImageGifContainer.swift in Sources */,
+				5DDAECB61DBBC599005201CF /* PostNavigationDemoViewController.swift in Sources */,
 				5DA74A211DA52CE8001B3B79 /* DetailPostItem.swift in Sources */,
 				5DA74A101DA44F82001B3B79 /* MainCollectionViewCell.swift in Sources */,
 				5DF830DF1DB402A500CD270C /* SettingItem.swift in Sources */,
@@ -837,6 +864,7 @@
 				5DA74A051DA44076001B3B79 /* Subreddit.swift in Sources */,
 				5DB609251DAC8FDB000F3258 /* MainCollectionView.swift in Sources */,
 				5DDAECAC1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift in Sources */,
+				5DDAECB41DBBBF73005201CF /* UserAppState.swift in Sources */,
 				5DF830E11DB403F300CD270C /* SettingAuthItem.swift in Sources */,
 				5DA74A0A1DA44693001B3B79 /* DisplayableFeedItem.swift in Sources */,
 				5DA74A0D1DA44E5E001B3B79 /* MainCollectionViewSource.swift in Sources */,

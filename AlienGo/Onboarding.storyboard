@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome Onboarding View Controller-->
+        <scene sceneID="bgR-kS-Pwc">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeOnboardingViewController" id="29s-ob-pI1" customClass="WelcomeOnboardingViewController" customModule="Alien_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pgQ-Ft-c9o"/>
+                        <viewControllerLayoutGuide type="bottom" id="hFg-jB-APk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qUd-dr-xRL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNN-yz-TEK">
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Thanks for checking out Alien Reader, the first reddit client that reads reddit to you. Since this is a different sort of app concept, let's do a quick tutorial</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="AvenirNext-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure your volume is on!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eur-sA-DIQ">
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hFg-jB-APk" firstAttribute="top" secondItem="eur-sA-DIQ" secondAttribute="bottom" constant="8" id="0tv-3S-hMW"/>
+                            <constraint firstItem="eur-sA-DIQ" firstAttribute="centerX" secondItem="qUd-dr-xRL" secondAttribute="centerX" id="BAP-NU-wb4"/>
+                            <constraint firstItem="SNN-yz-TEK" firstAttribute="leading" secondItem="qUd-dr-xRL" secondAttribute="leading" constant="16" id="KfO-Gf-cOc"/>
+                            <constraint firstItem="SNN-yz-TEK" firstAttribute="centerX" secondItem="qUd-dr-xRL" secondAttribute="centerX" id="Nbx-8X-52L"/>
+                            <constraint firstAttribute="trailing" secondItem="SNN-yz-TEK" secondAttribute="trailing" constant="16" id="hab-nE-ZI9"/>
+                            <constraint firstItem="SNN-yz-TEK" firstAttribute="centerY" secondItem="qUd-dr-xRL" secondAttribute="centerY" id="rbp-xf-bxe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="f9b-kf-9Tj"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="welcomeLabel" destination="SNN-yz-TEK" id="bWs-lp-cdV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GdI-8g-4lP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="424.80000000000001" y="87.706146926536732"/>
+        </scene>
+        <!--Sound Setup View Controller-->
+        <scene sceneID="KvF-QM-sGi">
+            <objects>
+                <viewController storyboardIdentifier="SoundSetupViewController" id="oKe-Oy-Zgl" customClass="SoundSetupViewController" customModule="Alien_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kfv-KP-DVT"/>
+                        <viewControllerLayoutGuide type="bottom" id="oBT-VI-2Z9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D9k-G8-acm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xjp-md-Q9e">
+                                <color key="tintColor" red="0.33333333329999998" green="0.57647058819999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="oKe-Oy-Zgl" eventType="valueChanged" id="UA0-FW-70m"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First, let's get your speech speed setup. Control the speech speed with the slider" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pp-r2-ck0">
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbg-ZW-6IG">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="naV-uk-zgD"/>
+                                </constraints>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.33333333329999998" green="0.57647058819999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="done:" destination="oKe-Oy-Zgl" eventType="touchUpInside" id="gxj-KJ-T0D"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The quick brown fox jumped over the lazy dog" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pj-CC-ZKD">
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fbg-ZW-6IG" firstAttribute="leading" secondItem="D9k-G8-acm" secondAttribute="leadingMargin" id="7ud-yB-wXb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0Pp-r2-ck0" secondAttribute="trailing" constant="24" id="Izb-La-PgL"/>
+                            <constraint firstItem="Xjp-md-Q9e" firstAttribute="top" secondItem="0Pp-r2-ck0" secondAttribute="bottom" constant="48" id="JvJ-VY-gz3"/>
+                            <constraint firstItem="oBT-VI-2Z9" firstAttribute="top" secondItem="fbg-ZW-6IG" secondAttribute="bottom" constant="20" id="O7A-yW-qhj"/>
+                            <constraint firstItem="Xjp-md-Q9e" firstAttribute="centerY" secondItem="D9k-G8-acm" secondAttribute="centerY" id="RX4-l3-vZt"/>
+                            <constraint firstAttribute="trailing" secondItem="Xjp-md-Q9e" secondAttribute="trailing" constant="16" id="f98-3q-xmp"/>
+                            <constraint firstItem="fbg-ZW-6IG" firstAttribute="trailing" secondItem="D9k-G8-acm" secondAttribute="trailingMargin" id="gJO-rV-IdS"/>
+                            <constraint firstItem="6Pj-CC-ZKD" firstAttribute="trailing" secondItem="D9k-G8-acm" secondAttribute="trailingMargin" id="hgu-zr-tQX"/>
+                            <constraint firstItem="0Pp-r2-ck0" firstAttribute="leading" secondItem="D9k-G8-acm" secondAttribute="leadingMargin" constant="24" id="l3V-eO-EWZ"/>
+                            <constraint firstItem="6Pj-CC-ZKD" firstAttribute="leading" secondItem="D9k-G8-acm" secondAttribute="leadingMargin" id="qR2-Gx-p0f"/>
+                            <constraint firstItem="6Pj-CC-ZKD" firstAttribute="top" secondItem="Xjp-md-Q9e" secondAttribute="bottom" constant="95" id="qSS-ND-nYM"/>
+                            <constraint firstItem="Xjp-md-Q9e" firstAttribute="leading" secondItem="D9k-G8-acm" secondAttribute="leading" constant="16" id="t1T-TE-TGp"/>
+                            <constraint firstItem="Xjp-md-Q9e" firstAttribute="centerX" secondItem="D9k-G8-acm" secondAttribute="centerX" id="ypF-4a-B9c"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="fbg-ZW-6IG" id="bPb-LZ-wxu"/>
+                        <outlet property="explanationlabel" destination="0Pp-r2-ck0" id="EXZ-db-mxJ"/>
+                        <outlet property="readLabel" destination="6Pj-CC-ZKD" id="FJV-EE-uyV"/>
+                        <outlet property="slider" destination="Xjp-md-Q9e" id="FJN-S3-pim"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s36-cM-Ac9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045.5999999999999" y="86.806596701649184"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="A0l-TR-MBu">
+            <objects>
+                <viewController id="zW8-AI-unt" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V8t-po-ddY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pgr-3z-Jt9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WEV-Lx-gt7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zNP-Ta-F5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2406" y="87"/>
+        </scene>
+        <!--Post Navigation Demo View Controller-->
+        <scene sceneID="Jfu-aO-Z3z">
+            <objects>
+                <viewController storyboardIdentifier="PostNavigationDemoViewController" id="Gb9-bV-CyZ" customClass="PostNavigationDemoViewController" customModule="Alien_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Wr-DJ-NKO"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qii-93-3BD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Z3-Ik-ACV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83S-B2-Jau">
+                                <string key="text">Alien Reader navigation can be set to manual or automatic. Since navigating automatically speaks for itself, let's try out manual mode.</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Srw-At-Kaf">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Srw-At-Kaf" firstAttribute="leading" secondItem="2Z3-Ik-ACV" secondAttribute="leading" id="CoI-hv-VVP"/>
+                            <constraint firstItem="83S-B2-Jau" firstAttribute="top" secondItem="3Wr-DJ-NKO" secondAttribute="bottom" id="Cvz-2m-QzW"/>
+                            <constraint firstItem="Srw-At-Kaf" firstAttribute="top" secondItem="83S-B2-Jau" secondAttribute="bottom" constant="8" id="PpZ-tr-jsh"/>
+                            <constraint firstAttribute="trailing" secondItem="Srw-At-Kaf" secondAttribute="trailing" id="e1I-JF-bzC"/>
+                            <constraint firstItem="83S-B2-Jau" firstAttribute="leading" secondItem="2Z3-Ik-ACV" secondAttribute="leadingMargin" id="gLQ-Gt-l0f"/>
+                            <constraint firstItem="83S-B2-Jau" firstAttribute="trailing" secondItem="2Z3-Ik-ACV" secondAttribute="trailingMargin" id="ngf-f5-jeK"/>
+                            <constraint firstItem="Qii-93-3BD" firstAttribute="top" secondItem="Srw-At-Kaf" secondAttribute="bottom" id="yZO-9h-RCc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="childVCContainer" destination="Srw-At-Kaf" id="tXY-tD-E3n"/>
+                        <outlet property="explanationLabel" destination="83S-B2-Jau" id="J1o-1w-F4d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XF3-86-dCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688.8" y="86.806596701649184"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xFA-Zl-hdf">
+            <objects>
+                <navigationController storyboardIdentifier="OnboardingNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m4j-ql-Nnh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qpP-Qs-LWf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="29s-ob-pI1" kind="relationship" relationship="rootViewController" id="2Wk-kk-bhD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T2r-CK-jFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-228" y="87.706146926536732"/>
+        </scene>
+    </scenes>
+</document>

@@ -56,7 +56,7 @@ class ReadHandler: NSObject {
     
     private func createUtterance(text: String) -> AVSpeechUtterance {
         let utterance = AVSpeechUtterance(string: text)
-        utterance.rate = UserInfo.utteranceSpeed ?? AVSpeechUtteranceDefaultSpeechRate
+        utterance.rate = UserInfo.utteranceSpeed 
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         
         return utterance
