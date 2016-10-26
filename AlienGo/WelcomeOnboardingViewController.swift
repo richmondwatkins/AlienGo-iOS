@@ -11,7 +11,7 @@ import UIKit
 class WelcomeOnboardingViewController: UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
-    var readerDelegate: ReadableDelegate = ReadHandler()
+    var readerDelegate: ReadableDelegate = ReadHandler.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

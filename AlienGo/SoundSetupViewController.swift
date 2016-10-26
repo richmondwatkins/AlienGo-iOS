@@ -25,7 +25,7 @@ class SoundSetupViewController: UIViewController {
         }
     }
     var readingExplanation: Bool = true
-    var readDelegate: ReadableDelegate = ReadHandler()
+    var readDelegate: ReadableDelegate = ReadHandler.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

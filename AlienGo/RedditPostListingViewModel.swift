@@ -15,6 +15,7 @@ protocol RedditPostListingViewModelDelegate {
 
 protocol RedditPostListingNavigationDelegate {
     func displayDetailVC()
+    func didFinishReadingAfterSwipe(direction: ScrollDirection)
 }
 class RedditPostListingViewModel: NSObject {
 
@@ -71,12 +72,11 @@ class RedditPostListingViewModel: NSObject {
         readHandler.stop()
         return DetailViewModel(detailPostItem: DetailPost(displayableFeedItem: collectionSource.getCurrentPost()), displayDelegate: detailViewController)
     }
-
 }
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell) {
-        if UserDefaults.standard.bool(forKey: "hasLaunched") {
+        if UserDefaults.standard.bool(forKey: "shouldStartReading") {
             var prefixText = ""
             
             switch scrollDirection {
@@ -96,6 +96,10 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
                 self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
                     if StateProvider.isAuto {
                         self.navigationDelegate.displayDetailVC()
+                    }
+                    
+                    if scrollDirection != .first {
+                        self.navigationDelegate.didFinishReadingAfterSwipe(direction: scrollDirection)
                     }
                 })
             }

@@ -87,6 +87,10 @@ class MainViewController: UIViewController {
 
 extension MainViewController: RedditPostListingNavigationDelegate {
     
+    func didFinishReadingAfterSwipe(direction: ScrollDirection) {
+        
+    }
+    
     func displayDetailVC() {
         didSingleTap()
     }

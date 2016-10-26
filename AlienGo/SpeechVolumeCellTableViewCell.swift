@@ -11,7 +11,7 @@ import UIKit
 class SpeechVolumeCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sliderControl: UISlider!
-    var readDelegate: ReadableDelegate = ReadHandler()
+    var readDelegate: ReadableDelegate = ReadHandler.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()

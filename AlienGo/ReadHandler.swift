@@ -26,18 +26,20 @@ protocol ReadingCallbackDelegate {
     func willSpeak(_ speechString: String, characterRange: NSRange)
 }
 
+typealias Utterance = String
+
 class ReadHandler: NSObject {
 
     static let shared: ReadHandler = ReadHandler()
     var synthesizer = AVSpeechSynthesizer()
     var state: ReadState = .notStarted
     var currentRead: Readable?
+    var queue: [Utterance: (completion: ReaderCompletion, callback: ReadingCallbackDelegate?)] = [:]
     var readingCallbackDelegate: ReadingCallbackDelegate? {
         didSet {
             synthesizer.delegate = self
         }
     }
-    var shouldCallCompletion: Bool = false
     var completion: ReaderCompletion
     var startNew: (() -> Void)?
     
@@ -68,8 +70,10 @@ extension ReadHandler: ReadableDelegate {
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
     
         startNew = {
+            self.queue[readableItem.text] = (completion, delegate)
+
             self.state = .reading
-            
+
             self.synthesizer.delegate = nil
             
             let words = readableItem.text.words()
@@ -91,15 +95,12 @@ extension ReadHandler: ReadableDelegate {
             self.readItem(readableItem: ReaderContainer(text: originalText))
             self.startNew = nil
         }
-        
-        if synthesizer.isSpeaking || state == .reading {
-           
-        } else {
-            
-        }
                 
         hardStop()
-        startNew?()
+        
+        if queue.isEmpty || !synthesizer.isSpeaking {
+            startNew?()
+        }
     }
     
     func reReadCurrent() {
@@ -126,10 +127,7 @@ extension ReadHandler: ReadableDelegate {
     }
     
     func hardStop() {
-        shouldCallCompletion = false
-        readingCallbackDelegate = nil
         currentRead = nil
-        completion = nil
         synthesizer.stopSpeaking(at: .immediate)
     }
 }
@@ -137,18 +135,25 @@ extension ReadHandler: ReadableDelegate {
 extension ReadHandler: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        completion?()
-        startNew?()
+        if let completion = queue[utterance.speechString]?.completion {
+            completion()
+            queue.removeValue(forKey: utterance.speechString)
+        }
+        
         state = .finished
+        startNew?()
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        completion?()
+        queue.removeValue(forKey: utterance.speechString)
         state = .stopped
+        startNew?()
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         
-        readingCallbackDelegate?.willSpeak(utterance.speechString, characterRange: characterRange)
+        if let delegate = queue[utterance.speechString]?.callback {
+            delegate.willSpeak(utterance.speechString, characterRange: characterRange)
+        }
     }
 }

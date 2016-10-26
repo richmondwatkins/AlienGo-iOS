@@ -11,28 +11,40 @@ import UIKit
 class PostNavigationDemoViewController: UIViewController {
 
     @IBOutlet weak var explanationLabel: UILabel!
-    @IBOutlet weak var childVCContainer: UIView!
-    let readerDelegate: ReadableDelegate = ReadHandler()
-    var mainVC: MainViewController!
+    let readerDelegate: ReadableDelegate = ReadHandler.shared
+    var contentVC: MainFeedDemoViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let mainNav = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewControllerNavigationController") as! UINavigationController
-        mainVC = mainNav.topViewController as! MainViewController
         
-        addChildViewController(mainVC)
-        childVCContainer.addSubview(mainVC.view)
-        mainNav.didMove(toParentViewController: self)
-
-        readerDelegate.readItem(readableItem: ReaderContainer(text: explanationLabel.text!), delegate: self) { 
+        UserDefaults.standard.set(false, forKey: "shouldStartReading")
+        UserDefaults.standard.synchronize()
+        
+        self.contentVC.viewModel.collectionSource.collectionView.isScrollEnabled = false
+        self.contentVC.viewModel.navigationDelegate = self
+        readExplanationLabel {
+            self.contentVC.viewModel.collectionSource.collectionView.reloadData()
+            self.explanationLabel.text = "Swipe up or down to have the next or previous post read out loud to you. I will go ahead and read the first one for you"
             
+            self.readExplanationLabel {
+                UserDefaults.standard.set(true, forKey: "shouldStartReading")
+                UserDefaults.standard.synchronize()
+                self.contentVC.viewModel.collectionSource.collectionView.isScrollEnabled = true
+                self.contentVC.viewModel.readFirst()
+            }
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if let mainVC = mainVC {
-            mainVC.view.frame = childVCContainer.bounds
+    func readExplanationLabel(callback: @escaping () -> Void) {
+        readerDelegate.readItem(readableItem: ReaderContainer(text: explanationLabel.text!), delegate: self) {
+            
+            callback()
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ContentSegue" {
+            contentVC = segue.destination as! MainFeedDemoViewController
         }
     }
 }
@@ -43,3 +55,20 @@ extension PostNavigationDemoViewController: ReadingCallbackDelegate {
         explanationLabel.attributedText = willSpeakAttrString(fullString: explanationLabel.text!, speechString: speechString, range: characterRange, font: explanationLabel.font)
     }
 }
+
+extension PostNavigationDemoViewController: RedditPostListingNavigationDelegate {
+    
+    func didFinishReadingAfterSwipe(direction: ScrollDirection) {
+        self.contentVC.viewModel.collectionSource.collectionView.isScrollEnabled = false
+        self.explanationLabel.text = "Nice job! Now touch the post to reveal it's content"
+        
+        self.readExplanationLabel {
+            
+        }
+    }
+    
+    func displayDetailVC() {
+        
+    }
+}
+
