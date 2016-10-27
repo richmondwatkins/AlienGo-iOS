@@ -60,6 +60,37 @@ class OnboardingDetailViewModel: DetailViewModel {
             
             readOverviewExplanation = true
         }
+        
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
+            switch self.detailPostItem.content.contentType {
+            case .image, .gif, .imageGallery:
+                break
+            case .link, .selfPost:
+                self.getTextInfo()
+                break
+            case .richVideo:
+                break
+            case .titleOnly, .selfPostTitleOnly:
+                break
+            }
+        })
+    }
+    
+    private func getTextInfo() {
+//        if let textPost = self.provider.get() {
+//            
+//            if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
+//              
+//            } else {
+//                let vc = self.buildTextVC(title: textPost.title, text: textPost.content)
+//                
+//                self.readableDelegate.readItem(readableItem: ReaderContainer(text: textPost.content), delegate: vc, completion: {
+//                    if StateProvider.isAuto {
+//                        self.showCommentVC()
+//                    }
+//                })
+//            }
+//        }
     }
     
     private func showCommentVC() {

@@ -25,10 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var navId: String = "MainViewControllerNavigationController"
         var storyboard: String = "Main"
         
-        if !UserAppState.hasSeenOnboarding {
+//        if !UserAppState.hasSeenOnboarding {
             navId = "OnboardingNavigationController"
             storyboard = "Onboarding"
-        }
+//        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)

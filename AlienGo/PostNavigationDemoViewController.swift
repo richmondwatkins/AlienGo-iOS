@@ -52,6 +52,21 @@ class PostNavigationDemoViewController: UIViewController {
             contentVC = (segue.destination as! UINavigationController).topViewController as! MainFeedDemoViewController
         }
     }
+    
+    func finish() {
+        readerDelegate.hardStop()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { 
+            self.explanationLabel.text = "That's it! Thanks for making it this far. This view will reload and you will be good to go."
+            self.readExplanationLabel {
+                UserAppState.hasSeenOnboarding = true
+                let navId: String = "MainViewControllerNavigationController"
+                let storyboard: String = "Main"
+                
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)
+            }
+        }
+    }
 }
 
 extension PostNavigationDemoViewController: ReadingCallbackDelegate {
