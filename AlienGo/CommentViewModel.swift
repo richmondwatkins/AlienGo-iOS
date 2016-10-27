@@ -15,15 +15,30 @@ protocol CommentDisplayDelegate {
     func cellForIndex(indexPath: IndexPath) -> CommentTableViewCell?
 }
 
-class CommentViewModel {
+protocol CommentViewModel {
+    var detailPostItem: DetailPostItem { get }
+    var provider: CommentProvider { get }
+    var displayDelegate: CommentDisplayDelegate { get }
+    var orderedComments: [Comment] { get }
+    var linearComments: [Comment] { get }
+    var readableDelegate: ReadableDelegate { get }
+    func getComments()
+    func goToNextTopLevel()
+    func didTap(gesture: UITapGestureRecognizer)
+    func didSwipe(gesture: UISwipeGestureRecognizer)
+    func dismiss()
+    func read(comment: Comment, index: Int, prefix: String)
+}
+
+class MainCommentViewModel: CommentViewModel {
 
     let detailPostItem: DetailPostItem
     let provider: CommentProvider
     let displayDelegate: CommentDisplayDelegate
-    private var readableDelegate: ReadableDelegate = ReadHandler.shared
+    var readableDelegate: ReadableDelegate = ReadHandler.shared
     private lazy var metaDetailReader: ReadableDelegate = ReadHandler.shared
-    private var orderedComments: [Comment] = []
-    private var linearComments: [Comment] = []
+    var orderedComments: [Comment] = []
+    var linearComments: [Comment] = []
     private var readingComment: Comment?
     private var shouldAcceptLongPress: Bool = true
     private var isDisplaying: Bool = true
@@ -87,7 +102,13 @@ class CommentViewModel {
         }
     }
     
-    func goToReply() {
+    func dismiss() {
+        isDisplaying = false
+        readableDelegate.hardStop()
+        displayDelegate.dismiss()
+    }
+    
+    private func goToReply() {
         if let readingComment = readingComment {
             if let firstReply = readingComment.replies.first {
                 goToComment(comment: firstReply, prefix: "Reply by")
@@ -101,7 +122,7 @@ class CommentViewModel {
         }
     }
     
-    func goToNextSibling() {
+    private func goToNextSibling() {
         if let readingComment = readingComment {
             if let comment = orderedComments.nextSibling(current: readingComment) {
                 goToComment(comment: comment)
@@ -111,7 +132,7 @@ class CommentViewModel {
         }
     }
     
-    func goToComment(comment: Comment, prefix: String = "Comment by") {
+    private func goToComment(comment: Comment, prefix: String = "Comment by") {
         if let liniearIndex = linearComments.index(of: comment) {
            
             displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
@@ -120,13 +141,7 @@ class CommentViewModel {
         }
     }
     
-    func dismiss() {
-        isDisplaying = false
-        readableDelegate.hardStop()
-        displayDelegate.dismiss()
-    }
-    
-    private func read(comment: Comment, index: Int, prefix: String = "Comment by") {
+    func read(comment: Comment, index: Int, prefix: String = "Comment by") {
         readComments += 1
         readingComment = comment
         

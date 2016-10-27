@@ -15,5 +15,6 @@ class MainFeedDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewModel.collectionSource.collectionView.isScrollEnabled = false
     }
 }

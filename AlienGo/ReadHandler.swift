@@ -70,8 +70,6 @@ extension ReadHandler: ReadableDelegate {
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
     
         startNew = {
-            self.queue[readableItem.text] = (completion, delegate)
-
             self.state = .reading
 
             self.synthesizer.delegate = nil
@@ -90,6 +88,8 @@ extension ReadHandler: ReadableDelegate {
                 originalText = originalText.replacingOccurrences(of: url, with: " skipping un readable u r l ")
             }
             
+            self.queue[originalText] = (completion, delegate)
+
             self.readingCallbackDelegate = delegate
             self.completion = completion
             self.readItem(readableItem: ReaderContainer(text: originalText))
@@ -127,6 +127,7 @@ extension ReadHandler: ReadableDelegate {
     }
     
     func hardStop() {
+        readingCallbackDelegate = nil
         currentRead = nil
         synthesizer.stopSpeaking(at: .immediate)
     }
@@ -135,6 +136,7 @@ extension ReadHandler: ReadableDelegate {
 extension ReadHandler: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        readingCallbackDelegate = nil
         if let completion = queue[utterance.speechString]?.completion {
             completion()
             queue.removeValue(forKey: utterance.speechString)
@@ -145,6 +147,7 @@ extension ReadHandler: AVSpeechSynthesizerDelegate {
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        readingCallbackDelegate = nil
         queue.removeValue(forKey: utterance.speechString)
         state = .stopped
         startNew?()

@@ -70,7 +70,7 @@ class RedditPostListingViewModel: NSObject {
 
     func getDetailViewModel(detailViewController: DetailViewController) -> DetailViewModel {
         readHandler.stop()
-        return DetailViewModel(detailPostItem: DetailPost(displayableFeedItem: collectionSource.getCurrentPost()), displayDelegate: detailViewController)
+        return MainDetailViewModel(detailPostItem: DetailPost(displayableFeedItem: collectionSource.getCurrentPost()), displayDelegate: detailViewController)
     }
 }
 

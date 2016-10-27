@@ -12,7 +12,13 @@ class PostNavigationDemoViewController: UIViewController {
 
     @IBOutlet weak var explanationLabel: UILabel!
     let readerDelegate: ReadableDelegate = ReadHandler.shared
-    var contentVC: MainFeedDemoViewController!
+    var contentVC: MainFeedDemoViewController! {
+        didSet {
+            let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(displayDetailVC))
+            singleTap.numberOfTapsRequired = 1
+            contentVC.view.addGestureRecognizer(singleTap)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +26,6 @@ class PostNavigationDemoViewController: UIViewController {
         UserDefaults.standard.set(false, forKey: "shouldStartReading")
         UserDefaults.standard.synchronize()
         
-        self.contentVC.viewModel.collectionSource.collectionView.isScrollEnabled = false
         self.contentVC.viewModel.navigationDelegate = self
         readExplanationLabel {
             self.contentVC.viewModel.collectionSource.collectionView.reloadData()
@@ -44,7 +49,7 @@ class PostNavigationDemoViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ContentSegue" {
-            contentVC = segue.destination as! MainFeedDemoViewController
+            contentVC = (segue.destination as! UINavigationController).topViewController as! MainFeedDemoViewController
         }
     }
 }
@@ -68,7 +73,86 @@ extension PostNavigationDemoViewController: RedditPostListingNavigationDelegate 
     }
     
     func displayDetailVC() {
+        let detailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+        detailViewController.viewModel = OnboardingDetailViewModel(
+            detailPostItem: DetailPost(displayableFeedItem: contentVC.viewModel.collectionSource.getCurrentPost()),
+            displayDelegate: detailViewController,
+            onboardingDetailLifecyleDelegate: self,
+            onboardingCommentLifecycleDelegate: self
+        )
+        
+        self.explanationLabel.text = detailExplanationText
+        self.explanationLabel.sizeToFit()
+        
+        contentVC.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+}
+
+extension PostNavigationDemoViewController: OnboardingDetailLifecycle {
+    var readerCallback: ReadingCallbackDelegate {
+        return self
+    }
+    
+    var detailExplanationText: String {
+        return "Alien Reader tries to pull any text it can from a post. If it is unable to it will tell you so. We will skip this content for now and demo comments. Long press anywhere on the screen to display them"
+    }
+    
+    func didReadDetailExplanation() {
         
     }
 }
 
+extension PostNavigationDemoViewController: OnboardingCommentLifecycle {
+    
+    var firstCommentGestureExplanationText: String {
+        return "Swipe down to go to the next comment on the same level"
+    }
+    
+    var postSiblingGestureExplanationText: String {
+        return "Swipe right to read a comment's reply. Alien Reader will tell you when you've reached the bottom"
+    }
+    
+    var postReplyGestureExplanationText: String {
+        return "Double tap at anytime to go to the next top level comment"
+    }
+    
+    var exitExplanationText: String {
+        return "Long press at anytime to dismiss the comments view"
+    }
+    
+    var commentReaderCallback: ReadingCallbackDelegate {
+        return self
+    }
+    
+    func didFinisheReadingFirstComment() {
+        self.explanationLabel.text = firstCommentGestureExplanationText
+        
+        self.readExplanationLabel {
+            
+        }
+    }
+    
+    func didFinisheReadingReplyExplanation() {
+        self.explanationLabel.text = postReplyGestureExplanationText
+        
+        self.readExplanationLabel {
+            
+        }
+    }
+    
+    func didFinisheReadingSiblingComment() {
+        self.explanationLabel.text = postSiblingGestureExplanationText
+        
+        self.readExplanationLabel {
+            //
+        }
+    }
+    
+    func didFinishReadingNextTopLevel() {
+        self.explanationLabel.text = exitExplanationText
+        
+        self.readExplanationLabel {
+            //
+        }
+    }
+}

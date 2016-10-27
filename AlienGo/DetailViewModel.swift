@@ -12,7 +12,19 @@ protocol DetailViewModelDelegate {
     func display(childVC: UIViewController)
     func present(vc: UIViewController)
 }
-class DetailViewModel {
+
+protocol DetailViewModel {
+    var disappearFromCommentPopover: Bool { get set }
+    var disappearFromSettings: Bool { get set }
+    var detailPostItem: DetailPostItem { get }
+    var displayDelegate: DetailViewModelDelegate { get }
+    func showComments(press: UILongPressGestureRecognizer)
+    func viewDidDisappear()
+    func navBack()
+    func getInfo()
+}
+
+class MainDetailViewModel: DetailViewModel {
 
     let detailPostItem: DetailPostItem
     let displayDelegate: DetailViewModelDelegate
@@ -26,7 +38,7 @@ class DetailViewModel {
         self.readableDelegate = readableDelegate
     }
     
-    init(detailPostItem: DetailPostItem, displayDelegate: DetailViewModelDelegate) {
+    required init(detailPostItem: DetailPostItem, displayDelegate: DetailViewModelDelegate) {
         self.detailPostItem = detailPostItem
         provider = RedditDetailPostProvider(detailPost: detailPostItem)
         self.displayDelegate = displayDelegate
@@ -54,23 +66,6 @@ class DetailViewModel {
         readableDelegate.hardStop()
     }
     
-    @objc func settingsWillShow() {
-        disappearFromSettings = true
-    }
-    
-    @objc func settingsWillHide() {
-        disappearFromSettings = true
-    }
-    
-    func showCommentVC() {
-        disappearFromCommentPopover = true
-                
-        let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController
-        commentVC.viewModel = CommentViewModel(detailPostItem: detailPostItem, displayDelegate: commentVC)
-        
-        displayDelegate.present(vc: commentVC)
-    }
-    
     func getInfo() {
         self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
@@ -84,7 +79,7 @@ class DetailViewModel {
             switch self.detailPostItem.content.contentType {
             case .image, .gif, .imageGallery:
                 
-                nothingToRead({ 
+                nothingToRead({
                     self.getImageGifInfo()
                 })
                 break
@@ -98,7 +93,7 @@ class DetailViewModel {
                 let vc = self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
                 self.displayDelegate.display(childVC: vc)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { 
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                     self.showCommentVC()
                 })
                 break
@@ -106,7 +101,24 @@ class DetailViewModel {
         })
     }
     
-    func getTextInfo() {
+    @objc private func settingsWillShow() {
+        disappearFromSettings = true
+    }
+    
+    @objc private func settingsWillHide() {
+        disappearFromSettings = true
+    }
+    
+    private func showCommentVC() {
+        disappearFromCommentPopover = true
+                
+        let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController
+        commentVC.viewModel = MainCommentViewModel(detailPostItem: detailPostItem, displayDelegate: commentVC)
+        
+        displayDelegate.present(vc: commentVC)
+    }
+    
+    private func getTextInfo() {
         if let textPost = self.provider.get() {
             
             if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
@@ -123,7 +135,7 @@ class DetailViewModel {
         }
     }
     
-    func buildTextVC(title: String, text: String) -> DetailTextViewController {
+    private func buildTextVC(title: String, text: String) -> DetailTextViewController {
         let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
         detailTextVC.textPost = DetailTextContainer(title: title, content: text)
         
@@ -132,7 +144,7 @@ class DetailViewModel {
         return detailTextVC
     }
     
-    func showVideoVC() {
+    private func showVideoVC() {
         self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading video"), delegate: nil, completion: nil)
         
         let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
@@ -144,7 +156,7 @@ class DetailViewModel {
         }
     }
     
-    func getImageGifInfo() {
+    private func getImageGifInfo() {
         self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
         let detailImageGifVc = vc(storyboardId: String(describing: DetailImageGifViewController.self)) as! DetailImageGifViewController

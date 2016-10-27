@@ -58,6 +58,8 @@
 		5DA74A301DA592F1001B3B79 /* DisplayableDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */; };
 		5DB609251DAC8FDB000F3258 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB609241DAC8FDB000F3258 /* MainCollectionView.swift */; };
 		5DC1A6CA1DC04DD100B74FFF /* MainFeedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */; };
+		5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */; };
+		5DC1A6CE1DC1808700B74FFF /* OnboardingCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */; };
 		5DD1BA641DA432D40044BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA631DA432D40044BD0C /* AppDelegate.swift */; };
 		5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA651DA432D40044BD0C /* MainViewController.swift */; };
 		5DD1BA691DA432D40044BD0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA671DA432D40044BD0C /* Main.storyboard */; };
@@ -160,6 +162,8 @@
 		5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableDetailItem.swift; sourceTree = "<group>"; };
 		5DB609241DAC8FDB000F3258 /* MainCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionView.swift; sourceTree = "<group>"; };
 		5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFeedDemoViewController.swift; sourceTree = "<group>"; };
+		5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingDetailViewModel.swift; sourceTree = "<group>"; };
+		5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCommentViewModel.swift; sourceTree = "<group>"; };
 		5DD1BA601DA432D40044BD0C /* Alien Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alien Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD1BA631DA432D40044BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DD1BA651DA432D40044BD0C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +485,8 @@
 				5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */,
 				5DA74A291DA59120001B3B79 /* DetailViewModel.swift */,
 				5D3A06661DA6CAB4001C8B7C /* CommentViewModel.swift */,
+				5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */,
+				5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -835,6 +841,7 @@
 				5DA74A1D1DA52555001B3B79 /* SwipeToShowInteractionController.swift in Sources */,
 				5DD1BA9F1DA4370F0044BD0C /* RedditPost.swift in Sources */,
 				5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */,
+				5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */,
 				5D29A2BD1DA5F43800963D0D /* DetailTextViewController.swift in Sources */,
 				5D6649341DADF3870054F4BA /* InstructionsViewController.swift in Sources */,
 				5DA74A231DA52D00001B3B79 /* DetailPost.swift in Sources */,
@@ -848,6 +855,7 @@
 				5DA74A211DA52CE8001B3B79 /* DetailPostItem.swift in Sources */,
 				5DA74A101DA44F82001B3B79 /* MainCollectionViewCell.swift in Sources */,
 				5DF830DF1DB402A500CD270C /* SettingItem.swift in Sources */,
+				5DC1A6CE1DC1808700B74FFF /* OnboardingCommentViewModel.swift in Sources */,
 				5D3A06711DA6D71F001C8B7C /* User.swift in Sources */,
 				5DA74A171DA482BC001B3B79 /* ReadHandler.swift in Sources */,
 				5DA74A281DA58852001B3B79 /* RedditContent.swift in Sources */,
