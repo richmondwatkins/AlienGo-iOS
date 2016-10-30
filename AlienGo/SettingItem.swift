@@ -26,7 +26,8 @@ struct SettingBuilder {
             SettingAllSubredditItem(),
             SettingFrontPageItem(),
             SettingAuthItem(),
-            SettingSpeechSpeed()
+            SettingSpeechSpeed(),
+            SettingAutoPlayItem()
         ]
     }
 }

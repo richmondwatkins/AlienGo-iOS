@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="43.5"/>
+                <frame key="frameInset" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hf7-la-vRn">
@@ -19,10 +19,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXX-EI-pem">
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="lAI-i3-jnr"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftDetail" translatesAutoresizingMaskIntoConstraints="NO" id="Pl9-To-86L">
+                        <color key="tintColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="0Uz-Sd-hbv"/>
+                            <constraint firstAttribute="height" constant="18" id="leF-n8-7Ab"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Hf7-la-vRn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="97d-Q3-vT6"/>
                     <constraint firstItem="Hf7-la-vRn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B2w-Tc-FR5"/>
+                    <constraint firstAttribute="trailing" secondItem="Pl9-To-86L" secondAttribute="trailing" constant="16" id="Bmt-yU-DcY"/>
+                    <constraint firstItem="Pl9-To-86L" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EU5-3G-CRl"/>
+                    <constraint firstAttribute="bottom" secondItem="KXX-EI-pem" secondAttribute="bottom" id="Rqa-Nx-vTE"/>
+                    <constraint firstAttribute="trailing" secondItem="KXX-EI-pem" secondAttribute="trailing" constant="16" id="gpc-WW-Qw9"/>
+                    <constraint firstItem="KXX-EI-pem" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="oIr-rp-eey"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -30,4 +48,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="leftDetail" width="40" height="40"/>
+    </resources>
 </document>

@@ -20,16 +20,38 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jez-5F-JoR">
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="9NR-1g-tru"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftDetail" translatesAutoresizingMaskIntoConstraints="NO" id="mNr-g7-H4k">
+                        <color key="tintColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="EBU-TG-nud"/>
+                            <constraint firstAttribute="height" constant="18" id="dMz-SO-6KH"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="mNr-g7-H4k" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ju0-FM-TYB"/>
                     <constraint firstItem="hec-G6-cfA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QlF-B9-Pa8"/>
+                    <constraint firstAttribute="trailing" secondItem="mNr-g7-H4k" secondAttribute="trailing" constant="16" id="Vhi-Lq-C04"/>
+                    <constraint firstAttribute="trailing" secondItem="jez-5F-JoR" secondAttribute="trailing" constant="16" id="aYe-wL-CVq"/>
+                    <constraint firstAttribute="bottom" secondItem="jez-5F-JoR" secondAttribute="bottom" id="b4g-Al-SlU"/>
+                    <constraint firstItem="jez-5F-JoR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="iVb-20-H2Y"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hec-G6-cfA" secondAttribute="bottom" constant="4" id="kkC-U1-i6g"/>
                     <constraint firstItem="hec-G6-cfA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="m9a-qz-8Lp"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="detailImageView" destination="mNr-g7-H4k" id="Jgr-si-b34"/>
                 <outlet property="usernameLabel" destination="hec-G6-cfA" id="rB1-d7-znF"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="leftDetail" width="40" height="40"/>
+    </resources>
 </document>

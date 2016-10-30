@@ -12,12 +12,14 @@ protocol OnboardingCommentLifecycle {
     var firstCommentGestureExplanationText: String { get }
     var postSiblingGestureExplanationText: String { get }
     var postReplyGestureExplanationText: String { get }
-    var exitExplanationText: String { get }
+    var commentExitExplanationText: String { get }
     var commentReaderCallback: ReadingCallbackDelegate { get }
     func didFinisheReadingFirstComment()
     func didFinisheReadingSiblingComment()
     func didFinisheReadingReplyExplanation()
     func didFinishReadingNextTopLevel()
+    func didDimissComments()
+    func readyToDisplayComments(completion: @escaping () -> Void)
 }
 
 
@@ -41,8 +43,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     }
     
     func getComments() {
-        readableDelegate.readItem(readableItem: ReaderContainer(text: "Once comments are loaded, the first one will be read automatically"), delegate: nil, completion: {
-        
+        onboardingDelegate.readyToDisplayComments {
             DispatchQueue.global(qos: .userInitiated).async {
                 let response = self.provider.get()
                 
@@ -55,7 +56,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                     self.read(comment: first, index: 0)
                 }
             }
-        })
+        }
     }
     
     func goToNextTopLevel() {
@@ -125,7 +126,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     func dismiss() {
         readableDelegate.hardStop()
         displayDelegate.dismiss()
-        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Double tap to exit out of the post and return to the main screen"), delegate: nil, completion: nil)
+        onboardingDelegate.didDimissComments()
     }
     
     func read(comment: Comment, index: Int, prefix: String = "") {

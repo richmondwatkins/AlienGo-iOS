@@ -12,10 +12,11 @@
             <rect key="frame" x="0.0" y="0.0" width="348" height="87"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="348" height="86.5"/>
+                <frame key="frameInset" width="348" height="86"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acN-ZH-9Fl">
+                        <color key="tintColor" red="0.33333333329999998" green="0.57647058819999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <action selector="didSlide:" destination="KGk-i7-Jjw" eventType="valueChanged" id="oXh-Oh-a48"/>
                         </connections>
@@ -25,14 +26,24 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s0A-BX-W9I">
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="00k-eH-waW"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="UXN-HZ-BWZ"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="s0A-BX-W9I" secondAttribute="trailing" constant="16" id="1p2-zx-TeO"/>
                     <constraint firstAttribute="trailing" secondItem="acN-ZH-9Fl" secondAttribute="trailing" constant="16" id="AfP-GA-Fi7"/>
                     <constraint firstItem="b0a-hZ-tMs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="DHT-nb-KCM"/>
                     <constraint firstAttribute="bottom" secondItem="acN-ZH-9Fl" secondAttribute="bottom" constant="8.5" id="Fe4-II-nTW"/>
                     <constraint firstItem="acN-ZH-9Fl" firstAttribute="top" secondItem="b0a-hZ-tMs" secondAttribute="bottom" constant="16" id="NUK-Ok-403"/>
                     <constraint firstItem="b0a-hZ-tMs" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Uli-jG-0dx"/>
                     <constraint firstItem="acN-ZH-9Fl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dS6-ad-OGk"/>
+                    <constraint firstAttribute="bottom" secondItem="s0A-BX-W9I" secondAttribute="bottom" id="eGr-TY-qkm"/>
+                    <constraint firstItem="s0A-BX-W9I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zLy-6V-pJu"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

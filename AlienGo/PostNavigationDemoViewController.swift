@@ -118,7 +118,7 @@ extension PostNavigationDemoViewController: OnboardingDetailLifecycle {
 }
 
 extension PostNavigationDemoViewController: OnboardingCommentLifecycle {
-    
+   
     var firstCommentGestureExplanationText: String {
         return "Swipe down to go to the next comment on the same level"
     }
@@ -131,7 +131,7 @@ extension PostNavigationDemoViewController: OnboardingCommentLifecycle {
         return "Double tap at anytime to go to the next top level comment"
     }
     
-    var exitExplanationText: String {
+    var commentExitExplanationText: String {
         return "Long press at anytime to dismiss the comments view"
     }
     
@@ -164,10 +164,26 @@ extension PostNavigationDemoViewController: OnboardingCommentLifecycle {
     }
     
     func didFinishReadingNextTopLevel() {
-        self.explanationLabel.text = exitExplanationText
+        self.explanationLabel.text = commentExitExplanationText
         
         self.readExplanationLabel {
             //
+        }
+    }
+    
+    func didDimissComments() {
+        self.explanationLabel.text = "Double tap to exit out of the post and return to the main screen"
+        
+        self.readExplanationLabel {
+            //
+        }
+    }
+    
+    func readyToDisplayComments(completion: @escaping () -> Void) {
+        self.explanationLabel.text = "Once comments are loaded, the first one will be read automatically"
+        
+        self.readExplanationLabel {
+            completion()
         }
     }
 }

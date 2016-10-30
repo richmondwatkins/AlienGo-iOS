@@ -20,7 +20,6 @@ struct SettingFrontPageItem: SettingItem {
 
     func configure(tableView: UITableView) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AllFrontSettingTableViewCell.self)) as! AllFrontSettingTableViewCell
-        cell.accessoryType = .disclosureIndicator
         
         cell.titlelabel.text = text
         

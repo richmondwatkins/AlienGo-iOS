@@ -12,6 +12,7 @@ import KeychainAccess
 class AccountInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var detailImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,5 +20,7 @@ class AccountInfoTableViewCell: UITableViewCell {
         if let username = UserInfo.username {
             usernameLabel.text = username
         }
+        
+        detailImageView.tintColor = UIColor("#C7C7CC")
     }
 }

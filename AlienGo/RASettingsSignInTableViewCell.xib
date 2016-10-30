@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,18 +20,40 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJV-ql-SgR">
+                        <color key="backgroundColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="wV9-uW-RZe"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftDetail" translatesAutoresizingMaskIntoConstraints="NO" id="miB-wO-Q8t">
+                        <color key="tintColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="Uzd-4w-E0T"/>
+                            <constraint firstAttribute="height" constant="18" id="vFT-aY-4vB"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="miB-wO-Q8t" secondAttribute="trailing" constant="16" id="Bl8-U6-XDj"/>
                     <constraint firstItem="OqD-8h-gzE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="EFe-Gi-A4Y"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OqD-8h-gzE" secondAttribute="bottom" constant="4" id="HgA-ey-W2b"/>
                     <constraint firstAttribute="trailing" secondItem="OqD-8h-gzE" secondAttribute="trailing" constant="38" id="LcL-tS-lvG"/>
-                    <constraint firstAttribute="bottom" secondItem="OqD-8h-gzE" secondAttribute="bottom" constant="4" id="Tf4-ql-C1L"/>
-                    <constraint firstItem="OqD-8h-gzE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="iTl-s8-KLW"/>
+                    <constraint firstAttribute="trailing" secondItem="OJV-ql-SgR" secondAttribute="trailing" constant="16" id="VgX-on-c4A"/>
+                    <constraint firstAttribute="bottom" secondItem="OJV-ql-SgR" secondAttribute="bottom" id="VkD-xn-vT3"/>
+                    <constraint firstItem="OJV-ql-SgR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="aIc-vL-6G0"/>
+                    <constraint firstItem="miB-wO-Q8t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ceY-9S-i2K"/>
+                    <constraint firstItem="OqD-8h-gzE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="mTO-qn-CF7"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="titleLabel" destination="OqD-8h-gzE" id="ZpN-gC-Cie"/>
             </connections>
+            <point key="canvasLocation" x="34" y="56"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="leftDetail" width="40" height="40"/>
+    </resources>
 </document>

@@ -247,27 +247,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y35-oo-VjU">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="I6d-jZ-1LG"/>
-                                    <constraint firstAttribute="width" constant="46" id="fnC-lX-mHN"/>
-                                </constraints>
                                 <state key="normal" title="Help"/>
                                 <connections>
                                     <action selector="selectHelp:" destination="zLP-hb-zdK" eventType="touchUpInside" id="svq-BR-DQK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMd-pp-Wm3">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="fwM-3c-NHn"/>
-                                    <constraint firstAttribute="height" constant="30" id="n0h-AC-Sem"/>
-                                </constraints>
                                 <state key="normal" title="Close"/>
                                 <connections>
                                     <action selector="close:" destination="zLP-hb-zdK" eventType="touchUpInside" id="da0-Sw-Bxv"/>
                                     <action selector="selectHelp:" destination="zLP-hb-zdK" eventType="touchUpInside" id="FRh-ED-PxC"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B51-H2-Uje">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B51-H2-Uje">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -333,6 +325,7 @@
                     <connections>
                         <outlet property="tableSource" destination="7P1-Em-v4q" id="kOL-Yg-CNc"/>
                         <outlet property="tableView" destination="SYm-0t-arw" id="6gR-pM-o4m"/>
+                        <outlet property="tableViewTopConstraint" destination="Uih-Fs-awe" id="xlR-KA-prn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsr-7l-edf" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -26,9 +26,7 @@ struct SettingAuthItem: SettingItem {
     func configure(tableView: UITableView) -> UITableViewCell {
         if type == .preAuth {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RASettingsSignInTableViewCell.self)) as! RASettingsSignInTableViewCell
-            
-            cell.accessoryType = .disclosureIndicator
-            
+                        
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AccountInfoTableViewCell.self)) as! AccountInfoTableViewCell

@@ -60,6 +60,9 @@
 		5DC1A6CA1DC04DD100B74FFF /* MainFeedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */; };
 		5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */; };
 		5DC1A6CE1DC1808700B74FFF /* OnboardingCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */; };
+		5DCCEE7F1DC67907008EADA2 /* SettingAutoPlayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */; };
+		5DCCEE831DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */; };
+		5DCCEE841DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */; };
 		5DD1BA641DA432D40044BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA631DA432D40044BD0C /* AppDelegate.swift */; };
 		5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA651DA432D40044BD0C /* MainViewController.swift */; };
 		5DD1BA691DA432D40044BD0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA671DA432D40044BD0C /* Main.storyboard */; };
@@ -164,6 +167,9 @@
 		5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFeedDemoViewController.swift; sourceTree = "<group>"; };
 		5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingDetailViewModel.swift; sourceTree = "<group>"; };
 		5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCommentViewModel.swift; sourceTree = "<group>"; };
+		5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAutoPlayItem.swift; sourceTree = "<group>"; };
+		5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoPlaySettingTableViewCell.swift; sourceTree = "<group>"; };
+		5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoPlaySettingTableViewCell.xib; sourceTree = "<group>"; };
 		5DD1BA601DA432D40044BD0C /* Alien Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alien Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD1BA631DA432D40044BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DD1BA651DA432D40044BD0C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +362,15 @@
 			name = DetailVC;
 			sourceTree = "<group>";
 		};
+		5DCCEE801DC67925008EADA2 /* AutoPlay */ = {
+			isa = PBXGroup;
+			children = (
+				5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */,
+				5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */,
+			);
+			name = AutoPlay;
+			sourceTree = "<group>";
+		};
 		5DD1BA571DA432D40044BD0C = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +490,7 @@
 				5D53AD091DB8289800941B2B /* SettingFrontPageItem.swift */,
 				5D53AD101DB851B800941B2B /* SettingAllSubredditItem.swift */,
 				5D53AD171DB8743600941B2B /* SettingSpeechSpeed.swift */,
+				5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -522,6 +538,7 @@
 		5DF830DD1DB3FA8000CD270C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5DCCEE801DC67925008EADA2 /* AutoPlay */,
 				5DDAECA91DB9C7B8005201CF /* SpeechVolume */,
 				5D53AD0B1DB8298B00941B2B /* AllFront */,
 				5D8601681DB56FA000BC7DAE /* AccountInfo */,
@@ -660,6 +677,7 @@
 				5DD1BA6E1DA432D40044BD0C /* Assets.xcassets in Resources */,
 				5DF830DC1DB3FA7D00CD270C /* RASettingsSignInTableViewCell.xib in Resources */,
 				5DD1BA691DA432D40044BD0C /* Main.storyboard in Resources */,
+				5DCCEE841DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib in Resources */,
 				5DDAECAD1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib in Resources */,
 				5D6649301DADDA870054F4BA /* SettingsView.xib in Resources */,
 				5DA74A111DA44F82001B3B79 /* MainCollectionViewCell.xib in Resources */,
@@ -883,6 +901,7 @@
 				5D3A066B1DA6CAC8001C8B7C /* CommentProvider.swift in Sources */,
 				5D53AD0E1DB829A800941B2B /* AllFrontSettingTableViewCell.swift in Sources */,
 				5DA74A1F1DA52734001B3B79 /* SwipeToShowAnimationController.swift in Sources */,
+				5DCCEE7F1DC67907008EADA2 /* SettingAutoPlayItem.swift in Sources */,
 				5D29A2B91DA5B81900963D0D /* DisplayableDetailContainer.swift in Sources */,
 				5D3A065E1DA611B4001C8B7C /* RAYoutubeWebView.swift in Sources */,
 				5D3A066F1DA6D6F6001C8B7C /* Comment.swift in Sources */,
@@ -894,6 +913,7 @@
 				5D53AD0A1DB8289800941B2B /* SettingFrontPageItem.swift in Sources */,
 				5DA74A2E1DA592AC001B3B79 /* RedditDetailPostProvider.swift in Sources */,
 				5DA74A131DA45334001B3B79 /* Readable.swift in Sources */,
+				5DCCEE831DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

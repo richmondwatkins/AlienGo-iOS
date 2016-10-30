@@ -10,6 +10,12 @@ import UIKit
 
 class CommentViewController: UIViewController {
 
+    var tableYConstraintVal: CGFloat = 0 {
+        didSet {
+           layoutTableView()
+        }
+    }
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var tableSource: CommentTableSource!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -28,9 +34,12 @@ class CommentViewController: UIViewController {
     }()
     var viewModel: CommentViewModel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        layoutTableView()
+        
         viewModel.getComments()
         
         let directions: [UISwipeGestureRecognizerDirection] = [.right, .left, .up, .down]
@@ -49,6 +58,13 @@ class CommentViewController: UIViewController {
         tableView.addGestureRecognizer(tapGesture)
         
         refreshControl.beginRefreshing()
+    }
+    
+    func layoutTableView() {
+        if tableViewTopConstraint != nil && tableViewTopConstraint.constant != tableYConstraintVal {
+            tableViewTopConstraint.constant = tableYConstraintVal
+            view.layoutIfNeeded()
+        }
     }
 
     func refresh() {

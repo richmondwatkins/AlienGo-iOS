@@ -10,6 +10,7 @@ import UIKit
 
 class ColorConstants {
     static let appBlue = "#5593FC"
+    //C7C7CC
 }
 let notificationAuthCodeReceived = "notificationAuthCodeReceived"
 

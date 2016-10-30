@@ -96,6 +96,11 @@ extension DetailViewController: DetailViewModelDelegate {
     }
     
     func present(vc: UIViewController) {
+        if vc is CommentViewController && !UserAppState.hasSeenOnboarding {
+            (vc as! CommentViewController).tableYConstraintVal = 100
+            vc.modalPresentationStyle = .overCurrentContext
+        }
+        
         present(vc, animated: true, completion: nil)
     }
 }
