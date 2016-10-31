@@ -94,15 +94,6 @@ class NetworkManager: NSObject {
         }
     }
     
-    func postDetailInfo(detailPostItem: DetailPostItem, bodyContent: String, callback: NetworkCallback?) {
-        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/update")!
-        let request = NSMutableURLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: ["content": bodyContent, "postId": detailPostItem.id], options: .prettyPrinted)
-        
-        sendRequest(request: request as URLRequest, callback: callback)
-    }
-    
     func getDetailInfo(detailPostItem: DetailPostItem, callback: NetworkCallback?) {
         let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/parse")!
         
@@ -110,11 +101,10 @@ class NetworkManager: NSObject {
             return
         }
         
-        let request = NSMutableURLRequest(url: url)
-        request.httpBody = try? JSONSerialization.data(withJSONObject: ["html": bodyContent, "postId": detailPostItem.id], options: .prettyPrinted)
-        request.httpMethod = "GET"
-        
-        sendRequest(request: request as URLRequest, callback: callback)
+        Alamofire.request(url, method: .post, parameters:  ["html": bodyContent, "postId": detailPostItem.id], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            
+            callback?(response.result.value as AnyObject?, response.result.error)
+        }
     }
     
     private func setReadditHeaders(request: NSMutableURLRequest) -> NSMutableURLRequest {

@@ -35,7 +35,7 @@ class SoundSetupViewController: UIViewController {
 
     @IBAction func sliderChanged(_ sender: UISlider) {
         readingExplanation = false
-        UserInfo.utteranceSpeed = sender.value
+        UserInfo.utteranceSpeed = sender.value > 0 ? sender.value : 0.0001
         
         UIView.animate(withDuration: 0.3, animations: { 
             self.readLabel.alpha = 1

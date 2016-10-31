@@ -53,19 +53,31 @@ class PostNavigationDemoViewController: UIViewController {
         }
     }
     
+    @IBAction func skip(_ sender: UIButton) {
+        UserDefaults.standard.set(true, forKey: "shouldStartReading")
+        UserDefaults.standard.synchronize()
+        readerDelegate.hardStop()
+        complete()
+    }
+    
     func finish() {
         readerDelegate.hardStop()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { 
             self.explanationLabel.text = "That's it! Thanks for making it this far. This view will reload and you will be good to go."
             self.readExplanationLabel {
-                UserAppState.hasSeenOnboarding = true
-                let navId: String = "MainViewControllerNavigationController"
-                let storyboard: String = "Main"
-                
-                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)
+                self.complete()
             }
         }
+    }
+    
+    func complete() {
+        UserAppState.hasSeenOnboarding = true
+
+        let navId: String = "MainViewControllerNavigationController"
+        let storyboard: String = "Main"
+        
+        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)
     }
 }
 
@@ -88,18 +100,19 @@ extension PostNavigationDemoViewController: RedditPostListingNavigationDelegate 
     }
     
     func displayDetailVC() {
-        let detailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
-        detailViewController.viewModel = OnboardingDetailViewModel(
-            detailPostItem: DetailPost(displayableFeedItem: contentVC.viewModel.collectionSource.getCurrentPost()),
-            displayDelegate: detailViewController,
-            onboardingDetailLifecyleDelegate: self,
-            onboardingCommentLifecycleDelegate: self
-        )
-        
-        self.explanationLabel.text = detailExplanationText
-        self.explanationLabel.sizeToFit()
-        
-        contentVC.navigationController?.pushViewController(detailViewController, animated: true)
+        if let currentPost = contentVC.viewModel.collectionSource.getCurrentPost() {
+            let detailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+            detailViewController.viewModel = OnboardingDetailViewModel(
+                detailPostItem: DetailPost(displayableFeedItem: currentPost),
+                displayDelegate: detailViewController,
+                onboardingDetailLifecyleDelegate: self,
+                onboardingCommentLifecycleDelegate: self
+            )
+            self.explanationLabel.text = detailExplanationText
+            self.explanationLabel.sizeToFit()
+            
+            contentVC.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }
 

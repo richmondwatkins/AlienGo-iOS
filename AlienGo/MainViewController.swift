@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
         settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
         settingsView.actionDelegate = viewModel
         
-        settingsView.layer.zPosition = CGFloat.greatestFiniteMagnitude
+        settingsView.layer.zPosition = 100
         
         view.addSubview(settingsView)
         
@@ -70,8 +70,10 @@ class MainViewController: UIViewController {
     }
     
     func setupDetailVC() {
-        self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
-        detailViewController.viewModel = viewModel.getDetailViewModel(detailViewController: detailViewController)        
+        if let detaiViewModel = viewModel.getDetailViewModel(detailViewController: detailViewController) {
+            self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+            detailViewController.viewModel = detaiViewModel
+        }
     }
     
     private func setUpNavAnimations() {

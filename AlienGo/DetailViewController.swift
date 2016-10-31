@@ -10,11 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    var viewModel: DetailViewModel! {
-        didSet {
-             viewModel.getInfo()
-        }
-    }
+    var viewModel: DetailViewModel!
     var childVC: UIViewController?
     
     override func viewDidLoad() {

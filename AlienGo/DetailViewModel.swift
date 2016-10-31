@@ -33,6 +33,7 @@ class MainDetailViewModel: DetailViewModel {
     var disappearFromSettings: Bool = false
     private var readableDelegate: ReadableDelegate = ReadHandler.shared
     private var shouldAcceptLongPress: Bool = true
+    var didDisplay: Bool = false
     
     func set(readableDelegate: ReadableDelegate) {
         self.readableDelegate = readableDelegate
@@ -45,6 +46,8 @@ class MainDetailViewModel: DetailViewModel {
         
         NotificationCenter.default.addObserver(self, selector: #selector(settingsWillShow), name: nSettingsWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(settingsWillHide), name: nSettingsWillHide, object: nil)
+        
+        getInfo()
     }
     
     func viewDidDisappear() {
@@ -67,15 +70,21 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     func getInfo() {
+        guard !didDisplay else {
+            didDisplay = true
+            return
+        }
+        
         self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
         let nothingToRead: (@escaping () -> Void) -> Void = {  call in
             self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Image was found without a description. Long press for comments"), delegate: nil, completion: {
-                call()
             })
+            
+            call()
         }
         
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
+//        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
             switch self.detailPostItem.content.contentType {
             case .image, .gif, .imageGallery:
                 
@@ -92,13 +101,9 @@ class MainDetailViewModel: DetailViewModel {
             case .titleOnly, .selfPostTitleOnly:
                 let vc = self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
                 self.displayDelegate.display(childVC: vc)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                    self.showCommentVC()
-                })
                 break
             }
-        })
+//        })
     }
     
     @objc private func settingsWillShow() {
@@ -119,18 +124,22 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     private func getTextInfo() {
-        if let textPost = self.provider.get() {
-            
-            if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
-                self.readableDelegate.readItem(readableItem:  ReaderContainer(text: "Could not parse text. Long press for comments"), delegate: nil, completion: nil)
-            } else {
-                let vc = self.buildTextVC(title: textPost.title, text: textPost.content)
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let textPost = self.provider.get() {
                 
-                self.readableDelegate.readItem(readableItem: ReaderContainer(text: textPost.content), delegate: vc, completion: {
-                    if StateProvider.isAuto {
-                        self.showCommentVC()
-                    }
-                })
+                if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
+                    self.readableDelegate.readItem(readableItem:  ReaderContainer(text: "Could not parse text. Long press for comments"), delegate: nil, completion: nil)
+                } else {
+                    let vc = self.buildTextVC(title: textPost.title, text: textPost.content)
+                    
+                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: textPost.content), delegate: vc, completion: {
+                        if StateProvider.isAuto {
+                            self.showCommentVC()
+                        }
+                    })
+                    
+                    self.displayDelegate.display(childVC: vc)
+                }
             }
         }
     }
@@ -157,8 +166,6 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     private func getImageGifInfo() {
-        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
-        
         let detailImageGifVc = vc(storyboardId: String(describing: DetailImageGifViewController.self)) as! DetailImageGifViewController
         
         if let detailImageGifItem = DetailImageGifContainer(title: detailPostItem.title, imageGifUrl: detailPostItem.content.url, showInWebView: detailPostItem.content.shouldBeShownInWebView()) {

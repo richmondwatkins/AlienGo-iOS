@@ -31,6 +31,8 @@ class OnboardingDetailViewModel: DetailViewModel {
         self.displayDelegate = displayDelegate
         self.onboardingDetailLifecyleDelegate = onboardingDetailLifecyleDelegate
         self.onboardingCommentLifecycleDelegate = onboardingCommentLifecycleDelegate
+        
+        getInfo()
     }
     
     func showComments(press: UILongPressGestureRecognizer) {

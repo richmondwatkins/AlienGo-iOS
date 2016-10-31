@@ -92,8 +92,12 @@ class MainCollectionViewSource: NSObject {
         self.selectionDelegate = selectionDelegate
     }
 
-    func getCurrentPost() -> DisplayableFeedItem {
-        return data[currentPage]
+    func getCurrentPost() -> DisplayableFeedItem? {
+        if currentPage < data.count {
+            return data[currentPage]
+        }
+        
+        return nil
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -115,7 +119,9 @@ class MainCollectionViewSource: NSObject {
     }
     
     func callDelegates(previousPage: Int) {
-        selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: getCurrentPost()), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage), cell:  self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as! MainCollectionViewCell)
+        if let currentPost = getCurrentPost() {
+            selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: currentPost), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage), cell:  self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as! MainCollectionViewCell)
+        }
     }
 }
 

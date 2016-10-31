@@ -256,7 +256,6 @@
                                 <state key="normal" title="Close"/>
                                 <connections>
                                     <action selector="close:" destination="zLP-hb-zdK" eventType="touchUpInside" id="da0-Sw-Bxv"/>
-                                    <action selector="selectHelp:" destination="zLP-hb-zdK" eventType="touchUpInside" id="FRh-ED-PxC"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B51-H2-Uje">
