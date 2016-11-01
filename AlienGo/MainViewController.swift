@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
     private var disapearFromDetailNav: Bool = false
     private var settingsView: SettingsView = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil)!.first as! SettingsView
     private var disappearFromInstructionsVC: Bool = false
+    private var viewDidDisappearFromPush: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,8 @@ class MainViewController: UIViewController {
             viewModel.readFirst()
             disappearFromInstructionsVC = false
         }
+        
+        viewDidDisappearFromPush = false
     }
     
     func reReadCurrent(press: UILongPressGestureRecognizer) {
@@ -64,14 +67,18 @@ class MainViewController: UIViewController {
     }
     
     func didSingleTap() {
+        viewModel.didSelect()
         setupDetailVC()
         disapearFromDetailNav = true
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        if !viewDidDisappearFromPush {
+            viewDidDisappearFromPush = true
+            self.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
     
     func setupDetailVC() {
+        self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
         if let detaiViewModel = viewModel.getDetailViewModel(detailViewController: detailViewController) {
-            self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
             detailViewController.viewModel = detaiViewModel
         }
     }

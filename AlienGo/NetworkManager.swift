@@ -17,7 +17,7 @@ class NetworkManager: NSObject {
     static let shared: NetworkManager = NetworkManager()
     
     var urlDomainPrefix: String {
-        if let _ = AuthInfo.accessToken {
+        if let _ = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
             return "https://oauth.reddit.com"
         }
         
@@ -108,7 +108,7 @@ class NetworkManager: NSObject {
     }
     
     private func setReadditHeaders(request: NSMutableURLRequest) -> NSMutableURLRequest {
-        if let accessToken = AuthInfo.accessToken {
+        if let accessToken = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
             request.setValue("bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }
 
@@ -117,8 +117,8 @@ class NetworkManager: NSObject {
     
     private func sendRequest(request: URLRequest, callback: NetworkCallback?) {
         Alamofire.request(request).responseJSON { (response) in
-            if let result = response.result.value as AnyObject?, response.result.isSuccess {
-                if let errorCode = result["error"] as? Int, errorCode == 401 {
+            if let result = response.result.value as AnyObject? {
+                if let errorCode = result["error"] as? Int, (errorCode == 401 || errorCode == 403) {
                     self.queuedRequests.append((request: request, callback: callback))
                     if let refreshToken = AuthInfo.refreshToken {
                         self.getRedditAccessToken(refreshToken: refreshToken, callback: nil)

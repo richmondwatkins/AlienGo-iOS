@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
     
     func pop() {
         viewModel.navBack()
-        let _ = self.navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewWillLayoutSubviews() {

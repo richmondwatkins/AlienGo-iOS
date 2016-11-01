@@ -78,19 +78,21 @@ class MainDetailViewModel: DetailViewModel {
         self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
         let nothingToRead: (@escaping () -> Void) -> Void = {  call in
-            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Image was found without a description. Long press for comments"), delegate: nil, completion: {
+            let descriptionEnd = StateProvider.isAuto ? "Will display comments" : "Long press for comments"
+            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Image was found without a description. \(descriptionEnd)"), delegate: nil, completion: {
+                if StateProvider.isAuto {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                        self.showCommentVC()
+                    })
+                }
             })
-            
-            call()
         }
         
 //        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
             switch self.detailPostItem.content.contentType {
             case .image, .gif, .imageGallery:
-                
-                nothingToRead({
-                    self.getImageGifInfo()
-                })
+                self.getImageGifInfo()
+                nothingToRead({})
                 break
             case .link, .selfPost:
                 self.getTextInfo()
@@ -170,13 +172,7 @@ class MainDetailViewModel: DetailViewModel {
         
         if let detailImageGifItem = DetailImageGifContainer(title: detailPostItem.title, imageGifUrl: detailPostItem.content.url, showInWebView: detailPostItem.content.shouldBeShownInWebView()) {
             detailImageGifVc.imageGifPost = detailImageGifItem
-            
-            if StateProvider.isAuto {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: { 
-                    self.showCommentVC()
-                })
-            }
-            
+   
             self.displayDelegate.display(childVC: detailImageGifVc)
         }
     }

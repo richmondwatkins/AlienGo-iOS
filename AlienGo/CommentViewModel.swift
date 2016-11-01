@@ -51,20 +51,33 @@ class MainCommentViewModel: CommentViewModel {
     }
     
     func getComments() {
+        var readingFinished = false
+        var commentsLoaded = false
         
-        readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading comments"), delegate: nil, completion: nil)
+        let displayIfNeeded = {
+            if readingFinished && commentsLoaded {
+                
+                self.displayDelegate.display(comments: self.linearComments)
+                
+                if let first = self.linearComments.first {
+                    self.read(comment: first, index: 0)
+                }
+            }
+        }
+        readableDelegate.hardStop()
+        readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: {
+            readingFinished = true
+            displayIfNeeded()
+        })
         
         DispatchQueue.global(qos: .userInitiated).async {
             let response = self.provider.get()
-        
+            
             self.orderedComments = response.orderedComments
             self.linearComments = response.linearComments
             
-            self.displayDelegate.display(comments: response.linearComments)
-            
-            if let first = response.linearComments.first {
-                self.read(comment: first, index: 0)
-            }
+            commentsLoaded = true
+            displayIfNeeded()
         }
     }
     

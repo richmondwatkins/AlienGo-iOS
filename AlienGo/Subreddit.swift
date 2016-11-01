@@ -18,14 +18,14 @@ struct Subreddit: Equatable {
     
     var urlPath: String {
         if name == "front" {
-            if let _ = AuthInfo.accessToken {
+            if let _ = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
                 return "/"
             }
             
             return "/.json"
         }
         
-        if let _ = AuthInfo.accessToken {
+        if let _ = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
             return "/r/\(name)"
         }
         

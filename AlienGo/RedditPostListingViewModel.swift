@@ -67,6 +67,10 @@ class RedditPostListingViewModel: NSObject {
             self.displayDelegate.displayRedditPosts(posts: self.postProvider.getPostsFor(subreddit: subreddit))
         }
     }
+    
+    func didSelect() {
+        readHandler.hardStop()
+    }
 
     func getDetailViewModel(detailViewController: DetailViewController) -> DetailViewModel? {
         if let currentPost = collectionSource.getCurrentPost() {
