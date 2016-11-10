@@ -29,20 +29,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        let onTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onSelected))
-//        onTap.numberOfTapsRequired = 1
-//        
-//        autoOnView.addGestureRecognizer(onTap)
-//        
-//        let offTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(offSelected))
-//        offTap.numberOfTapsRequired = 1
-//        
-//        autoOffView.addGestureRecognizer(offTap)
-//        
-//        if StateProvider.isAuto {
-//           onSelected()
-//        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -15,7 +15,7 @@ protocol OnboardingDetailLifecycle {
 }
 
 class OnboardingDetailViewModel: DetailViewModel {
-    var displayDelegate: DetailViewModelDelegate
+    weak var displayDelegate: DetailViewModelDelegate?
     var detailPostItem: DetailPostItem
     var onboardingDetailLifecyleDelegate: OnboardingDetailLifecycle
     var onboardingCommentLifecycleDelegate: OnboardingCommentLifecycle
@@ -106,6 +106,6 @@ class OnboardingDetailViewModel: DetailViewModel {
             onboardingDelegate: onboardingCommentLifecycleDelegate
         )
         
-        displayDelegate.present(vc: commentVC)
+        displayDelegate?.present(vc: commentVC)
     }
 }

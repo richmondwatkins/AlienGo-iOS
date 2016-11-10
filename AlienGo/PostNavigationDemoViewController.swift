@@ -133,7 +133,7 @@ extension PostNavigationDemoViewController: OnboardingDetailLifecycle {
 extension PostNavigationDemoViewController: OnboardingCommentLifecycle {
    
     var firstCommentGestureExplanationText: String {
-        return "Swipe down to go to the next comment on the same level"
+        return "Swipe up to go to the next comment on the same level"
     }
     
     var postSiblingGestureExplanationText: String {

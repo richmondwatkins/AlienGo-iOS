@@ -20,9 +20,6 @@ class MainViewController: UIViewController {
             viewModel.navigationDelegate = self
         }
     }
-    fileprivate lazy var swipeInteractionController = SwipeToShowInteractionController()
-    fileprivate var swipeAnimationController: SwipeToShowAnimationController!
-    fileprivate var detailViewController: DetailViewController!
     private var disapearFromDetailNav: Bool = false
     private var settingsView: SettingsView = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil)!.first as! SettingsView
     private var disappearFromInstructionsVC: Bool = false
@@ -31,7 +28,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let settingsWidthHeight: CGFloat = 60
+        let settingsWidthHeight: CGFloat = 50
         
         settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
         settingsView.actionDelegate = viewModel
@@ -68,25 +65,20 @@ class MainViewController: UIViewController {
     
     func didSingleTap() {
         viewModel.didSelect()
-        setupDetailVC()
         disapearFromDetailNav = true
+        
         if !viewDidDisappearFromPush {
             viewDidDisappearFromPush = true
-            self.navigationController?.pushViewController(detailViewController, animated: true)
+            let detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+            if let detaiViewModel = viewModel.getDetailViewModel(detailViewController: detailViewController) {
+                detailViewController.viewModel = detaiViewModel
+                self.navigationController?.pushViewController(detailViewController, animated: true)
+            }
         }
     }
     
     func setupDetailVC() {
-        self.detailViewController = storyboard!.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
-        if let detaiViewModel = viewModel.getDetailViewModel(detailViewController: detailViewController) {
-            detailViewController.viewModel = detaiViewModel
-        }
-    }
-    
-    private func setUpNavAnimations() {
-        swipeAnimationController = SwipeToShowAnimationController(percentDrivenController: self.swipeInteractionController)
-        
-        setupDetailVC()        
+       
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -60,6 +60,7 @@
 		5DC1A6CA1DC04DD100B74FFF /* MainFeedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */; };
 		5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */; };
 		5DC1A6CE1DC1808700B74FFF /* OnboardingCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */; };
+		5DCB42351DCAA21F00B392AC /* EllipsisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCB42341DCAA21F00B392AC /* EllipsisView.swift */; };
 		5DCCEE7F1DC67907008EADA2 /* SettingAutoPlayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */; };
 		5DCCEE831DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */; };
 		5DCCEE841DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */; };
@@ -167,6 +168,7 @@
 		5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFeedDemoViewController.swift; sourceTree = "<group>"; };
 		5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingDetailViewModel.swift; sourceTree = "<group>"; };
 		5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCommentViewModel.swift; sourceTree = "<group>"; };
+		5DCB42341DCAA21F00B392AC /* EllipsisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipsisView.swift; sourceTree = "<group>"; };
 		5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAutoPlayItem.swift; sourceTree = "<group>"; };
 		5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoPlaySettingTableViewCell.swift; sourceTree = "<group>"; };
 		5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoPlaySettingTableViewCell.xib; sourceTree = "<group>"; };
@@ -362,6 +364,14 @@
 			name = DetailVC;
 			sourceTree = "<group>";
 		};
+		5DCB42331DCAA1ED00B392AC /* Ellipsis */ = {
+			isa = PBXGroup;
+			children = (
+				5DCB42341DCAA21F00B392AC /* EllipsisView.swift */,
+			);
+			name = Ellipsis;
+			sourceTree = "<group>";
+		};
 		5DCCEE801DC67925008EADA2 /* AutoPlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +407,7 @@
 		5DD1BA621DA432D40044BD0C /* AlienGo */ = {
 			isa = PBXGroup;
 			children = (
+				5DCB42331DCAA1ED00B392AC /* Ellipsis */,
 				5D3A065D1DA611B4001C8B7C /* RAYoutubeWebView.swift */,
 				5DA74A181DA522CE001B3B79 /* ViewControllers */,
 				5DA74A161DA482BC001B3B79 /* ReadHandler.swift */,
@@ -848,6 +859,7 @@
 				5D3A06651DA6CAA6001C8B7C /* CommentViewController.swift in Sources */,
 				5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */,
 				5DA74A1A1DA522F3001B3B79 /* DetailViewController.swift in Sources */,
+				5DCB42351DCAA21F00B392AC /* EllipsisView.swift in Sources */,
 				5D3A06691DA6CAC1001C8B7C /* CommentRepository.swift in Sources */,
 				5DDAECB81DBBC5BE005201CF /* SoundSetupViewController.swift in Sources */,
 				5DF830D81DB3FA4D00CD270C /* SettingsTableSource.swift in Sources */,
@@ -1077,6 +1089,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1096,6 +1109,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

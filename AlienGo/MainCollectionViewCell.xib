@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainCollectionViewCell" id="gTV-IL-0wX" customClass="MainCollectionViewCell" customModule="AlienGo" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainCollectionViewCell" id="gTV-IL-0wX" customClass="MainCollectionViewCell" customModule="Alien_Reader" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="431" height="199"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -37,17 +37,26 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZwU-6q-ffh" customClass="EllipsisView" customModule="Alien_Reader" customModuleProvider="target">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="56" id="5P2-Uq-EbH"/>
+                            <constraint firstAttribute="height" constant="32" id="wmp-cC-udO"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="nIV-RI-zqB" secondAttribute="bottom" constant="8" id="H0g-e8-rsd"/>
                 <constraint firstItem="nIV-RI-zqB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="TrS-6h-32I"/>
                 <constraint firstItem="FFy-u1-crK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Tvp-oh-2jq"/>
+                <constraint firstItem="ZwU-6q-ffh" firstAttribute="leading" secondItem="nIV-RI-zqB" secondAttribute="leading" id="Y0h-eL-IVx"/>
                 <constraint firstItem="hL2-IP-A7h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="aCT-pP-aFh"/>
                 <constraint firstAttribute="bottom" secondItem="4RQ-5Z-PJn" secondAttribute="bottom" id="bGB-wo-j9Y"/>
                 <constraint firstItem="FFy-u1-crK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bvj-JX-2we"/>
                 <constraint firstAttribute="trailing" secondItem="PMu-gc-dUd" secondAttribute="trailing" constant="8" id="cs5-7B-88L"/>
                 <constraint firstAttribute="trailing" secondItem="FFy-u1-crK" secondAttribute="trailing" id="dQo-4q-m4s"/>
+                <constraint firstItem="ZwU-6q-ffh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="fNh-W3-aXO"/>
                 <constraint firstAttribute="bottom" secondItem="FFy-u1-crK" secondAttribute="bottom" id="fbL-Nc-nfp"/>
                 <constraint firstAttribute="bottom" secondItem="PMu-gc-dUd" secondAttribute="bottom" constant="8" id="fvG-KS-mCV"/>
                 <constraint firstItem="4RQ-5Z-PJn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gAz-2Y-HDm"/>
@@ -59,6 +68,7 @@
             </constraints>
             <size key="customSize" width="431" height="199"/>
             <connections>
+                <outlet property="ellipsisView" destination="ZwU-6q-ffh" id="8dU-GO-OHe"/>
                 <outlet property="imageView" destination="FFy-u1-crK" id="dhC-5G-RmT"/>
                 <outlet property="subredditLabel" destination="nIV-RI-zqB" id="9Li-Po-7Cb"/>
                 <outlet property="titleLabel" destination="hL2-IP-A7h" id="AWJ-VT-s8M"/>

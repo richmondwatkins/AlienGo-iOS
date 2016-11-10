@@ -7,14 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SettingsView" customModule="AlienGo" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SettingsView" customModule="Alien_Reader" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyD-AB-v6P" userLabel="ContainerView">
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWJ-D1-stB">
-                            <state key="normal" backgroundImage="settings"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWJ-D1-stB">
+                            <state key="normal" image="settings"/>
                             <connections>
                                 <action selector="didSelectSettings:" destination="iN0-l3-epB" eventType="touchUpInside" id="pd6-o1-zOy"/>
                             </connections>
@@ -31,10 +31,10 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="tyD-AB-v6P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="CVN-sT-7Lg"/>
-                <constraint firstItem="tyD-AB-v6P" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="WDc-aY-dJ5"/>
-                <constraint firstAttribute="bottom" secondItem="tyD-AB-v6P" secondAttribute="bottom" constant="8" id="rzQ-Lv-J3Q"/>
-                <constraint firstAttribute="trailing" secondItem="tyD-AB-v6P" secondAttribute="trailing" constant="8" id="u0a-KI-dcJ"/>
+                <constraint firstItem="tyD-AB-v6P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CVN-sT-7Lg"/>
+                <constraint firstItem="tyD-AB-v6P" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="WDc-aY-dJ5"/>
+                <constraint firstAttribute="bottom" secondItem="tyD-AB-v6P" secondAttribute="bottom" id="rzQ-Lv-J3Q"/>
+                <constraint firstAttribute="trailing" secondItem="tyD-AB-v6P" secondAttribute="trailing" id="u0a-KI-dcJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

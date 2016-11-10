@@ -42,6 +42,8 @@ class ReadHandler: NSObject {
     }
     var completion: ReaderCompletion
     var startNew: (() -> Void)?
+    var canceled: Bool = false
+    var readingDispatchQueue = DispatchQueue(label: "reading queue")
     
     override init() {
         super.init()
@@ -69,37 +71,41 @@ extension ReadHandler: ReadableDelegate {
 
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
     
-        startNew = {
-            self.state = .reading
-
-            self.synthesizer.delegate = nil
-            
-            let words = readableItem.text.words()
-            var originalText = readableItem.text
-            var urls: [String] = []
-            
-            words.forEach { (word) in
-                if word.isURL() {
-                    urls.append(word)
+        readingDispatchQueue.async { [weak self] in
+            self?.startNew = {
+                self?.readingDispatchQueue.async { [weak self] in
+                    self?.state = .reading
+                    
+                    self?.synthesizer.delegate = nil
+                    
+                    let words = readableItem.text.words()
+                    var originalText = readableItem.text
+                    var urls: [String] = []
+                    
+                    words.forEach { (word) in
+                        if word.isURL() {
+                            urls.append(word)
+                        }
+                    }
+                    
+                    urls.forEach { (url) in
+                        originalText = originalText.replacingOccurrences(of: url, with: " skipping un readable u r l ")
+                    }
+                    
+                    self?.queue[originalText] = (completion, delegate)
+                    
+                    self?.readingCallbackDelegate = delegate
+                    self?.completion = completion
+                    self?.readItem(readableItem: ReaderContainer(text: originalText))
+                    self?.startNew = nil
                 }
             }
             
-            urls.forEach { (url) in
-                originalText = originalText.replacingOccurrences(of: url, with: " skipping un readable u r l ")
+            if self!.queue.isEmpty || !self!.synthesizer.isSpeaking {
+                self?.startNew?()
+            } else {
+                self?.hardStop()
             }
-            
-            self.queue[originalText] = (completion, delegate)
-
-            self.readingCallbackDelegate = delegate
-            self.completion = completion
-            self.readItem(readableItem: ReaderContainer(text: originalText))
-            self.startNew = nil
-        }
-                
-        hardStop()
-        
-        if queue.isEmpty || !synthesizer.isSpeaking {
-            startNew?()
         }
     }
     
@@ -127,6 +133,10 @@ extension ReadHandler: ReadableDelegate {
     }
     
     func hardStop() {
+        if synthesizer.isSpeaking {
+            canceled = true
+        }
+        
         readingCallbackDelegate = nil
         currentRead = nil
         synthesizer.stopSpeaking(at: .immediate)
@@ -136,21 +146,33 @@ extension ReadHandler: ReadableDelegate {
 extension ReadHandler: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        readingCallbackDelegate = nil
-        if let completion = queue[utterance.speechString]?.completion {
-            completion()
-            queue.removeValue(forKey: utterance.speechString)
+        readingDispatchQueue.async { [unowned self] in
+            self.readingCallbackDelegate = nil
+            if let completion = self.queue[utterance.speechString]?.completion, !self.canceled {
+                completion()
+                self.queue.removeValue(forKey: utterance.speechString)
+            }
+            
+            self.canceled = false
+            self.state = .finished
+            print(self.startNew)
+            self.startNew?()
         }
-        
-        state = .finished
-        startNew?()
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        readingCallbackDelegate = nil
-        queue.removeValue(forKey: utterance.speechString)
-        state = .stopped
-        startNew?()
+        readingDispatchQueue.async { [unowned self] in
+            self.readingCallbackDelegate = nil
+            if let completion = self.queue[utterance.speechString]?.completion, !self.canceled {
+                completion()
+                self.queue.removeValue(forKey: utterance.speechString)
+            }
+            
+            self.canceled = false
+            self.state = .finished
+            print(self.startNew)
+            self.startNew?()
+        }
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {

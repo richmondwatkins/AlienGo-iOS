@@ -27,7 +27,7 @@ class OnboardingCommentViewModel: CommentViewModel {
 
     var detailPostItem: DetailPostItem
     var provider: CommentProvider
-    var displayDelegate: CommentDisplayDelegate
+    weak var displayDelegate: CommentDisplayDelegate?
     var readableDelegate: ReadableDelegate = ReadHandler.shared
     var orderedComments: [Comment] = []
     var linearComments: [Comment] = []
@@ -50,7 +50,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 self.orderedComments = response.orderedComments
                 self.linearComments = response.linearComments
                 
-                self.displayDelegate.display(comments: response.linearComments)
+                self.displayDelegate?.display(comments: response.linearComments)
                 
                 if let first = response.linearComments.first {
                     self.read(comment: first, index: 0)
@@ -117,7 +117,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     private func goToComment(comment: Comment, prefix: String = "Comment by") {
         if let liniearIndex = linearComments.index(of: comment) {
             
-            displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
+            displayDelegate?.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
             
             read(comment: comment, index: liniearIndex, prefix: prefix)
         }
@@ -125,7 +125,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     
     func dismiss() {
         readableDelegate.hardStop()
-        displayDelegate.dismiss()
+        displayDelegate?.dismiss()
         onboardingDelegate.didDimissComments()
     }
     
@@ -136,7 +136,7 @@ class OnboardingCommentViewModel: CommentViewModel {
         self.commentReadCount += 1
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            if let cell = self.displayDelegate.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
+            if let cell = self.displayDelegate?.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
                 self.readableDelegate.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
                     self.readableDelegate.readItem(readableItem: comment, delegate: cell, completion: {
                 

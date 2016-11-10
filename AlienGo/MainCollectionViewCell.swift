@@ -15,6 +15,11 @@ class MainCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var subredditLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var ellipsisView: EllipsisView! {
+        didSet {
+            ellipsisView.selectionDelegate = self
+        }
+    }
     var post: DisplayableFeedItem!
     
     func configure(post: DisplayableFeedItem) {
@@ -42,6 +47,29 @@ class MainCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
         
         configure(post: post)
+    }
+}
+
+extension MainCollectionViewCell: EllipsisSelectionDelegate {
+    
+    func didSelect() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "Report", style: .destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            NetworkManager.shared.reportPost(postId: self.post.postId)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        
+        })
+
+        optionMenu.addAction(reportAction)
+        optionMenu.addAction(cancelAction)
+        
+        UIApplication.shared.keyWindow?.rootViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: optionMenu, animated: true, completion: nil)
     }
 }
 

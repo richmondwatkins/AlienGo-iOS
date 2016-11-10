@@ -10,11 +10,13 @@ import UIKit
 
 struct RedditReadablePost: Readable {
 
+    var postId: String
     var text: String
     var subredditName: String?
     var username: String?
     
     init(displayablePost: DisplayableFeedItem) {
+        self.postId = displayablePost.postId
         self.text = displayablePost.postTitle
         self.username = displayablePost.postedByUsername
         self.subredditName = displayablePost.postSubredditName

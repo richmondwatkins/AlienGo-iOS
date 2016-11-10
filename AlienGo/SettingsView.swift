@@ -22,7 +22,20 @@ class SettingsView: UIView {
     var settingsVC: UINavigationController?
     var actionDelegate: ActionDelegate!
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let touch: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showSettingsVC))
+        touch.numberOfTapsRequired = 1
+        addGestureRecognizer(touch)
+    }
+    
     @IBAction func didSelectSettings(_ sender: UIButton) {
+        showSettingsVC()
+    }
+    
+    func showSettingsVC() {
         NotificationCenter.default.post(name: nSettingsWillShow, object: nil)
         
         settingsVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsNavigationController") as? UINavigationController
@@ -45,19 +58,5 @@ class SettingsView: UIView {
         containerView.layer.shadowOffset = CGSize(width: 1, height: 1)
         containerView.layer.shadowOpacity = 0.5
         containerView.layer.shadowPath = bezPath.cgPath
-    }
-}
-
-extension UIViewController {
-    func presentViewControllerFromVisibleViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
-        if let navigationController = self as? UINavigationController {
-            navigationController.topViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: viewControllerToPresent, animated: flag, completion: completion)
-        } else if let tabBarController = self as? UITabBarController {
-            tabBarController.selectedViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: viewControllerToPresent, animated: flag, completion: completion)
-        } else if let presentedViewController = presentedViewController {
-            presentedViewController.presentViewControllerFromVisibleViewController(viewControllerToPresent: viewControllerToPresent, animated: flag, completion: completion)
-        } else {
-            present(viewControllerToPresent, animated: flag, completion: completion)
-        }
     }
 }

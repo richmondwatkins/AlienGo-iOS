@@ -64,7 +64,8 @@ class RedditPostListingViewModel: NSObject {
         displayDelegate.animateRefreshControl()
         self.currentSubreddit = subreddit
         DispatchQueue.global(qos: .userInitiated).async {
-            self.displayDelegate.displayRedditPosts(posts: self.postProvider.getPostsFor(subreddit: subreddit))
+            let posts = self.postProvider.getPostsFor(subreddit: subreddit)
+            self.displayDelegate.displayRedditPosts(posts: posts)
         }
     }
     
@@ -85,6 +86,8 @@ class RedditPostListingViewModel: NSObject {
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell) {
         if UserDefaults.standard.bool(forKey: "shouldStartReading") {
+            self.readHandler.hardStop()
+            
             var prefixText = ""
             
             switch scrollDirection {
@@ -100,9 +103,10 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
                 prefixText += " in \(subbreddit)"
             }
             
+            let readingId = post.postId
             readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
                 self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
-                    if StateProvider.isAuto {
+                    if StateProvider.isAuto && readingId == self.collectionSource.getCurrentPost()?.postId {
                         self.navigationDelegate.displayDetailVC()
                     }
                     
@@ -125,7 +129,7 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     }
     
     func refresh() {
-        
+        getPostsFor(subreddit: currentSubreddit)
     }
     
     func loadMore() {
@@ -143,10 +147,12 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
 extension RedditPostListingViewModel: ActionDelegate {
     
     func showFrontPage() {
+        readHandler.hardStop()
         getPostsFor(subreddit: Subreddit(name: "front"))
     }
     
     func showAll() {
+        readHandler.hardStop()
         getPostsFor(subreddit: Subreddit(name: "all"))
     }
 }

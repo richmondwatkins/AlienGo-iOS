@@ -40,6 +40,20 @@ extension String {
     }
 }
 
+extension UIViewController {
+    func presentViewControllerFromVisibleViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        if let navigationController = self as? UINavigationController {
+            navigationController.topViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: viewControllerToPresent, animated: flag, completion: completion)
+        } else if let tabBarController = self as? UITabBarController {
+            tabBarController.selectedViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: viewControllerToPresent, animated: flag, completion: completion)
+        } else if let presentedViewController = presentedViewController {
+            presentedViewController.presentViewControllerFromVisibleViewController(viewControllerToPresent: viewControllerToPresent, animated: flag, completion: completion)
+        } else {
+            present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+    }
+}
+
 /**
  MissingHashMarkAsPrefix:   "Invalid RGB string, missing '#' as prefix"
  UnableToScanHexValue:      "Scan hex error"

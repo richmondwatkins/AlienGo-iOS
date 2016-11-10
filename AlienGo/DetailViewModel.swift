@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DetailViewModelDelegate {
+protocol DetailViewModelDelegate: class {
     func display(childVC: UIViewController)
     func present(vc: UIViewController)
 }
@@ -17,7 +17,7 @@ protocol DetailViewModel {
     var disappearFromCommentPopover: Bool { get set }
     var disappearFromSettings: Bool { get set }
     var detailPostItem: DetailPostItem { get }
-    var displayDelegate: DetailViewModelDelegate { get }
+    weak var displayDelegate: DetailViewModelDelegate? { get }
     func showComments(press: UILongPressGestureRecognizer)
     func viewDidDisappear()
     func navBack()
@@ -27,7 +27,7 @@ protocol DetailViewModel {
 class MainDetailViewModel: DetailViewModel {
 
     let detailPostItem: DetailPostItem
-    let displayDelegate: DetailViewModelDelegate
+    weak var displayDelegate: DetailViewModelDelegate?
     var provider: RedditDetailPostProvider!
     var disappearFromCommentPopover: Bool = false
     var disappearFromSettings: Bool = false
@@ -101,8 +101,7 @@ class MainDetailViewModel: DetailViewModel {
                 self.showVideoVC()
                 break
             case .titleOnly, .selfPostTitleOnly:
-                let vc = self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
-                self.displayDelegate.display(childVC: vc)
+                self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
                 break
             }
 //        })
@@ -122,7 +121,7 @@ class MainDetailViewModel: DetailViewModel {
         let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController
         commentVC.viewModel = MainCommentViewModel(detailPostItem: detailPostItem, displayDelegate: commentVC)
         
-        displayDelegate.present(vc: commentVC)
+        displayDelegate?.present(vc: commentVC)
     }
     
     private func getTextInfo() {
@@ -132,27 +131,23 @@ class MainDetailViewModel: DetailViewModel {
                 if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
                     self.readableDelegate.readItem(readableItem:  ReaderContainer(text: "Could not parse text. Long press for comments"), delegate: nil, completion: nil)
                 } else {
-                    let vc = self.buildTextVC(title: textPost.title, text: textPost.content)
-                    
-                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: textPost.content), delegate: vc, completion: {
-                        if StateProvider.isAuto {
-                            self.showCommentVC()
-                        }
-                    })
-                    
-                    self.displayDelegate.display(childVC: vc)
+                    self.buildTextVC(title: textPost.title, text: textPost.content)
                 }
             }
         }
     }
     
-    private func buildTextVC(title: String, text: String) -> DetailTextViewController {
+    private func buildTextVC(title: String, text: String) {
         let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
         detailTextVC.textPost = DetailTextContainer(title: title, content: text)
         
-        self.displayDelegate.display(childVC: detailTextVC)
+        self.readableDelegate.readItem(readableItem: ReaderContainer(text: text), delegate: detailTextVC, completion: {
+            if StateProvider.isAuto {
+                self.showCommentVC()
+            }
+        })
         
-        return detailTextVC
+        self.displayDelegate?.display(childVC: detailTextVC)
     }
     
     private func showVideoVC() {
@@ -163,7 +158,7 @@ class MainDetailViewModel: DetailViewModel {
         if let videoUrl = detailPostItem.content.url {
              detailVideoVC.videoDetailItem = DetailVideoItemContainer(title: detailPostItem.title, videoUrl: videoUrl)
             
-            self.displayDelegate.display(childVC: detailVideoVC)
+            self.displayDelegate?.display(childVC: detailVideoVC)
         }
     }
     
@@ -173,7 +168,7 @@ class MainDetailViewModel: DetailViewModel {
         if let detailImageGifItem = DetailImageGifContainer(title: detailPostItem.title, imageGifUrl: detailPostItem.content.url, showInWebView: detailPostItem.content.shouldBeShownInWebView()) {
             detailImageGifVc.imageGifPost = detailImageGifItem
    
-            self.displayDelegate.display(childVC: detailImageGifVc)
+            self.displayDelegate?.display(childVC: detailImageGifVc)
         }
     }
     

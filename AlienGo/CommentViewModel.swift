@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CommentDisplayDelegate {
+protocol CommentDisplayDelegate: class {
     func display(comments: [Comment])
     func dismiss()
     func scrollTo(indexPath: IndexPath)
@@ -18,7 +18,7 @@ protocol CommentDisplayDelegate {
 protocol CommentViewModel {
     var detailPostItem: DetailPostItem { get }
     var provider: CommentProvider { get }
-    var displayDelegate: CommentDisplayDelegate { get }
+    weak var displayDelegate: CommentDisplayDelegate? { get }
     var orderedComments: [Comment] { get }
     var linearComments: [Comment] { get }
     var readableDelegate: ReadableDelegate { get }
@@ -34,7 +34,7 @@ class MainCommentViewModel: CommentViewModel {
 
     let detailPostItem: DetailPostItem
     let provider: CommentProvider
-    let displayDelegate: CommentDisplayDelegate
+    weak var displayDelegate: CommentDisplayDelegate?
     var readableDelegate: ReadableDelegate = ReadHandler.shared
     private lazy var metaDetailReader: ReadableDelegate = ReadHandler.shared
     var orderedComments: [Comment] = []
@@ -51,23 +51,10 @@ class MainCommentViewModel: CommentViewModel {
     }
     
     func getComments() {
-        var readingFinished = false
-        var commentsLoaded = false
-        
-        let displayIfNeeded = {
-            if readingFinished && commentsLoaded {
-                
-                self.displayDelegate.display(comments: self.linearComments)
-                
-                if let first = self.linearComments.first {
-                    self.read(comment: first, index: 0)
-                }
-            }
-        }
+
         readableDelegate.hardStop()
         readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: {
-            readingFinished = true
-            displayIfNeeded()
+           //readingFinished = true
         })
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -76,8 +63,11 @@ class MainCommentViewModel: CommentViewModel {
             self.orderedComments = response.orderedComments
             self.linearComments = response.linearComments
             
-            commentsLoaded = true
-            displayIfNeeded()
+            self.displayDelegate?.display(comments: self.linearComments)
+            
+            if let first = self.linearComments.first {
+                self.read(comment: first, index: 0)
+            }
         }
     }
     
@@ -101,11 +91,11 @@ class MainCommentViewModel: CommentViewModel {
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
         if let readingComment = readingComment {
-            if gesture.direction == .down {
+            if gesture.direction == .up {
                goToNextSibling()
             } else if gesture.direction == .right {
                goToReply()
-            } else if gesture.direction == .up {
+            } else if gesture.direction == .down {
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
                 } else {
@@ -118,7 +108,7 @@ class MainCommentViewModel: CommentViewModel {
     func dismiss() {
         isDisplaying = false
         readableDelegate.hardStop()
-        displayDelegate.dismiss()
+        displayDelegate?.dismiss()
     }
     
     private func goToReply() {
@@ -148,7 +138,7 @@ class MainCommentViewModel: CommentViewModel {
     private func goToComment(comment: Comment, prefix: String = "Comment by") {
         if let liniearIndex = linearComments.index(of: comment) {
            
-            displayDelegate.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
+            displayDelegate?.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
             
             read(comment: comment, index: liniearIndex, prefix: prefix)
         }
@@ -163,12 +153,13 @@ class MainCommentViewModel: CommentViewModel {
         readableDelegate.hardStop()
         // hack for now
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            if let cell = self.displayDelegate.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
+            if let cell = self.displayDelegate?.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
                 self.readableDelegate.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
+                    self.readableDelegate.hardStop()
                     self.readableDelegate.readItem(readableItem: comment, delegate: cell, completion: { 
                         if StateProvider.isAuto && self.isDisplaying {
                             if self.readComments == 6 {
-                                self.displayDelegate.dismiss()
+                                self.displayDelegate?.dismiss()
                                 return
                             }
                             

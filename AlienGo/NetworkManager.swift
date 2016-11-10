@@ -78,6 +78,16 @@ class NetworkManager: NSObject {
         getAccessToken(paramaters: ["grant_type": "refresh_token", "refresh_token": refreshToken], callback: callback)
     }
     
+    func reportPost(postId: String) {
+        let url: URL = URL(string: "\(urlDomainPrefix)/api/report")!
+        var request = NSMutableURLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request = setReadditHeaders(request: request)
+        
+        sendRequest(request: request as URLRequest, callback: nil)
+    }
+    
     private func getAccessToken(paramaters: [String: String], callback: NetworkCallback?) {
         Alamofire.request("https://www.reddit.com/api/v1/access_token", method: .post, parameters: paramaters, encoding: URLEncoding.default).authenticate(user: clientId, password: "").responseJSON { (response) in
             if response.result.isSuccess, let value = response.result.value as AnyObject? {
