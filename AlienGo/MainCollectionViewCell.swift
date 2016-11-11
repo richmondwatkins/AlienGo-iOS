@@ -69,6 +69,9 @@ extension MainCollectionViewCell: EllipsisSelectionDelegate {
         optionMenu.addAction(reportAction)
         optionMenu.addAction(cancelAction)
         
+        let view = UIApplication.shared.keyWindow?.rootViewController?.view
+        optionMenu.popoverPresentationController?.sourceView = view
+
         UIApplication.shared.keyWindow?.rootViewController?.presentViewControllerFromVisibleViewController(viewControllerToPresent: optionMenu, animated: true, completion: nil)
     }
 }
