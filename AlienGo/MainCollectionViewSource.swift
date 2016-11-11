@@ -119,8 +119,8 @@ class MainCollectionViewSource: NSObject {
     }
     
     func callDelegates(previousPage: Int) {
-        if let currentPost = getCurrentPost() {
-            selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: currentPost), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage), cell:  self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as! MainCollectionViewCell)
+        if let currentPost = getCurrentPost(), let cell = self.collectionView.cellForItem(at: IndexPath(row: currentPage, section: 0)) as? MainCollectionViewCell {
+            selectionDelegate.readPostTitle(post: RedditReadablePost(displayablePost: currentPost), scrollDirection: ScrollDirection(previousPage: previousPage, newPage: currentPage), cell:  cell)
         }
     }
 }
