@@ -9,8 +9,7 @@
 import UIKit
 
 class RedditDetailPostProvider: NSObject {
-
-    var repository: RedditPostDetailRepository!
+    let repository: RedditPostDetailRepository
     let detailPost: DetailPostItem
     
     init(detailPost: DetailPostItem) {

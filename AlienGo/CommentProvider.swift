@@ -10,10 +10,11 @@ import UIKit
 
 class CommentProvider {
 
-    lazy var repository: CommentRepository = CommentRepository()
+    let repository: CommentRepository
     let detailPostItem: DetailPostItem
     
-    init(detailPostItem: DetailPostItem) {
+    init(detailPostItem: DetailPostItem, repository: CommentRepository) {
+        self.repository = repository
         self.detailPostItem = detailPostItem
     }
     

@@ -47,7 +47,7 @@ class MainCommentViewModel: CommentViewModel {
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate) {
         self.detailPostItem = detailPostItem
         self.displayDelegate = displayDelegate
-        provider = CommentProvider(detailPostItem: detailPostItem)
+        provider = CommentProvider(detailPostItem: detailPostItem, repository: MainCommentRepository())
     }
     
     func getComments() {

@@ -102,6 +102,7 @@ extension PostNavigationDemoViewController: RedditPostListingNavigationDelegate 
     func displayDetailVC() {
         if let currentPost = contentVC.viewModel.collectionSource.getCurrentPost() {
             let detailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
+            
             detailViewController.viewModel = OnboardingDetailViewModel(
                 detailPostItem: DetailPost(displayableFeedItem: currentPost),
                 displayDelegate: detailViewController,

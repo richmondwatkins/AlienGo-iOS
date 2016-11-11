@@ -11,8 +11,11 @@ import UIKit
 
 class RedditPostProvider {
     
-    lazy var repository: RedditPostRepository = RedditPostRepository()
+    let repository: RedditPostRepository
 
+    init(repository: RedditPostRepository) {
+        self.repository = repository
+    }
     
     func getPostsFor(subreddit: Subreddit) -> [RedditPost] {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)

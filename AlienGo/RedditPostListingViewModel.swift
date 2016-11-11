@@ -29,12 +29,8 @@ class RedditPostListingViewModel: NSObject {
         }
     }
     var currentSubreddit = Subreddit(name: "front")
-    var displayDelegate: RedditPostListingViewModelDelegate! {
-        didSet {
-           getPostsFor(subreddit: Subreddit(name: "front"))
-        }
-    }
-    lazy var postProvider: RedditPostProvider = RedditPostProvider()
+    var displayDelegate: RedditPostListingViewModelDelegate!
+    var postProvider: RedditPostProvider = RedditPostProvider(repository: MainRedditRepository())
     var navigationDelegate: RedditPostListingNavigationDelegate!
     
     // For storyboard object

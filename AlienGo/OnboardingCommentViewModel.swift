@@ -38,7 +38,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate, onboardingDelegate: OnboardingCommentLifecycle) {
         self.detailPostItem = detailPostItem
         self.displayDelegate = displayDelegate
-        provider = CommentProvider(detailPostItem: detailPostItem)
+        provider = CommentProvider(detailPostItem: detailPostItem, repository: OnboardingCommentRepository())
         self.onboardingDelegate = onboardingDelegate
     }
     
@@ -76,15 +76,15 @@ class OnboardingCommentViewModel: CommentViewModel {
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
         if let readingComment = readingComment {
-            if gesture.direction == .down {
+            if gesture.direction == .up {
                 goToNextSibling()
             } else if gesture.direction == .right {
                 goToReply()
-            } else if gesture.direction == .up {
+            } else if gesture.direction == .down {
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
                 } else {
-                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."), delegate: nil, completion: nil)
+                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more previous comments."), delegate: nil, completion: nil)
                 }
             }
         }
@@ -98,7 +98,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 if StateProvider.isAuto {
                     goToNextTopLevel()
                 } else {
-                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"), delegate: nil, completion: nil)
+                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more replies. Double tap to go to the next top level comment"), delegate: nil, completion: nil)
                 }
             }
         }

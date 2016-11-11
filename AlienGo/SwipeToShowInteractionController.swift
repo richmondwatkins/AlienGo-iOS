@@ -76,7 +76,7 @@ class SwipeToShowInteractionController: UIPercentDrivenInteractiveTransition {
                 transitionInProgress = false
             }
         default:
-            print("Swift switch must be exhaustive, thus the default")
+            break
         }
     }
     

@@ -10,7 +10,12 @@ import UIKit
 
 class MainFeedDemoViewController: UIViewController {
 
-    @IBOutlet var viewModel: RedditPostListingViewModel!
+    @IBOutlet var viewModel: RedditPostListingViewModel! {
+        didSet {
+            viewModel.postProvider = RedditPostProvider(repository: OnboardingRedditPostRepository())
+            viewModel.getPostsFor(subreddit: Subreddit(name: "front"))
+        }
+    }
     var didReturnFromDetail: Bool = false
     
     override func viewDidLoad() {

@@ -9,7 +9,29 @@
 import UIKit
 
 typealias CommentFetchCallback = (_ linearComments: [Comment]?, _ orderedComments: [Comment]?, _ error: Error?) -> Void
-class CommentRepository {
+
+protocol CommentRepository {
+    func get(detailPostItem: DetailPostItem, callback: @escaping CommentFetchCallback)
+    func buildSingleLevelComments(comments: [Comment]) -> [Comment]
+}
+
+extension CommentRepository {
+    
+    func buildSingleLevelComments(comments: [Comment]) -> [Comment] {
+        var retVal: [Comment] = []
+        
+        comments.forEach { (comment) in
+            retVal.append(comment)
+            if comment.replies.count > 0 {
+                retVal.append(contentsOf: buildSingleLevelComments(comments: comment.replies))
+            }
+        }
+        
+        return retVal
+    }
+}
+
+class MainCommentRepository: CommentRepository {
 
     
     func get(detailPostItem: DetailPostItem, callback: @escaping CommentFetchCallback) {
@@ -28,18 +50,5 @@ class CommentRepository {
             
             callback(singleLevelComment, deserializedComments, nil)
         }
-    }
-    
-    private func buildSingleLevelComments(comments: [Comment]) -> [Comment] {
-        var retVal: [Comment] = []
-        
-        comments.forEach { (comment) in
-            retVal.append(comment)
-            if comment.replies.count > 0 {
-                retVal.append(contentsOf: buildSingleLevelComments(comments: comment.replies))
-            }
-        }
-        
-        return retVal
     }
 }

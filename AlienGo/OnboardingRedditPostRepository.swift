@@ -23,7 +23,7 @@ class OnboardingRedditPostRepository: RedditPostRepository {
                 callback(self.deserializeRedditPostResponse(response: postResponse))
             }
             catch {
-          
+                print(error)
             }
         }
     }

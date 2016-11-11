@@ -27,6 +27,7 @@ class OnboardingDetailViewModel: DetailViewModel {
     private var readOverviewExplanation: Bool = false
     
     init(detailPostItem: DetailPostItem, displayDelegate: DetailViewModelDelegate, onboardingDetailLifecyleDelegate: OnboardingDetailLifecycle, onboardingCommentLifecycleDelegate: OnboardingCommentLifecycle) {
+        
         self.detailPostItem = detailPostItem
         self.displayDelegate = displayDelegate
         self.onboardingDetailLifecyleDelegate = onboardingDetailLifecyleDelegate
@@ -63,36 +64,28 @@ class OnboardingDetailViewModel: DetailViewModel {
             readOverviewExplanation = true
         }
         
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
-            switch self.detailPostItem.content.contentType {
-            case .image, .gif, .imageGallery:
-                break
-            case .link, .selfPost:
-                self.getTextInfo()
-                break
-            case .richVideo:
-                break
-            case .titleOnly, .selfPostTitleOnly:
-                break
-            }
-        })
+       getTextInfo()
     }
     
     private func getTextInfo() {
-//        if let textPost = self.provider.get() {
-//            
-//            if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
-//              
-//            } else {
-//                let vc = self.buildTextVC(title: textPost.title, text: textPost.content)
-//                
-//                self.readableDelegate.readItem(readableItem: ReaderContainer(text: textPost.content), delegate: vc, completion: {
-//                    if StateProvider.isAuto {
-//                        self.showCommentVC()
-//                    }
-//                })
-//            }
-//        }
+        DispatchQueue.global(qos: .userInitiated).async {
+           
+            if let filePath = Bundle.main.path(forResource: "onboardingTextContent", ofType: "txt") {
+                let content = try! String(contentsOfFile: filePath)
+                self.buildTextVC(title: content, text: content)
+            }
+        }
+    }
+    
+    private func buildTextVC(title: String, text: String) {
+        let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
+        detailTextVC.textPost = DetailTextContainer(title: title, content: text)
+        
+        self.displayDelegate?.display(childVC: detailTextVC)
+    }
+    
+    private func vc(storyboardId: String) -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: storyboardId)
     }
     
     private func showCommentVC() {

@@ -11,28 +11,38 @@ import UIKit
 class DetailTextViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
-    
+    var tmpTextView: UITextView = UITextView()
     var textPost: DetailTextItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textView.text = textPost.content
+        tmpTextView.isEditable = false
+        tmpTextView.isSelectable = false
+        tmpTextView.font = UIFont(name: "AvenirNext-Regular", size: 18)
+        tmpTextView.text = textPost.content
+
+        view.addSubview(tmpTextView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        textView.isScrollEnabled = false
+        tmpTextView.isScrollEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        textView.isScrollEnabled = true
+        tmpTextView.isScrollEnabled = true
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tmpTextView.frame = CGRect(x: 8, y: 20, width: view.bounds.width - 16, height: view.bounds.height)
     }
 }
 
 extension DetailTextViewController: ReadingCallbackDelegate {
     func willSpeak(_ speechString: String, characterRange: NSRange) {
-        if let textView = textView {
-            textView.attributedText = willSpeakAttrString(fullString: textPost.content, speechString: speechString, range: characterRange, font: UIFont(name: "AvenirNext-Regular", size: 18)!)
+        DispatchQueue.main.async {
+              self.tmpTextView.attributedText = willSpeakAttrString(fullString: self.textPost.content, speechString: speechString, range: characterRange, font: UIFont(name: "AvenirNext-Regular", size: 18)!)
         }
     }
 }

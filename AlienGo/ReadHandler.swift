@@ -43,7 +43,6 @@ class ReadHandler: NSObject {
     var completion: ReaderCompletion
     var startNew: (() -> Void)?
     var canceled: Bool = false
-    var readingDispatchQueue = DispatchQueue(label: "reading queue")
     
     override init() {
         super.init()
@@ -71,9 +70,9 @@ extension ReadHandler: ReadableDelegate {
 
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion) {
     
-        readingDispatchQueue.async { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.startNew = {
-                self?.readingDispatchQueue.async { [weak self] in
+                DispatchQueue.main.async { [weak self] in
                     self?.state = .reading
                     
                     self?.synthesizer.delegate = nil
@@ -146,7 +145,7 @@ extension ReadHandler: ReadableDelegate {
 extension ReadHandler: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        readingDispatchQueue.async { [unowned self] in
+        DispatchQueue.main.async { [unowned self] in
             self.readingCallbackDelegate = nil
             if let completion = self.queue[utterance.speechString]?.completion, !self.canceled {
                 completion()
@@ -161,7 +160,7 @@ extension ReadHandler: AVSpeechSynthesizerDelegate {
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        readingDispatchQueue.async { [unowned self] in
+        DispatchQueue.main.async { [unowned self] in
             self.readingCallbackDelegate = nil
             if let completion = self.queue[utterance.speechString]?.completion, !self.canceled {
                 completion()

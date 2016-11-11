@@ -36,14 +36,6 @@ class NetworkManager: NSObject {
         sendRequest(request: request as URLRequest, callback: callback)
     }
     
-    func getFrontPage(callback: NetworkCallback?) {
-        let url: URL = URL(string: "\(urlDomainPrefix)/.json")!
-        let request = NSMutableURLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        sendRequest(request: setReadditHeaders(request: request) as URLRequest, callback: callback)
-    }
-    
     func getRedditPostsAtPage(lastPostId: String, totalPostCount: Int, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/all/.json?count=25&after=t3_5656e1.json
         let url: URL = URL(string: "\(urlDomainPrefix)/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")!
@@ -79,7 +71,7 @@ class NetworkManager: NSObject {
     }
     
     func reportPost(postId: String) {
-        let url: URL = URL(string: "\(urlDomainPrefix)/api/report")!
+        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/report")!
         var request = NSMutableURLRequest(url: url)
         request.httpMethod = "POST"
         
