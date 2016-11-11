@@ -18,7 +18,9 @@ class WelcomeOnboardingViewController: UIViewController {
 
         readerDelegate.readItem(readableItem: ReaderContainer(text: welcomeLabel.text!), delegate: self) {
             let soundVC: SoundSetupViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: SoundSetupViewController.self)) as! SoundSetupViewController
-            self.navigationController!.pushViewController(soundVC, animated: true)
+            DispatchQueue.main.async {
+                self.navigationController!.pushViewController(soundVC, animated: true)
+            }
         }
     }
 }
