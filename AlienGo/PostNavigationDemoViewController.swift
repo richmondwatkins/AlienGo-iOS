@@ -58,8 +58,9 @@ class PostNavigationDemoViewController: UIViewController {
     
     func finish() {
         readerDelegate.hardStop()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { 
+        UserAppState.hasSeenOnboarding = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.explanationLabel.text = "That's it! Thanks for making it this far. This view will reload and you will be good to go."
             self.readExplanationLabel {
                 self.complete()
@@ -68,8 +69,6 @@ class PostNavigationDemoViewController: UIViewController {
     }
     
     func complete() {
-        UserAppState.hasSeenOnboarding = true
-
         let navId: String = "MainViewControllerNavigationController"
         let storyboard: String = "Main"
         
