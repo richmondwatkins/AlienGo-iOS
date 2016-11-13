@@ -27,7 +27,7 @@ protocol CommentViewModel {
     func didTap(gesture: UITapGestureRecognizer)
     func didSwipe(gesture: UISwipeGestureRecognizer)
     func dismiss()
-    func read(comment: Comment, index: Int, prefix: String)
+   // func read(comment: Comment, index: Int, prefix: String)
 }
 
 class MainCommentViewModel: CommentViewModel {

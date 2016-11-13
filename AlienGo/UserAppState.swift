@@ -20,4 +20,15 @@ class UserAppState {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var shouldStartReading: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "shouldStartReading")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "shouldStartReading")
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

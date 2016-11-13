@@ -22,6 +22,13 @@ protocol OnboardingCommentLifecycle {
     func readyToDisplayComments(completion: @escaping () -> Void)
 }
 
+enum OnboardingCommentReadingState {
+    case readingFirst
+    case readingSibling
+    case readingReply
+    case readingTopLevel
+    case notNeededForOnboarding
+}
 
 class OnboardingCommentViewModel: CommentViewModel {
 
@@ -34,6 +41,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     private var readingComment: Comment?
     var commentReadCount = 0
     let onboardingDelegate: OnboardingCommentLifecycle
+    var onboardingReadingState: OnboardingCommentReadingState = .readingFirst
     
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate, onboardingDelegate: OnboardingCommentLifecycle) {
         self.detailPostItem = detailPostItem
@@ -53,7 +61,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 self.displayDelegate?.display(comments: response.linearComments)
                 
                 if let first = response.linearComments.first {
-                    self.read(comment: first, index: 0)
+                    self.read(comment: first, index: 0, toOnboardingState: .readingFirst)
                 }
             }
         }
@@ -65,7 +73,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 let nextTopIndex = topIndex + 1
                 let comment = orderedComments[nextTopIndex]
                 
-                goToComment(comment: comment)
+                goToComment(comment: comment, toOnboardingState: .readingTopLevel)
             }
         }
     }
@@ -82,7 +90,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 goToReply()
             } else if gesture.direction == .down {
                 if let previousComment = orderedComments.previous(current: readingComment) {
-                    goToComment(comment: previousComment)
+                    goToComment(comment: previousComment, toOnboardingState: .notNeededForOnboarding)
                 } else {
                     self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more previous comments."), delegate: nil, completion: nil)
                 }
@@ -93,7 +101,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     private func goToReply() {
         if let readingComment = readingComment {
             if let firstReply = readingComment.replies.first {
-                goToComment(comment: firstReply, prefix: "Reply by")
+                goToComment(comment: firstReply, toOnboardingState: .readingReply, prefix: "Reply by")
             } else {
                 if StateProvider.isAuto {
                     goToNextTopLevel()
@@ -107,19 +115,19 @@ class OnboardingCommentViewModel: CommentViewModel {
     private func goToNextSibling() {
         if let readingComment = readingComment {
             if let comment = orderedComments.nextSibling(current: readingComment) {
-                goToComment(comment: comment)
+                goToComment(comment: comment, toOnboardingState: .readingSibling)
             } else {
                 self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more sibling comments"), delegate: nil, completion: nil)
             }
         }
     }
     
-    private func goToComment(comment: Comment, prefix: String = "Comment by") {
+    private func goToComment(comment: Comment, toOnboardingState: OnboardingCommentReadingState, prefix: String = "Comment by") {
         if let liniearIndex = linearComments.index(of: comment) {
             
             displayDelegate?.scrollTo(indexPath: IndexPath(row: liniearIndex, section: 0))
             
-            read(comment: comment, index: liniearIndex, prefix: prefix)
+            read(comment: comment, index: liniearIndex, toOnboardingState: toOnboardingState, prefix: prefix)
         }
     }
     
@@ -129,7 +137,7 @@ class OnboardingCommentViewModel: CommentViewModel {
         onboardingDelegate.didDimissComments()
     }
     
-    func read(comment: Comment, index: Int, prefix: String = "") {
+    func read(comment: Comment, index: Int, toOnboardingState: OnboardingCommentReadingState, prefix: String = "") {
         let userReadItem = ReaderContainer(readable: comment.user)
         readingComment = comment
         readableDelegate.hardStop()
@@ -140,14 +148,32 @@ class OnboardingCommentViewModel: CommentViewModel {
                 self.readableDelegate.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
                     self.readableDelegate.readItem(readableItem: comment, delegate: cell, completion: {
                 
-                        if self.commentReadCount == 1 {
-                            self.onboardingDelegate.didFinisheReadingFirstComment()
-                        } else if self.commentReadCount == 2 {
-                            self.onboardingDelegate.didFinisheReadingSiblingComment()
-                        } else if self.commentReadCount == 3 {
-                            self.onboardingDelegate.didFinisheReadingReplyExplanation()
-                        } else if self.commentReadCount == 4 {
+                        if self.commentReadCount >= 4 {
                             self.onboardingDelegate.didFinishReadingNextTopLevel()
+                            return
+                        }
+                        
+                        switch toOnboardingState {
+                        case .readingFirst:
+                             self.onboardingDelegate.didFinisheReadingFirstComment()
+                            break
+                        case .readingReply:
+                            self.onboardingDelegate.didFinisheReadingReplyExplanation()
+                            break
+                        case .readingSibling:
+                              self.onboardingDelegate.didFinisheReadingSiblingComment()
+                            break
+                        case .readingTopLevel where self.commentReadCount < 4:
+                            self.onboardingDelegate.didFinisheReadingFirstComment()
+                            break
+                        case .readingTopLevel where self.commentReadCount > 4:
+                            self.onboardingDelegate.didFinishReadingNextTopLevel()
+                            break
+                        case .notNeededForOnboarding where self.commentReadCount > 1:
+                             self.onboardingDelegate.didFinishReadingNextTopLevel()
+                            break
+                        default:
+                            break
                         }
                     })
                 })

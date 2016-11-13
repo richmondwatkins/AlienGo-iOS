@@ -10,6 +10,7 @@ import UIKit
 
 class DetailTextViewController: UIViewController {
 
+    var textViewYInset: CGFloat = 0
     @IBOutlet weak var textView: UITextView!
     var tmpTextView: UITextView = UITextView()
     var textPost: DetailTextItem!
@@ -21,7 +22,8 @@ class DetailTextViewController: UIViewController {
         tmpTextView.isSelectable = false
         tmpTextView.font = UIFont(name: "AvenirNext-Regular", size: 18)
         tmpTextView.text = textPost.content
-
+        tmpTextView.contentInset = UIEdgeInsets(top: textViewYInset, left: 0, bottom: 0, right: 0)
+        
         view.addSubview(tmpTextView)
     }
     

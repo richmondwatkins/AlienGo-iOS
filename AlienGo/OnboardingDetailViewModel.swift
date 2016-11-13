@@ -80,6 +80,7 @@ class OnboardingDetailViewModel: DetailViewModel {
     private func buildTextVC(title: String, text: String) {
         let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
         detailTextVC.textPost = DetailTextContainer(title: title, content: text)
+        detailTextVC.textViewYInset = 110
         
         self.displayDelegate?.display(childVC: detailTextVC)
     }

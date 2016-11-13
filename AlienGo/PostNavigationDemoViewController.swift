@@ -23,19 +23,16 @@ class PostNavigationDemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.set(false, forKey: "shouldStartReading")
-        UserDefaults.standard.synchronize()
-        
+        UserAppState.shouldStartReading = false
+    
         self.contentVC.viewModel.navigationDelegate = self
         readExplanationLabel {
             self.contentVC.viewModel.collectionSource.collectionView.reloadData()
-            self.explanationLabel.text = "Swipe up or down to have the next or previous post read out loud to you. I will go ahead and read the first one for you"
+            self.explanationLabel.text = "Swipe up or down to have the next or previous post read out loud to you"
             
             self.readExplanationLabel {
-                UserDefaults.standard.set(true, forKey: "shouldStartReading")
-                UserDefaults.standard.synchronize()
+                UserAppState.shouldStartReading = true
                 self.contentVC.viewModel.collectionSource.collectionView.isScrollEnabled = true
-                self.contentVC.viewModel.readFirst()
             }
         }
     }
@@ -54,8 +51,7 @@ class PostNavigationDemoViewController: UIViewController {
     }
     
     @IBAction func skip(_ sender: UIButton) {
-        UserDefaults.standard.set(true, forKey: "shouldStartReading")
-        UserDefaults.standard.synchronize()
+        UserAppState.shouldStartReading = true
         readerDelegate.hardStop()
         complete()
     }
@@ -100,6 +96,8 @@ extension PostNavigationDemoViewController: RedditPostListingNavigationDelegate 
     }
     
     func displayDetailVC() {
+        guard UserAppState.shouldStartReading else { return }
+        
         if let currentPost = contentVC.viewModel.collectionSource.getCurrentPost() {
             let detailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as! DetailViewController
             

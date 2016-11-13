@@ -81,36 +81,36 @@ class RedditPostListingViewModel: NSObject {
 
 extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell) {
-        if UserDefaults.standard.bool(forKey: "shouldStartReading") {
-            self.readHandler.hardStop()
-            
-            var prefixText = ""
-            
-            switch scrollDirection {
-            case .first:
-                prefixText = "First Post"
-            case .down:
-                prefixText = "Next Post"
-            case .up:
-                prefixText = "Previous Post"
-            }
-            
-            if let subbreddit = post.subredditName {
-                prefixText += " in \(subbreddit)"
-            }
-            
-            let readingId = post.postId
-            readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
-                self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
-                    if StateProvider.isAuto && readingId == self.collectionSource.getCurrentPost()?.postId {
-                        self.navigationDelegate.displayDetailVC()
-                    }
-                    
-                    if scrollDirection != .first {
-                        self.navigationDelegate.didFinishReadingAfterSwipe(direction: scrollDirection)
-                    }
-                })
-            }
+        guard UserAppState.shouldStartReading else { return }
+        
+        self.readHandler.hardStop()
+        
+        var prefixText = ""
+        
+        switch scrollDirection {
+        case .first:
+            prefixText = "First Post"
+        case .down:
+            prefixText = "Next Post"
+        case .up:
+            prefixText = "Previous Post"
+        }
+        
+        if let subbreddit = post.subredditName {
+            prefixText += " in \(subbreddit)"
+        }
+        
+        let readingId = post.postId
+        readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
+            self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
+                if StateProvider.isAuto && readingId == self.collectionSource.getCurrentPost()?.postId {
+                    self.navigationDelegate.displayDetailVC()
+                }
+                
+                if scrollDirection != .first {
+                    self.navigationDelegate.didFinishReadingAfterSwipe(direction: scrollDirection)
+                }
+            })
         }
     }
     
@@ -121,6 +121,8 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
     }
 
     func didSelect(post: DisplayableFeedItem) {
+        guard UserAppState.shouldStartReading else { return }
+        
         readHandler.stop()
     }
     
