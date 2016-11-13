@@ -11,15 +11,15 @@ import UIKit
 
 class RedditPostProvider {
     
-    let repository: RedditPostRepository
+    let repository: NewsPostRepository
 
-    init(repository: RedditPostRepository) {
+    init(repository: NewsPostRepository) {
         self.repository = repository
     }
     
-    func getPostsFor(subreddit: Subreddit) -> [RedditPost] {
+    func getPostsFor(subreddit: Subreddit) -> [NewsPost] {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
-        var posts: [RedditPost] = [RedditPost]()
+        var posts: [NewsPost] = [NewsPost]()
         
         repository.getPostsFor(subreddit: subreddit) { (redditPosts) in
             posts = redditPosts
@@ -32,9 +32,9 @@ class RedditPostProvider {
         return posts
     }
     
-    func loadMore(postId: String, totalCount: Int) -> [RedditPost] {
+    func loadMore(postId: String, totalCount: Int) -> [NewsPost] {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
-        var posts: [RedditPost] = [RedditPost]()
+        var posts: [NewsPost] = [NewsPost]()
         
         repository.loadMore(postId: postId, totalCount: totalCount) { (redditPosts) in
             posts = redditPosts

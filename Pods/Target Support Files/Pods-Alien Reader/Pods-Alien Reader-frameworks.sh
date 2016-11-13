@@ -84,16 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FLAnimatedImage/FLAnimatedImage.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/KeychainAccess/KeychainAccess.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/PINCache/PINCache.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/PINRemoteImage/PINRemoteImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS9.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FLAnimatedImage-iOS9.0/FLAnimatedImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/KeychainAccess-iOS9.0/KeychainAccess.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PINCache-iOS9.0/PINCache.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PINRemoteImage-iOS9.0/PINRemoteImage.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FLAnimatedImage/FLAnimatedImage.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/KeychainAccess/KeychainAccess.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/PINCache/PINCache.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/PINRemoteImage/PINRemoteImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS9.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FLAnimatedImage-iOS9.0/FLAnimatedImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/KeychainAccess-iOS9.0/KeychainAccess.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PINCache-iOS9.0/PINCache.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PINRemoteImage-iOS9.0/PINRemoteImage.framework"
 fi

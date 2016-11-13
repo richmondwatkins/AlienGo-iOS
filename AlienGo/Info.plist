@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppConfig</key>
+	<dict>
+		<key>ReadableName</key>
+		<string>Alien Reader</string>
+		<key>OnboardingOpening</key>
+		<string>Thanks for checking out Alien Reader, the first reddit client that reads reddit to you. Since this is a different sort of app concept, let&apos;s do a quick tutorial</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

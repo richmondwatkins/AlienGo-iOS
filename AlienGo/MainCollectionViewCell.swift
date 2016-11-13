@@ -26,11 +26,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         self.post = post
         
         titleLabel.text = post.postTitle
-        
-        if let subredditName = post.postSubredditName {
-            subredditLabel.text = "/r/\(subredditName)"
-        }
-        
+        subredditLabel.text = post.postSubredditName
         usernameLabel.text = post.postedByUsername
 
         imageView.ra_setImageFromUrlString(urlString: post.content.thumbnailUrl)

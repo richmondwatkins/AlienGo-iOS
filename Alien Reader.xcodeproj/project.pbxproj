@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58AFF3EB062AE56ECA22055A /* Pods_NewsReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17025437567EFAC6910C4AD /* Pods_NewsReader.framework */; };
 		5D1393E41DD5517000C3CBAA /* onboardingComments.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D1393E31DD5517000C3CBAA /* onboardingComments.json */; };
 		5D29A2B91DA5B81900963D0D /* DisplayableDetailContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2B81DA5B81900963D0D /* DisplayableDetailContainer.swift */; };
 		5D29A2BB1DA5DB3B00963D0D /* ReaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BA1DA5DB3B00963D0D /* ReaderContainer.swift */; };
@@ -41,6 +42,101 @@
 		5D86016B1DB56FE100BC7DAE /* AccountInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8601691DB56FE100BC7DAE /* AccountInfoTableViewCell.swift */; };
 		5D86016C1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D86016A1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib */; };
 		5D86016E1DB5C03D00BC7DAE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D86016D1DB5C03D00BC7DAE /* UserInfo.swift */; };
+		5D8C071B1DD91917002A4334 /* NewsReader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07191DD91917002A4334 /* NewsReader.xcdatamodeld */; };
+		5D8C071D1DD91917002A4334 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C071C1DD91917002A4334 /* Assets.xcassets */; };
+		5D8C07201DD91917002A4334 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C071E1DD91917002A4334 /* LaunchScreen.storyboard */; };
+		5D8C072B1DD91917002A4334 /* NewsReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C072A1DD91917002A4334 /* NewsReaderTests.swift */; };
+		5D8C07361DD91917002A4334 /* NewsReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07351DD91917002A4334 /* NewsReaderUITests.swift */; };
+		5D8C07411DD91B56002A4334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA631DA432D40044BD0C /* AppDelegate.swift */; };
+		5D8C07421DD91C4E002A4334 /* EllipsisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCB42341DCAA21F00B392AC /* EllipsisView.swift */; };
+		5D8C07431DD91C4E002A4334 /* RAYoutubeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A065D1DA611B4001C8B7C /* RAYoutubeWebView.swift */; };
+		5D8C07441DD91C4E002A4334 /* WelcomeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB11DBBBF25005201CF /* WelcomeOnboardingViewController.swift */; };
+		5D8C07451DD91C4E002A4334 /* PostNavigationDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB51DBBC599005201CF /* PostNavigationDemoViewController.swift */; };
+		5D8C07461DD91C4E002A4334 /* SoundSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB71DBBC5BE005201CF /* SoundSetupViewController.swift */; };
+		5D8C07471DD91C4E002A4334 /* MainFeedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */; };
+		5D8C07481DD91C4E002A4334 /* RAAuthWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830D41DB3EB0500CD270C /* RAAuthWebViewController.swift */; };
+		5D8C07491DD91C4E002A4334 /* AutoPlaySettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */; };
+		5D8C074A1DD91C4E002A4334 /* AutoPlaySettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */; };
+		5D8C074B1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECAA1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift */; };
+		5D8C074C1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DDAECAB1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib */; };
+		5D8C074D1DD91C4E002A4334 /* AllFrontSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD0C1DB829A800941B2B /* AllFrontSettingTableViewCell.swift */; };
+		5D8C074E1DD91C4E002A4334 /* AllFrontSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D53AD0D1DB829A800941B2B /* AllFrontSettingTableViewCell.xib */; };
+		5D8C074F1DD91C4E002A4334 /* AccountInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8601691DB56FE100BC7DAE /* AccountInfoTableViewCell.swift */; };
+		5D8C07501DD91C4E002A4334 /* AccountInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D86016A1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib */; };
+		5D8C07511DD91C4E002A4334 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66492B1DADDA6D0054F4BA /* SettingsView.swift */; };
+		5D8C07521DD91C4E002A4334 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D66492F1DADDA870054F4BA /* SettingsView.xib */; };
+		5D8C07531DD91C4E002A4334 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6649311DADDEF10054F4BA /* SettingsViewController.swift */; };
+		5D8C07541DD91C4E002A4334 /* SettingsTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830D71DB3FA4D00CD270C /* SettingsTableSource.swift */; };
+		5D8C07551DD91C4E002A4334 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06641DA6CAA6001C8B7C /* CommentViewController.swift */; };
+		5D8C07561DD91C4E002A4334 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06721DA6E32E001C8B7C /* CommentTableViewCell.swift */; };
+		5D8C07571DD91C4E002A4334 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3A06731DA6E32E001C8B7C /* CommentTableViewCell.xib */; };
+		5D8C07581DD91C4E002A4334 /* CommentTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06761DA6E3E6001C8B7C /* CommentTableSource.swift */; };
+		5D8C07591DD91C4E002A4334 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA651DA432D40044BD0C /* MainViewController.swift */; };
+		5D8C075A1DD91C4E002A4334 /* MainCollectionViewSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A0C1DA44E5E001B3B79 /* MainCollectionViewSource.swift */; };
+		5D8C075B1DD91C4E002A4334 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A0E1DA44F82001B3B79 /* MainCollectionViewCell.swift */; };
+		5D8C075C1DD91C4E002A4334 /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DA74A0F1DA44F82001B3B79 /* MainCollectionViewCell.xib */; };
+		5D8C075D1DD91C4E002A4334 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A191DA522F3001B3B79 /* DetailViewController.swift */; };
+		5D8C075E1DD91C4E002A4334 /* DetailTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BC1DA5F43800963D0D /* DetailTextViewController.swift */; };
+		5D8C075F1DD91C4E002A4334 /* DetailImageGifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BE1DA6007100963D0D /* DetailImageGifViewController.swift */; };
+		5D8C07601DD91C4E002A4334 /* DetailVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A065F1DA6129C001C8B7C /* DetailVideoViewController.swift */; };
+		5D8C07611DD91C4E002A4334 /* SwipeToShowInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A1C1DA52554001B3B79 /* SwipeToShowInteractionController.swift */; };
+		5D8C07621DD91C4E002A4334 /* SwipeToShowAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A1E1DA52734001B3B79 /* SwipeToShowAnimationController.swift */; };
+		5D8C07631DD91C4E002A4334 /* ReadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A161DA482BC001B3B79 /* ReadHandler.swift */; };
+		5D8C07641DD91C4E002A4334 /* DisplayableFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */; };
+		5D8C07651DD91C4E002A4334 /* DetailPostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A201DA52CE8001B3B79 /* DetailPostItem.swift */; };
+		5D8C07661DD91C4E002A4334 /* DisplayableDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */; };
+		5D8C07671DD91C4E002A4334 /* CommentPostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A066C1DA6CBC6001C8B7C /* CommentPostItem.swift */; };
+		5D8C07681DD91C4E002A4334 /* RedditPostListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */; };
+		5D8C07691DD91C4E002A4334 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A291DA59120001B3B79 /* DetailViewModel.swift */; };
+		5D8C076A1DD91C4E002A4334 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06661DA6CAB4001C8B7C /* CommentViewModel.swift */; };
+		5D8C076B1DD91C4E002A4334 /* OnboardingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */; };
+		5D8C076C1DD91C4E002A4334 /* OnboardingCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CD1DC1808700B74FFF /* OnboardingCommentViewModel.swift */; };
+		5D8C076D1DD91C4E002A4334 /* NewsPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9E1DA4370F0044BD0C /* NewsPost.swift */; };
+		5D8C076E1DD91C4E002A4334 /* Subreddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A041DA44076001B3B79 /* Subreddit.swift */; };
+		5D8C076F1DD91C4E002A4334 /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */; };
+		5D8C07701DD91C4E002A4334 /* RedditReadablePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A141DA47A29001B3B79 /* RedditReadablePost.swift */; };
+		5D8C07711DD91C4E002A4334 /* DetailPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A221DA52D00001B3B79 /* DetailPost.swift */; };
+		5D8C07721DD91C4E002A4334 /* RedditContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A271DA58852001B3B79 /* RedditContent.swift */; };
+		5D8C07731DD91C4E002A4334 /* DisplayableDetailContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2B81DA5B81900963D0D /* DisplayableDetailContainer.swift */; };
+		5D8C07741DD91C4E002A4334 /* ReaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2BA1DA5DB3B00963D0D /* ReaderContainer.swift */; };
+		5D8C07751DD91C4E002A4334 /* DetailImageGifContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D29A2C01DA6011700963D0D /* DetailImageGifContainer.swift */; };
+		5D8C07761DD91C4E002A4334 /* DetailVideoItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06611DA6134C001C8B7C /* DetailVideoItemContainer.swift */; };
+		5D8C07771DD91C4E002A4334 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A066E1DA6D6F6001C8B7C /* Comment.swift */; };
+		5D8C07781DD91C4E002A4334 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06701DA6D71F001C8B7C /* User.swift */; };
+		5D8C07791DD91C4E002A4334 /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830DE1DB402A500CD270C /* SettingItem.swift */; };
+		5D8C077A1DD91C4E002A4334 /* SettingAuthItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830E01DB403F300CD270C /* SettingAuthItem.swift */; };
+		5D8C077B1DD91C4E002A4334 /* SettingFrontPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD091DB8289800941B2B /* SettingFrontPageItem.swift */; };
+		5D8C077C1DD91C4E002A4334 /* SettingAllSubredditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD101DB851B800941B2B /* SettingAllSubredditItem.swift */; };
+		5D8C077D1DD91C4E002A4334 /* SettingSpeechSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD171DB8743600941B2B /* SettingSpeechSpeed.swift */; };
+		5D8C077E1DD91C4E002A4334 /* SettingAutoPlayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */; };
+		5D8C077F1DD91C4E002A4334 /* RedditPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */; };
+		5D8C07801DD91C4E002A4334 /* RedditDetailPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2D1DA592AC001B3B79 /* RedditDetailPostProvider.swift */; };
+		5D8C07811DD91C4E002A4334 /* CommentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A066A1DA6CAC8001C8B7C /* CommentProvider.swift */; };
+		5D8C07831DD91C4E002A4334 /* RedditPostDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */; };
+		5D8C07841DD91C4E002A4334 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06681DA6CAC1001C8B7C /* CommentRepository.swift */; };
+		5D8C07851DD91C4E002A4334 /* OnboardingRedditPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6754481DD53CE500623348 /* OnboardingRedditPostRepository.swift */; };
+		5D8C07861DD91C4E002A4334 /* OnboardingCommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD757751DD552D90064F949 /* OnboardingCommentRepository.swift */; };
+		5D8C07871DD91C59002A4334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA671DA432D40044BD0C /* Main.storyboard */; };
+		5D8C07881DD91C65002A4334 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA981DA434310044BD0C /* NetworkManager.swift */; };
+		5D8C07891DD91C74002A4334 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7BF1DAA8FA800FD63BF /* Constants.swift */; };
+		5D8C078A1DD91C74002A4334 /* StateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDCC7C11DAC8BEE00FD63BF /* StateProvider.swift */; };
+		5D8C078B1DD91C74002A4334 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB609241DAC8FDB000F3258 /* MainCollectionView.swift */; };
+		5D8C078C1DD91C74002A4334 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6649331DADF3870054F4BA /* InstructionsViewController.swift */; };
+		5D8C078D1DD91C74002A4334 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE3F4C11DAF1DCC007F533A /* UIImageViewExtension.swift */; };
+		5D8C078E1DD91C74002A4334 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D86016D1DB5C03D00BC7DAE /* UserInfo.swift */; };
+		5D8C078F1DD91C77002A4334 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DDAECAE1DBBBEFF005201CF /* Onboarding.storyboard */; };
+		5D8C07901DD91C7A002A4334 /* UserAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB31DBBBF73005201CF /* UserAppState.swift */; };
+		5D8C07921DD91C7D002A4334 /* onboardingTextContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5D67544A1DD5444000623348 /* onboardingTextContent.txt */; };
+		5D8C07931DD91C7D002A4334 /* onboardingComments.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D1393E31DD5517000C3CBAA /* onboardingComments.json */; };
+		5D8C07941DD91C8A002A4334 /* RASettingsSignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830D91DB3FA7D00CD270C /* RASettingsSignInTableViewCell.swift */; };
+		5D8C07951DD91C8F002A4334 /* RASettingsSignInTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF830DA1DB3FA7D00CD270C /* RASettingsSignInTableViewCell.xib */; };
+		5D8C07981DD91E01002A4334 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07971DD91E01002A4334 /* Configuration.swift */; };
+		5D8C07991DD91E01002A4334 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07971DD91E01002A4334 /* Configuration.swift */; };
+		5D8C079C1DD92193002A4334 /* allSeed.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C079B1DD92193002A4334 /* allSeed.json */; };
+		5D8C079D1DD92193002A4334 /* allSeed.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C079B1DD92193002A4334 /* allSeed.json */; };
+		5D8C079F1DD92858002A4334 /* NewsPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C079E1DD92858002A4334 /* NewsPostRepository.swift */; };
+		5D8C07A01DD92858002A4334 /* NewsPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C079E1DD92858002A4334 /* NewsPostRepository.swift */; };
+		5D8C07A21DD929D5002A4334 /* MainNewsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07A11DD929D5002A4334 /* MainNewsRepository.swift */; };
 		5DA74A051DA44076001B3B79 /* Subreddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A041DA44076001B3B79 /* Subreddit.swift */; };
 		5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */; };
 		5DA74A0A1DA44693001B3B79 /* DisplayableFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */; };
@@ -75,10 +171,10 @@
 		5DD1BA711DA432D40044BD0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD1BA6F1DA432D40044BD0C /* LaunchScreen.storyboard */; };
 		5DD1BA7C1DA432D40044BD0C /* AlienGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA7B1DA432D40044BD0C /* AlienGoTests.swift */; };
 		5DD1BA871DA432D40044BD0C /* AlienGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA861DA432D40044BD0C /* AlienGoUITests.swift */; };
-		5DD1BA971DA434230044BD0C /* RedditPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA961DA434230044BD0C /* RedditPostRepository.swift */; };
+		5DD1BA971DA434230044BD0C /* MainNewsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA961DA434230044BD0C /* MainNewsRepository.swift */; };
 		5DD1BA991DA434310044BD0C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA981DA434310044BD0C /* NetworkManager.swift */; };
 		5DD1BA9C1DA4343F0044BD0C /* RedditPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */; };
-		5DD1BA9F1DA4370F0044BD0C /* RedditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */; };
+		5DD1BA9F1DA4370F0044BD0C /* NewsPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA9E1DA4370F0044BD0C /* NewsPost.swift */; };
 		5DD1BAA21DA438440044BD0C /* RedditPostListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */; };
 		5DD757761DD552D90064F949 /* OnboardingCommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD757751DD552D90064F949 /* OnboardingCommentRepository.swift */; };
 		5DDAECAC1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECAA1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift */; };
@@ -101,6 +197,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5D8C07271DD91917002A4334 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DD1BA581DA432D40044BD0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D8C070F1DD91917002A4334;
+			remoteInfo = NewsReader;
+		};
+		5D8C07321DD91917002A4334 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DD1BA581DA432D40044BD0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D8C070F1DD91917002A4334;
+			remoteInfo = NewsReader;
+		};
 		5DD1BA781DA432D40044BD0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DD1BA581DA432D40044BD0C /* Project object */;
@@ -153,6 +263,21 @@
 		5D8601691DB56FE100BC7DAE /* AccountInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewCell.swift; sourceTree = "<group>"; };
 		5D86016A1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoTableViewCell.xib; sourceTree = "<group>"; };
 		5D86016D1DB5C03D00BC7DAE /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		5D8C07101DD91917002A4334 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D8C071A1DD91917002A4334 /* NewsReader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsReader.xcdatamodel; sourceTree = "<group>"; };
+		5D8C071C1DD91917002A4334 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D8C071F1DD91917002A4334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5D8C07211DD91917002A4334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D8C07261DD91917002A4334 /* NewsReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D8C072A1DD91917002A4334 /* NewsReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsReaderTests.swift; sourceTree = "<group>"; };
+		5D8C072C1DD91917002A4334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D8C07311DD91917002A4334 /* NewsReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D8C07351DD91917002A4334 /* NewsReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsReaderUITests.swift; sourceTree = "<group>"; };
+		5D8C07371DD91917002A4334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D8C07971DD91E01002A4334 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		5D8C079B1DD92193002A4334 /* allSeed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allSeed.json; sourceTree = "<group>"; };
+		5D8C079E1DD92858002A4334 /* NewsPostRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsPostRepository.swift; sourceTree = "<group>"; };
+		5D8C07A11DD929D5002A4334 /* MainNewsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNewsRepository.swift; sourceTree = "<group>"; };
 		5DA74A041DA44076001B3B79 /* Subreddit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subreddit.swift; sourceTree = "<group>"; };
 		5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
 		5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableFeedItem.swift; sourceTree = "<group>"; };
@@ -193,10 +318,10 @@
 		5DD1BA821DA432D40044BD0C /* Alien ReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Alien ReaderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD1BA861DA432D40044BD0C /* AlienGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlienGoUITests.swift; sourceTree = "<group>"; };
 		5DD1BA881DA432D40044BD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5DD1BA961DA434230044BD0C /* RedditPostRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostRepository.swift; sourceTree = "<group>"; };
+		5DD1BA961DA434230044BD0C /* MainNewsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNewsRepository.swift; sourceTree = "<group>"; };
 		5DD1BA981DA434310044BD0C /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5DD1BA9B1DA4343F0044BD0C /* RedditPostProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostProvider.swift; sourceTree = "<group>"; };
-		5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPost.swift; sourceTree = "<group>"; };
+		5DD1BA9E1DA4370F0044BD0C /* NewsPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsPost.swift; sourceTree = "<group>"; };
 		5DD1BAA11DA438440044BD0C /* RedditPostListingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostListingViewModel.swift; sourceTree = "<group>"; };
 		5DD757751DD552D90064F949 /* OnboardingCommentRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCommentRepository.swift; sourceTree = "<group>"; };
 		5DDAECAA1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechVolumeCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -218,14 +343,39 @@
 		5DF830E01DB403F300CD270C /* SettingAuthItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAuthItem.swift; sourceTree = "<group>"; };
 		74CEF7E6C5D81CF10C70F3FA /* Pods-AlienGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo.release.xcconfig"; sourceTree = "<group>"; };
 		942E0184373714DB25C5CFEB /* Pods_AlienGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlienGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABBA79380A573EF966B152D8 /* Pods-NewsReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-NewsReader/Pods-NewsReader.release.xcconfig"; sourceTree = "<group>"; };
+		B23637F35C76E7CD5F5A3BFB /* Pods-NewsReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NewsReader/Pods-NewsReader.debug.xcconfig"; sourceTree = "<group>"; };
 		B7E006968593C049378A51C5 /* Pods_Alien_Reader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alien_Reader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43AEE13E38C58C607A39466 /* Pods-Alien Reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alien Reader.release.xcconfig"; path = "Pods/Target Support Files/Pods-Alien Reader/Pods-Alien Reader.release.xcconfig"; sourceTree = "<group>"; };
 		C5095718DCB632A856304EE1 /* Pods_AlienGoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlienGoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE49ADC3D7BA3F6FD4A247C /* Pods_AlienGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlienGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C3725C41958C9212755DC9 /* Pods-AlienGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlienGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlienGo/Pods-AlienGo.debug.xcconfig"; sourceTree = "<group>"; };
+		E17025437567EFAC6910C4AD /* Pods_NewsReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5D8C070D1DD91917002A4334 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58AFF3EB062AE56ECA22055A /* Pods_NewsReader.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D8C07231DD91917002A4334 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D8C072E1DD91917002A4334 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DD1BA5D1DA432D40044BD0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +408,7 @@
 				942E0184373714DB25C5CFEB /* Pods_AlienGoTests.framework */,
 				C5095718DCB632A856304EE1 /* Pods_AlienGoUITests.framework */,
 				B7E006968593C049378A51C5 /* Pods_Alien_Reader.framework */,
+				E17025437567EFAC6910C4AD /* Pods_NewsReader.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -269,6 +420,8 @@
 				74CEF7E6C5D81CF10C70F3FA /* Pods-AlienGo.release.xcconfig */,
 				4F620723F5443E582CFC01BA /* Pods-Alien Reader.debug.xcconfig */,
 				C43AEE13E38C58C607A39466 /* Pods-Alien Reader.release.xcconfig */,
+				B23637F35C76E7CD5F5A3BFB /* Pods-NewsReader.debug.xcconfig */,
+				ABBA79380A573EF966B152D8 /* Pods-NewsReader.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -321,6 +474,45 @@
 				5D86016A1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib */,
 			);
 			name = AccountInfo;
+			sourceTree = "<group>";
+		};
+		5D8C07111DD91917002A4334 /* NewsReader */ = {
+			isa = PBXGroup;
+			children = (
+				5D8C071C1DD91917002A4334 /* Assets.xcassets */,
+				5D8C071E1DD91917002A4334 /* LaunchScreen.storyboard */,
+				5D8C07211DD91917002A4334 /* Info.plist */,
+				5D8C07191DD91917002A4334 /* NewsReader.xcdatamodeld */,
+				5D8C079B1DD92193002A4334 /* allSeed.json */,
+				5D8C07A11DD929D5002A4334 /* MainNewsRepository.swift */,
+			);
+			path = NewsReader;
+			sourceTree = "<group>";
+		};
+		5D8C07291DD91917002A4334 /* NewsReaderTests */ = {
+			isa = PBXGroup;
+			children = (
+				5D8C072A1DD91917002A4334 /* NewsReaderTests.swift */,
+				5D8C072C1DD91917002A4334 /* Info.plist */,
+			);
+			path = NewsReaderTests;
+			sourceTree = "<group>";
+		};
+		5D8C07341DD91917002A4334 /* NewsReaderUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5D8C07351DD91917002A4334 /* NewsReaderUITests.swift */,
+				5D8C07371DD91917002A4334 /* Info.plist */,
+			);
+			path = NewsReaderUITests;
+			sourceTree = "<group>";
+		};
+		5D8C07961DD91D8D002A4334 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5D8C07971DD91E01002A4334 /* Configuration.swift */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		5DA74A081DA44682001B3B79 /* Protocols */ = {
@@ -391,10 +583,14 @@
 		5DD1BA571DA432D40044BD0C = {
 			isa = PBXGroup;
 			children = (
+				5D8C07961DD91D8D002A4334 /* Shared */,
 				5DF830D61DB3F5A400CD270C /* Alien Reader.entitlements */,
 				5DD1BA621DA432D40044BD0C /* AlienGo */,
 				5DD1BA7A1DA432D40044BD0C /* AlienGoTests */,
 				5DD1BA851DA432D40044BD0C /* AlienGoUITests */,
+				5D8C07111DD91917002A4334 /* NewsReader */,
+				5D8C07291DD91917002A4334 /* NewsReaderTests */,
+				5D8C07341DD91917002A4334 /* NewsReaderUITests */,
 				5DD1BA611DA432D40044BD0C /* Products */,
 				4DEB0ADF05A1493D3B930EDA /* Pods */,
 				1C3DC408ACE467A11043E025 /* Frameworks */,
@@ -407,6 +603,9 @@
 				5DD1BA601DA432D40044BD0C /* Alien Reader.app */,
 				5DD1BA771DA432D40044BD0C /* Alien ReaderTests.xctest */,
 				5DD1BA821DA432D40044BD0C /* Alien ReaderUITests.xctest */,
+				5D8C07101DD91917002A4334 /* NewsReader.app */,
+				5D8C07261DD91917002A4334 /* NewsReaderTests.xctest */,
+				5D8C07311DD91917002A4334 /* NewsReaderUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,7 +635,6 @@
 				5D6649331DADF3870054F4BA /* InstructionsViewController.swift */,
 				5DE3F4C11DAF1DCC007F533A /* UIImageViewExtension.swift */,
 				5D86016D1DB5C03D00BC7DAE /* UserInfo.swift */,
-				5DDAECAE1DBBBEFF005201CF /* Onboarding.storyboard */,
 				5DDAECB31DBBBF73005201CF /* UserAppState.swift */,
 				5D6754461DD538DA00623348 /* allSeed.json */,
 				5D67544A1DD5444000623348 /* onboardingTextContent.txt */,
@@ -474,11 +672,12 @@
 		5DD1BA951DA4340B0044BD0C /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				5DD1BA961DA434230044BD0C /* RedditPostRepository.swift */,
+				5DD1BA961DA434230044BD0C /* MainNewsRepository.swift */,
 				5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */,
 				5D3A06681DA6CAC1001C8B7C /* CommentRepository.swift */,
 				5D6754481DD53CE500623348 /* OnboardingRedditPostRepository.swift */,
 				5DD757751DD552D90064F949 /* OnboardingCommentRepository.swift */,
+				5D8C079E1DD92858002A4334 /* NewsPostRepository.swift */,
 			);
 			name = Repositories;
 			sourceTree = "<group>";
@@ -496,7 +695,7 @@
 		5DD1BA9D1DA437040044BD0C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5DD1BA9E1DA4370F0044BD0C /* RedditPost.swift */,
+				5DD1BA9E1DA4370F0044BD0C /* NewsPost.swift */,
 				5DA74A041DA44076001B3B79 /* Subreddit.swift */,
 				5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */,
 				5DA74A141DA47A29001B3B79 /* RedditReadablePost.swift */,
@@ -542,6 +741,7 @@
 		5DDAECB01DBBBF0E005201CF /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				5DDAECAE1DBBBEFF005201CF /* Onboarding.storyboard */,
 				5DDAECB11DBBBF25005201CF /* WelcomeOnboardingViewController.swift */,
 				5DDAECB51DBBC599005201CF /* PostNavigationDemoViewController.swift */,
 				5DDAECB71DBBC5BE005201CF /* SoundSetupViewController.swift */,
@@ -573,6 +773,62 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5D8C070F1DD91917002A4334 /* NewsReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D8C07381DD91917002A4334 /* Build configuration list for PBXNativeTarget "NewsReader" */;
+			buildPhases = (
+				2CE5B6E4897E3C224BC77D6D /* [CP] Check Pods Manifest.lock */,
+				5D8C070C1DD91917002A4334 /* Sources */,
+				5D8C070D1DD91917002A4334 /* Frameworks */,
+				5D8C070E1DD91917002A4334 /* Resources */,
+				F16055B64A3608686A99C9AC /* [CP] Embed Pods Frameworks */,
+				5FEAD3CCC0A8F4664789DEEE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NewsReader;
+			productName = NewsReader;
+			productReference = 5D8C07101DD91917002A4334 /* NewsReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5D8C07251DD91917002A4334 /* NewsReaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D8C073B1DD91917002A4334 /* Build configuration list for PBXNativeTarget "NewsReaderTests" */;
+			buildPhases = (
+				5D8C07221DD91917002A4334 /* Sources */,
+				5D8C07231DD91917002A4334 /* Frameworks */,
+				5D8C07241DD91917002A4334 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D8C07281DD91917002A4334 /* PBXTargetDependency */,
+			);
+			name = NewsReaderTests;
+			productName = NewsReaderTests;
+			productReference = 5D8C07261DD91917002A4334 /* NewsReaderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5D8C07301DD91917002A4334 /* NewsReaderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D8C073E1DD91917002A4334 /* Build configuration list for PBXNativeTarget "NewsReaderUITests" */;
+			buildPhases = (
+				5D8C072D1DD91917002A4334 /* Sources */,
+				5D8C072E1DD91917002A4334 /* Frameworks */,
+				5D8C072F1DD91917002A4334 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D8C07331DD91917002A4334 /* PBXTargetDependency */,
+			);
+			name = NewsReaderUITests;
+			productName = NewsReaderUITests;
+			productReference = 5D8C07311DD91917002A4334 /* NewsReaderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		5DD1BA5F1DA432D40044BD0C /* Alien Reader */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DD1BA8B1DA432D40044BD0C /* Build configuration list for PBXNativeTarget "Alien Reader" */;
@@ -645,6 +901,23 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Nashville Native";
 				TargetAttributes = {
+					5D8C070F1DD91917002A4334 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = TB5YKEAJ2S;
+						ProvisioningStyle = Automatic;
+					};
+					5D8C07251DD91917002A4334 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = TB5YKEAJ2S;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5D8C070F1DD91917002A4334;
+					};
+					5D8C07301DD91917002A4334 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = TB5YKEAJ2S;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5D8C070F1DD91917002A4334;
+					};
 					5DD1BA5F1DA432D40044BD0C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = TB5YKEAJ2S;
@@ -685,11 +958,50 @@
 				5DD1BA5F1DA432D40044BD0C /* Alien Reader */,
 				5DD1BA761DA432D40044BD0C /* Alien ReaderTests */,
 				5DD1BA811DA432D40044BD0C /* Alien ReaderUITests */,
+				5D8C070F1DD91917002A4334 /* NewsReader */,
+				5D8C07251DD91917002A4334 /* NewsReaderTests */,
+				5D8C07301DD91917002A4334 /* NewsReaderUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5D8C070E1DD91917002A4334 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8C078F1DD91C77002A4334 /* Onboarding.storyboard in Resources */,
+				5D8C074A1DD91C4E002A4334 /* AutoPlaySettingTableViewCell.xib in Resources */,
+				5D8C07871DD91C59002A4334 /* Main.storyboard in Resources */,
+				5D8C079D1DD92193002A4334 /* allSeed.json in Resources */,
+				5D8C07951DD91C8F002A4334 /* RASettingsSignInTableViewCell.xib in Resources */,
+				5D8C075C1DD91C4E002A4334 /* MainCollectionViewCell.xib in Resources */,
+				5D8C07921DD91C7D002A4334 /* onboardingTextContent.txt in Resources */,
+				5D8C07201DD91917002A4334 /* LaunchScreen.storyboard in Resources */,
+				5D8C071D1DD91917002A4334 /* Assets.xcassets in Resources */,
+				5D8C074C1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.xib in Resources */,
+				5D8C074E1DD91C4E002A4334 /* AllFrontSettingTableViewCell.xib in Resources */,
+				5D8C07501DD91C4E002A4334 /* AccountInfoTableViewCell.xib in Resources */,
+				5D8C07521DD91C4E002A4334 /* SettingsView.xib in Resources */,
+				5D8C07931DD91C7D002A4334 /* onboardingComments.json in Resources */,
+				5D8C07571DD91C4E002A4334 /* CommentTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D8C07241DD91917002A4334 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D8C072F1DD91917002A4334 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DD1BA5E1DA432D40044BD0C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,6 +1020,7 @@
 				5DA74A111DA44F82001B3B79 /* MainCollectionViewCell.xib in Resources */,
 				5D3A06751DA6E32E001C8B7C /* CommentTableViewCell.xib in Resources */,
 				5D53AD0F1DB829A800941B2B /* AllFrontSettingTableViewCell.xib in Resources */,
+				5D8C079C1DD92193002A4334 /* allSeed.json in Resources */,
 				5D1393E41DD5517000C3CBAA /* onboardingComments.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -729,6 +1042,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2CE5B6E4897E3C224BC77D6D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		32635B8C0A31B766B349C6AA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -786,6 +1114,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" b2fa13da961943ada093ca86282c0717d8d6c662 7cad0ab1a6f39490fc1b7a2086c4b18cd46eab09c11125e6b936de9bc4dd93ee";
+		};
+		5FEAD3CCC0A8F4664789DEEE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewsReader/Pods-NewsReader-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		6215E9AE36C109769D12A13B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -847,6 +1190,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F16055B64A3608686A99C9AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewsReader/Pods-NewsReader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FCF8951CBB9E271FEFCD6F21 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -865,6 +1223,104 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5D8C070C1DD91917002A4334 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8C076A1DD91C4E002A4334 /* CommentViewModel.swift in Sources */,
+				5D8C07841DD91C4E002A4334 /* CommentRepository.swift in Sources */,
+				5D8C07A21DD929D5002A4334 /* MainNewsRepository.swift in Sources */,
+				5D8C07701DD91C4E002A4334 /* RedditReadablePost.swift in Sources */,
+				5D8C074D1DD91C4E002A4334 /* AllFrontSettingTableViewCell.swift in Sources */,
+				5D8C07651DD91C4E002A4334 /* DetailPostItem.swift in Sources */,
+				5D8C07731DD91C4E002A4334 /* DisplayableDetailContainer.swift in Sources */,
+				5D8C07661DD91C4E002A4334 /* DisplayableDetailItem.swift in Sources */,
+				5D8C078E1DD91C74002A4334 /* UserInfo.swift in Sources */,
+				5D8C077D1DD91C4E002A4334 /* SettingSpeechSpeed.swift in Sources */,
+				5D8C07A01DD92858002A4334 /* NewsPostRepository.swift in Sources */,
+				5D8C075A1DD91C4E002A4334 /* MainCollectionViewSource.swift in Sources */,
+				5D8C075D1DD91C4E002A4334 /* DetailViewController.swift in Sources */,
+				5D8C07471DD91C4E002A4334 /* MainFeedDemoViewController.swift in Sources */,
+				5D8C07831DD91C4E002A4334 /* RedditPostDetailRepository.swift in Sources */,
+				5D8C07411DD91B56002A4334 /* AppDelegate.swift in Sources */,
+				5D8C076E1DD91C4E002A4334 /* Subreddit.swift in Sources */,
+				5D8C07481DD91C4E002A4334 /* RAAuthWebViewController.swift in Sources */,
+				5D8C078B1DD91C74002A4334 /* MainCollectionView.swift in Sources */,
+				5D8C07631DD91C4E002A4334 /* ReadHandler.swift in Sources */,
+				5D8C07711DD91C4E002A4334 /* DetailPost.swift in Sources */,
+				5D8C07811DD91C4E002A4334 /* CommentProvider.swift in Sources */,
+				5D8C07991DD91E01002A4334 /* Configuration.swift in Sources */,
+				5D8C076C1DD91C4E002A4334 /* OnboardingCommentViewModel.swift in Sources */,
+				5D8C077E1DD91C4E002A4334 /* SettingAutoPlayItem.swift in Sources */,
+				5D8C077A1DD91C4E002A4334 /* SettingAuthItem.swift in Sources */,
+				5D8C076D1DD91C4E002A4334 /* NewsPost.swift in Sources */,
+				5D8C07581DD91C4E002A4334 /* CommentTableSource.swift in Sources */,
+				5D8C07891DD91C74002A4334 /* Constants.swift in Sources */,
+				5D8C07941DD91C8A002A4334 /* RASettingsSignInTableViewCell.swift in Sources */,
+				5D8C07621DD91C4E002A4334 /* SwipeToShowAnimationController.swift in Sources */,
+				5D8C075F1DD91C4E002A4334 /* DetailImageGifViewController.swift in Sources */,
+				5D8C07851DD91C4E002A4334 /* OnboardingRedditPostRepository.swift in Sources */,
+				5D8C076F1DD91C4E002A4334 /* PreviewPhoto.swift in Sources */,
+				5D8C07451DD91C4E002A4334 /* PostNavigationDemoViewController.swift in Sources */,
+				5D8C075B1DD91C4E002A4334 /* MainCollectionViewCell.swift in Sources */,
+				5D8C07551DD91C4E002A4334 /* CommentViewController.swift in Sources */,
+				5D8C07461DD91C4E002A4334 /* SoundSetupViewController.swift in Sources */,
+				5D8C07771DD91C4E002A4334 /* Comment.swift in Sources */,
+				5D8C071B1DD91917002A4334 /* NewsReader.xcdatamodeld in Sources */,
+				5D8C07751DD91C4E002A4334 /* DetailImageGifContainer.swift in Sources */,
+				5D8C07511DD91C4E002A4334 /* SettingsView.swift in Sources */,
+				5D8C07801DD91C4E002A4334 /* RedditDetailPostProvider.swift in Sources */,
+				5D8C07781DD91C4E002A4334 /* User.swift in Sources */,
+				5D8C07531DD91C4E002A4334 /* SettingsViewController.swift in Sources */,
+				5D8C07641DD91C4E002A4334 /* DisplayableFeedItem.swift in Sources */,
+				5D8C076B1DD91C4E002A4334 /* OnboardingDetailViewModel.swift in Sources */,
+				5D8C078C1DD91C74002A4334 /* InstructionsViewController.swift in Sources */,
+				5D8C07441DD91C4E002A4334 /* WelcomeOnboardingViewController.swift in Sources */,
+				5D8C07671DD91C4E002A4334 /* CommentPostItem.swift in Sources */,
+				5D8C07881DD91C65002A4334 /* NetworkManager.swift in Sources */,
+				5D8C077F1DD91C4E002A4334 /* RedditPostProvider.swift in Sources */,
+				5D8C07431DD91C4E002A4334 /* RAYoutubeWebView.swift in Sources */,
+				5D8C07691DD91C4E002A4334 /* DetailViewModel.swift in Sources */,
+				5D8C078D1DD91C74002A4334 /* UIImageViewExtension.swift in Sources */,
+				5D8C075E1DD91C4E002A4334 /* DetailTextViewController.swift in Sources */,
+				5D8C077B1DD91C4E002A4334 /* SettingFrontPageItem.swift in Sources */,
+				5D8C07901DD91C7A002A4334 /* UserAppState.swift in Sources */,
+				5D8C07741DD91C4E002A4334 /* ReaderContainer.swift in Sources */,
+				5D8C077C1DD91C4E002A4334 /* SettingAllSubredditItem.swift in Sources */,
+				5D8C07421DD91C4E002A4334 /* EllipsisView.swift in Sources */,
+				5D8C07761DD91C4E002A4334 /* DetailVideoItemContainer.swift in Sources */,
+				5D8C07611DD91C4E002A4334 /* SwipeToShowInteractionController.swift in Sources */,
+				5D8C07791DD91C4E002A4334 /* SettingItem.swift in Sources */,
+				5D8C07861DD91C4E002A4334 /* OnboardingCommentRepository.swift in Sources */,
+				5D8C07561DD91C4E002A4334 /* CommentTableViewCell.swift in Sources */,
+				5D8C074B1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.swift in Sources */,
+				5D8C07681DD91C4E002A4334 /* RedditPostListingViewModel.swift in Sources */,
+				5D8C078A1DD91C74002A4334 /* StateProvider.swift in Sources */,
+				5D8C07601DD91C4E002A4334 /* DetailVideoViewController.swift in Sources */,
+				5D8C07491DD91C4E002A4334 /* AutoPlaySettingTableViewCell.swift in Sources */,
+				5D8C07541DD91C4E002A4334 /* SettingsTableSource.swift in Sources */,
+				5D8C07721DD91C4E002A4334 /* RedditContent.swift in Sources */,
+				5D8C074F1DD91C4E002A4334 /* AccountInfoTableViewCell.swift in Sources */,
+				5D8C07591DD91C4E002A4334 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D8C07221DD91917002A4334 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8C072B1DD91917002A4334 /* NewsReaderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D8C072D1DD91917002A4334 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8C07361DD91917002A4334 /* NewsReaderUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DD1BA5C1DA432D40044BD0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -878,17 +1334,19 @@
 				5D3A06691DA6CAC1001C8B7C /* CommentRepository.swift in Sources */,
 				5DDAECB81DBBC5BE005201CF /* SoundSetupViewController.swift in Sources */,
 				5DF830D81DB3FA4D00CD270C /* SettingsTableSource.swift in Sources */,
+				5D8C079F1DD92858002A4334 /* NewsPostRepository.swift in Sources */,
 				5DDAECB21DBBBF25005201CF /* WelcomeOnboardingViewController.swift in Sources */,
 				5DDCC7C21DAC8BEE00FD63BF /* StateProvider.swift in Sources */,
 				5D29A2BF1DA6007100963D0D /* DetailImageGifViewController.swift in Sources */,
 				5DC1A6CA1DC04DD100B74FFF /* MainFeedDemoViewController.swift in Sources */,
 				5DD1BA641DA432D40044BD0C /* AppDelegate.swift in Sources */,
 				5DA74A1D1DA52555001B3B79 /* SwipeToShowInteractionController.swift in Sources */,
-				5DD1BA9F1DA4370F0044BD0C /* RedditPost.swift in Sources */,
+				5DD1BA9F1DA4370F0044BD0C /* NewsPost.swift in Sources */,
 				5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */,
 				5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */,
 				5D6754491DD53CE500623348 /* OnboardingRedditPostRepository.swift in Sources */,
 				5D29A2BD1DA5F43800963D0D /* DetailTextViewController.swift in Sources */,
+				5D8C07981DD91E01002A4334 /* Configuration.swift in Sources */,
 				5D6649341DADF3870054F4BA /* InstructionsViewController.swift in Sources */,
 				5DA74A231DA52D00001B3B79 /* DetailPost.swift in Sources */,
 				5DA74A2A1DA59120001B3B79 /* DetailViewModel.swift in Sources */,
@@ -934,7 +1392,7 @@
 				5D29A2B91DA5B81900963D0D /* DisplayableDetailContainer.swift in Sources */,
 				5D3A065E1DA611B4001C8B7C /* RAYoutubeWebView.swift in Sources */,
 				5D3A066F1DA6D6F6001C8B7C /* Comment.swift in Sources */,
-				5DD1BA971DA434230044BD0C /* RedditPostRepository.swift in Sources */,
+				5DD1BA971DA434230044BD0C /* MainNewsRepository.swift in Sources */,
 				5DA74A151DA47A29001B3B79 /* RedditReadablePost.swift in Sources */,
 				5D53AD111DB851B800941B2B /* SettingAllSubredditItem.swift in Sources */,
 				5DF830D51DB3EB0500CD270C /* RAAuthWebViewController.swift in Sources */,
@@ -964,6 +1422,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5D8C07281DD91917002A4334 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D8C070F1DD91917002A4334 /* NewsReader */;
+			targetProxy = 5D8C07271DD91917002A4334 /* PBXContainerItemProxy */;
+		};
+		5D8C07331DD91917002A4334 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D8C070F1DD91917002A4334 /* NewsReader */;
+			targetProxy = 5D8C07321DD91917002A4334 /* PBXContainerItemProxy */;
+		};
 		5DD1BA791DA432D40044BD0C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5DD1BA5F1DA432D40044BD0C /* Alien Reader */;
@@ -977,6 +1445,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5D8C071E1DD91917002A4334 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D8C071F1DD91917002A4334 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		5DD1BA671DA432D40044BD0C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -996,6 +1472,92 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5D8C07391DD91917002A4334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B23637F35C76E7CD5F5A3BFB /* Pods-NewsReader.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TB5YKEAJ2S;
+				INFOPLIST_FILE = NewsReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nashvillenative.newsreader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		5D8C073A1DD91917002A4334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABBA79380A573EF966B152D8 /* Pods-NewsReader.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TB5YKEAJ2S;
+				INFOPLIST_FILE = NewsReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nashvillenative.newsreader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		5D8C073C1DD91917002A4334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = TB5YKEAJ2S;
+				INFOPLIST_FILE = NewsReaderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NN.NewsReaderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsReader.app/NewsReader";
+			};
+			name = Debug;
+		};
+		5D8C073D1DD91917002A4334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = TB5YKEAJ2S;
+				INFOPLIST_FILE = NewsReaderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NN.NewsReaderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsReader.app/NewsReader";
+			};
+			name = Release;
+		};
+		5D8C073F1DD91917002A4334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = TB5YKEAJ2S;
+				INFOPLIST_FILE = NewsReaderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NN.NewsReaderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = NewsReader;
+			};
+			name = Debug;
+		};
+		5D8C07401DD91917002A4334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = TB5YKEAJ2S;
+				INFOPLIST_FILE = NewsReaderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NN.NewsReaderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = NewsReader;
+			};
+			name = Release;
+		};
 		5DD1BA891DA432D40044BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1190,6 +1752,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5D8C07381DD91917002A4334 /* Build configuration list for PBXNativeTarget "NewsReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D8C07391DD91917002A4334 /* Debug */,
+				5D8C073A1DD91917002A4334 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D8C073B1DD91917002A4334 /* Build configuration list for PBXNativeTarget "NewsReaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D8C073C1DD91917002A4334 /* Debug */,
+				5D8C073D1DD91917002A4334 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D8C073E1DD91917002A4334 /* Build configuration list for PBXNativeTarget "NewsReaderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D8C073F1DD91917002A4334 /* Debug */,
+				5D8C07401DD91917002A4334 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5DD1BA5B1DA432D40044BD0C /* Build configuration list for PBXProject "Alien Reader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1229,6 +1818,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		5D8C07191DD91917002A4334 /* NewsReader.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5D8C071A1DD91917002A4334 /* NewsReader.xcdatamodel */,
+			);
+			currentVersion = 5D8C071A1DD91917002A4334 /* NewsReader.xcdatamodel */;
+			path = NewsReader.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		5DD1BA6A1DA432D40044BD0C /* AlienGo.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

@@ -15,6 +15,8 @@ class WelcomeOnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        welcomeLabel.text = Configuration.onboardingOpeningText
 
         readerDelegate.readItem(readableItem: ReaderContainer(text: welcomeLabel.text!), delegate: self) {
             let soundVC: SoundSetupViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: SoundSetupViewController.self)) as! SoundSetupViewController

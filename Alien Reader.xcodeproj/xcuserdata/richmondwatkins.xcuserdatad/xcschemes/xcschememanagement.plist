@@ -7,16 +7,36 @@
 		<key>Alien Reader.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>1</integer>
 		</dict>
 		<key>AlienGo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>NewsReader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>5D8C070F1DD91917002A4334</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D8C07251DD91917002A4334</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D8C07301DD91917002A4334</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5DD1BA5F1DA432D40044BD0C</key>
 		<dict>
 			<key>primary</key>

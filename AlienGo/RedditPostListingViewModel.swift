@@ -30,7 +30,7 @@ class RedditPostListingViewModel: NSObject {
     }
     var currentSubreddit = Subreddit(name: "front")
     var displayDelegate: RedditPostListingViewModelDelegate!
-    var postProvider: RedditPostProvider = RedditPostProvider(repository: MainRedditRepository())
+    var postProvider: RedditPostProvider = RedditPostProvider(repository: MainNewsRepository())
     var navigationDelegate: RedditPostListingNavigationDelegate!
     
     // For storyboard object

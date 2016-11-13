@@ -8,9 +8,9 @@
 
 import UIKit
 
-class OnboardingRedditPostRepository: RedditPostRepository {
+class OnboardingRedditPostRepository: NewsPostRepository {
     
-    func getPostsFor(subreddit: Subreddit, callback: @escaping RedditPostFetchCallback) {
+    func getPostsFor(subreddit: Subreddit, callback: @escaping NewsPostFetchCallback) {
         if let filePath = Bundle.main.path(forResource: "allSeed", ofType: "json"), let data = NSData(contentsOfFile: filePath) {
             do {
                 let response = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
@@ -28,7 +28,7 @@ class OnboardingRedditPostRepository: RedditPostRepository {
         }
     }
 
-    func loadMore(postId: String, totalCount: Int, callback: @escaping RedditPostFetchCallback) {
+    func loadMore(postId: String, totalCount: Int, callback: @escaping NewsPostFetchCallback) {
         NetworkManager.shared.getRedditPostsAtPage(lastPostId: postId, totalPostCount: totalCount) { (response, error) in
             print(response)
             guard let response = response, let postResponse = (response["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]], error == nil else {

@@ -114,7 +114,7 @@ class NetworkManager: NSObject {
             request.setValue("bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }
 
-         return request
+        return request
     }
     
     private func sendRequest(request: URLRequest, callback: NetworkCallback?) {
