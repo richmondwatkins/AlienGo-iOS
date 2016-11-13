@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+protocol Readable {
+    var text: String { get }
+}
+
 enum ReadState {
     case reading, stopped, finished, notStarted
 }
