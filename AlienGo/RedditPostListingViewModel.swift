@@ -28,7 +28,7 @@ class RedditPostListingViewModel: NSObject {
             displayDelegate = collectionSource
         }
     }
-    var currentSubreddit = Subreddit(name: "front")
+    var currentSubreddit = Category(name: "front")
     var displayDelegate: RedditPostListingViewModelDelegate!
     var postProvider: RedditPostProvider = RedditPostProvider(repository: MainNewsRepository())
     var navigationDelegate: RedditPostListingNavigationDelegate!
@@ -56,7 +56,7 @@ class RedditPostListingViewModel: NSObject {
         }
     }
     
-    func getPostsFor(subreddit: Subreddit) {
+    func getPostsFor(subreddit: Category) {
         displayDelegate.animateRefreshControl()
         self.currentSubreddit = subreddit
         DispatchQueue.global(qos: .userInitiated).async {
@@ -146,12 +146,12 @@ extension RedditPostListingViewModel: ActionDelegate {
     
     func showFrontPage() {
         readHandler.hardStop()
-        getPostsFor(subreddit: Subreddit(name: "front"))
+        getPostsFor(subreddit: Category(name: "front"))
     }
     
     func showAll() {
         readHandler.hardStop()
-        getPostsFor(subreddit: Subreddit(name: "all"))
+        getPostsFor(subreddit: Category(name: "all"))
     }
 }
 

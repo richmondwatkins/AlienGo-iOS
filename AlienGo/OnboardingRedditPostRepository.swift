@@ -10,7 +10,7 @@ import UIKit
 
 class OnboardingRedditPostRepository: NewsPostRepository {
     
-    func getPostsFor(subreddit: Subreddit, callback: @escaping NewsPostFetchCallback) {
+    func getPostsFor(subreddit: Category, callback: @escaping NewsPostFetchCallback) {
         if let filePath = Bundle.main.path(forResource: "allSeed", ofType: "json"), let data = NSData(contentsOfFile: filePath) {
             do {
                 let response = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary

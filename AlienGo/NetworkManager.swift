@@ -25,7 +25,7 @@ class NetworkManager: NSObject {
     }
     var queuedRequests: [NetworkCall] = []
     
-    func getPostsForSubreddit(subreddit: Subreddit, callback: NetworkCallback?) {
+    func getPostsForSubreddit(subreddit: Category, callback: NetworkCallback?) {
         
         let url: URL = URL(string: "\(urlDomainPrefix)\(subreddit.urlPath)")!
         var request = NSMutableURLRequest(url: url)
@@ -139,9 +139,5 @@ class NetworkManager: NSObject {
             sendRequest(request: networkCall.request, callback: networkCall.callback)
         }
         queuedRequests.removeAll()
-    }
-        
-    private func handleResponse(callback: NetworkCallback?) {
-    
     }
 }

@@ -8,13 +8,14 @@
 
 import UIKit
 
-func ==(lhs: Subreddit, rhs: Subreddit) -> Bool {
+func ==(lhs: Category, rhs: Category) -> Bool {
     return lhs.name == rhs.name
 }
 
-struct Subreddit: Equatable {
+struct Category: Equatable {
 
     let name: String
+    private var subscribed: Bool = false
     
     var urlPath: String {
         if name == "front" {
@@ -42,5 +43,13 @@ struct Subreddit: Equatable {
     
     init(name: String) {
         self.name = name
+    }
+    
+    mutating func setSubscribed(subscribed: Bool) {
+        self.subscribed = subscribed
+    }
+    
+    func getSubscribed() -> Bool {
+        return self.subscribed
     }
 }

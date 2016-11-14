@@ -15,9 +15,11 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let commentLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(showComments(press:)))
-        view.addGestureRecognizer(commentLongPress)
+        
+        if Configuration.commentsEnabled {
+            let commentLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(showComments(press:)))
+            view.addGestureRecognizer(commentLongPress)
+        }
         
         let exitTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pop))
         exitTap.numberOfTapsRequired = 2

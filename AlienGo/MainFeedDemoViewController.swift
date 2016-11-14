@@ -13,7 +13,7 @@ class MainFeedDemoViewController: UIViewController {
     @IBOutlet var viewModel: RedditPostListingViewModel! {
         didSet {
             viewModel.postProvider = RedditPostProvider(repository: OnboardingRedditPostRepository())
-            viewModel.getPostsFor(subreddit: Subreddit(name: "front"))
+            viewModel.getPostsFor(subreddit: Category(name: "front"))
         }
     }
     var didReturnFromDetail: Bool = false

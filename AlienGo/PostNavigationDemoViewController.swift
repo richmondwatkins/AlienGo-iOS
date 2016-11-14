@@ -63,7 +63,7 @@ class PostNavigationDemoViewController: UIViewController {
         UserAppState.hasSeenOnboarding = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.explanationLabel.text = "That's it! Thanks for making it this far. This view will reload and you will be good to go."
+            self.explanationLabel.text = Configuration.onboardingCompleteText
             self.readExplanationLabel {
                 self.complete()
             }
@@ -71,10 +71,11 @@ class PostNavigationDemoViewController: UIViewController {
     }
     
     func complete() {
-        let navId: String = "MainViewControllerNavigationController"
-        let storyboard: String = "Main"
-        
-        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)
+        if Configuration.showCategorySelection {
+            self.present(self.storyboard!.instantiateViewController(withIdentifier: "NRCategorySelectionViewController"), animated: true, completion: nil)
+        } else {
+           reloadMainView()
+        }
     }
 }
 
@@ -122,7 +123,7 @@ extension PostNavigationDemoViewController: OnboardingDetailLifecycle {
     }
     
     var detailExplanationText: String {
-        return "Alien Reader tries to pull any text it can from a post. If it is unable to it will tell you so. We will skip this content for now and demo comments. Long press anywhere on the screen to display them"
+        return Configuration.onboardingDetailText
     }
     
     func didReadDetailExplanation() {

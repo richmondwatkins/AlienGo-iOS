@@ -11,7 +11,7 @@ import UIKit
 typealias NewsPostFetchCallback = (_ posts: [NewsPost]) -> Void
 
 protocol NewsPostRepository {
-    func getPostsFor(subreddit: Subreddit, callback: @escaping NewsPostFetchCallback)
+    func getPostsFor(subreddit: Category, callback: @escaping NewsPostFetchCallback)
     func loadMore(postId: String, totalCount: Int, callback: @escaping NewsPostFetchCallback)
     func deserializeRedditPostResponse(response: [[String: AnyObject]]) -> [NewsPost]
 }

@@ -10,7 +10,7 @@ import UIKit
 
 struct NewsPost {
 
-    let subreddit: Subreddit
+    let subreddit: Category
     let previewPhoto: PreviewPhoto
     var content: RedditContent
     let id: String
@@ -23,7 +23,7 @@ struct NewsPost {
     
     init?(apiResponse: [String: AnyObject]) {
         guard let data = apiResponse["data"] as? [String: AnyObject],
-            let subreddit = Subreddit(apiResponse: data),
+            let subreddit = Category(apiResponse: data),
             let id = data["id"] as? String,
             let previewPhoto = PreviewPhoto(apiResponse: data),
             let name = data["name"] as? String,

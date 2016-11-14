@@ -4,6 +4,14 @@
 <dict>
 	<key>AppConfig</key>
 	<dict>
+		<key>ShowCategorySelection</key>
+		<false/>
+		<key>OnboardingCompleteText</key>
+		<string>That&apos;s it! Thanks for making it this far. This view will reload and you will be good to go.</string>
+		<key>CommentsEnabled</key>
+		<true/>
+		<key>OnboardingDetailExplanation</key>
+		<string>Alien Reader tries to pull any text it can from a post. If it is unable to it will tell you so. We will skip this content for now and demo comments. Long press anywhere on the screen to display them</string>
 		<key>ReadableName</key>
 		<string>Alien Reader</string>
 		<key>OnboardingOpening</key>

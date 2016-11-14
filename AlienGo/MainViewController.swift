@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     @IBOutlet var viewModel: RedditPostListingViewModel! {
         didSet {
             viewModel.navigationDelegate = self
-            viewModel.getPostsFor(subreddit: Subreddit(name: "front"))
+            viewModel.getPostsFor(subreddit: Category(name: "front"))
         }
     }
     private var disapearFromDetailNav: Bool = false

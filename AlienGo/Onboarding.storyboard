@@ -124,24 +124,6 @@
             </objects>
             <point key="canvasLocation" x="1045.5999999999999" y="86.806596701649184"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="A0l-TR-MBu">
-            <objects>
-                <viewController id="zW8-AI-unt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="V8t-po-ddY"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pgr-3z-Jt9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WEV-Lx-gt7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zNP-Ta-F5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3344.8000000000002" y="86.806596701649184"/>
-        </scene>
         <!--Post Navigation Demo View Controller-->
         <scene sceneID="Jfu-aO-Z3z">
             <objects>
@@ -302,6 +284,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hq-Yp-Koy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1689" y="-610"/>
+        </scene>
+        <!--Category Selection View Controller-->
+        <scene sceneID="gVX-oW-p4E">
+            <objects>
+                <viewController storyboardIdentifier="NRCategorySelectionViewController" id="ShX-K6-NUn" customClass="NRCategorySelectionViewController" customModule="Alien_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xr0-KG-EH3"/>
+                        <viewControllerLayoutGuide type="bottom" id="mnI-IC-j8M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ju3-MX-wdB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FEC-HU-1cO">
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nJ2-ay-DR2">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYS-xn-2wB">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="UlK-ga-77m"/>
+                                </constraints>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="didSelectDone:" destination="ShX-K6-NUn" eventType="touchUpInside" id="CVq-3Y-bYj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="rYS-xn-2wB" firstAttribute="top" secondItem="FEC-HU-1cO" secondAttribute="bottom" id="3rd-sA-2I2"/>
+                            <constraint firstItem="rYS-xn-2wB" firstAttribute="leading" secondItem="ju3-MX-wdB" secondAttribute="leading" id="7jE-zR-pWc"/>
+                            <constraint firstAttribute="trailing" secondItem="FEC-HU-1cO" secondAttribute="trailing" id="KRe-5e-NX6"/>
+                            <constraint firstItem="mnI-IC-j8M" firstAttribute="top" secondItem="rYS-xn-2wB" secondAttribute="bottom" id="Kh3-ZC-uwp"/>
+                            <constraint firstItem="FEC-HU-1cO" firstAttribute="leading" secondItem="ju3-MX-wdB" secondAttribute="leading" id="S3C-gi-EJH"/>
+                            <constraint firstItem="FEC-HU-1cO" firstAttribute="top" secondItem="xr0-KG-EH3" secondAttribute="bottom" id="vz9-0S-cWG"/>
+                            <constraint firstAttribute="trailing" secondItem="rYS-xn-2wB" secondAttribute="trailing" id="xDp-a3-2hh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="FEC-HU-1cO" id="WNu-zI-F68"/>
+                        <outlet property="doneButton" destination="rYS-xn-2wB" id="aUN-7o-l0z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IVe-wR-NxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2396" y="86.806596701649184"/>
         </scene>
     </scenes>
 </document>

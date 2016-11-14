@@ -4,8 +4,16 @@
 <dict>
 	<key>AppConfig</key>
 	<dict>
+		<key>ShowCategorySelection</key>
+		<true/>
+		<key>OnboardingCompleteText</key>
+		<string>That&apos;s it for the tutorial! Let&apos;s choose your categories and then you&apos;ll be good to go!</string>
+		<key>CommentsEnabled</key>
+		<false/>
+		<key>OnboardingDetailExplanation</key>
+		<string>News Reader tries to pull any text it can from a post. If it is unable to it will tell you so. We will skip this content for now and finish on boarding. Double tap to go back.</string>
 		<key>OnboardingOpening</key>
-		<string>Thanks for checking out News Reader the first news client that reads itself to you. Since this is a different sort of app concept, let's do a quick tutorial</string>
+		<string>Thanks for checking out News Reader the first news client that reads itself to you. Since this is a different sort of app concept, let&apos;s do a quick tutorial</string>
 		<key>ReadableName</key>
 		<string>News Reader</string>
 	</dict>

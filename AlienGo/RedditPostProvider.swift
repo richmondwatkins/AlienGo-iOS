@@ -17,7 +17,7 @@ class RedditPostProvider {
         self.repository = repository
     }
     
-    func getPostsFor(subreddit: Subreddit) -> [NewsPost] {
+    func getPostsFor(subreddit: Category) -> [NewsPost] {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         var posts: [NewsPost] = [NewsPost]()
         

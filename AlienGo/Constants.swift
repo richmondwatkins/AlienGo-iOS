@@ -26,6 +26,13 @@ public func willSpeakAttrString(fullString: String, speechString: String, range:
     return attrString
 }
 
+public func reloadMainView() {
+    let navId: String = "MainViewControllerNavigationController"
+    let storyboard: String = "Main"
+    
+    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)
+}
+
 extension String {
     func isURL() -> Bool {
         let types: NSTextCheckingResult.CheckingType = .link

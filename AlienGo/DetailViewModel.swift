@@ -88,23 +88,21 @@ class MainDetailViewModel: DetailViewModel {
             })
         }
         
-//        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.4, execute: {
-            switch self.detailPostItem.content.contentType {
-            case .image, .gif, .imageGallery:
-                self.getImageGifInfo()
-                nothingToRead({})
-                break
-            case .link, .selfPost:
-                self.getTextInfo()
-                break
-            case .richVideo:
-                self.showVideoVC()
-                break
-            case .titleOnly, .selfPostTitleOnly:
-                self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
-                break
-            }
-//        })
+        switch self.detailPostItem.content.contentType {
+        case .image, .gif, .imageGallery:
+            self.getImageGifInfo()
+            nothingToRead({})
+            break
+        case .link, .selfPost:
+            self.getTextInfo()
+            break
+        case .richVideo:
+            self.showVideoVC()
+            break
+        case .titleOnly, .selfPostTitleOnly:
+            self.buildTextVC(title: self.detailPostItem.title, text: self.detailPostItem.title)
+            break
+        }
     }
     
     @objc private func settingsWillShow() {
