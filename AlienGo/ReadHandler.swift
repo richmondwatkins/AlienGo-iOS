@@ -158,7 +158,6 @@ extension ReadHandler: AVSpeechSynthesizerDelegate {
             
             self.canceled = false
             self.state = .finished
-            print(self.startNew)
             self.startNew?()
         }
     }

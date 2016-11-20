@@ -27,7 +27,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         
         titleLabel.text = post.postTitle
         subredditLabel.text = post.postSubredditName
-        usernameLabel.text = post.postedByUsername
+        usernameLabel.text = post.author?.username
 
         imageView.ra_setImageFromUrlString(urlString: post.content.thumbnailUrl)
     }

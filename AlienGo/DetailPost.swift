@@ -9,6 +9,7 @@
 import UIKit
 
 struct DetailPost: DetailPostItem {
+    internal var author: User?
     internal var permalink: String
     internal var id: String
     internal var title: String
@@ -20,5 +21,6 @@ struct DetailPost: DetailPostItem {
         self.title = displayableFeedItem.postTitle
         self.permalink = displayableFeedItem.postPermalink
         self.id = displayableFeedItem.postId
+        self.author = displayableFeedItem.author
     }
 }

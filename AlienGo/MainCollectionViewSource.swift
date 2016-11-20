@@ -149,6 +149,8 @@ extension MainCollectionViewSource: RedditPostListingViewModelDelegate {
     }
 
     internal func displayRedditPosts(posts: [DisplayableFeedItem]) {
+        firstLoad = true
+        currentPage = 0
         DispatchQueue.main.async {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.refreshControl.isRefreshing {

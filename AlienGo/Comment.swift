@@ -22,11 +22,11 @@ class Comment: CommentItem {
     let score: Int
     let body: String
     let nestedLevel: Int
-    let user: User
+    var user: User
     var replies: [Comment] = []
     var parent: Comment?
     
-    init?(apiResponse: [String: AnyObject], nestedLevel: Int = 0, parent: Comment? = nil) {
+    init?(apiResponse: [String: AnyObject], postAuthor: User?, nestedLevel: Int = 0, parent: Comment? = nil) {
         guard let data = apiResponse["data"] as? [String: AnyObject],
             let id = data["id"] as? String,
             let score = data["score"] as? Int,
@@ -42,9 +42,13 @@ class Comment: CommentItem {
         self.nestedLevel = nestedLevel
         self.parent = parent
         
+        if self.user == postAuthor {
+            self.user.isOp = true
+        }
+        
         if let replies = (data["replies"]?["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]] {
             for reply in replies {
-                if let comment = Comment(apiResponse: reply, nestedLevel: nestedLevel + 1, parent: self) {
+                if let comment = Comment(apiResponse: reply, postAuthor: postAuthor, nestedLevel: nestedLevel + 1, parent: self) {
                     self.replies.append(comment)
                 }
             }

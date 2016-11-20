@@ -8,7 +8,11 @@
 
 import UIKit
 
-struct User: Readable {
+func ==(lhs: User, rhs: User) -> Bool {
+    return lhs.username == rhs.username
+}
+
+struct User: Readable, Equatable {
     let username: String
     var isOp: Bool = false
     

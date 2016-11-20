@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlienGo/RedditPostListingViewModel.swift"
-            timestampString = "500687706.401836"
+            timestampString = "501310859.962313"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "readPostTitle(post:scrollDirection:cell:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,6 +138,150 @@
             startingLineNumber = "151"
             endingLineNumber = "151"
             landmarkName = "read(comment:index:toOnboardingState:prefix:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlienGo/NetworkManager.swift"
+            timestampString = "501313084.199299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "getDefaultSubreddits(callback:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlienGo/NetworkManager.swift"
+            timestampString = "501313123.551594"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "getAccessToken(paramaters:callback:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlienGo/RAAuthWebViewController.swift"
+            timestampString = "501313147.586628"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "didRecieveCode(notification:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Alien_Reader.RAAuthWebViewController.didRecieveCode (notification : Foundation.Notification) -&gt; ()"
+                  moduleName = "Alien Reader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondwatkins/Documents/Code/iOS/AlienGo/AlienGo/RAAuthWebViewController.swift"
+                  timestampString = "501313166.09621"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Alien_Reader.RAAuthWebViewController.(didRecieveCode (notification : Foundation.Notification) -&gt; ()).(closure #1)"
+                  moduleName = "Alien Reader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondwatkins/Documents/Code/iOS/AlienGo/AlienGo/RAAuthWebViewController.swift"
+                  timestampString = "501313166.09755"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlienGo/RAAuthWebViewController.swift"
+            timestampString = "501313252.13211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "didRecieveCode(notification:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Alien_Reader.RAAuthWebViewController.(didRecieveCode (notification : Foundation.Notification) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Alien Reader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondwatkins/Documents/Code/iOS/AlienGo/AlienGo/RAAuthWebViewController.swift"
+                  timestampString = "501315987.395334"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Alien_Reader.RAAuthWebViewController.(didRecieveCode (notification : Foundation.Notification) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Alien Reader"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondwatkins/Documents/Code/iOS/AlienGo/AlienGo/RAAuthWebViewController.swift"
+                  timestampString = "501315987.396986"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "1756">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlienGo/CommentViewController.swift"
+            timestampString = "501314302.325563"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

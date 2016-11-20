@@ -43,7 +43,7 @@ class MainCommentRepository: CommentRepository {
             }
             
             let deserializedComments = comments.flatMap({ (apiComment) -> Comment? in
-                    return Comment(apiResponse: apiComment)
+                return Comment(apiResponse: apiComment, postAuthor: detailPostItem.author)
             })
             
             let singleLevelComment = self.buildSingleLevelComments(comments: deserializedComments)

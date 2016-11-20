@@ -15,6 +15,6 @@ protocol DisplayableFeedItem: Readable {
     var postTitle: String { get }
     var postPhotoURL: String? { get }
     var postSubredditName: String? { get }
-    var postedByUsername: String? { get }
+    var author: User? { get }
     var content: RedditContent { get }
 }

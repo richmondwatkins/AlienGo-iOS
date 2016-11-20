@@ -11,14 +11,15 @@ import CoreData
 
 class SubredditRepository {
 
-    func storeDefaults() {
+    func storeSubscriptions() {
         NetworkManager.shared.getDefaultSubreddits { (subResponse, error) in
-            guard let subreddits = subResponse, let defaults = (subreddits["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]] else { return }
+            guard let subreddits = subResponse,
+                let defaults = (subreddits["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]],
+                defaults.count > 0 else { return }
             
             CoreDataManager.shared.deleteAll(entityName: SubscribedSubreddit.entityName)
             
             defaults.forEach({ (sub) in
-                print(sub)
                 guard let data = sub["data"] as? [String: AnyObject], let name = data["url"] as? String else { return }
                 
                 let entity = NSEntityDescription.insertNewObject(forEntityName: SubscribedSubreddit.entityName, into: CoreDataManager.shared.managedObjectContext) as! SubscribedSubreddit

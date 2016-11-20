@@ -45,6 +45,8 @@ class RAAuthWebViewController: UIViewController {
                     UserInfo.username = username
                 }
                 
+                ((UIApplication.shared).delegate as! AppDelegate).subredditRepository.storeSubscriptions()
+                
                 let _ = self?.navigationController?.popViewController(animated: true)
             })
         })

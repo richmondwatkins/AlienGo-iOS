@@ -28,17 +28,28 @@ class NetworkManager: NSObject {
     func getPostsForSubreddit(subreddit: Category, callback: NetworkCallback?) {
         
         let url: URL = URL(string: "\(urlDomainPrefix)\(subreddit.urlPath)")!
-        var request = NSMutableURLRequest(url: url)
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
        
         request = setReadditHeaders(request: request)
         
-        sendRequest(request: request as URLRequest, callback: callback)
+        sendRequest(request: request, callback: callback)
     }
     
     func getDefaultSubreddits(callback: @escaping NetworkCallback) {
-        let url: URL = URL(string: "https://www.reddit.com/subreddits/default.json")!
-        let request = NSMutableURLRequest(url: url)
+        var urlString = "https://www.reddit.com/subreddits/default.json"
+        
+        if let _ = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
+            urlString = "https://oauth.reddit.com/subreddits/mine/"
+        }
+       
+        let url: URL = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        if let _ = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
+            request = setReadditHeaders(request: request)
+        }
+
         request.httpMethod = "GET"
         
         sendRequest(request: request as URLRequest, callback: callback)
@@ -53,14 +64,14 @@ class NetworkManager: NSObject {
     
     func getCommentsForPost(permalink: String, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/pics/comments/5658ox/how_to_cable/.json
-        let url: URL = URL(string: "\(urlDomainPrefix)\(permalink).json")!
+        let url: URL = URL(string: "https://www.reddit.com\(permalink).json")!
 
         sendRequest(request: URLRequest(url: url), callback: callback)
     }
     
     func getRedditUsername(callback: NetworkCallback?) {
         let url: URL = URL(string: "https://oauth.reddit.com/api/v1/me")!
-        let request = NSMutableURLRequest(url: url)
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         sendRequest(request: setReadditHeaders(request: request) as URLRequest, callback: callback)
@@ -80,12 +91,12 @@ class NetworkManager: NSObject {
     
     func reportPost(postId: String) {
         let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/report")!
-        var request = NSMutableURLRequest(url: url)
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
         request = setReadditHeaders(request: request)
         
-        sendRequest(request: request as URLRequest, callback: nil)
+        sendRequest(request: request, callback: nil)
     }
     
     private func getAccessToken(paramaters: [String: String], callback: NetworkCallback?) {
@@ -117,7 +128,8 @@ class NetworkManager: NSObject {
         }
     }
     
-    private func setReadditHeaders(request: NSMutableURLRequest) -> NSMutableURLRequest {
+    private func setReadditHeaders(request: URLRequest) -> URLRequest {
+        var request = request
         if let accessToken = AuthInfo.accessToken, let _ = AuthInfo.refreshToken {
             request.setValue("bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }

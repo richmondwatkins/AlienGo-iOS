@@ -16,6 +16,8 @@ protocol RedditPostListingViewModelDelegate {
 protocol RedditPostListingNavigationDelegate {
     func displayDetailVC()
     func didFinishReadingAfterSwipe(direction: ScrollDirection)
+    func showingCategory(category: Category)
+    func loading()
 }
 class RedditPostListingViewModel: NSObject {
 
@@ -62,6 +64,8 @@ class RedditPostListingViewModel: NSObject {
         DispatchQueue.global(qos: .userInitiated).async {
             let posts = self.postProvider.getPostsFor(subreddit: subreddit)
             self.displayDelegate.displayRedditPosts(posts: posts)
+            
+            self.navigationDelegate.showingCategory(category: self.currentSubreddit)
         }
     }
     
@@ -144,18 +148,23 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
 
 extension RedditPostListingViewModel: ActionDelegate {
     func show(subreddit: Category) {
-        readHandler.hardStop()
-        getPostsFor(subreddit: subreddit)
+        show(category: subreddit)
     }
 
     func showFrontPage() {
-        readHandler.hardStop()
-        getPostsFor(subreddit: Category(name: "front"))
+        show(subreddit: Category(name: "front"))
     }
     
     func showAll() {
+        show(subreddit: Category(name: "all"))
+    }
+    
+    func show(category: Category) {
         readHandler.hardStop()
-        getPostsFor(subreddit: Category(name: "all"))
+
+        getPostsFor(subreddit: category)
+        
+        navigationDelegate.loading()
     }
 }
 

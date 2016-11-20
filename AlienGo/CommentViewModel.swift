@@ -43,7 +43,7 @@ class MainCommentViewModel: CommentViewModel {
     private var shouldAcceptLongPress: Bool = true
     private var isDisplaying: Bool = true
     var readComments: Int = 0
-    
+    var firstLoad = true
     init(detailPostItem: DetailPostItem, displayDelegate: CommentDisplayDelegate) {
         self.detailPostItem = detailPostItem
         self.displayDelegate = displayDelegate
@@ -52,21 +52,26 @@ class MainCommentViewModel: CommentViewModel {
     
     func getComments() {
 
-        readableDelegate.hardStop()
-        readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading Comments"), delegate: nil, completion: {
-           //readingFinished = true
-        })
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            let response = self.provider.get()
+        if firstLoad {
+            firstLoad = false
+            readableDelegate.hardStop()
+            var readingFinished = false
+            readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading Comments"), delegate: nil, completion: {
+                readingFinished = true
+            })
             
-            self.orderedComments = response.orderedComments
-            self.linearComments = response.linearComments
-            
-            self.displayDelegate?.display(comments: self.linearComments)
-            
-            if let first = self.linearComments.first {
-                self.read(comment: first, index: 0)
+            DispatchQueue.global(qos: .userInitiated).async {
+                let response = self.provider.get()
+                
+                self.orderedComments = response.orderedComments
+                self.linearComments = response.linearComments
+                
+                self.displayDelegate?.display(comments: self.linearComments)
+                
+                if let first = self.linearComments.first {
+                    while !readingFinished {}
+                    self.read(comment: first, index: 0)
+                }
             }
         }
     }
@@ -85,7 +90,8 @@ class MainCommentViewModel: CommentViewModel {
     
     func didTap(gesture: UITapGestureRecognizer) {
         if let readingComment = readingComment {
-            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Comment by \(readingComment.user.username)   score of \(readingComment.score) \(readingComment.text)"), delegate: nil, completion: nil)
+            let usernameReadable = readingComment.user.isOp ? "\(readingComment.user.username) the O P" : readingComment.user.username
+            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Comment by \(usernameReadable)   score of \(readingComment.score) \(readingComment.text)"), delegate: nil, completion: nil)
         }
     }
     
@@ -147,8 +153,8 @@ class MainCommentViewModel: CommentViewModel {
     func read(comment: Comment, index: Int, prefix: String = "Comment by") {
         readComments += 1
         readingComment = comment
-        
-        let userReadItem = ReaderContainer(readable: comment.user)
+        let userReadText = comment.user.isOp ? "\(comment.user.username), the O P" : comment.user.username
+        let userReadItem = ReaderContainer(text: userReadText)
         
         readableDelegate.hardStop()
         // hack for now

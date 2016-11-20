@@ -66,6 +66,10 @@ class SettingsViewController: UIViewController {
         notSelected.backgroundColor = .white
         notSelectedLabel.textColor = UIColor(ColorConstants.appBlue)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 extension SettingsViewController: SettingsDisplayDelegate {

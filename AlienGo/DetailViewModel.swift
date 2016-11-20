@@ -34,6 +34,7 @@ class MainDetailViewModel: DetailViewModel {
     private var readableDelegate: ReadableDelegate = ReadHandler.shared
     private var shouldAcceptLongPress: Bool = true
     var didDisplay: Bool = false
+    var showingComments: Bool = false
     
     func set(readableDelegate: ReadableDelegate) {
         self.readableDelegate = readableDelegate
@@ -51,10 +52,15 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     func viewDidDisappear() {
-        readableDelegate.stop()
+        if !showingComments {
+            readableDelegate.stop()
+        }
+        
+        showingComments = false
     }
     
     func showComments(press: UILongPressGestureRecognizer) {
+        showingComments = true
         if press.state == .began && shouldAcceptLongPress {
             
             showCommentVC()

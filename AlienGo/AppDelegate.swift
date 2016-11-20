@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             storyboard = "Onboarding"
         }
 
-        subredditRepository.storeDefaults()
+        subredditRepository.storeSubscriptions()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)

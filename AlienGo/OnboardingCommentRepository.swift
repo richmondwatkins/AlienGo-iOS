@@ -23,7 +23,7 @@ class OnboardingCommentRepository: CommentRepository {
                 }
                 
                 let deserializedComments = comments.flatMap({ (apiComment) -> Comment? in
-                    return Comment(apiResponse: apiComment)
+                    return Comment(apiResponse: apiComment, postAuthor: nil)
                 })
                 
                 let singleLevelComment = self.buildSingleLevelComments(comments: deserializedComments)

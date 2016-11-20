@@ -13,4 +13,5 @@ protocol DetailPostItem {
     var title: String { get }
     var id: String { get }
     var permalink: String { get }
+    var author: User? { get }
 }

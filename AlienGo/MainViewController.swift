@@ -16,6 +16,7 @@ protocol ActionDelegate {
 
 class MainViewController: UIViewController {
 
+    @IBOutlet weak var loadingLabel: LoadingLabel!
     @IBOutlet var viewModel: RedditPostListingViewModel! {
         didSet {
             viewModel.navigationDelegate = self
@@ -29,6 +30,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingLabel.start()
         
         let settingsWidthHeight: CGFloat = 50
         
@@ -97,6 +100,11 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: RedditPostListingNavigationDelegate {
+    func showingCategory(category: Category) {
+        DispatchQueue.main.async {
+            self.loadingLabel.text = category.name
+        }
+    }
     
     func didFinishReadingAfterSwipe(direction: ScrollDirection) {
         
@@ -104,5 +112,9 @@ extension MainViewController: RedditPostListingNavigationDelegate {
     
     func displayDetailVC() {
         didSingleTap()
+    }
+    
+    func loading() {
+        loadingLabel.start()
     }
 }

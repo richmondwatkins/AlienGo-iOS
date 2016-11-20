@@ -88,7 +88,14 @@ extension PostNavigationDemoViewController: ReadingCallbackDelegate {
 }
 
 extension PostNavigationDemoViewController: RedditPostListingNavigationDelegate {
-    
+    func loading() {
+        //
+    }
+
+    func showingCategory(category: Category) {
+        //
+    }
+
     func didFinishReadingAfterSwipe(direction: ScrollDirection) {
         self.contentVC.viewModel.collectionSource.collectionView.isScrollEnabled = false
         self.explanationLabel.text = "Nice job! Now touch the post to reveal it's content"

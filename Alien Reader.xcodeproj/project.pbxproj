@@ -176,6 +176,8 @@
 		5DA74A2C1DA59282001B3B79 /* RedditPostDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */; };
 		5DA74A2E1DA592AC001B3B79 /* RedditDetailPostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2D1DA592AC001B3B79 /* RedditDetailPostProvider.swift */; };
 		5DA74A301DA592F1001B3B79 /* DisplayableDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */; };
+		5DADB5571DE1611B005EF963 /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DADB5561DE1611B005EF963 /* LoadingLabel.swift */; };
+		5DADB5581DE1611B005EF963 /* LoadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DADB5561DE1611B005EF963 /* LoadingLabel.swift */; };
 		5DB609251DAC8FDB000F3258 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB609241DAC8FDB000F3258 /* MainCollectionView.swift */; };
 		5DC1A6CA1DC04DD100B74FFF /* MainFeedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */; };
 		5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */; };
@@ -336,6 +338,7 @@
 		5DA74A2B1DA59282001B3B79 /* RedditPostDetailRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditPostDetailRepository.swift; sourceTree = "<group>"; };
 		5DA74A2D1DA592AC001B3B79 /* RedditDetailPostProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditDetailPostProvider.swift; sourceTree = "<group>"; };
 		5DA74A2F1DA592F1001B3B79 /* DisplayableDetailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableDetailItem.swift; sourceTree = "<group>"; };
+		5DADB5561DE1611B005EF963 /* LoadingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingLabel.swift; path = AlienGo/LoadingLabel.swift; sourceTree = "<group>"; };
 		5DB609241DAC8FDB000F3258 /* MainCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionView.swift; sourceTree = "<group>"; };
 		5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFeedDemoViewController.swift; sourceTree = "<group>"; };
 		5DC1A6CB1DC1704900B74FFF /* OnboardingDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingDetailViewModel.swift; sourceTree = "<group>"; };
@@ -566,6 +569,7 @@
 		5D8C07961DD91D8D002A4334 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5DADB5561DE1611B005EF963 /* LoadingLabel.swift */,
 				5D8C07971DD91E01002A4334 /* Configuration.swift */,
 				5D8C07A31DD93077002A4334 /* HTTPClient.swift */,
 			);
@@ -1326,6 +1330,7 @@
 				5D8C07661DD91C4E002A4334 /* DisplayableDetailItem.swift in Sources */,
 				5D8C078E1DD91C74002A4334 /* UserInfo.swift in Sources */,
 				5D8C077D1DD91C4E002A4334 /* SettingSpeechSpeed.swift in Sources */,
+				5DADB5581DE1611B005EF963 /* LoadingLabel.swift in Sources */,
 				5D8C07A01DD92858002A4334 /* NewsPostRepository.swift in Sources */,
 				5D8C075A1DD91C4E002A4334 /* MainCollectionViewSource.swift in Sources */,
 				5D8C075D1DD91C4E002A4334 /* DetailViewController.swift in Sources */,
@@ -1496,6 +1501,7 @@
 				5DD1BA971DA434230044BD0C /* MainNewsRepository.swift in Sources */,
 				5DA74A151DA47A29001B3B79 /* RedditReadablePost.swift in Sources */,
 				5D53AD111DB851B800941B2B /* SettingAllSubredditItem.swift in Sources */,
+				5DADB5571DE1611B005EF963 /* LoadingLabel.swift in Sources */,
 				5DF830D51DB3EB0500CD270C /* RAAuthWebViewController.swift in Sources */,
 				5D3A06771DA6E3E6001C8B7C /* CommentTableSource.swift in Sources */,
 				5D53AD0A1DB8289800941B2B /* SettingFrontPageItem.swift in Sources */,

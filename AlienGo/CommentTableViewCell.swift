@@ -33,11 +33,17 @@ class CommentTableViewCell: UITableViewCell {
         usernameLabel.text = comment.user.username
         scoreLabel.text = "\(comment.score)"
         
+        if comment.user.isOp {
+            usernameLabel.textColor = UIColor(ColorConstants.appBlue)
+        } else {
+            usernameLabel.textColor = .black
+        }
+        
         lableLeadingConstraint.constant = CGFloat((comment.nestedLevel + 1) * spacing)
         
         for _ in 0..<comment.nestedLevel + 1 {
             let tmpLine = UIView()
-            tmpLine.backgroundColor = UIColor("#FAFAFA")
+            tmpLine.backgroundColor = UIColor("#D3D3D3")
             addSubview(tmpLine)
             
             sideLines.append(tmpLine)

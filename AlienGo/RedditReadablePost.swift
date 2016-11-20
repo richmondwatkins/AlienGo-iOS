@@ -13,12 +13,12 @@ struct RedditReadablePost: Readable {
     var postId: String
     var text: String
     var subredditName: String?
-    var username: String?
+    var author: User?
     
     init(displayablePost: DisplayableFeedItem) {
         self.postId = displayablePost.postId
         self.text = displayablePost.postTitle
-        self.username = displayablePost.postedByUsername
+        self.author = displayablePost.author
         self.subredditName = displayablePost.postSubredditName
     }
 }

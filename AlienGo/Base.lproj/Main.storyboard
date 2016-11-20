@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16C41b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -33,10 +33,19 @@
                                     <outlet property="delegate" destination="cGy-KJ-ScY" id="CoP-9K-2UE"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ge0-aI-DaL" customClass="LoadingLabel" customModule="Alien_Reader" customModuleProvider="target">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" placeholder="YES" id="FZA-zI-Rfv"/>
+                                    <constraint firstAttribute="width" constant="50" placeholder="YES" id="raM-Wr-bWo"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PO6-c3-rVY" secondAttribute="trailing" id="2cU-4z-jqD"/>
+                            <constraint firstItem="ge0-aI-DaL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3tp-VN-Wqn"/>
+                            <constraint firstItem="ge0-aI-DaL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="15" id="D0b-rA-HdS"/>
                             <constraint firstItem="PO6-c3-rVY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cOc-Lm-oQr"/>
                             <constraint firstItem="PO6-c3-rVY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uQ4-cE-8RS"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PO6-c3-rVY" secondAttribute="bottom" id="uVZ-Gw-ird"/>
@@ -44,6 +53,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="zRT-9C-xVn"/>
                     <connections>
+                        <outlet property="loadingLabel" destination="ge0-aI-DaL" id="rQO-SK-wXl"/>
                         <outlet property="viewModel" destination="crP-ob-sSr" id="r8N-07-UOv"/>
                     </connections>
                 </viewController>
@@ -269,7 +279,7 @@
                             <constraint firstItem="Y35-oo-VjU" firstAttribute="leading" secondItem="dra-Vx-GVe" secondAttribute="leading" constant="16" id="C9K-Ku-NwL"/>
                             <constraint firstItem="kMd-pp-Wm3" firstAttribute="top" secondItem="Y35-oo-VjU" secondAttribute="top" id="OPv-cg-dgo"/>
                             <constraint firstItem="zKg-PR-SZu" firstAttribute="top" secondItem="B51-H2-Uje" secondAttribute="bottom" id="SSj-fY-17d"/>
-                            <constraint firstItem="Y35-oo-VjU" firstAttribute="top" secondItem="dra-Vx-GVe" secondAttribute="top" constant="20" id="b0N-pa-iMo"/>
+                            <constraint firstItem="Y35-oo-VjU" firstAttribute="top" secondItem="dra-Vx-GVe" secondAttribute="top" constant="15" id="b0N-pa-iMo"/>
                             <constraint firstAttribute="trailing" secondItem="B51-H2-Uje" secondAttribute="trailing" id="jBD-Ts-LJd"/>
                             <constraint firstItem="B51-H2-Uje" firstAttribute="top" secondItem="Y35-oo-VjU" secondAttribute="bottom" constant="8" id="ylK-sr-eoQ"/>
                         </constraints>

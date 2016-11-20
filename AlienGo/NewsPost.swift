@@ -17,7 +17,7 @@ struct NewsPost {
     let name: String
     let title: String
     let permalink: String
-    var author: String?
+    var author: User?
     var score: Int?
     var readCompletionHandler: (() -> Void)?
     
@@ -40,7 +40,10 @@ struct NewsPost {
         self.previewPhoto = previewPhoto
         self.permalink = permalink
         
-        self.author = data["author"] as? String
+        if let auther = data["author"] as? String {
+            self.author = User(username: auther)
+        }
+        
         self.score = data["score"] as? Int
     }
     
@@ -64,7 +67,7 @@ struct NewsPost {
 
 extension NewsPost: DisplayableFeedItem {
     var postedByUsername: String? {
-        return author
+        return author?.username
     }
 
     var postSubredditName: String? {
