@@ -11,19 +11,23 @@ import UIKit
 protocol NRCategorySelectionViewModelDisplayDelegate {
     func enabledDoneButton()
     func disableDoneButton()
+    func dismissViewController()
 }
 
 class NRCategorySelectionViewModel {
 
     var categories: [Category] = CategoryDataSourceBuilder.build()
     let displayDelegate: NRCategorySelectionViewModelDisplayDelegate
+    let repository: SubscribedCategoryRepository = SubscribedCategoryRepository()
     
     init(displayDelegate: NRCategorySelectionViewModelDisplayDelegate) {
         self.displayDelegate = displayDelegate
     }
     
     func didSelectDone() {
-        //Save selected categories and setup NYT api
+        UserAppState.hasSelectedCategories = true
+        repository.set(categories: categories.filter({ $0.getSubscribed() }))
+        displayDelegate.dismissViewController()
     }
 }
 

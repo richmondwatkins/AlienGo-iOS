@@ -37,4 +37,8 @@ class Configuration {
     static func plistDict() -> NSDictionary {
         return NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Info", ofType: "plist")!)!["AppConfig"] as! NSDictionary
     }
+    
+    static var cdModelName: String {
+        return plistDict()["CoreDataModelName"] as! String
+    }
 }

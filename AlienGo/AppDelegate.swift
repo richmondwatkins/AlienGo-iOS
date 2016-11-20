@@ -16,7 +16,7 @@ import KeychainAccess
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let subredditRepository = SubredditRepository()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navId = "OnboardingNavigationController"
             storyboard = "Onboarding"
         }
+
+        subredditRepository.storeDefaults()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: navId)

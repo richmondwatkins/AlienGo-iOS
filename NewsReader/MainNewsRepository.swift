@@ -10,7 +10,14 @@ import UIKit
 
 class MainNewsRepository: NewsPostRepository {
     
+    let catogoryRepo: SubscribedCategoryRepository = SubscribedCategoryRepository()
+    
     func getPostsFor(subreddit: Category, callback: @escaping NewsPostFetchCallback) {
+        catogoryRepo.get { (categories) in
+            //https://api.nytimes.com/svc/topstories/v2/upshot.json
+        }
+        
+        
         NetworkManager.shared.getPostsForSubreddit(subreddit: subreddit) { (response, error) in
             guard let response = response, let postResponse = (response["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]], error == nil else {
                 print("NONE AT FIRST PAGE")

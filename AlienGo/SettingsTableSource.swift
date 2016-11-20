@@ -31,7 +31,8 @@ class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource 
                 String(describing: AccountInfoTableViewCell.self),
                 String(describing: AllFrontSettingTableViewCell.self),
                 String(describing: SpeechVolumeCellTableViewCell.self),
-                String(describing: AutoPlaySettingTableViewCell.self)
+                String(describing: AutoPlaySettingTableViewCell.self),
+                String(describing: SubscribedSubredditTableViewCell.self)
             ])
         }
     }

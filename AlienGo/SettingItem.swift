@@ -9,7 +9,7 @@
 import UIKit
 
 enum SettingType {
-    case preAuth, postAuth, auto, front, all, speedControl
+    case preAuth, postAuth, auto, front, all, speedControl, subreddit, subredditHeader
 }
 
 protocol SettingItem {
@@ -22,12 +22,20 @@ protocol SettingItem {
 struct SettingBuilder {
    
     static func build() -> [SettingItem] {
-        return [
+        var subs: [SettingItem] = [
             SettingAllSubredditItem(),
             SettingFrontPageItem(),
             SettingAuthItem(),
             SettingSpeechSpeed(),
             SettingAutoPlayItem()
         ]
+        
+         SubredditRepository().get()
+            .flatMap({ SettingSubscribedSubreddit(subscribedSubreddit: $0) })
+            .forEach { (subSetting) in
+            subs.append(subSetting)
+        }
+        
+        return subs
     }
 }

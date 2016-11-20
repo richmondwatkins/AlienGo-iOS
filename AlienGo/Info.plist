@@ -4,18 +4,20 @@
 <dict>
 	<key>AppConfig</key>
 	<dict>
-		<key>ShowCategorySelection</key>
-		<false/>
-		<key>OnboardingCompleteText</key>
-		<string>That&apos;s it! Thanks for making it this far. This view will reload and you will be good to go.</string>
+		<key>CoreDataModelName</key>
+		<string>AlienGo</string>
 		<key>CommentsEnabled</key>
 		<true/>
+		<key>OnboardingCompleteText</key>
+		<string>That&apos;s it! Thanks for making it this far. This view will reload and you will be good to go.</string>
 		<key>OnboardingDetailExplanation</key>
 		<string>Alien Reader tries to pull any text it can from a post. If it is unable to it will tell you so. We will skip this content for now and demo comments. Long press anywhere on the screen to display them</string>
-		<key>ReadableName</key>
-		<string>Alien Reader</string>
 		<key>OnboardingOpening</key>
 		<string>Thanks for checking out Alien Reader, the first reddit client that reads reddit to you. Since this is a different sort of app concept, let&apos;s do a quick tutorial</string>
+		<key>ReadableName</key>
+		<string>Alien Reader</string>
+		<key>ShowCategorySelection</key>
+		<false/>
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -32,7 +34,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -45,7 +47,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>9</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

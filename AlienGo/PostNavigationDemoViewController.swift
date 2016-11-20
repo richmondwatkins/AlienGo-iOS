@@ -54,6 +54,7 @@ class PostNavigationDemoViewController: UIViewController {
     
     @IBAction func skip(_ sender: UIButton) {
         UserAppState.shouldStartReading = true
+        UserAppState.hasSeenOnboarding = true
         readerDelegate.hardStop()
         complete()
     }
@@ -71,7 +72,7 @@ class PostNavigationDemoViewController: UIViewController {
     }
     
     func complete() {
-        if Configuration.showCategorySelection {
+        if Configuration.showCategorySelection && !UserAppState.hasSelectedCategories {
             self.present(self.storyboard!.instantiateViewController(withIdentifier: "NRCategorySelectionViewController"), animated: true, completion: nil)
         } else {
            reloadMainView()

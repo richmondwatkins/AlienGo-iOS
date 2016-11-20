@@ -34,7 +34,7 @@ class NRCategorySelectionViewController: UIViewController {
     }
     
     @IBAction func didSelectDone(_ sender: UIButton) {
-        
+        viewModel.didSelectDone()
     }
 }
 
@@ -46,6 +46,10 @@ extension NRCategorySelectionViewController: NRCategorySelectionViewModelDisplay
     
     func disableDoneButton() {
         self.doneButton.isEnabled = false
+    }
+    
+    func dismissViewController() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

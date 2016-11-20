@@ -31,4 +31,15 @@ class UserAppState {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var hasSelectedCategories: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "hasSelectedCategories")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasSelectedCategories")
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

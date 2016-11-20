@@ -11,6 +11,7 @@ import UIKit
 protocol ActionDelegate {
     func showFrontPage()
     func showAll()
+    func show(subreddit: Category)
 }
 
 class MainViewController: UIViewController {
@@ -31,7 +32,7 @@ class MainViewController: UIViewController {
         
         let settingsWidthHeight: CGFloat = 50
         
-        settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: UIApplication.shared.statusBarFrame.height, width: settingsWidthHeight, height: settingsWidthHeight)
+        settingsView.frame = CGRect(x: UIScreen.main.bounds.width - settingsWidthHeight - 8, y: 15, width: settingsWidthHeight, height: settingsWidthHeight)
         settingsView.actionDelegate = viewModel
         
         settingsView.layer.zPosition = 100
@@ -58,6 +59,10 @@ class MainViewController: UIViewController {
         }
         
         viewDidDisappearFromPush = false
+        
+        if Configuration.showCategorySelection && !UserAppState.hasSelectedCategories {
+            self.presentViewControllerFromVisibleViewController(viewControllerToPresent: UIStoryboard(name: "Onboarding", bundle: Bundle.main).instantiateViewController(withIdentifier: "NRCategorySelectionViewController"), animated: true, completion: nil)
+        }
     }
     
     func reReadCurrent(press: UILongPressGestureRecognizer) {
@@ -84,6 +89,10 @@ class MainViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }
 

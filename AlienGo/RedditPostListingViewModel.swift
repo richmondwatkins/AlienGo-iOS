@@ -143,7 +143,11 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
 }
 
 extension RedditPostListingViewModel: ActionDelegate {
-    
+    func show(subreddit: Category) {
+        readHandler.hardStop()
+        getPostsFor(subreddit: subreddit)
+    }
+
     func showFrontPage() {
         readHandler.hardStop()
         getPostsFor(subreddit: Category(name: "front"))

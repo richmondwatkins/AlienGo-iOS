@@ -53,7 +53,7 @@ class MainCommentViewModel: CommentViewModel {
     func getComments() {
 
         readableDelegate.hardStop()
-        readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: {
+        readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading Comments"), delegate: nil, completion: {
            //readingFinished = true
         })
         

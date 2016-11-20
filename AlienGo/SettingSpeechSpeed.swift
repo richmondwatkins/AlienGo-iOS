@@ -28,7 +28,9 @@ class SettingSpeechSpeed: SettingItem {
         
         actionDelegate.showAll()
         
-        currentVC.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            currentVC.dismiss(animated: true, completion: nil)
+        }
         
         return nil
     }

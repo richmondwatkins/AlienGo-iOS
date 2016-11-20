@@ -36,6 +36,14 @@ class NetworkManager: NSObject {
         sendRequest(request: request as URLRequest, callback: callback)
     }
     
+    func getDefaultSubreddits(callback: @escaping NetworkCallback) {
+        let url: URL = URL(string: "https://www.reddit.com/subreddits/default.json")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        sendRequest(request: request as URLRequest, callback: callback)
+    }
+    
     func getRedditPostsAtPage(lastPostId: String, totalPostCount: Int, callback: @escaping NetworkCallback) {
         //https://www.reddit.com/r/all/.json?count=25&after=t3_5656e1.json
         let url: URL = URL(string: "\(urlDomainPrefix)/r/all/.json?count=\(totalPostCount)&after=\(lastPostId)")!
