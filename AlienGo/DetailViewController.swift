@@ -25,6 +25,12 @@ class DetailViewController: UIViewController {
         exitTap.numberOfTapsRequired = 2
         exitTap.delegate = self
         view.addGestureRecognizer(exitTap)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Comments", style: .done, target: self, action: #selector(comments))
+    }
+    
+    func comments() {
+        viewModel.showCommentVC()
     }
     
     func showComments(press: UILongPressGestureRecognizer) {

@@ -89,7 +89,7 @@ class OnboardingDetailViewModel: DetailViewModel {
         return UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: storyboardId)
     }
     
-    private func showCommentVC() {
+    internal func showCommentVC() {
         disappearFromCommentPopover = true
         
         let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController

@@ -23,7 +23,6 @@ class MainNewsRepository: NewsPostRepository {
 
     func loadMore(postId: String, totalCount: Int, callback: @escaping NewsPostFetchCallback) {
         NetworkManager.shared.getRedditPostsAtPage(lastPostId: postId, totalPostCount: totalCount) { (response, error) in
-            print(response)
             guard let response = response, let postResponse = (response["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]], error == nil else {
                 print("NONE AT PAGE")
                 return

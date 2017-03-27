@@ -19,6 +19,7 @@ protocol DetailViewModel {
     var detailPostItem: DetailPostItem { get }
     weak var displayDelegate: DetailViewModelDelegate? { get }
     func showComments(press: UILongPressGestureRecognizer)
+    func showCommentVC()
     func viewDidDisappear()
     func navBack()
     func getInfo()
@@ -60,11 +61,8 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     func showComments(press: UILongPressGestureRecognizer) {
-        showingComments = true
         if press.state == .began && shouldAcceptLongPress {
-            
             showCommentVC()
-            
             shouldAcceptLongPress = false
         } else if press.state == .ended {
             shouldAcceptLongPress = true
@@ -119,7 +117,8 @@ class MainDetailViewModel: DetailViewModel {
         disappearFromSettings = true
     }
     
-    private func showCommentVC() {
+    func showCommentVC() {
+        showingComments = true
         disappearFromCommentPopover = true
                 
         let commentVC: CommentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: String(describing: CommentViewController.self)) as! CommentViewController

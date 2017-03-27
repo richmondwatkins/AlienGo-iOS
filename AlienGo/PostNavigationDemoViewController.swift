@@ -20,12 +20,13 @@ class PostNavigationDemoViewController: UIViewController {
         }
     }
     
-            super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         explanationLabel.text = explanationLabel.text!.replacingOccurrences(of: "$AppName", with: Configuration.readableName)
         
         UserAppState.shouldStartReading = false
-    
+        
         self.contentVC.viewModel.navigationDelegate = self
         readExplanationLabel {
             self.contentVC.viewModel.collectionSource.collectionView.reloadData()
@@ -37,6 +38,7 @@ class PostNavigationDemoViewController: UIViewController {
             }
         }
     }
+    
     
     func readExplanationLabel(callback: @escaping () -> Void) {
         readerDelegate.readItem(readableItem: ReaderContainer(text: explanationLabel.text!), delegate: self) {

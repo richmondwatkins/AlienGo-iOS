@@ -542,6 +542,15 @@
 			name = Subreddits;
 			sourceTree = "<group>";
 		};
+		5D797DB01E88BB4500492205 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D3A065D1DA611B4001C8B7C /* RAYoutubeWebView.swift */,
+				5DCB42341DCAA21F00B392AC /* EllipsisView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		5D8601671DB56F7B00BC7DAE /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,14 +690,6 @@
 			name = DetailVC;
 			sourceTree = "<group>";
 		};
-		5DCB42331DCAA1ED00B392AC /* Ellipsis */ = {
-			isa = PBXGroup;
-			children = (
-				5DCB42341DCAA21F00B392AC /* EllipsisView.swift */,
-			);
-			name = Ellipsis;
-			sourceTree = "<group>";
-		};
 		5DCCEE801DC67925008EADA2 /* AutoPlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,8 +732,7 @@
 		5DD1BA621DA432D40044BD0C /* AlienGo */ = {
 			isa = PBXGroup;
 			children = (
-				5DCB42331DCAA1ED00B392AC /* Ellipsis */,
-				5D3A065D1DA611B4001C8B7C /* RAYoutubeWebView.swift */,
+				5D797DB01E88BB4500492205 /* Views */,
 				5DA74A181DA522CE001B3B79 /* ViewControllers */,
 				5DA74A161DA482BC001B3B79 /* ReadHandler.swift */,
 				5DA74A081DA44682001B3B79 /* Protocols */,
