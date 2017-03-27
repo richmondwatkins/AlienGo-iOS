@@ -320,27 +320,39 @@
                                     <outlet property="delegate" destination="7P1-Em-v4q" id="cG1-7w-QuH"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rn4-9N-xv4">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="4SA-vj-V95"/>
+                                    <constraint firstAttribute="height" constant="30" id="KQh-Av-rlV"/>
+                                </constraints>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="didSelectClose:" destination="FlQ-VK-Zc9" eventType="touchUpInside" id="Mhu-ie-924"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mPf-kS-LPg" firstAttribute="top" secondItem="SYm-0t-arw" secondAttribute="bottom" id="2ct-sP-Ujb"/>
                             <constraint firstItem="SYm-0t-arw" firstAttribute="leading" secondItem="p7p-mZ-sc7" secondAttribute="leading" id="G4h-f5-4Q5"/>
+                            <constraint firstItem="rn4-9N-xv4" firstAttribute="top" secondItem="H9M-VV-WFz" secondAttribute="bottom" constant="15" id="KKn-cp-4kp"/>
                             <constraint firstItem="jFb-FW-2xm" firstAttribute="centerY" secondItem="p7p-mZ-sc7" secondAttribute="centerY" id="QRl-xv-AHo"/>
-                            <constraint firstItem="SYm-0t-arw" firstAttribute="top" secondItem="H9M-VV-WFz" secondAttribute="bottom" id="Uih-Fs-awe"/>
+                            <constraint firstItem="rn4-9N-xv4" firstAttribute="trailing" secondItem="p7p-mZ-sc7" secondAttribute="trailingMargin" id="cpu-5K-HEr"/>
                             <constraint firstAttribute="trailing" secondItem="SYm-0t-arw" secondAttribute="trailing" id="cy0-PF-oWK"/>
+                            <constraint firstItem="SYm-0t-arw" firstAttribute="top" secondItem="rn4-9N-xv4" secondAttribute="bottom" constant="8" id="f4F-Oq-xjX"/>
                             <constraint firstItem="jFb-FW-2xm" firstAttribute="centerX" secondItem="p7p-mZ-sc7" secondAttribute="centerX" id="y6j-gy-OlB"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="tableSource" destination="7P1-Em-v4q" id="kOL-Yg-CNc"/>
                         <outlet property="tableView" destination="SYm-0t-arw" id="6gR-pM-o4m"/>
-                        <outlet property="tableViewTopConstraint" destination="Uih-Fs-awe" id="xlR-KA-prn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsr-7l-edf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="7P1-Em-v4q" customClass="CommentTableSource" customModule="Alien_Reader" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="2449" y="814"/>
+            <point key="canvasLocation" x="2448.8000000000002" y="813.64317841079469"/>
         </scene>
         <!--Auth Web View Controller-->
         <scene sceneID="bAE-kr-fPP">

@@ -8,9 +8,6 @@
 
 import UIKit
 
-let clientId: String = "KDXXXxZltF-RMA"
-let redirectUri: String = "alienreader://com.alienreader.app/oauth"
-
 class RAAuthWebViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView! {

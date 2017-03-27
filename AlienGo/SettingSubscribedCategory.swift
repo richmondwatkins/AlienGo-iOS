@@ -9,18 +9,18 @@
 import UIKit
 import CoreData
 
-class SettingSubscribedSubreddit: SettingItem {
+class SettingSubscribedCategory: SettingItem {
     
     let type: SettingType
     let text: String
     var iconURL: String?
     
-    init?(subscribedSubreddit: SubscribedSubreddit) {
-        guard let name = subscribedSubreddit.name else { return nil }
+    init?(subscription: Subscription) {
+        guard let name = subscription.name else { return nil }
         
         type = .subreddit
         text = name
-        iconURL = subscribedSubreddit.iconURL
+        iconURL = subscription.iconURL
     }
     
     func configure(tableView: UITableView) -> UITableViewCell {

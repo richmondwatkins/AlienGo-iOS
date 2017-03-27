@@ -42,4 +42,15 @@ class UserAppState {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var autoNavAfterComments: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "autoNavAfterComments")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "autoNavAfterComments")
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

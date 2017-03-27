@@ -12,14 +12,20 @@ class SubscribedSubredditTableViewCell: UITableViewCell {
 
     @IBOutlet weak var subredditNameLabel: UILabel!
     @IBOutlet weak var subredditIconImageView: UIImageView!
-   
-    func configure(subreddit: SettingSubscribedSubreddit) {
+    @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
+    
+    func configure(subreddit: SettingSubscribedCategory) {
         subredditNameLabel.text = subreddit.text
         
         if let iconURL = subreddit.iconURL, let url = URL(string: iconURL) {
             subredditIconImageView.ra_setImageFromURL(url: url)
         } else {
-            subredditIconImageView.image = UIImage(named: "redditLogo")
+            if let image = UIImage(named: "redditLogo") {
+                subredditIconImageView.image = image
+            } else {
+                imageViewWidthConstraint.constant = 0
+                layoutIfNeeded()
+            }
         }
     }
 }

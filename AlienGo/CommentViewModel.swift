@@ -21,7 +21,7 @@ protocol CommentViewModel {
     weak var displayDelegate: CommentDisplayDelegate? { get }
     var orderedComments: [Comment] { get }
     var linearComments: [Comment] { get }
-    var readableDelegate: ReadableDelegate { get }
+    weak var readableDelegate: ReadableDelegate? { get }
     func getComments()
     func goToNextTopLevel()
     func didTap(gesture: UITapGestureRecognizer)
@@ -35,8 +35,7 @@ class MainCommentViewModel: CommentViewModel {
     let detailPostItem: DetailPostItem
     let provider: CommentProvider
     weak var displayDelegate: CommentDisplayDelegate?
-    var readableDelegate: ReadableDelegate = ReadHandler.shared
-    private lazy var metaDetailReader: ReadableDelegate = ReadHandler.shared
+    weak var readableDelegate: ReadableDelegate? = ReadHandler.shared
     var orderedComments: [Comment] = []
     var linearComments: [Comment] = []
     private var readingComment: Comment?
@@ -54,9 +53,9 @@ class MainCommentViewModel: CommentViewModel {
 
         if firstLoad {
             firstLoad = false
-            readableDelegate.hardStop()
+            readableDelegate?.hardStop()
             var readingFinished = false
-            readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading Comments"), delegate: nil, completion: {
+            readableDelegate?.readItem(readableItem: ReaderContainer(text: "Loading Comments"), delegate: nil, completion: {
                 readingFinished = true
             })
             
@@ -69,6 +68,7 @@ class MainCommentViewModel: CommentViewModel {
                 self.displayDelegate?.display(comments: self.linearComments)
                 
                 if let first = self.linearComments.first {
+                    //hack 
                     while !readingFinished {}
                     self.read(comment: first, index: 0)
                 }
@@ -91,7 +91,7 @@ class MainCommentViewModel: CommentViewModel {
     func didTap(gesture: UITapGestureRecognizer) {
         if let readingComment = readingComment {
             let usernameReadable = readingComment.user.isOp ? "\(readingComment.user.username) the O P" : readingComment.user.username
-            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Comment by \(usernameReadable)   score of \(readingComment.score) \(readingComment.text)"), delegate: nil, completion: nil)
+            self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "Comment by \(usernameReadable)   score of \(readingComment.score) \(readingComment.text)"), delegate: nil, completion: nil)
         }
     }
     
@@ -99,13 +99,13 @@ class MainCommentViewModel: CommentViewModel {
         if let readingComment = readingComment {
             if gesture.direction == .up {
                goToNextSibling()
-            } else if gesture.direction == .right {
+            } else if gesture.direction == .right || gesture.direction == .left {
                goToReply()
             } else if gesture.direction == .down {
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment)
                 } else {
-                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."), delegate: nil, completion: nil)
+                    self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "No more previous comments. Try swiping down."), delegate: nil, completion: nil)
                 }
             }
         }
@@ -113,7 +113,7 @@ class MainCommentViewModel: CommentViewModel {
     
     func dismiss() {
         isDisplaying = false
-        readableDelegate.hardStop()
+        readableDelegate?.hardStop()
         displayDelegate?.dismiss()
     }
     
@@ -125,7 +125,7 @@ class MainCommentViewModel: CommentViewModel {
                 if StateProvider.isAuto {
                     goToNextTopLevel()
                 } else {
-                     self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more replies. Long press to go to next top level comment"), delegate: nil, completion: nil)
+                     self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "No more replies. Double tap to go to next top level comment"), delegate: nil, completion: nil)
                 }
             }
         }
@@ -136,7 +136,7 @@ class MainCommentViewModel: CommentViewModel {
             if let comment = orderedComments.nextSibling(current: readingComment) {
                 goToComment(comment: comment)
             } else {
-                self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more sibling comments"), delegate: nil, completion: nil)
+                self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "No more sibling comments"), delegate: nil, completion: nil)
             }
         }
     }
@@ -156,13 +156,13 @@ class MainCommentViewModel: CommentViewModel {
         let userReadText = comment.user.isOp ? "\(comment.user.username), the O P" : comment.user.username
         let userReadItem = ReaderContainer(text: userReadText)
         
-        readableDelegate.hardStop()
+        readableDelegate?.hardStop()
         // hack for now
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if let cell = self.displayDelegate?.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
-                self.readableDelegate.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
-                    self.readableDelegate.hardStop()
-                    self.readableDelegate.readItem(readableItem: comment, delegate: cell, completion: { 
+                self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
+                    self.readableDelegate?.hardStop()
+                    self.readableDelegate?.readItem(readableItem: comment, delegate: cell, completion: {
                         if StateProvider.isAuto && self.isDisplaying {
                             if self.readComments == 6 {
                                 self.displayDelegate?.dismiss()

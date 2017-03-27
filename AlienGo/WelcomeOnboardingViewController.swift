@@ -11,18 +11,27 @@ import UIKit
 class WelcomeOnboardingViewController: UIViewController {
 
     @IBOutlet weak var welcomeLabel: UILabel!
-    var readerDelegate: ReadableDelegate = ReadHandler.shared
+    weak var readerDelegate: ReadableDelegate? = ReadHandler.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         welcomeLabel.text = Configuration.onboardingOpeningText
 
-        readerDelegate.readItem(readableItem: ReaderContainer(text: welcomeLabel.text!), delegate: self) {
-            let soundVC: SoundSetupViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: SoundSetupViewController.self)) as! SoundSetupViewController
-            DispatchQueue.main.async {
-                self.navigationController!.pushViewController(soundVC, animated: true)
-            }
+        readerDelegate?.readItem(readableItem: ReaderContainer(text: welcomeLabel.text!), delegate: self) {
+            self.goToNextScreen()
+        }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToNextScreen))
+        tapGesture.numberOfTapsRequired = 1
+        
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func goToNextScreen() {
+        let soundVC: SoundSetupViewController = self.storyboard!.instantiateViewController(withIdentifier: String(describing: SoundSetupViewController.self)) as! SoundSetupViewController
+        DispatchQueue.main.async {
+            self.navigationController!.pushViewController(soundVC, animated: true)
         }
     }
 }

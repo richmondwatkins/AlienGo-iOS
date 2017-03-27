@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol SettingsDisplayDelegate {
+protocol SettingsDisplayDelegate: class {
     func display(vc: UIViewController)
     var vc: UIViewController { get }
-    var actionDelegate: ActionDelegate { get }
+    weak var actionDelegate: ActionDelegate? { get }
 }
 
 class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var dataSource: [SettingItem] = SettingBuilder.build()
-    var displayDelegate: SettingsDisplayDelegate!
+    weak var displayDelegate: SettingsDisplayDelegate?
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -32,14 +32,15 @@ class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource 
                 String(describing: AllFrontSettingTableViewCell.self),
                 String(describing: SpeechVolumeCellTableViewCell.self),
                 String(describing: AutoPlaySettingTableViewCell.self),
-                String(describing: SubscribedSubredditTableViewCell.self)
+                String(describing: SubscribedSubredditTableViewCell.self),
+                String(describing: SettingAutoNavAfterCommentsTableViewCell.self)
             ])
         }
     }
     
     func regsiterCells(cellStrings: [String]) {
         cellStrings.forEach { (cellString) in
-            tableView.register(UINib(nibName: cellString, bundle: Bundle.main), forCellReuseIdentifier: cellString)
+            tableView.register(UINib(nibName: cellString, bundle: nil), forCellReuseIdentifier: cellString)
         }
     }
     
@@ -59,7 +60,7 @@ class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource 
             UserInfo.username = nil
             AuthInfo.accessToken = nil
             AuthInfo.refreshToken = nil
-            dataSource[indexPath.row] = SettingAuthItem()
+//            dataSource[indexPath.row] = SettingAuthItem()
             tableView.reloadData()
         }
     }
@@ -75,8 +76,11 @@ class SettingsTableSource: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = dataSource[indexPath.row].didSelect(currentVC: displayDelegate.vc, actionDelegate: displayDelegate.actionDelegate) {
-            displayDelegate.display(vc: vc)
+        if let actionDelegate = displayDelegate?.actionDelegate,
+            let displayVC = displayDelegate?.vc,
+            let vc = dataSource[indexPath.row].didSelect(currentVC: displayVC, actionDelegate: actionDelegate) {
+            
+            displayDelegate?.display(vc: vc)
         }
     }
 }

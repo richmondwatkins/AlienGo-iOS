@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 
-public class SubscribedSubreddit: NSManagedObject {
+public class SubscribedSubreddit: NSManagedObject, Subscription {
 
 }

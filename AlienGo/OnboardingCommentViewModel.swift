@@ -35,7 +35,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     var detailPostItem: DetailPostItem
     var provider: CommentProvider
     weak var displayDelegate: CommentDisplayDelegate?
-    var readableDelegate: ReadableDelegate = ReadHandler.shared
+    weak var readableDelegate: ReadableDelegate? = ReadHandler.shared
     var orderedComments: [Comment] = []
     var linearComments: [Comment] = []
     private var readingComment: Comment?
@@ -92,7 +92,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 if let previousComment = orderedComments.previous(current: readingComment) {
                     goToComment(comment: previousComment, toOnboardingState: .notNeededForOnboarding)
                 } else {
-                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more previous comments."), delegate: nil, completion: nil)
+                    self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "No more previous comments."), delegate: nil, completion: nil)
                 }
             }
         }
@@ -106,7 +106,7 @@ class OnboardingCommentViewModel: CommentViewModel {
                 if StateProvider.isAuto {
                     goToNextTopLevel()
                 } else {
-                    self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more replies. Double tap to go to the next top level comment"), delegate: nil, completion: nil)
+                    self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "No more replies. Double tap to go to the next top level comment"), delegate: nil, completion: nil)
                 }
             }
         }
@@ -117,7 +117,7 @@ class OnboardingCommentViewModel: CommentViewModel {
             if let comment = orderedComments.nextSibling(current: readingComment) {
                 goToComment(comment: comment, toOnboardingState: .readingSibling)
             } else {
-                self.readableDelegate.readItem(readableItem: ReaderContainer(text: "No more sibling comments"), delegate: nil, completion: nil)
+                self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "No more sibling comments"), delegate: nil, completion: nil)
             }
         }
     }
@@ -132,7 +132,7 @@ class OnboardingCommentViewModel: CommentViewModel {
     }
     
     func dismiss() {
-        readableDelegate.hardStop()
+        readableDelegate?.hardStop()
         displayDelegate?.dismiss()
         onboardingDelegate.didDimissComments()
     }
@@ -140,13 +140,13 @@ class OnboardingCommentViewModel: CommentViewModel {
     func read(comment: Comment, index: Int, toOnboardingState: OnboardingCommentReadingState, prefix: String = "") {
         let userReadItem = ReaderContainer(readable: comment.user)
         readingComment = comment
-        readableDelegate.hardStop()
+        readableDelegate?.hardStop()
         self.commentReadCount += 1
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if let cell = self.displayDelegate?.cellForIndex(indexPath: IndexPath(row: index, section: 0)) {
-                self.readableDelegate.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
-                    self.readableDelegate.readItem(readableItem: comment, delegate: cell, completion: {
+                self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "\(prefix)  \(userReadItem.text)"), delegate: nil, completion: {
+                    self.readableDelegate?.readItem(readableItem: comment, delegate: cell, completion: {
                 
                         if self.commentReadCount >= 4 {
                             self.onboardingDelegate.didFinishReadingNextTopLevel()

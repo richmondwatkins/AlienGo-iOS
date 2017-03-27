@@ -31,7 +31,7 @@ class MainDetailViewModel: DetailViewModel {
     var provider: RedditDetailPostProvider!
     var disappearFromCommentPopover: Bool = false
     var disappearFromSettings: Bool = false
-    private var readableDelegate: ReadableDelegate = ReadHandler.shared
+    private weak var readableDelegate: ReadableDelegate? = ReadHandler.shared
     private var shouldAcceptLongPress: Bool = true
     var didDisplay: Bool = false
     var showingComments: Bool = false
@@ -53,7 +53,7 @@ class MainDetailViewModel: DetailViewModel {
     
     func viewDidDisappear() {
         if !showingComments {
-            readableDelegate.stop()
+            readableDelegate?.stop()
         }
         
         showingComments = false
@@ -72,7 +72,7 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     func navBack() {
-        readableDelegate.hardStop()
+        readableDelegate?.hardStop()
     }
     
     func getInfo() {
@@ -81,11 +81,11 @@ class MainDetailViewModel: DetailViewModel {
             return
         }
         
-        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
+        self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "Loading"), delegate: nil, completion: nil)
         
         let nothingToRead: (@escaping () -> Void) -> Void = {  call in
             let descriptionEnd = StateProvider.isAuto ? "Will display comments" : "Long press for comments"
-            self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Image was found without a description. \(descriptionEnd)"), delegate: nil, completion: {
+            self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "Image was found without a description. \(descriptionEnd)"), delegate: nil, completion: {
                 if StateProvider.isAuto {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
                         self.showCommentVC()
@@ -133,7 +133,7 @@ class MainDetailViewModel: DetailViewModel {
             if let textPost = self.provider.get() {
                 
                 if textPost.content.removeAllNewLinesAndSpaces().isEmpty {
-                    self.readableDelegate.readItem(readableItem:  ReaderContainer(text: "Could not parse text. Long press for comments"), delegate: nil, completion: nil)
+                    self.readableDelegate?.readItem(readableItem:  ReaderContainer(text: "Could not parse text. Long press for comments"), delegate: nil, completion: nil)
                 } else {
                     self.buildTextVC(title: textPost.title, text: textPost.content)
                 }
@@ -145,7 +145,7 @@ class MainDetailViewModel: DetailViewModel {
         let detailTextVC = vc(storyboardId: String(describing: DetailTextViewController.self)) as! DetailTextViewController
         detailTextVC.textPost = DetailTextContainer(title: title, content: text)
         
-        self.readableDelegate.readItem(readableItem: ReaderContainer(text: text), delegate: detailTextVC, completion: {
+        self.readableDelegate?.readItem(readableItem: ReaderContainer(text: text), delegate: detailTextVC, completion: {
             if StateProvider.isAuto {
                 self.showCommentVC()
             }
@@ -155,7 +155,7 @@ class MainDetailViewModel: DetailViewModel {
     }
     
     private func showVideoVC() {
-        self.readableDelegate.readItem(readableItem: ReaderContainer(text: "Loading video"), delegate: nil, completion: nil)
+        self.readableDelegate?.readItem(readableItem: ReaderContainer(text: "Loading video"), delegate: nil, completion: nil)
         
         let detailVideoVC = vc(storyboardId: String(describing: DetailVideoViewController.self)) as! DetailVideoViewController
         

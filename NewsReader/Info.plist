@@ -4,6 +4,10 @@
 <dict>
 	<key>AppConfig</key>
 	<dict>
+		<key>ParseEndpoint</key>
+		<string>http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/parse-nyt</string>
+		<key>SettingsAutoNavText</key>
+		<string>Auto navigate to next post after reading</string>
 		<key>CoreDataModelName</key>
 		<string>NewsReader</string>
 		<key>ShowCategorySelection</key>
@@ -70,5 +74,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

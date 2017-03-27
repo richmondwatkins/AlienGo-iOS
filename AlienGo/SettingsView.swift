@@ -20,7 +20,7 @@ class SettingsView: UIView {
     @IBOutlet weak var containerView: UIView!
     var state: SettingsState = .closed
     var settingsVC: UINavigationController?
-    var actionDelegate: ActionDelegate!
+    weak var actionDelegate: ActionDelegate!
     
     
     override func awakeFromNib() {

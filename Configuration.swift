@@ -41,4 +41,12 @@ class Configuration {
     static var cdModelName: String {
         return plistDict()["CoreDataModelName"] as! String
     }
+    
+    static var settingsAutoNavText: String {
+        return plistDict()["SettingsAutoNavText"] as! String
+    }
+    
+    static var parseEndpoint: String {
+        return plistDict()["ParseEndpoint"] as! String
+    }
 }

@@ -12,6 +12,9 @@ import Alamofire
 typealias NetworkCallback = (_ data: AnyObject?, _ error: Error?) -> Void
 typealias NetworkCall = (request: URLRequest, callback: NetworkCallback?)
 
+let clientId: String = "KDXXXxZltF-RMA"
+let redirectUri: String = "alienreader://com.alienreader.app/oauth"
+
 class NetworkManager: NSObject {
 
     static let shared: NetworkManager = NetworkManager()
@@ -102,7 +105,6 @@ class NetworkManager: NSObject {
     private func getAccessToken(paramaters: [String: String], callback: NetworkCallback?) {
         Alamofire.request("https://www.reddit.com/api/v1/access_token", method: .post, parameters: paramaters, encoding: URLEncoding.default).authenticate(user: clientId, password: "").responseJSON { (response) in
             if response.result.isSuccess, let value = response.result.value as AnyObject? {
-                print(value)
                 AuthInfo.accessToken = value["access_token"] as? String
                 AuthInfo.refreshToken = value["refresh_token"] as? String
                 
@@ -116,7 +118,8 @@ class NetworkManager: NSObject {
     }
     
     func getDetailInfo(detailPostItem: DetailPostItem, callback: NetworkCallback?) {
-        let url: URL = URL(string: "http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/parse")!
+        //"http://lowcost-env.pcwzrxfsmz.us-east-1.elasticbeanstalk.com/parse"
+        let url: URL = URL(string: Configuration.parseEndpoint)!
         
         guard let bodyContent = detailPostItem.content.requestBodyValue() else {
             return

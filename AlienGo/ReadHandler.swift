@@ -19,14 +19,14 @@ enum ReadState {
 
 typealias ReaderCompletion = (() -> Void)?
 
-protocol ReadableDelegate {
+protocol ReadableDelegate: class {
     func stop()
     func hardStop()
     func reReadCurrent()
     func readItem(readableItem: Readable, delegate: ReadingCallbackDelegate?, completion: ReaderCompletion)
 }
 
-protocol ReadingCallbackDelegate {
+protocol ReadingCallbackDelegate: class {
     func willSpeak(_ speechString: String, characterRange: NSRange)
 }
 
@@ -39,7 +39,7 @@ class ReadHandler: NSObject {
     var state: ReadState = .notStarted
     var currentRead: Readable?
     var queue: [Utterance: (completion: ReaderCompletion, callback: ReadingCallbackDelegate?)] = [:]
-    var readingCallbackDelegate: ReadingCallbackDelegate? {
+    weak var readingCallbackDelegate: ReadingCallbackDelegate? {
         didSet {
             synthesizer.delegate = self
         }

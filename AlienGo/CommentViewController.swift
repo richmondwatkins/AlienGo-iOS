@@ -82,6 +82,14 @@ class CommentViewController: UIViewController {
     func didSwipe(gesture: UISwipeGestureRecognizer) {
         viewModel.didSwipe(gesture: gesture)
     }
+    
+    @IBAction func didSelectClose(_ sender: UIButton) {
+        viewModel.dismiss()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 extension CommentViewController: UIGestureRecognizerDelegate {

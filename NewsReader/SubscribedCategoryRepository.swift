@@ -11,18 +11,22 @@ import CoreData
 
 struct SubscribedCategoryRepository {
 
-    func get(completion: @escaping ([Category]) -> Void) {
+    func get() -> [Category] {
+        var retCategories = [Category]()
+        
         CoreDataManager.shared.perform {
             let fetchRequest:NSFetchRequest<SubscribedCategory> = SubscribedCategory.fetchRequest()
             
             if let categories = try? CoreDataManager.shared.managedObjectContext.fetch(fetchRequest) {
-                completion(categories.flatMap({ (subCat) -> Category? in
+                retCategories = categories.flatMap({ (subCat) -> Category? in
                     guard let name = subCat.name else { return nil }
                     
                     return Category(name: name)
-                }))
+                })
             }
         }
+        
+        return retCategories
     }
     
     func set(categories: [Category]) {

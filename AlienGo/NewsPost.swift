@@ -11,23 +11,22 @@ import UIKit
 struct NewsPost {
 
     let subreddit: Category
-    let previewPhoto: PreviewPhoto
     var content: RedditContent
     let id: String
-    let name: String
     let title: String
     let permalink: String
+    let name: String
     var author: User?
     var score: Int?
     var readCompletionHandler: (() -> Void)?
+    var postedDate: Date = Date()
     
     init?(apiResponse: [String: AnyObject]) {
         guard let data = apiResponse["data"] as? [String: AnyObject],
             let subreddit = Category(apiResponse: data),
             let id = data["id"] as? String,
-            let previewPhoto = PreviewPhoto(apiResponse: data),
-            let name = data["name"] as? String,
             let permalink: String = data["permalink"] as? String,
+            let name = data["name"] as? String,
             let title = data["title"] as? String else {
             return nil
         }
@@ -37,7 +36,6 @@ struct NewsPost {
         self.title = NewsPost.massageTitle(title: title)
         self.content = RedditContent(apiResponse: data)
         self.subreddit = subreddit
-        self.previewPhoto = previewPhoto
         self.permalink = permalink
         
         if let auther = data["author"] as? String {
@@ -45,6 +43,29 @@ struct NewsPost {
         }
         
         self.score = data["score"] as? Int
+    }
+    
+    init?(nytApiResponse: [String: AnyObject]) {
+        guard let category = Category(nytApiResponse: nytApiResponse),
+            let id = nytApiResponse["url"] as? String,
+            let permalink: String = nytApiResponse["url"] as? String,
+            let content = RedditContent(nytApiResponse: nytApiResponse),
+            let title = nytApiResponse["title"] as? String else {
+                return nil
+        }
+        
+        self.id = id
+        self.title = NewsPost.massageTitle(title: title)
+        self.content = content
+        self.subreddit = category
+        self.permalink = permalink
+        self.name = title
+        
+        if let publishedDate = nytApiResponse["published_date"] as? String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            self.postedDate = dateFormatter.date(from: publishedDate)!
+        }
     }
     
     private static func massageTitle(title: String) -> String {
@@ -71,7 +92,7 @@ extension NewsPost: DisplayableFeedItem {
     }
 
     var postSubredditName: String? {
-        return "/r/\(subreddit.name)"
+        return "\(subreddit.name)"
     }
 
     internal var postPermalink: String {
@@ -88,10 +109,6 @@ extension NewsPost: DisplayableFeedItem {
 
     var postTitle: String {
         return self.title
-    }
-    
-    var postPhotoURL: String? {
-        return previewPhoto.sourceUrl
     }
 }
 

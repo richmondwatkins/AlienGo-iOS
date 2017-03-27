@@ -22,7 +22,7 @@ enum ScrollDirection {
     }
 }
 
-protocol MainCollectionSourceSelectionDelegate {
+protocol MainCollectionSourceSelectionDelegate: class {
     func didSelect(post: DisplayableFeedItem)
     func didStartToPan()
     func readPostTitle(post: RedditReadablePost, scrollDirection: ScrollDirection, cell: MainCollectionViewCell)
@@ -49,7 +49,7 @@ class MainCollectionViewSource: NSObject {
     var currentPage: Int = 0
     var pagesLoaded: [Int] = []
     fileprivate var data: [DisplayableFeedItem] = []
-    fileprivate var selectionDelegate: MainCollectionSourceSelectionDelegate!
+    fileprivate weak var selectionDelegate: MainCollectionSourceSelectionDelegate!
     fileprivate var firstLoad: Bool = true
     private var userScrolling: Bool = false
     

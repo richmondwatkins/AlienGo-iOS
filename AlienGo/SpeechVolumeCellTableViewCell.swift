@@ -11,7 +11,7 @@ import UIKit
 class SpeechVolumeCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sliderControl: UISlider!
-    var readDelegate: ReadableDelegate = ReadHandler.shared
+    weak var readDelegate: ReadableDelegate? = ReadHandler.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +22,6 @@ class SpeechVolumeCellTableViewCell: UITableViewCell {
     @IBAction func didSlide(_ sender: UISlider) {
         UserInfo.utteranceSpeed = sender.value
         
-        readDelegate.readItem(readableItem: ReaderContainer(text: "The quick brown fox jumps over the lazy dog"), delegate: nil, completion: nil)
+        readDelegate?.readItem(readableItem: ReaderContainer(text: "The quick brown fox jumps over the lazy dog"), delegate: nil, completion: nil)
     }
 }

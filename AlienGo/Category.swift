@@ -41,6 +41,15 @@ struct Category: Equatable {
         self.name = name
     }
     
+    init?(nytApiResponse: [String: AnyObject]) {
+        guard let name = nytApiResponse["section"] as? String else {
+            return nil
+        }
+        
+        self.name = name
+    }
+    
+    
     init(name: String) {
         self.name = name
     }

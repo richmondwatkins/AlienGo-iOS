@@ -25,12 +25,12 @@ class SoundSetupViewController: UIViewController {
         }
     }
     var readingExplanation: Bool = true
-    var readDelegate: ReadableDelegate = ReadHandler.shared
+    weak var readDelegate: ReadableDelegate? = ReadHandler.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        readDelegate.readItem(readableItem: ReaderContainer(text: explanationlabel.text!), delegate: self, completion: nil)
+        readDelegate?.readItem(readableItem: ReaderContainer(text: explanationlabel.text!), delegate: self, completion: nil)
     }
 
     @IBAction func sliderChanged(_ sender: UISlider) {
@@ -40,14 +40,14 @@ class SoundSetupViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { 
             self.readLabel.alpha = 1
         }) { (finsihed) in
-            self.readDelegate.readItem(readableItem: ReaderContainer(text: self.readLabel.text!), delegate: self, completion: {
+            self.readDelegate?.readItem(readableItem: ReaderContainer(text: self.readLabel.text!), delegate: self, completion: {
             })
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        readDelegate.hardStop()
+        readDelegate?.hardStop()
     }
     
     @IBAction func done(_ sender: AnyObject) {

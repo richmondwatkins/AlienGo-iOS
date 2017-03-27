@@ -20,4 +20,15 @@ class StateProvider {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    static var hasSeenNewAutoNavSetting: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "hasSeenNewAutoNavSetting")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasSeenNewAutoNavSetting")
+            UserDefaults.standard.synchronize()
+        }
+    }
 }

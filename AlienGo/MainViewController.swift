@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ActionDelegate {
+protocol ActionDelegate: class {
     func showFrontPage()
     func showAll()
     func show(subreddit: Category)
@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if disapearFromDetailNav && StateProvider.isAuto {
+        if disapearFromDetailNav && (StateProvider.isAuto || UserAppState.autoNavAfterComments) {
             viewModel.readAndShowNextPost()
             disapearFromDetailNav = false
         } else if disappearFromInstructionsVC {

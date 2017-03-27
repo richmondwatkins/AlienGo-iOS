@@ -29,7 +29,7 @@ struct RedditContent {
         selfText = (apiResponse["selftext"] as? String)?.trim()
         url = apiResponse["url"] as? String
         thumbnailUrl = apiResponse["thumbnail"] as? String
-        
+  
         //order of conditional matters
         if let url = url, url.contains("gallery") || url.contains("/a/") {
             self.contentType = .imageGallery
@@ -37,7 +37,7 @@ struct RedditContent {
             self.contentType = .gif
         } else if let domain = apiResponse["domain"] as? String, domain.contains("reddituploads") || domain.contains("imgur") || domain.contains("streamable") {
             
-            if  domain.contains("streamable") {
+            if domain.contains("streamable") {
                 self.contentType = .richVideo
             } else {
                 self.contentType = .image
@@ -56,6 +56,8 @@ struct RedditContent {
             } else {
                 self.contentType = .selfPost
             }
+        } else if let _ = url {
+            self.contentType = .link
         } else {
             self.contentType = .titleOnly
         }
@@ -65,6 +67,19 @@ struct RedditContent {
                 self.url!.append(".jpg")
             }
         }
+    }
+    
+    init?(nytApiResponse: [String: AnyObject]) {
+        self.contentType = .link
+        
+        guard let url = nytApiResponse["url"] as? String,
+            let multimedia = nytApiResponse["multimedia"] as? [[String: AnyObject]],
+            let sourceUrl = multimedia.first?["url"] as? String else {
+                return nil
+        }
+        
+        self.url = url
+        self.thumbnailUrl = sourceUrl
     }
     
     func shouldBeShownInWebView() -> Bool {

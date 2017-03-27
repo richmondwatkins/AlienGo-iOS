@@ -41,6 +41,19 @@ class DetailViewController: UIViewController {
         childVC?.view.frame = view.bounds
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if !viewModel.disappearFromCommentPopover {
+            self.navigationController!.setNavigationBarHidden(true, animated: true)
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -49,7 +62,7 @@ class DetailViewController: UIViewController {
         } else if viewModel.disappearFromCommentPopover {
             viewModel.disappearFromCommentPopover = false
             
-            if StateProvider.isAuto {
+            if StateProvider.isAuto || UserAppState.autoNavAfterComments {
                 pop()
             }
         }

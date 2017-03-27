@@ -7,24 +7,39 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainNewsRepository: NewsPostRepository {
     
     let catogoryRepo: SubscribedCategoryRepository = SubscribedCategoryRepository()
     
     func getPostsFor(subreddit: Category, callback: @escaping NewsPostFetchCallback) {
-        catogoryRepo.get { (categories) in
+        DispatchQueue.global(qos: .default).async {
+            let categories = self.catogoryRepo.get()
             //https://api.nytimes.com/svc/topstories/v2/upshot.json
-        }
-        
-        
-        NetworkManager.shared.getPostsForSubreddit(subreddit: subreddit) { (response, error) in
-            guard let response = response, let postResponse = (response["data"] as? [String: AnyObject])?["children"] as? [[String: AnyObject]], error == nil else {
-                print("NONE AT FIRST PAGE")
-                return
-            }
             
-            callback(self.deserializeRedditPostResponse(response: postResponse))
+            var apiResponses: [[String: AnyObject]] = []
+            
+            let operations = categories.map({ (category) -> NYTRequestOperation in
+                return NYTRequestOperation(category: category, callback: { (result, success) in
+                    if let result = result, let results = result["results"] as? [[String: AnyObject]], success {
+                        apiResponses.append(contentsOf: results)
+                    }
+                })
+            })
+            
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 20
+            
+            queue.addOperations(operations, waitUntilFinished: true)
+            
+            let newsPosts = apiResponses.flatMap({ (response) -> NewsPost? in
+                return NewsPost(nytApiResponse: response)
+            }).sorted(by: { (post1, post2) -> Bool in
+                return post1.postedDate > post2.postedDate
+            })
+            
+            callback(newsPosts)
         }
     }
     

@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol RedditPostListingViewModelDelegate {
+protocol RedditPostListingViewModelDelegate: class {
     func displayRedditPosts(posts: [DisplayableFeedItem])
     func animateRefreshControl()
 }
 
-protocol RedditPostListingNavigationDelegate {
+protocol RedditPostListingNavigationDelegate: class {
     func displayDetailVC()
     func didFinishReadingAfterSwipe(direction: ScrollDirection)
     func showingCategory(category: Category)
@@ -31,9 +31,9 @@ class RedditPostListingViewModel: NSObject {
         }
     }
     var currentSubreddit = Category(name: "front")
-    var displayDelegate: RedditPostListingViewModelDelegate!
+    weak var displayDelegate: RedditPostListingViewModelDelegate?
     var postProvider: RedditPostProvider = RedditPostProvider(repository: MainNewsRepository())
-    var navigationDelegate: RedditPostListingNavigationDelegate!
+    weak var navigationDelegate: RedditPostListingNavigationDelegate?
     
     // For storyboard object
     override init() {
@@ -59,13 +59,13 @@ class RedditPostListingViewModel: NSObject {
     }
     
     func getPostsFor(subreddit: Category) {
-        displayDelegate.animateRefreshControl()
+        displayDelegate?.animateRefreshControl()
         self.currentSubreddit = subreddit
         DispatchQueue.global(qos: .userInitiated).async {
             let posts = self.postProvider.getPostsFor(subreddit: subreddit)
-            self.displayDelegate.displayRedditPosts(posts: posts)
+            self.displayDelegate?.displayRedditPosts(posts: posts)
             
-            self.navigationDelegate.showingCategory(category: self.currentSubreddit)
+            self.navigationDelegate?.showingCategory(category: self.currentSubreddit)
         }
     }
     
@@ -108,11 +108,11 @@ extension RedditPostListingViewModel: MainCollectionSourceSelectionDelegate {
         readHandler.readItem(readableItem: ReaderContainer(text: prefixText), delegate: nil) {
             self.readHandler.readItem(readableItem: post, delegate: cell, completion: {
                 if StateProvider.isAuto && readingId == self.collectionSource.getCurrentPost()?.postId {
-                    self.navigationDelegate.displayDetailVC()
+                    self.navigationDelegate?.displayDetailVC()
                 }
                 
                 if scrollDirection != .first {
-                    self.navigationDelegate.didFinishReadingAfterSwipe(direction: scrollDirection)
+                    self.navigationDelegate?.didFinishReadingAfterSwipe(direction: scrollDirection)
                 }
             })
         }
@@ -164,7 +164,7 @@ extension RedditPostListingViewModel: ActionDelegate {
 
         getPostsFor(subreddit: category)
         
-        navigationDelegate.loading()
+        navigationDelegate?.loading()
     }
 }
 

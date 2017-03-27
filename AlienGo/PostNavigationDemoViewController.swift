@@ -20,8 +20,7 @@ class PostNavigationDemoViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+            super.viewDidLoad()
         
         explanationLabel.text = explanationLabel.text!.replacingOccurrences(of: "$AppName", with: Configuration.readableName)
         

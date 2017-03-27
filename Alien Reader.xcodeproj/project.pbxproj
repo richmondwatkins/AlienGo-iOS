@@ -31,6 +31,12 @@
 		5D4D06A91DDAB310003C1B90 /* SubscribedCategory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D06A71DDAB310003C1B90 /* SubscribedCategory+CoreDataProperties.swift */; };
 		5D4D06AB1DDAB388003C1B90 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D06AA1DDAB388003C1B90 /* CoreDataManager.swift */; };
 		5D4D06AD1DDAB47A003C1B90 /* SubscribedCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D06AC1DDAB47A003C1B90 /* SubscribedCategoryRepository.swift */; };
+		5D4EC1471DEE87FD003B78F4 /* SettingAutoNavBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4EC1461DEE87FD003B78F4 /* SettingAutoNavBack.swift */; };
+		5D4EC1481DEE87FD003B78F4 /* SettingAutoNavBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4EC1461DEE87FD003B78F4 /* SettingAutoNavBack.swift */; };
+		5D4EC14C1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4EC14A1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift */; };
+		5D4EC14D1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4EC14A1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift */; };
+		5D4EC14E1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4EC14B1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib */; };
+		5D4EC14F1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4EC14B1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib */; };
 		5D53AD0A1DB8289800941B2B /* SettingFrontPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD091DB8289800941B2B /* SettingFrontPageItem.swift */; };
 		5D53AD0E1DB829A800941B2B /* AllFrontSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD0C1DB829A800941B2B /* AllFrontSettingTableViewCell.swift */; };
 		5D53AD0F1DB829A800941B2B /* AllFrontSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D53AD0D1DB829A800941B2B /* AllFrontSettingTableViewCell.xib */; };
@@ -48,8 +54,7 @@
 		5D67FEC51DE14E15009BBBB3 /* SubscribedSubreddit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D67FEC31DE14E15009BBBB3 /* SubscribedSubreddit+CoreDataProperties.swift */; };
 		5D67FEC61DE15151009BBBB3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D06AA1DDAB388003C1B90 /* CoreDataManager.swift */; };
 		5D67FEC81DE154DA009BBBB3 /* SettingSubscribedSubredditHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D67FEC71DE154DA009BBBB3 /* SettingSubscribedSubredditHeader.swift */; };
-		5D67FECA1DE154E1009BBBB3 /* SettingSubscribedSubreddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D67FEC91DE154E1009BBBB3 /* SettingSubscribedSubreddit.swift */; };
-		5D67FECE1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D67FECC1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.swift */; };
+		5D67FECA1DE154E1009BBBB3 /* SettingSubscribedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D67FEC91DE154E1009BBBB3 /* SettingSubscribedCategory.swift */; };
 		5D67FECF1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D67FECD1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.xib */; };
 		5D86016B1DB56FE100BC7DAE /* AccountInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8601691DB56FE100BC7DAE /* AccountInfoTableViewCell.swift */; };
 		5D86016C1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D86016A1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib */; };
@@ -59,14 +64,12 @@
 		5D8C07201DD91917002A4334 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C071E1DD91917002A4334 /* LaunchScreen.storyboard */; };
 		5D8C072B1DD91917002A4334 /* NewsReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C072A1DD91917002A4334 /* NewsReaderTests.swift */; };
 		5D8C07361DD91917002A4334 /* NewsReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07351DD91917002A4334 /* NewsReaderUITests.swift */; };
-		5D8C07411DD91B56002A4334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD1BA631DA432D40044BD0C /* AppDelegate.swift */; };
 		5D8C07421DD91C4E002A4334 /* EllipsisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCB42341DCAA21F00B392AC /* EllipsisView.swift */; };
 		5D8C07431DD91C4E002A4334 /* RAYoutubeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A065D1DA611B4001C8B7C /* RAYoutubeWebView.swift */; };
 		5D8C07441DD91C4E002A4334 /* WelcomeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB11DBBBF25005201CF /* WelcomeOnboardingViewController.swift */; };
 		5D8C07451DD91C4E002A4334 /* PostNavigationDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB51DBBC599005201CF /* PostNavigationDemoViewController.swift */; };
 		5D8C07461DD91C4E002A4334 /* SoundSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECB71DBBC5BE005201CF /* SoundSetupViewController.swift */; };
 		5D8C07471DD91C4E002A4334 /* MainFeedDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC1A6C91DC04DD100B74FFF /* MainFeedDemoViewController.swift */; };
-		5D8C07481DD91C4E002A4334 /* RAAuthWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830D41DB3EB0500CD270C /* RAAuthWebViewController.swift */; };
 		5D8C07491DD91C4E002A4334 /* AutoPlaySettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCEE811DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift */; };
 		5D8C074A1DD91C4E002A4334 /* AutoPlaySettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DCCEE821DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib */; };
 		5D8C074B1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAECAA1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.swift */; };
@@ -115,8 +118,6 @@
 		5D8C07761DD91C4E002A4334 /* DetailVideoItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06611DA6134C001C8B7C /* DetailVideoItemContainer.swift */; };
 		5D8C07771DD91C4E002A4334 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A066E1DA6D6F6001C8B7C /* Comment.swift */; };
 		5D8C07781DD91C4E002A4334 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A06701DA6D71F001C8B7C /* User.swift */; };
-		5D8C07791DD91C4E002A4334 /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830DE1DB402A500CD270C /* SettingItem.swift */; };
-		5D8C077A1DD91C4E002A4334 /* SettingAuthItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830E01DB403F300CD270C /* SettingAuthItem.swift */; };
 		5D8C077B1DD91C4E002A4334 /* SettingFrontPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD091DB8289800941B2B /* SettingFrontPageItem.swift */; };
 		5D8C077C1DD91C4E002A4334 /* SettingAllSubredditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD101DB851B800941B2B /* SettingAllSubredditItem.swift */; };
 		5D8C077D1DD91C4E002A4334 /* SettingSpeechSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53AD171DB8743600941B2B /* SettingSpeechSpeed.swift */; };
@@ -158,6 +159,19 @@
 		5D8C07B11DD9390D002A4334 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C07AF1DD9390D002A4334 /* CategoryCollectionViewCell.xib */; };
 		5D8C07B31DD93C69002A4334 /* NRCategorySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07B21DD93C69002A4334 /* NRCategorySelectionViewModel.swift */; };
 		5D8C07B51DD93E03002A4334 /* CategoryDataSourceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C07B41DD93E03002A4334 /* CategoryDataSourceBuilder.swift */; };
+		5DA6E9C61DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9C51DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift */; };
+		5DA6E9C71DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9C51DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift */; };
+		5DA6E9C91DEFBCC800FD9FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9C81DEFBCC800FD9FE2 /* AppDelegate.swift */; };
+		5DA6E9CB1DEFBD1500FD9FE2 /* SettingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9CA1DEFBD1500FD9FE2 /* SettingBuilder.swift */; };
+		5DA6E9CD1DEFBD2D00FD9FE2 /* SettingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9CC1DEFBD2D00FD9FE2 /* SettingBuilder.swift */; };
+		5DA6E9CE1DEFBD3700FD9FE2 /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF830DE1DB402A500CD270C /* SettingItem.swift */; };
+		5DA6E9D41DEFCEC300FD9FE2 /* NYTRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9D31DEFCEC300FD9FE2 /* NYTRequestOperation.swift */; };
+		5DA6E9D61DF1293A00FD9FE2 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9D51DF1293A00FD9FE2 /* Subscription.swift */; };
+		5DA6E9D71DF1293A00FD9FE2 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9D51DF1293A00FD9FE2 /* Subscription.swift */; };
+		5DA6E9D81DF12E1B00FD9FE2 /* SettingSubscribedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D67FEC91DE154E1009BBBB3 /* SettingSubscribedCategory.swift */; };
+		5DA6E9DA1DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9D91DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift */; };
+		5DA6E9DB1DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E9D91DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift */; };
+		5DA6E9DC1DF1310000FD9FE2 /* SubscribedSubredditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D67FECD1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.xib */; };
 		5DA74A051DA44076001B3B79 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A041DA44076001B3B79 /* Category.swift */; };
 		5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */; };
 		5DA74A0A1DA44693001B3B79 /* DisplayableFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */; };
@@ -275,6 +289,9 @@
 		5D4D06A71DDAB310003C1B90 /* SubscribedCategory+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscribedCategory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5D4D06AA1DDAB388003C1B90 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5D4D06AC1DDAB47A003C1B90 /* SubscribedCategoryRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribedCategoryRepository.swift; sourceTree = "<group>"; };
+		5D4EC1461DEE87FD003B78F4 /* SettingAutoNavBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAutoNavBack.swift; sourceTree = "<group>"; };
+		5D4EC14A1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAutoNavAfterCommentsTableViewCell.swift; sourceTree = "<group>"; };
+		5D4EC14B1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingAutoNavAfterCommentsTableViewCell.xib; sourceTree = "<group>"; };
 		5D53AD091DB8289800941B2B /* SettingFrontPageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingFrontPageItem.swift; sourceTree = "<group>"; };
 		5D53AD0C1DB829A800941B2B /* AllFrontSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllFrontSettingTableViewCell.swift; sourceTree = "<group>"; };
 		5D53AD0D1DB829A800941B2B /* AllFrontSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllFrontSettingTableViewCell.xib; sourceTree = "<group>"; };
@@ -291,8 +308,7 @@
 		5D67FEC21DE14E15009BBBB3 /* SubscribedSubreddit+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscribedSubreddit+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5D67FEC31DE14E15009BBBB3 /* SubscribedSubreddit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscribedSubreddit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5D67FEC71DE154DA009BBBB3 /* SettingSubscribedSubredditHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingSubscribedSubredditHeader.swift; sourceTree = "<group>"; };
-		5D67FEC91DE154E1009BBBB3 /* SettingSubscribedSubreddit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingSubscribedSubreddit.swift; sourceTree = "<group>"; };
-		5D67FECC1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribedSubredditTableViewCell.swift; sourceTree = "<group>"; };
+		5D67FEC91DE154E1009BBBB3 /* SettingSubscribedCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingSubscribedCategory.swift; sourceTree = "<group>"; };
 		5D67FECD1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribedSubredditTableViewCell.xib; sourceTree = "<group>"; };
 		5D8601691DB56FE100BC7DAE /* AccountInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewCell.swift; sourceTree = "<group>"; };
 		5D86016A1DB56FE100BC7DAE /* AccountInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -320,6 +336,13 @@
 		5D8C07AF1DD9390D002A4334 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		5D8C07B21DD93C69002A4334 /* NRCategorySelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRCategorySelectionViewModel.swift; sourceTree = "<group>"; };
 		5D8C07B41DD93E03002A4334 /* CategoryDataSourceBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDataSourceBuilder.swift; sourceTree = "<group>"; };
+		5DA6E9C51DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateConfigurator.swift; sourceTree = "<group>"; };
+		5DA6E9C81DEFBCC800FD9FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5DA6E9CA1DEFBD1500FD9FE2 /* SettingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingBuilder.swift; sourceTree = "<group>"; };
+		5DA6E9CC1DEFBD2D00FD9FE2 /* SettingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingBuilder.swift; sourceTree = "<group>"; };
+		5DA6E9D31DEFCEC300FD9FE2 /* NYTRequestOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTRequestOperation.swift; sourceTree = "<group>"; };
+		5DA6E9D51DF1293A00FD9FE2 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		5DA6E9D91DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribedSubredditTableViewCell.swift; sourceTree = "<group>"; };
 		5DA74A041DA44076001B3B79 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5DA74A061DA44143001B3B79 /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
 		5DA74A091DA44693001B3B79 /* DisplayableFeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayableFeedItem.swift; sourceTree = "<group>"; };
@@ -480,6 +503,15 @@
 			name = CommenVC;
 			sourceTree = "<group>";
 		};
+		5D4EC1491DEE885E003B78F4 /* AutoNav */ = {
+			isa = PBXGroup;
+			children = (
+				5D4EC14A1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift */,
+				5D4EC14B1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib */,
+			);
+			name = AutoNav;
+			sourceTree = "<group>";
+		};
 		5D53AD0B1DB8298B00941B2B /* AllFront */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,7 +536,7 @@
 		5D67FECB1DE1555A009BBBB3 /* Subreddits */ = {
 			isa = PBXGroup;
 			children = (
-				5D67FECC1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.swift */,
+				5DA6E9D91DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift */,
 				5D67FECD1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.xib */,
 			);
 			name = Subreddits;
@@ -544,6 +576,9 @@
 				5D8C07AB1DD93874002A4334 /* CategorySelection.storyboard */,
 				5D8C07B41DD93E03002A4334 /* CategoryDataSourceBuilder.swift */,
 				5D4D06AA1DDAB388003C1B90 /* CoreDataManager.swift */,
+				5DA6E9C81DEFBCC800FD9FE2 /* AppDelegate.swift */,
+				5DA6E9CC1DEFBD2D00FD9FE2 /* SettingBuilder.swift */,
+				5DA6E9D31DEFCEC300FD9FE2 /* NYTRequestOperation.swift */,
 			);
 			path = NewsReader;
 			sourceTree = "<group>";
@@ -572,6 +607,8 @@
 				5DADB5561DE1611B005EF963 /* LoadingLabel.swift */,
 				5D8C07971DD91E01002A4334 /* Configuration.swift */,
 				5D8C07A31DD93077002A4334 /* HTTPClient.swift */,
+				5DA6E9C51DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift */,
+				5DA6E9D51DF1293A00FD9FE2 /* Subscription.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -798,7 +835,9 @@
 				5D53AD171DB8743600941B2B /* SettingSpeechSpeed.swift */,
 				5DCCEE7E1DC67907008EADA2 /* SettingAutoPlayItem.swift */,
 				5D67FEC71DE154DA009BBBB3 /* SettingSubscribedSubredditHeader.swift */,
-				5D67FEC91DE154E1009BBBB3 /* SettingSubscribedSubreddit.swift */,
+				5D67FEC91DE154E1009BBBB3 /* SettingSubscribedCategory.swift */,
+				5D4EC1461DEE87FD003B78F4 /* SettingAutoNavBack.swift */,
+				5DA6E9CA1DEFBD1500FD9FE2 /* SettingBuilder.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -847,6 +886,7 @@
 		5DF830DD1DB3FA8000CD270C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5D4EC1491DEE885E003B78F4 /* AutoNav */,
 				5D67FECB1DE1555A009BBBB3 /* Subreddits */,
 				5DCCEE801DC67925008EADA2 /* AutoPlay */,
 				5DDAECA91DB9C7B8005201CF /* SpeechVolume */,
@@ -1065,11 +1105,13 @@
 				5D8C075C1DD91C4E002A4334 /* MainCollectionViewCell.xib in Resources */,
 				5D8C07921DD91C7D002A4334 /* onboardingTextContent.txt in Resources */,
 				5D8C07AC1DD93874002A4334 /* CategorySelection.storyboard in Resources */,
+				5D4EC14F1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib in Resources */,
 				5D8C07201DD91917002A4334 /* LaunchScreen.storyboard in Resources */,
 				5D8C071D1DD91917002A4334 /* Assets.xcassets in Resources */,
 				5D8C074C1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.xib in Resources */,
 				5D8C074E1DD91C4E002A4334 /* AllFrontSettingTableViewCell.xib in Resources */,
 				5D8C07501DD91C4E002A4334 /* AccountInfoTableViewCell.xib in Resources */,
+				5DA6E9DC1DF1310000FD9FE2 /* SubscribedSubredditTableViewCell.xib in Resources */,
 				5D8C07521DD91C4E002A4334 /* SettingsView.xib in Resources */,
 				5D8C07B11DD9390D002A4334 /* CategoryCollectionViewCell.xib in Resources */,
 				5D8C07931DD91C7D002A4334 /* onboardingComments.json in Resources */,
@@ -1103,6 +1145,7 @@
 				5DF830DC1DB3FA7D00CD270C /* RASettingsSignInTableViewCell.xib in Resources */,
 				5DD1BA691DA432D40044BD0C /* Main.storyboard in Resources */,
 				5DCCEE841DC67937008EADA2 /* AutoPlaySettingTableViewCell.xib in Resources */,
+				5D4EC14E1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.xib in Resources */,
 				5D67544B1DD5444000623348 /* onboardingTextContent.txt in Resources */,
 				5DDAECAD1DB9C7D2005201CF /* SpeechVolumeCellTableViewCell.xib in Resources */,
 				5D6649301DADDA870054F4BA /* SettingsView.xib in Resources */,
@@ -1319,8 +1362,10 @@
 			files = (
 				5D8C07B01DD9390D002A4334 /* CategoryCollectionViewCell.swift in Sources */,
 				5D8C076A1DD91C4E002A4334 /* CommentViewModel.swift in Sources */,
+				5D4EC1481DEE87FD003B78F4 /* SettingAutoNavBack.swift in Sources */,
 				5D8C07841DD91C4E002A4334 /* CommentRepository.swift in Sources */,
 				5D8C07A21DD929D5002A4334 /* MainNewsRepository.swift in Sources */,
+				5DA6E9C71DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift in Sources */,
 				5D8C07701DD91C4E002A4334 /* RedditReadablePost.swift in Sources */,
 				5D8C07A71DD9370D002A4334 /* Keys.swift in Sources */,
 				5D8C07AA1DD9379A002A4334 /* NRCategorySelectionViewController.swift in Sources */,
@@ -1333,21 +1378,23 @@
 				5DADB5581DE1611B005EF963 /* LoadingLabel.swift in Sources */,
 				5D8C07A01DD92858002A4334 /* NewsPostRepository.swift in Sources */,
 				5D8C075A1DD91C4E002A4334 /* MainCollectionViewSource.swift in Sources */,
+				5DA6E9D41DEFCEC300FD9FE2 /* NYTRequestOperation.swift in Sources */,
 				5D8C075D1DD91C4E002A4334 /* DetailViewController.swift in Sources */,
 				5D8C07471DD91C4E002A4334 /* MainFeedDemoViewController.swift in Sources */,
 				5D8C07831DD91C4E002A4334 /* RedditPostDetailRepository.swift in Sources */,
-				5D8C07411DD91B56002A4334 /* AppDelegate.swift in Sources */,
 				5D8C076E1DD91C4E002A4334 /* Category.swift in Sources */,
 				5D4D06AD1DDAB47A003C1B90 /* SubscribedCategoryRepository.swift in Sources */,
-				5D8C07481DD91C4E002A4334 /* RAAuthWebViewController.swift in Sources */,
+				5DA6E9CE1DEFBD3700FD9FE2 /* SettingItem.swift in Sources */,
 				5D8C078B1DD91C74002A4334 /* MainCollectionView.swift in Sources */,
 				5D8C07631DD91C4E002A4334 /* ReadHandler.swift in Sources */,
 				5D8C07711DD91C4E002A4334 /* DetailPost.swift in Sources */,
+				5DA6E9DB1DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift in Sources */,
+				5DA6E9D81DF12E1B00FD9FE2 /* SettingSubscribedCategory.swift in Sources */,
 				5D8C07811DD91C4E002A4334 /* CommentProvider.swift in Sources */,
 				5D8C07991DD91E01002A4334 /* Configuration.swift in Sources */,
 				5D8C076C1DD91C4E002A4334 /* OnboardingCommentViewModel.swift in Sources */,
+				5DA6E9C91DEFBCC800FD9FE2 /* AppDelegate.swift in Sources */,
 				5D8C077E1DD91C4E002A4334 /* SettingAutoPlayItem.swift in Sources */,
-				5D8C077A1DD91C4E002A4334 /* SettingAuthItem.swift in Sources */,
 				5D8C076D1DD91C4E002A4334 /* NewsPost.swift in Sources */,
 				5D8C07B51DD93E03002A4334 /* CategoryDataSourceBuilder.swift in Sources */,
 				5D8C07581DD91C4E002A4334 /* CommentTableSource.swift in Sources */,
@@ -1365,6 +1412,7 @@
 				5D8C07461DD91C4E002A4334 /* SoundSetupViewController.swift in Sources */,
 				5D8C07771DD91C4E002A4334 /* Comment.swift in Sources */,
 				5D8C071B1DD91917002A4334 /* NewsReader.xcdatamodeld in Sources */,
+				5DA6E9D71DF1293A00FD9FE2 /* Subscription.swift in Sources */,
 				5D8C07751DD91C4E002A4334 /* DetailImageGifContainer.swift in Sources */,
 				5D8C07511DD91C4E002A4334 /* SettingsView.swift in Sources */,
 				5D8C07801DD91C4E002A4334 /* RedditDetailPostProvider.swift in Sources */,
@@ -1388,9 +1436,9 @@
 				5D8C07741DD91C4E002A4334 /* ReaderContainer.swift in Sources */,
 				5D8C077C1DD91C4E002A4334 /* SettingAllSubredditItem.swift in Sources */,
 				5D8C07421DD91C4E002A4334 /* EllipsisView.swift in Sources */,
+				5D4EC14D1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift in Sources */,
 				5D8C07761DD91C4E002A4334 /* DetailVideoItemContainer.swift in Sources */,
 				5D8C07611DD91C4E002A4334 /* SwipeToShowInteractionController.swift in Sources */,
-				5D8C07791DD91C4E002A4334 /* SettingItem.swift in Sources */,
 				5D8C07861DD91C4E002A4334 /* OnboardingCommentRepository.swift in Sources */,
 				5D8C07561DD91C4E002A4334 /* CommentTableViewCell.swift in Sources */,
 				5D8C074B1DD91C4E002A4334 /* SpeechVolumeCellTableViewCell.swift in Sources */,
@@ -1402,6 +1450,7 @@
 				5D8C07721DD91C4E002A4334 /* RedditContent.swift in Sources */,
 				5D8C074F1DD91C4E002A4334 /* AccountInfoTableViewCell.swift in Sources */,
 				5D8C07A41DD93077002A4334 /* HTTPClient.swift in Sources */,
+				5DA6E9CD1DEFBD2D00FD9FE2 /* SettingBuilder.swift in Sources */,
 				5D8C07591DD91C4E002A4334 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1432,6 +1481,7 @@
 				5D3A06651DA6CAA6001C8B7C /* CommentViewController.swift in Sources */,
 				5DD1BA661DA432D40044BD0C /* MainViewController.swift in Sources */,
 				5DA74A1A1DA522F3001B3B79 /* DetailViewController.swift in Sources */,
+				5D4EC14C1DEE887A003B78F4 /* SettingAutoNavAfterCommentsTableViewCell.swift in Sources */,
 				5DCB42351DCAA21F00B392AC /* EllipsisView.swift in Sources */,
 				5D3A06691DA6CAC1001C8B7C /* CommentRepository.swift in Sources */,
 				5DDAECB81DBBC5BE005201CF /* SoundSetupViewController.swift in Sources */,
@@ -1445,8 +1495,9 @@
 				5DA74A1D1DA52555001B3B79 /* SwipeToShowInteractionController.swift in Sources */,
 				5DD1BA9F1DA4370F0044BD0C /* NewsPost.swift in Sources */,
 				5DA74A071DA44143001B3B79 /* PreviewPhoto.swift in Sources */,
+				5DA6E9CB1DEFBD1500FD9FE2 /* SettingBuilder.swift in Sources */,
 				5DC1A6CC1DC1704900B74FFF /* OnboardingDetailViewModel.swift in Sources */,
-				5D67FECA1DE154E1009BBBB3 /* SettingSubscribedSubreddit.swift in Sources */,
+				5D67FECA1DE154E1009BBBB3 /* SettingSubscribedCategory.swift in Sources */,
 				5D6754491DD53CE500623348 /* OnboardingRedditPostRepository.swift in Sources */,
 				5D29A2BD1DA5F43800963D0D /* DetailTextViewController.swift in Sources */,
 				5D8C07981DD91E01002A4334 /* Configuration.swift in Sources */,
@@ -1477,9 +1528,11 @@
 				5DD1BA9C1DA4343F0044BD0C /* RedditPostProvider.swift in Sources */,
 				5D3A06621DA6134C001C8B7C /* DetailVideoItemContainer.swift in Sources */,
 				5D66492C1DADDA6D0054F4BA /* SettingsView.swift in Sources */,
+				5DA6E9DA1DF130FB00FD9FE2 /* SubscribedSubredditTableViewCell.swift in Sources */,
 				5D3A06741DA6E32E001C8B7C /* CommentTableViewCell.swift in Sources */,
 				5DD1BAA21DA438440044BD0C /* RedditPostListingViewModel.swift in Sources */,
 				5D53AD181DB8743600941B2B /* SettingSpeechSpeed.swift in Sources */,
+				5D4EC1471DEE87FD003B78F4 /* SettingAutoNavBack.swift in Sources */,
 				5DA74A2C1DA59282001B3B79 /* RedditPostDetailRepository.swift in Sources */,
 				5D3A06601DA6129C001C8B7C /* DetailVideoViewController.swift in Sources */,
 				5DF830DB1DB3FA7D00CD270C /* RASettingsSignInTableViewCell.swift in Sources */,
@@ -1490,6 +1543,7 @@
 				5DDAECB41DBBBF73005201CF /* UserAppState.swift in Sources */,
 				5DF830E11DB403F300CD270C /* SettingAuthItem.swift in Sources */,
 				5DA74A0A1DA44693001B3B79 /* DisplayableFeedItem.swift in Sources */,
+				5DA6E9C61DEFBC3D00FD9FE2 /* AppDelegateConfigurator.swift in Sources */,
 				5DA74A0D1DA44E5E001B3B79 /* MainCollectionViewSource.swift in Sources */,
 				5D3A066B1DA6CAC8001C8B7C /* CommentProvider.swift in Sources */,
 				5D53AD0E1DB829A800941B2B /* AllFrontSettingTableViewCell.swift in Sources */,
@@ -1502,12 +1556,12 @@
 				5DA74A151DA47A29001B3B79 /* RedditReadablePost.swift in Sources */,
 				5D53AD111DB851B800941B2B /* SettingAllSubredditItem.swift in Sources */,
 				5DADB5571DE1611B005EF963 /* LoadingLabel.swift in Sources */,
+				5DA6E9D61DF1293A00FD9FE2 /* Subscription.swift in Sources */,
 				5DF830D51DB3EB0500CD270C /* RAAuthWebViewController.swift in Sources */,
 				5D3A06771DA6E3E6001C8B7C /* CommentTableSource.swift in Sources */,
 				5D53AD0A1DB8289800941B2B /* SettingFrontPageItem.swift in Sources */,
 				5DA74A2E1DA592AC001B3B79 /* RedditDetailPostProvider.swift in Sources */,
 				5D8C07A51DD93079002A4334 /* HTTPClient.swift in Sources */,
-				5D67FECE1DE15573009BBBB3 /* SubscribedSubredditTableViewCell.swift in Sources */,
 				5D67FEC61DE15151009BBBB3 /* CoreDataManager.swift in Sources */,
 				5DCCEE831DC67937008EADA2 /* AutoPlaySettingTableViewCell.swift in Sources */,
 			);

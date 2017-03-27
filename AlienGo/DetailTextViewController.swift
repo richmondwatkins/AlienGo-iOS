@@ -22,6 +22,11 @@ class DetailTextViewController: UIViewController {
         tmpTextView.isSelectable = false
         tmpTextView.font = UIFont(name: "AvenirNext-Regular", size: 18)
         tmpTextView.text = textPost.content
+        
+        if textViewYInset == 0 {
+            textViewYInset = navigationController!.navigationBar.frame.height
+        }
+        
         tmpTextView.contentInset = UIEdgeInsets(top: textViewYInset, left: 0, bottom: 0, right: 0)
         
         view.addSubview(tmpTextView)
@@ -37,7 +42,10 @@ class DetailTextViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        tmpTextView.frame = CGRect(x: 8, y: 20, width: view.bounds.width - 16, height: view.bounds.height)
+        
+        let textY = UIApplication.shared.statusBarFrame.height + self.navigationController!.navigationBar.bounds.height
+        
+        tmpTextView.frame = CGRect(x: 8, y: textY, width: view.bounds.width - 16, height: view.bounds.height - textY)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EllipsisSelectionDelegate {
+protocol EllipsisSelectionDelegate: class {
     func didSelect()
 }
 
@@ -20,7 +20,7 @@ class EllipsisView: UIView {
     let sideInset: CGFloat = 10
     let spacing: CGFloat = 10
     let borderColor: CGColor = UIColor.white.cgColor
-    var selectionDelegate: EllipsisSelectionDelegate?
+    weak var selectionDelegate: EllipsisSelectionDelegate?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
